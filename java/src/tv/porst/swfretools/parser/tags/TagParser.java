@@ -76,6 +76,18 @@ public class TagParser {
 		case TagCodes.DefineBitsJPEG4: return DefineBitsJPEG4Parser.parse(header, parser);
 		case TagCodes.DefineMorphShape: return DefineMorphShapeParser.parse(header, parser);
 		case TagCodes.DefineMorphShape2: return DefineMorphShape2Parser.parse(header, parser);
+		case TagCodes.DefineFont: return DefineFontParser.parse(header, parser);
+		case TagCodes.DefineFontInfo: return DefineFontInfoParser.parse(header, parser);
+		case TagCodes.DefineFontInfo2: return DefineFontInfo2Parser.parse(header, parser);
+		case TagCodes.DefineFont2: return DefineFont2Parser.parse(header, parser);
+		case TagCodes.DefineFont3: return DefineFont3Parser.parse(header, parser);
+		case TagCodes.DefineFontAlignZones: return DefineFontAlignZonesParser.parse(header, parser);
+		case TagCodes.DefineFontName: return DefineFontNameParser.parse(header, parser);
+		case TagCodes.DefineText: return DefineTextParser.parse(header, parser);
+		case TagCodes.DefineText2: return DefineText2Parser.parse(header, parser);
+		case TagCodes.DefineEditText: return DefineEditTextParser.parse(header, parser);
+		case TagCodes.CSMTextSettings: return CSMTextSettingsParser.parse(header, parser);
+		case TagCodes.DefineFont4: return DefineFont4Parser.parse(header, parser);
 		}
 
 		return null;
