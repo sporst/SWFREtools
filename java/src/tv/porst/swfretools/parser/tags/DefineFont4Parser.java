@@ -2,12 +2,13 @@ package tv.porst.swfretools.parser.tags;
 
 import tv.porst.splib.io.BinaryParser;
 import tv.porst.splib.io.BinaryParserHelpers;
+import tv.porst.splib.io.UINT8;
 import tv.porst.swfretools.parser.structures.RecordHeader;
 
 public class DefineFont4Parser {
 
 	public static Tag parse(final RecordHeader header, final BinaryParser parser) {
-		final int fontID = parser.readUInt8();
+		final UINT8 fontID = parser.readUInt8();
 		final int fontFlagsReserved = parser.readBits(5);
 		final boolean fontFlagsHasFontData = parser.readFlag();
 		final boolean fontFlagsItalic = parser.readFlag();

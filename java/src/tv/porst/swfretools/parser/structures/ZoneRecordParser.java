@@ -4,15 +4,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 import tv.porst.splib.io.BinaryParser;
+import tv.porst.splib.io.UINT8;
 
 public class ZoneRecordParser {
 
 	public static ZoneRecord parse(final BinaryParser parser) {
-		final int numZoneData = parser.readUInt8();
+		final UINT8 numZoneData = parser.readUInt8();
 
 		final List<ZoneData> zoneData = new ArrayList<ZoneData>();
 
-		for (int i=0;i<numZoneData;i++) {
+		for (int i=0;i<numZoneData.value();i++) {
 			zoneData.add(ZoneDataParser.parse(parser));
 		}
 

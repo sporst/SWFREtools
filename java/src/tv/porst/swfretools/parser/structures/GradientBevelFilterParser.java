@@ -1,21 +1,22 @@
 package tv.porst.swfretools.parser.structures;
 
 import tv.porst.splib.io.BinaryParser;
+import tv.porst.splib.io.UINT8;
 
 public class GradientBevelFilterParser {
 
 	public static GradientBevelFilter parse(final BinaryParser parser) {
-		final int numColors = parser.readUInt8();
+		final UINT8 numColors = parser.readUInt8();
 
-		final RGBA[] gradientColors = new RGBA[numColors];
+		final RGBA[] gradientColors = new RGBA[numColors.value()];
 
-		for (int i=0;i<numColors;i++) {
+		for (int i=0;i<numColors.value();i++) {
 			gradientColors[i] = RGBAParser.parse(parser);
 		}
 
-		final int[] gradientRatio = new int[numColors];
+		final UINT8[] gradientRatio = new UINT8[numColors.value()];
 
-		for (int i=0;i<numColors;i++) {
+		for (int i=0;i<numColors.value();i++) {
 			gradientRatio[i] = parser.readUInt8();
 		}
 

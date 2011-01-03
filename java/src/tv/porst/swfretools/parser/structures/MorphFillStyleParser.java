@@ -1,19 +1,22 @@
 package tv.porst.swfretools.parser.structures;
 
 import tv.porst.splib.io.BinaryParser;
+import tv.porst.splib.io.UINT16;
+import tv.porst.splib.io.UINT8;
 
 public class MorphFillStyleParser {
 
 	public static MorphFillStyle parse(final BinaryParser parser) {
-		final int fillStyleType = parser.readUInt8();
-		final RGB startColor = fillStyleType == 0x00 ? RGBParser.parse(parser) : null;
-		final RGB endColor = fillStyleType == 0x00 ? RGBParser.parse(parser) : null;
-		final Matrix startGradientMatrix = fillStyleType == 0x10 || fillStyleType == 0x12 ? MatrixParser.parse(parser) : null;
-		final Matrix endGradientMatrix = fillStyleType == 0x10 || fillStyleType == 0x12 ? MatrixParser.parse(parser) : null;
-		final MorphGradient gradient = fillStyleType == 0x10 || fillStyleType == 0x12 ? MorphGradientParser.parse(parser) : null;
-		final int bitmapId = fillStyleType >= 0x40 && fillStyleType <= 0x43 ? parser.readUInt16() : 0;
-		final Matrix startBitmapMatrix= fillStyleType >= 0x40 && fillStyleType <= 0x43 ? MatrixParser.parse(parser) : null;
-		final Matrix endBitmapMatrix= fillStyleType >= 0x40 && fillStyleType <= 0x43 ? MatrixParser.parse(parser) : null;
+		final UINT8 fillStyleType = parser.readUInt8();
+		final int fillStyleTypeValue = fillStyleType.value();
+		final RGB startColor = fillStyleTypeValue == 0x00 ? RGBParser.parse(parser) : null;
+		final RGB endColor = fillStyleTypeValue == 0x00 ? RGBParser.parse(parser) : null;
+		final Matrix startGradientMatrix = fillStyleTypeValue == 0x10 || fillStyleTypeValue == 0x12 ? MatrixParser.parse(parser) : null;
+		final Matrix endGradientMatrix = fillStyleTypeValue == 0x10 || fillStyleTypeValue == 0x12 ? MatrixParser.parse(parser) : null;
+		final MorphGradient gradient = fillStyleTypeValue == 0x10 || fillStyleTypeValue == 0x12 ? MorphGradientParser.parse(parser) : null;
+		final UINT16 bitmapId = fillStyleTypeValue >= 0x40 && fillStyleTypeValue <= 0x43 ? parser.readUInt16() : null;
+		final Matrix startBitmapMatrix= fillStyleTypeValue >= 0x40 && fillStyleTypeValue <= 0x43 ? MatrixParser.parse(parser) : null;
+		final Matrix endBitmapMatrix= fillStyleTypeValue >= 0x40 && fillStyleTypeValue <= 0x43 ? MatrixParser.parse(parser) : null;
 
 		return new MorphFillStyle(fillStyleType, startColor, endColor, startGradientMatrix, endGradientMatrix, gradient, bitmapId, startBitmapMatrix, endBitmapMatrix);
 	}

@@ -36,7 +36,7 @@ public class TagParser {
 
 	private static RecordHeader parseRecordHeader(final BinaryParser parser) {
 
-		final int tagCodeAndLength = parser.readUInt16();
+		final int tagCodeAndLength = parser.readUInt16().value();
 
 		final int tagCode = tagCodeAndLength >>> 6;
 		final int length = tagCodeAndLength & 0x3F;

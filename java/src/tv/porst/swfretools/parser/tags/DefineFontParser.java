@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import tv.porst.splib.io.BinaryParser;
+import tv.porst.splib.io.UINT16;
 import tv.porst.swfretools.parser.structures.RecordHeader;
 import tv.porst.swfretools.parser.structures.Shape;
 import tv.porst.swfretools.parser.structures.ShapeParser;
@@ -11,11 +12,11 @@ import tv.porst.swfretools.parser.structures.ShapeParser;
 public class DefineFontParser {
 
 	public static Tag parse(final RecordHeader header, final BinaryParser parser) {
-		final int fontId = parser.readUInt16();
+		final UINT16 fontId = parser.readUInt16();
 
 		final int numberOfGlyphs = parser.peekUInt16() / 2;
 
-		final List<Integer> offsetTable = new ArrayList<Integer>();
+		final List<UINT16> offsetTable = new ArrayList<UINT16>();
 
 		for (int i=0;i<numberOfGlyphs;i++) {
 			offsetTable.add(parser.readUInt16());

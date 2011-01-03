@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import tv.porst.splib.io.BinaryParser;
+import tv.porst.splib.io.UINT16;
 import tv.porst.swfretools.parser.structures.RecordHeader;
 import tv.porst.swfretools.parser.structures.ZoneRecord;
 import tv.porst.swfretools.parser.structures.ZoneRecordParser;
@@ -15,7 +16,7 @@ public class DefineFontAlignZonesParser {
 	}
 
 	public static Tag parse(final RecordHeader header, final BinaryParser parser) {
-		final int fontID = parser.readUInt16();
+		final UINT16 fontID = parser.readUInt16();
 		final int csmTableHint = parser.readBits(2);
 		final int reserved = parser.readBits(6);
 

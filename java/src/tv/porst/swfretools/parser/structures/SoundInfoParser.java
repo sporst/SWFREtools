@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import tv.porst.splib.io.BinaryParser;
+import tv.porst.splib.io.UINT16;
+import tv.porst.splib.io.UINT32;
+import tv.porst.splib.io.UINT8;
 
 public class SoundInfoParser {
 
@@ -16,15 +19,15 @@ public class SoundInfoParser {
 		final boolean hasOutPoint = parser.readFlag();
 		final boolean hasInPoint = parser.readFlag();
 
-		final long inPoint = hasInPoint ? parser.readUInt32() : 0;
-		final long outPoint = hasOutPoint ? parser.readUInt32() : 0;
-		final int loopCount = hasLoops ? parser.readUInt16() : 0;
-		final int envPoints = hasEnvelope ? parser.readUInt8() : 0;
+		final UINT32 inPoint = hasInPoint ? parser.readUInt32() : null;
+		final UINT32 outPoint = hasOutPoint ? parser.readUInt32() : null;
+		final UINT16 loopCount = hasLoops ? parser.readUInt16() : null;
+		final UINT8 envPoints = hasEnvelope ? parser.readUInt8() : null;
 
 		final List<SoundEnvelope> envelopeRecords = new ArrayList<SoundEnvelope>();
 
 		if (hasEnvelope) {
-			for (int i=0;i<envPoints;i++) {
+			for (int i=0;i<envPoints.value();i++) {
 				envelopeRecords.add(SoundEnvelopeParser.parse(parser));
 			}
 		}

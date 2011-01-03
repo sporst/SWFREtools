@@ -1,6 +1,7 @@
 package tv.porst.swfretools.parser.structures;
 
 import tv.porst.splib.io.BinaryParser;
+import tv.porst.splib.io.UINT16;
 
 public class ButtonRecordParser {
 
@@ -12,8 +13,8 @@ public class ButtonRecordParser {
 		final boolean buttonStateDown = parser.readFlag();
 		final boolean buttonStateOver = parser.readFlag();
 		final boolean buttonStateUp = parser.readFlag();
-		final int characterID = parser.readUInt16();
-		final int placeDepth = parser.readUInt16();
+		final UINT16 characterID = parser.readUInt16();
+		final UINT16 placeDepth = parser.readUInt16();
 		final Matrix placeMatrix = MatrixParser.parse(parser);
 
 		return new ButtonRecord(buttonReserved, buttonHasBlendMode, buttonHasFilterList,

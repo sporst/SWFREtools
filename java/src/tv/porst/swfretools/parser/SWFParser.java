@@ -8,6 +8,9 @@ import java.util.zip.InflaterInputStream;
 
 import tv.porst.splib.io.BinaryParser;
 import tv.porst.splib.io.FileHelpers;
+import tv.porst.splib.io.UINT16;
+import tv.porst.splib.io.UINT32;
+import tv.porst.splib.io.UINT8;
 import tv.porst.swfretools.parser.structures.Rect;
 import tv.porst.swfretools.parser.structures.RectParser;
 import tv.porst.swfretools.parser.structures.SWFFile;
@@ -144,20 +147,20 @@ public final class SWFParser {
 
 		final BinaryParser parser = new BinaryParser(parserInputData);
 
-		final int signature1 = parser.readUInt8();
-		final int signature2 = parser.readUInt8();
-		final int signature3 = parser.readUInt8();
+		final UINT8 signature1 = parser.readUInt8();
+		final UINT8 signature2 = parser.readUInt8();
+		final UINT8 signature3 = parser.readUInt8();
 
-		final int version = parser.readUInt8();
+		final UINT8 version = parser.readUInt8();
 
-		final long fileLength = parser.readUInt32();
+		final UINT32 fileLength = parser.readUInt32();
 
 		final Rect frameSize = RectParser.parse(parser);
 
-		final int frameRate = parser.readUInt16();
-		final int frameCount = parser.readUInt16();
+		final UINT16 frameRate = parser.readUInt16();
+		final UINT16 frameCount = parser.readUInt16();
 
-		final List<Tag> tags = TagParser.parse(parser, version);
+		final List<Tag> tags = TagParser.parse(parser, version.value());
 
 		return new SWFFile(signature1, signature2, signature3, version, fileLength, frameSize, frameRate, frameCount, tags);
 	}

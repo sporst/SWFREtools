@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import tv.porst.splib.io.BinaryParser;
+import tv.porst.splib.io.UINT16;
+import tv.porst.splib.io.UINT8;
 
 public class TextRecord2Parser {
 
@@ -15,16 +17,16 @@ public class TextRecord2Parser {
 		final boolean styleFlagsHasColor = parser.readFlag();
 		final boolean styleFlagsHasYOffset = parser.readFlag();
 		final boolean styleFlagsHasXOffset = parser.readFlag();
-		final int fontID = styleFlagsHasFont ? parser.readUInt16() : 0;
+		final UINT16 fontID = styleFlagsHasFont ? parser.readUInt16() : null;
 		final RGBA textColor = styleFlagsHasColor ? RGBAParser.parse(parser) : null;
 		final int xOffset = styleFlagsHasXOffset ? parser.readInt16() : 0;
 		final int yOffset = styleFlagsHasYOffset ? parser.readInt16() : 0;
-		final int textHeight = styleFlagsHasFont ? parser.readUInt16() : 0;
-		final int glyphCount = parser.readUInt8();
+		final UINT16 textHeight = styleFlagsHasFont ? parser.readUInt16() : null;
+		final UINT8 glyphCount = parser.readUInt8();
 
 		final List<GlyphEntry> glyphEntries = new ArrayList<GlyphEntry>();
 
-		for (int i=0;i<glyphCount;i++) {
+		for (int i=0;i<glyphCount.value();i++) {
 			glyphEntries.add(GlyphEntryParser.parse(parser, glyphBits, advanceBits));
 		}
 

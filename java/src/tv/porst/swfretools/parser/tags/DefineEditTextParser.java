@@ -1,6 +1,8 @@
 package tv.porst.swfretools.parser.tags;
 
 import tv.porst.splib.io.BinaryParser;
+import tv.porst.splib.io.UINT16;
+import tv.porst.splib.io.UINT8;
 import tv.porst.swfretools.parser.structures.RGBA;
 import tv.porst.swfretools.parser.structures.RGBAParser;
 import tv.porst.swfretools.parser.structures.RecordHeader;
@@ -10,7 +12,7 @@ import tv.porst.swfretools.parser.structures.RectParser;
 public class DefineEditTextParser {
 
 	public static Tag parse(final RecordHeader header, final BinaryParser parser) {
-		final int characterID = parser.readUInt16();
+		final UINT16 characterID = parser.readUInt16();
 		final Rect bounds = RectParser.parse(parser);
 		final boolean hasText = parser.readFlag();
 		final boolean wordWrap = parser.readFlag();
@@ -28,15 +30,15 @@ public class DefineEditTextParser {
 		final boolean wasStatic = parser.readFlag();
 		final boolean html = parser.readFlag();
 		final boolean useOutlines = parser.readFlag();
-		final int fontID = hasFont ? parser.readUInt16() : 0;
+		final UINT16 fontID = hasFont ? parser.readUInt16() : null;
 		final String fontClass = hasFontClass ? parser.readString() : null;
-		final int fontHeight = hasFont ? parser.readUInt16() : 0;
+		final UINT16 fontHeight = hasFont ? parser.readUInt16() : null;
 		final RGBA textColor = hasTextColor ? RGBAParser.parse(parser) : null;
-		final int maxLength = hasMaxLength ? parser.readUInt16() : 0;
-		final int align = hasLayout ? parser.readUInt8() : 0;
-		final int leftMargin = hasLayout ? parser.readUInt16() : 0;
-		final int rightMargin = hasLayout ? parser.readUInt16() : 0;
-		final int indent = hasLayout ? parser.readUInt16() : 0;
+		final UINT16 maxLength = hasMaxLength ? parser.readUInt16() : null;
+		final UINT8 align = hasLayout ? parser.readUInt8() : null;
+		final UINT16 leftMargin = hasLayout ? parser.readUInt16() : null;
+		final UINT16 rightMargin = hasLayout ? parser.readUInt16() : null;
+		final UINT16 indent = hasLayout ? parser.readUInt16() : null;
 		final int leading = hasLayout ? parser.readInt16() : 0;
 		final String variableName = parser.readString();
 		final String initialText = hasText ? parser.readString() : null;

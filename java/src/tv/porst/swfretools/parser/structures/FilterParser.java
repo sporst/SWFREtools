@@ -1,22 +1,24 @@
 package tv.porst.swfretools.parser.structures;
 
 import tv.porst.splib.io.BinaryParser;
+import tv.porst.splib.io.UINT8;
 
 public class FilterParser {
 
 	public static Filter parse(final BinaryParser parser) {
-		final int filterId = parser.readUInt8();
+		final UINT8 filterId = parser.readUInt8();
+		final int filterIdValue = filterId.value();
 
-		final DropShadowFilter dropShadowFilter = filterId == 0 ? DropShadowFilterParser.parse(parser) : null;
-		final BlurFilter blurFilter = filterId == 1 ? BlurFilterParser.parse(parser) : null;
-		final GlowFilter glowFilter = filterId == 2 ? GlowFilterParser.parse(parser) : null;
-		final BevelFilter bevelFilter = filterId == 3 ? BevelFilterParser.parse(parser) : null;
-		final GradientGlowFilter gradientGlowFilter = filterId == 4 ? GradientGlowFilterParser.parse(parser) : null;
-		final ConvolutionFilter convolutionFilter = filterId == 5 ? ConvolutionFilterParser.parse(parser) : null;
-		final ColorMatrixFilter colorMatrixFilter = filterId == 6 ? ColorMatrixFilterParser.parse(parser) : null;
-		final GradientBevelFilter gradientBevelFilter = filterId == 7 ? GradientBevelFilterParser.parse(parser) : null;
+		final DropShadowFilter dropShadowFilter = filterIdValue == 0 ? DropShadowFilterParser.parse(parser) : null;
+		final BlurFilter blurFilter = filterIdValue == 1 ? BlurFilterParser.parse(parser) : null;
+		final GlowFilter glowFilter = filterIdValue == 2 ? GlowFilterParser.parse(parser) : null;
+		final BevelFilter bevelFilter = filterIdValue == 3 ? BevelFilterParser.parse(parser) : null;
+		final GradientGlowFilter gradientGlowFilter = filterIdValue == 4 ? GradientGlowFilterParser.parse(parser) : null;
+		final ConvolutionFilter convolutionFilter = filterIdValue == 5 ? ConvolutionFilterParser.parse(parser) : null;
+		final ColorMatrixFilter colorMatrixFilter = filterIdValue == 6 ? ColorMatrixFilterParser.parse(parser) : null;
+		final GradientBevelFilter gradientBevelFilter = filterIdValue == 7 ? GradientBevelFilterParser.parse(parser) : null;
 
-		return new Filter(dropShadowFilter, blurFilter, glowFilter, bevelFilter, gradientGlowFilter, convolutionFilter, colorMatrixFilter, gradientBevelFilter);
+		return new Filter(filterId, dropShadowFilter, blurFilter, glowFilter, bevelFilter, gradientGlowFilter, convolutionFilter, colorMatrixFilter, gradientBevelFilter);
 	}
 
 }

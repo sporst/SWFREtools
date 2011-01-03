@@ -4,14 +4,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 import tv.porst.splib.io.BinaryParser;
+import tv.porst.splib.io.IParsedUINTElement;
+import tv.porst.splib.io.UINT16;
+import tv.porst.splib.io.UINT8;
 import tv.porst.swfretools.parser.structures.RecordHeader;
 
 public class DefineFontInfoParser {
 
 	public static Tag parse(final RecordHeader header, final BinaryParser parser) {
-		final int fontId = parser.readUInt16();
-		final int fontNameLen = parser.readUInt8();
-		final String fontName = parser.readString(fontNameLen);
+		final UINT16 fontId = parser.readUInt16();
+		final UINT8 fontNameLen = parser.readUInt8();
+		final String fontName = parser.readString(fontNameLen.value());
 		final int fontFlagsReserved = parser.readBits(2);
 		final boolean fontFlagsSmallText = parser.readFlag();
 		final boolean fontFlagsShiftJIS = parser.readFlag();
@@ -20,11 +23,11 @@ public class DefineFontInfoParser {
 		final boolean fontFlagsBold = parser.readFlag();
 		final boolean fontFlagsWideCodes = parser.readFlag();
 
-		final int remainingBytes = header.getNormalizedLength() - 2 - 1 - fontNameLen - 1;
+		final int remainingBytes = header.getNormalizedLength() - 2 - 1 - fontNameLen.value() - 1;
 
 		final int numberOfGlyphs = remainingBytes / (fontFlagsWideCodes ? 2 : 1);
 
-		final List<Integer> codeTable = new ArrayList<Integer>();
+		final List<IParsedUINTElement> codeTable = new ArrayList<IParsedUINTElement>();
 
 		for (int i=0;i<numberOfGlyphs;i++) {
 			if (fontFlagsWideCodes) {

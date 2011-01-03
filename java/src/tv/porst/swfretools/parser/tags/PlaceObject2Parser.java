@@ -1,6 +1,7 @@
 package tv.porst.swfretools.parser.tags;
 
 import tv.porst.splib.io.BinaryParser;
+import tv.porst.splib.io.UINT16;
 import tv.porst.swfretools.parser.structures.ClipActions;
 import tv.porst.swfretools.parser.structures.ClipActionsParser;
 import tv.porst.swfretools.parser.structures.CxFormWithAlpha;
@@ -22,14 +23,14 @@ public class PlaceObject2Parser {
 		final int placeFlagHasCharacter = parser.readBits(1);
 		final int placeFlagHasMove = parser.readBits(1);
 
-		final int depth = parser.readUInt16();
+		final UINT16 depth = parser.readUInt16();
 
-		final int characterId = placeFlagHasCharacter == 1 ? parser.readUInt16() : 0;
+		final UINT16 characterId = placeFlagHasCharacter == 1 ? parser.readUInt16() : null;
 		final Matrix matrix = placeFlagHasMatrix == 1 ? MatrixParser.parse(parser) : null;
 		final CxFormWithAlpha colorTransform = placeFlagHasColorTransform == 1 ? CxFormWithAlphaParser.parse(parser) : null;
-		final int ratio = placeFlagHasRatio == 1 ? parser.readUInt16() : 0;
+		final UINT16 ratio = placeFlagHasRatio == 1 ? parser.readUInt16() : null;
 		final String name = placeFlagHasName == 1 ? parser.readString() : null;
-		final int clipDepth = placeFlagHasClipDepth == 1 ? parser.readUInt16() : 0;
+		final UINT16 clipDepth = placeFlagHasClipDepth == 1 ? parser.readUInt16() : null;
 		final ClipActions clipActions = placeFlagHasClipActions == 1 ? ClipActionsParser.parse(parser, version) : null;
 
 		return new PlaceObject2Tag(header, placeFlagHasClipActions, placeFlagHasClipDepth, placeFlagHasName,

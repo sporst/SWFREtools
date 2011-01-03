@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import tv.porst.splib.io.BinaryParser;
+import tv.porst.splib.io.IParsedUINTElement;
+import tv.porst.splib.io.UINT16;
+import tv.porst.splib.io.UINT8;
 import tv.porst.swfretools.parser.structures.KerningRecord;
 import tv.porst.swfretools.parser.structures.KerningRecordParser;
 import tv.porst.swfretools.parser.structures.RecordHeader;
@@ -15,7 +18,7 @@ import tv.porst.swfretools.parser.structures.ShapeParser;
 public class DefineFont2Parser {
 
 	public static Tag parse(final RecordHeader header, final BinaryParser parser) {
-		final int fontId = parser.readUInt16();
+		final UINT16 fontId = parser.readUInt16();
 		final boolean fontFlagsHasLayout = parser.readFlag();
 		final boolean fontFlagsShiftJIS = parser.readFlag();
 		final boolean fontFlagsSmallText = parser.readFlag();
@@ -24,33 +27,33 @@ public class DefineFont2Parser {
 		final boolean fontFlagsWideCodes = parser.readFlag();
 		final boolean fontFlagsItalic = parser.readFlag();
 		final boolean fontFlagsBold = parser.readFlag();
-		final int languageCode = parser.readUInt8();
-		final int fontNameLen = parser.readUInt8();
-		final String fontName = parser.readString(fontNameLen);
-		final int numGlyphs = parser.readUInt16();
+		final UINT8 languageCode = parser.readUInt8();
+		final UINT8 fontNameLen = parser.readUInt8();
+		final String fontName = parser.readString(fontNameLen.value());
+		final UINT16 numGlyphs = parser.readUInt16();
 
-		final List<Long> offsetTable = new ArrayList<Long>();
+		final List<IParsedUINTElement> offsetTable = new ArrayList<IParsedUINTElement>();
 
-		for (int i=0;i<numGlyphs;i++) {
+		for (int i=0;i<numGlyphs.value();i++) {
 			if (fontFlagsWideOffsets) {
 				offsetTable.add(parser.readUInt32());
 			}
 			else {
-				offsetTable.add((long) parser.readUInt16());
+				offsetTable.add(parser.readUInt16());
 			}
 		}
 
-		final long codeTableOffset = fontFlagsWideOffsets ? parser.readUInt32() : parser.readUInt16();
+		final IParsedUINTElement codeTableOffset = fontFlagsWideOffsets ? parser.readUInt32() : parser.readUInt16();
 
 		final List<Shape> glyphShapeTable = new ArrayList<Shape>();
 
-		for (int i=0;i<numGlyphs;i++) {
+		for (int i=0;i<numGlyphs.value();i++) {
 			glyphShapeTable.add(ShapeParser.parse(parser));
 		}
 
-		final List<Integer> codeTable = new ArrayList<Integer>();
+		final List<IParsedUINTElement> codeTable = new ArrayList<IParsedUINTElement>();
 
-		for (int i=0;i<numGlyphs;i++) {
+		for (int i=0;i<numGlyphs.value();i++) {
 			if (fontFlagsWideCodes) {
 				codeTable.add(parser.readUInt16());
 			}
@@ -67,11 +70,11 @@ public class DefineFont2Parser {
 		final List<Rect> fontBoundsTable = new ArrayList<Rect>();
 
 		if (fontFlagsHasLayout) {
-			for (int i=0;i<numGlyphs;i++) {
+			for (int i=0;i<numGlyphs.value();i++) {
 				fontAdvanceTable.add(parser.readInt16());
 			}
 
-			for (int i=0;i<numGlyphs;i++) {
+			for (int i=0;i<numGlyphs.value();i++) {
 				fontBoundsTable.add(RectParser.parse(parser));
 			}
 		}

@@ -2,6 +2,8 @@ package tv.porst.swfretools.parser.tags;
 
 import static tv.porst.splib.io.BinaryParserHelpers.readStringIf;
 import tv.porst.splib.io.BinaryParser;
+import tv.porst.splib.io.UINT16;
+import tv.porst.splib.io.UINT8;
 import tv.porst.swfretools.parser.structures.ClipActions;
 import tv.porst.swfretools.parser.structures.ClipActionsParser;
 import tv.porst.swfretools.parser.structures.CxFormWithAlpha;
@@ -31,19 +33,19 @@ public class PlaceObject3Parser {
 		final boolean placeFlagHasBlendMode = parser.readFlag();
 		final boolean placeFlagHasFilterList = parser.readFlag();
 
-		final int depth = parser.readUInt16();
+		final UINT16 depth = parser.readUInt16();
 		final String className = readStringIf(parser, placeFlagHasClassName || (placeFlagHasImage && placeFlagHasCharacter));
 
-		final int characterId = placeFlagHasCharacter ? parser.readUInt16() : 0;
+		final UINT16 characterId = placeFlagHasCharacter ? parser.readUInt16() : null;
 		final Matrix matrix = placeFlagHasMatrix ? MatrixParser.parse(parser) : null;
 		final CxFormWithAlpha colorTransform = placeFlagHasColorTransform ? CxFormWithAlphaParser.parse(parser) : null;
-		final int ratio = placeFlagHasRatio ? parser.readUInt16() : 0;
+		final UINT16 ratio = placeFlagHasRatio ? parser.readUInt16() : null;
 		final String name = readStringIf(parser, placeFlagHasName);
-		final int clipDepth = placeFlagHasClipDepth ? parser.readUInt16() : 0;
+		final UINT16 clipDepth = placeFlagHasClipDepth ? parser.readUInt16() : null;
 
 		final FilterList surfaceFilterList = placeFlagHasFilterList ? FilterListParser.parse(parser) : null;
-		final int blendMode = placeFlagHasBlendMode ? parser.readUInt8() : 0;
-		final int bitmapCache = placeFlagHasCacheAsBitmap ? parser.readUInt8() : 0;
+		final UINT8 blendMode = placeFlagHasBlendMode ? parser.readUInt8() : null;
+		final UINT8 bitmapCache = placeFlagHasCacheAsBitmap ? parser.readUInt8() : null;
 
 		final ClipActions clipActions = placeFlagHasClipActions ? ClipActionsParser.parse(parser, version) : null;
 

@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import tv.porst.splib.io.BinaryParser;
+import tv.porst.splib.io.UINT16;
+import tv.porst.splib.io.UINT8;
 import tv.porst.swfretools.parser.actions.Action;
 import tv.porst.swfretools.parser.actions.ActionRecordParser;
 import tv.porst.swfretools.parser.structures.RecordHeader;
@@ -11,10 +13,10 @@ import tv.porst.swfretools.parser.structures.RecordHeader;
 public class DefineButton2Parser {
 
 	public static Tag parse(final RecordHeader header, final BinaryParser parser) {
-		final int buttonID = parser.readUInt16();
+		final UINT16 buttonID = parser.readUInt16();
 		final int reservedFlags = parser.readBits(7);
 		final boolean trackAsMenu = parser.readFlag();
-		final int actionOffset = parser.readUInt16();
+		final UINT16 actionOffset = parser.readUInt16();
 
 		final List<ButtonRecord2> characters = new ArrayList<ButtonRecord2>();
 
@@ -32,7 +34,7 @@ public class DefineButton2Parser {
 
 		final List<Action> actions = ActionRecordParser.parse(parser, actionRecordSize);
 
-		final int actionEndFlag = parser.readUInt8();
+		final UINT8 actionEndFlag = parser.readUInt8();
 
 		return new DefineButton2Tag(header, buttonID, characters, actions, actionEndFlag);
 	}

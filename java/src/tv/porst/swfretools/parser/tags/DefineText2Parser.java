@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import tv.porst.splib.io.BinaryParser;
+import tv.porst.splib.io.UINT16;
+import tv.porst.splib.io.UINT8;
 import tv.porst.swfretools.parser.structures.Matrix;
 import tv.porst.swfretools.parser.structures.MatrixParser;
 import tv.porst.swfretools.parser.structures.RecordHeader;
@@ -15,11 +17,11 @@ import tv.porst.swfretools.parser.structures.TextRecord2Parser;
 public class DefineText2Parser {
 
 	public static Tag parse(final RecordHeader header, final BinaryParser parser) {
-		final int characterID = parser.readUInt16();
+		final UINT16 characterID = parser.readUInt16();
 		final Rect textBounds = RectParser.parse(parser);
 		final Matrix textMatrix = MatrixParser.parse(parser);
-		final int glyphBits = parser.readUInt8();
-		final int advanceBits = parser.readUInt8();
+		final UINT8 glyphBits = parser.readUInt8();
+		final UINT8 advanceBits = parser.readUInt8();
 
 		final List<TextRecord2> textRecords = new ArrayList<TextRecord2>();
 
@@ -29,7 +31,7 @@ public class DefineText2Parser {
 				break;
 			}
 
-			textRecords.add(TextRecord2Parser.parse(parser, glyphBits, advanceBits));
+			textRecords.add(TextRecord2Parser.parse(parser, glyphBits.value(), advanceBits.value()));
 
 		} while (true);
 

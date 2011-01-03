@@ -1,6 +1,8 @@
 package tv.porst.swfretools.parser.tags;
 
 import tv.porst.splib.io.BinaryParser;
+import tv.porst.splib.io.UINT16;
+import tv.porst.splib.io.UINT8;
 import tv.porst.swfretools.parser.structures.CxFormWithAlpha;
 import tv.porst.swfretools.parser.structures.CxFormWithAlphaParser;
 import tv.porst.swfretools.parser.structures.FilterList;
@@ -18,12 +20,12 @@ public class ButtonRecord2Parser {
 		final boolean buttonStateDown = parser.readFlag();
 		final boolean buttonStateOver = parser.readFlag();
 		final boolean buttonStateUp = parser.readFlag();
-		final int characterID = parser.readUInt16();
-		final int placeDepth = parser.readUInt16();
+		final UINT16 characterID = parser.readUInt16();
+		final UINT16 placeDepth = parser.readUInt16();
 		final Matrix placeMatrix = MatrixParser.parse(parser);
 		final CxFormWithAlpha colorTransform = CxFormWithAlphaParser.parse(parser);
 		final FilterList filterList = buttonHasFilterList ? FilterListParser.parse(parser) : null;
-		final int blendMode = buttonHasBlendMode ? parser.readUInt8() : 0;
+		final UINT8 blendMode = buttonHasBlendMode ? parser.readUInt8() : null;
 
 		return new ButtonRecord2(buttonReserved, buttonHasBlendMode, buttonHasFilterList,
 				buttonStateHitTest, buttonStateDown, buttonStateOver,

@@ -1,12 +1,13 @@
 package tv.porst.swfretools.parser.structures;
 
 import tv.porst.splib.io.BinaryParser;
+import tv.porst.splib.io.UINT16;
 
 public class LineStyle4Parser {
 
 	public static LineStyle4 parse(final BinaryParser parser) {
 
-		final int width = parser.readUInt16();
+		final UINT16 width = parser.readUInt16();
 		final int startCapStyle = parser.readBits(2);
 		final int joinStyle = parser.readBits(2);
 		final boolean hasFillFlag = parser.readFlag();
@@ -16,7 +17,7 @@ public class LineStyle4Parser {
 		final int reserved = parser.readBits(5);
 		final boolean noClose = parser.readFlag();
 		final int endCapStyle = parser.readBits(2);
-		final int miterLimitFactor = joinStyle == 2 ? parser.readUInt16() : 0;
+		final UINT16 miterLimitFactor = joinStyle == 2 ? parser.readUInt16() : null;
 		final RGBA color = !hasFillFlag ? RGBAParser.parse(parser) : null;
 		final FillStyle3 fillType = hasFillFlag ? FillStyle3Parser.parse(parser) : null;
 
