@@ -39,6 +39,8 @@ public final class TagCodes {
 	public static final int ExportAssets = 56;
 	public static final int ImportAssets = 57;
 	public static final int EnableDebugger = 58;
+	public static final int DefineVideoStream = 60;
+	public static final int VideoFrame = 61;
 	public static final int DefineFontInfo2 = 62;
 	public static final int EnableDebugger2 = 64;
 	public static final int ScriptLimits = 65;

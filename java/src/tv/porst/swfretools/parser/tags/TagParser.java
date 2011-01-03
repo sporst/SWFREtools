@@ -113,6 +113,8 @@ public class TagParser {
 		case TagCodes.DefineButtonCxform: return DefineButtonCxformParser.parse(header, parser);
 		case TagCodes.DefineButtonSound: return DefineButtonSoundParser.parse(header, parser);
 		case TagCodes.DefineSprite: return DefineSpriteParser.parse(header, parser, version);
+		case TagCodes.DefineVideoStream: return DefineVideoStreamParser.parse(header, parser);
+		case TagCodes.VideoFrame: return VideoFrameParser.parse(header, parser);
 		}
 
 		return null;
