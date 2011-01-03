@@ -88,6 +88,12 @@ public class TagParser {
 		case TagCodes.DefineEditText: return DefineEditTextParser.parse(header, parser);
 		case TagCodes.CSMTextSettings: return CSMTextSettingsParser.parse(header, parser);
 		case TagCodes.DefineFont4: return DefineFont4Parser.parse(header, parser);
+		case TagCodes.DefineSound: return DefineSoundParser.parse(header, parser);
+		case TagCodes.StartSound: return StartSoundParser.parse(header, parser);
+		case TagCodes.StartSound2: return StartSound2Parser.parse(header, parser);
+		case TagCodes.SoundStreamHead: return SoundStreamHeadParser.parse(header, parser);
+		case TagCodes.SoundStreamHead2: return SoundStreamHead2Parser.parse(header, parser);
+		case TagCodes.SoundStreamBlock: return SoundStreamBlockParser.parse(header, parser);
 		}
 
 		return null;

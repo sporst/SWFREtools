@@ -12,6 +12,10 @@ public final class TagCodes {
 	public static final int DefineFont = 10;
 	public static final int DefineText = 11;
 	public static final int DefineFontInfo = 13;
+	public static final int DefineSound = 14;
+	public static final int StartSound = 15;
+	public static final int SoundStreamHead = 18;
+	public static final int SoundStreamBlock = 19;
 	public static final int DefineBitsLossless = 20;
 	public static final int DefineBitsJPEG2 = 22;
 	public static final int DefineShape2 = 23;
@@ -24,6 +28,7 @@ public final class TagCodes {
 	public static final int DefineBitsLossless2 = 36;
 	public static final int DefineEditText = 37;
 	public static final int FrameLabel = 43;
+	public static final int SoundStreamHead2 = 45;
 	public static final int DefineMorphShape = 46;
 	public static final int DefineFont2 = 48;
 	public static final int ExportAssets = 56;
@@ -46,6 +51,7 @@ public final class TagCodes {
 	public static final int DefineMorphShape2 = 84;
 	public static final int DefineSceneAndFrameLabelData = 86;
 	public static final int DefineFontName = 88;
+	public static final int StartSound2 = 89;
 	public static final int DefineBitsJPEG4 = 90;
 	public static final int DefineFont4 = 91;
 }
