@@ -1,6 +1,7 @@
 package tv.porst.swfretools.parser.structures;
 
 import tv.porst.splib.io.BinaryParser;
+import tv.porst.splib.io.Flag;
 import tv.porst.splib.io.UINT8;
 
 public class GradientGlowFilterParser {
@@ -25,10 +26,10 @@ public class GradientGlowFilterParser {
 		final Fixed angle = FixedParser.parse(parser);
 		final Fixed distance = FixedParser.parse(parser);
 		final Fixed8 strength = Fixed8Parser.parse(parser);
-		final boolean innerShadow = parser.readFlag();
-		final boolean knockout = parser.readFlag();
-		final boolean compositeSource = parser.readFlag();
-		final boolean onTop = parser.readFlag();
+		final Flag innerShadow = parser.readFlag();
+		final Flag knockout = parser.readFlag();
+		final Flag compositeSource = parser.readFlag();
+		final Flag onTop = parser.readFlag();
 		final int passes = parser.readBits(4);
 
 		return new GradientGlowFilter(numColors, gradientColors, gradientRatio, blurX, blurY, angle, distance, strength, innerShadow, knockout, compositeSource, onTop, passes);

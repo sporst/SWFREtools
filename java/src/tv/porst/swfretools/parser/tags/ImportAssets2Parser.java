@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import tv.porst.splib.io.BinaryParser;
+import tv.porst.splib.io.PString;
 import tv.porst.splib.io.UINT16;
 import tv.porst.splib.io.UINT8;
 import tv.porst.swfretools.parser.structures.AssetParser;
@@ -13,7 +14,7 @@ import tv.porst.swfretools.parser.structures.RecordHeader;
 public class ImportAssets2Parser {
 	public static Tag parse(final RecordHeader header, final BinaryParser parser) {
 
-		final String url = parser.readString();
+		final PString url = parser.readString();
 		final UINT8 reserved = parser.readUInt8();
 		final UINT8 reserved2 = parser.readUInt8();
 		final UINT16 count = parser.readUInt16();

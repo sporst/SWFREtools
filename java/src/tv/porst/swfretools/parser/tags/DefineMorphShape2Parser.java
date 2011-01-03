@@ -1,6 +1,7 @@
 package tv.porst.swfretools.parser.tags;
 
 import tv.porst.splib.io.BinaryParser;
+import tv.porst.splib.io.Flag;
 import tv.porst.splib.io.UINT16;
 import tv.porst.splib.io.UINT32;
 import tv.porst.swfretools.parser.structures.MorphFillStyleArray;
@@ -20,8 +21,8 @@ public class DefineMorphShape2Parser {
 		final Rect startEdgeBounds = RectParser.parse(parser);
 		final Rect endEdgeBounds = RectParser.parse(parser);
 		final int reserved = parser.readBits(6);
-		final boolean useNonScalingStrokes = parser.readFlag();
-		final boolean useScalingStrokes = parser.readFlag();
+		final Flag useNonScalingStrokes = parser.readFlag();
+		final Flag useScalingStrokes = parser.readFlag();
 		final UINT32 offset = parser.readUInt32();
 		final MorphFillStyleArray morphFillStyles = MorphFillStyleArrayParser.parse(parser);
 		final MorphLineStyleArray2 morphLineStyles = MorphLineStyleArray2Parser.parse(parser);

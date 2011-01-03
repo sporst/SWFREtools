@@ -1,6 +1,7 @@
 package tv.porst.swfretools.parser.tags;
 
 import tv.porst.splib.io.BinaryParser;
+import tv.porst.splib.io.PString;
 import tv.porst.splib.io.UINT16;
 import tv.porst.swfretools.parser.structures.ClipActions;
 import tv.porst.swfretools.parser.structures.ClipActionsParser;
@@ -29,7 +30,7 @@ public class PlaceObject2Parser {
 		final Matrix matrix = placeFlagHasMatrix == 1 ? MatrixParser.parse(parser) : null;
 		final CxFormWithAlpha colorTransform = placeFlagHasColorTransform == 1 ? CxFormWithAlphaParser.parse(parser) : null;
 		final UINT16 ratio = placeFlagHasRatio == 1 ? parser.readUInt16() : null;
-		final String name = placeFlagHasName == 1 ? parser.readString() : null;
+		final PString name = placeFlagHasName == 1 ? parser.readString() : null;
 		final UINT16 clipDepth = placeFlagHasClipDepth == 1 ? parser.readUInt16() : null;
 		final ClipActions clipActions = placeFlagHasClipActions == 1 ? ClipActionsParser.parse(parser, version) : null;
 

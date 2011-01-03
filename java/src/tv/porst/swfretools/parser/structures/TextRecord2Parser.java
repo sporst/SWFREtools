@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import tv.porst.splib.io.BinaryParser;
+import tv.porst.splib.io.Flag;
+import tv.porst.splib.io.INT16;
 import tv.porst.splib.io.UINT16;
 import tv.porst.splib.io.UINT8;
 
@@ -11,17 +13,17 @@ public class TextRecord2Parser {
 
 	public static TextRecord2 parse(final BinaryParser parser, final int glyphBits,
 			final int advanceBits) {
-		final boolean textRecordType = parser.readFlag();
+		final Flag textRecordType = parser.readFlag();
 		final int styleFlagsReserved = parser.readBits(3);
-		final boolean styleFlagsHasFont = parser.readFlag();
-		final boolean styleFlagsHasColor = parser.readFlag();
-		final boolean styleFlagsHasYOffset = parser.readFlag();
-		final boolean styleFlagsHasXOffset = parser.readFlag();
-		final UINT16 fontID = styleFlagsHasFont ? parser.readUInt16() : null;
-		final RGBA textColor = styleFlagsHasColor ? RGBAParser.parse(parser) : null;
-		final int xOffset = styleFlagsHasXOffset ? parser.readInt16() : 0;
-		final int yOffset = styleFlagsHasYOffset ? parser.readInt16() : 0;
-		final UINT16 textHeight = styleFlagsHasFont ? parser.readUInt16() : null;
+		final Flag styleFlagsHasFont = parser.readFlag();
+		final Flag styleFlagsHasColor = parser.readFlag();
+		final Flag styleFlagsHasYOffset = parser.readFlag();
+		final Flag styleFlagsHasXOffset = parser.readFlag();
+		final UINT16 fontID = styleFlagsHasFont.value() ? parser.readUInt16() : null;
+		final RGBA textColor = styleFlagsHasColor.value() ? RGBAParser.parse(parser) : null;
+		final INT16 xOffset = styleFlagsHasXOffset.value() ? parser.readInt16() : null;
+		final INT16 yOffset = styleFlagsHasYOffset.value() ? parser.readInt16() : null;
+		final UINT16 textHeight = styleFlagsHasFont.value() ? parser.readUInt16() : null;
 		final UINT8 glyphCount = parser.readUInt8();
 
 		final List<GlyphEntry> glyphEntries = new ArrayList<GlyphEntry>();

@@ -1,6 +1,7 @@
 package tv.porst.swfretools.parser.tags;
 
 import tv.porst.splib.io.BinaryParser;
+import tv.porst.splib.io.Flag;
 import tv.porst.splib.io.UINT16;
 import tv.porst.swfretools.parser.structures.RecordHeader;
 import tv.porst.swfretools.parser.structures.Rect;
@@ -15,12 +16,12 @@ public class DefineShape4Parser {
 		final Rect shapeBounds = RectParser.parse(parser);
 		final Rect edgeBounds = RectParser.parse(parser);
 		final int reserved = parser.readBits(5);
-		final boolean usesFillWindingRule = parser.readFlag();
-		final boolean usesNonScalingStrokes = parser.readFlag();
-		final boolean usesScalingStrokes = parser.readFlag();
+		final Flag usesFillWindingRule = parser.readFlag();
+		final Flag usesNonScalingStrokes = parser.readFlag();
+		final Flag usesScalingStrokes = parser.readFlag();
 		final ShapeWithStyle4 shapes = ShapeWithStyle4Parser.parse(parser);
 
-		return new DefineShape4Tag(header, shapeId, shapeBounds, shapes);
+		return new DefineShape4Tag(header, shapeId, shapeBounds, edgeBounds, reserved, usesFillWindingRule, usesNonScalingStrokes, usesScalingStrokes, shapes);
 	}
 
 }

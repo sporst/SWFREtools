@@ -45,7 +45,7 @@ public class TagParser {
 			return new RecordHeader(tagCode, length, parser.readSInt32());
 		}
 		else {
-			return new RecordHeader(tagCode, length, 0);
+			return new RecordHeader(tagCode, length, null);
 		}
 
 	}

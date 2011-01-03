@@ -4,7 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import tv.porst.splib.io.BinaryParser;
-import tv.porst.splib.io.IParsedUINTElement;
+import tv.porst.splib.io.Flag;
+import tv.porst.splib.io.INT16;
+import tv.porst.splib.io.IParsedINTElement;
+import tv.porst.splib.io.PString;
 import tv.porst.splib.io.UINT16;
 import tv.porst.splib.io.UINT8;
 import tv.porst.swfretools.parser.structures.KerningRecord;
@@ -19,23 +22,23 @@ public class DefineFont3Parser {
 
 	public static Tag parse(final RecordHeader header, final BinaryParser parser) {
 		final UINT16 fontId = parser.readUInt16();
-		final boolean fontFlagsHasLayout = parser.readFlag();
-		final boolean fontFlagsShiftJIS = parser.readFlag();
-		final boolean fontFlagsSmallText = parser.readFlag();
-		final boolean fontFlagsANSI = parser.readFlag();
-		final boolean fontFlagsWideOffsets = parser.readFlag();
-		final boolean fontFlagsWideCodes = parser.readFlag();
-		final boolean fontFlagsItalic = parser.readFlag();
-		final boolean fontFlagsBold = parser.readFlag();
+		final Flag fontFlagsHasLayout = parser.readFlag();
+		final Flag fontFlagsShiftJIS = parser.readFlag();
+		final Flag fontFlagsSmallText = parser.readFlag();
+		final Flag fontFlagsANSI = parser.readFlag();
+		final Flag fontFlagsWideOffsets = parser.readFlag();
+		final Flag fontFlagsWideCodes = parser.readFlag();
+		final Flag fontFlagsItalic = parser.readFlag();
+		final Flag fontFlagsBold = parser.readFlag();
 		final UINT8 languageCode = parser.readUInt8();
 		final UINT8 fontNameLen = parser.readUInt8();
-		final String fontName = parser.readString(fontNameLen.value());
+		final PString fontName = parser.readString(fontNameLen.value());
 		final UINT16 numGlyphs = parser.readUInt16();
 
-		final List<IParsedUINTElement> offsetTable = new ArrayList<IParsedUINTElement>();
+		final List<IParsedINTElement> offsetTable = new ArrayList<IParsedINTElement>();
 
 		for (int i=0;i<numGlyphs.value();i++) {
-			if (fontFlagsWideOffsets) {
+			if (fontFlagsWideOffsets.value()) {
 				offsetTable.add(parser.readUInt32());
 			}
 			else {
@@ -43,7 +46,7 @@ public class DefineFont3Parser {
 			}
 		}
 
-		final IParsedUINTElement codeTableOffset = fontFlagsWideOffsets ? parser.readUInt32() : parser.readUInt16();
+		final IParsedINTElement codeTableOffset = fontFlagsWideOffsets.value() ? parser.readUInt32() : parser.readUInt16();
 
 		final List<Shape> glyphShapeTable = new ArrayList<Shape>();
 
@@ -51,20 +54,20 @@ public class DefineFont3Parser {
 			glyphShapeTable.add(ShapeParser.parse(parser));
 		}
 
-		final List<IParsedUINTElement> codeTable = new ArrayList<IParsedUINTElement>();
+		final List<IParsedINTElement> codeTable = new ArrayList<IParsedINTElement>();
 
 		for (int i=0;i<numGlyphs.value();i++) {
 			codeTable.add(parser.readUInt16());
 		}
 
-		final int fontAscent = fontFlagsHasLayout ? parser.readInt16() : 0;
-		final int fontDescent = fontFlagsHasLayout ? parser.readInt16() : 0;
-		final int fontLeading = fontFlagsHasLayout ? parser.readInt16() : 0;
+		final INT16 fontAscent = fontFlagsHasLayout.value() ? parser.readInt16() : null;
+		final INT16 fontDescent = fontFlagsHasLayout.value() ? parser.readInt16() : null;
+		final INT16 fontLeading = fontFlagsHasLayout.value() ? parser.readInt16() : null;
 
-		final List<Integer> fontAdvanceTable = new ArrayList<Integer>();
+		final List<INT16> fontAdvanceTable = new ArrayList<INT16>();
 		final List<Rect> fontBoundsTable = new ArrayList<Rect>();
 
-		if (fontFlagsHasLayout) {
+		if (fontFlagsHasLayout.value()) {
 			for (int i=0;i<numGlyphs.value();i++) {
 				fontAdvanceTable.add(parser.readInt16());
 			}
@@ -74,13 +77,13 @@ public class DefineFont3Parser {
 			}
 		}
 
-		final int kerningCount = fontFlagsHasLayout ? parser.readInt16() : 0;
+		final UINT16 kerningCount = fontFlagsHasLayout.value() ? parser.readUInt16() : null;
 
 		final List<KerningRecord> fontKerningTable = new ArrayList<KerningRecord>();
 
-		if (fontFlagsHasLayout) {
-			for (int i=0;i<kerningCount;i++) {
-				fontKerningTable.add(KerningRecordParser.parse(parser, fontFlagsWideCodes));
+		if (fontFlagsHasLayout.value()) {
+			for (int i=0;i<kerningCount.value();i++) {
+				fontKerningTable.add(KerningRecordParser.parse(parser, fontFlagsWideCodes.value()));
 			}
 		}
 

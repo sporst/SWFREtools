@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import tv.porst.splib.io.BinaryParser;
+import tv.porst.splib.io.Flag;
 import tv.porst.splib.io.UINT8;
 
 public class ZoneRecordParser {
@@ -18,8 +19,8 @@ public class ZoneRecordParser {
 		}
 
 		final int reserved = parser.readBits(6);
-		final boolean zoneMaskY = parser.readFlag();
-		final boolean zoneMaskX = parser.readFlag();
+		final Flag zoneMaskY = parser.readFlag();
+		final Flag zoneMaskX = parser.readFlag();
 
 		return new ZoneRecord(numZoneData, zoneData, reserved, zoneMaskY, zoneMaskX);
 	}

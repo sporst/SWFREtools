@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import tv.porst.splib.io.BinaryParser;
-import tv.porst.splib.io.IParsedUINTElement;
+import tv.porst.splib.io.IParsedINTElement;
 import tv.porst.splib.io.UINT16;
 
 public class ClipActionsParser {
@@ -27,7 +27,7 @@ public class ClipActionsParser {
 
 		} while (true);
 
-		final IParsedUINTElement clipActionEndFlag = version <= 5 ? parser.readUInt16() : parser.readUInt32();
+		final IParsedINTElement clipActionEndFlag = version <= 5 ? parser.readUInt16() : parser.readUInt32();
 
 		return new ClipActions(reserved, allEventFlags, clipActionRecords, clipActionEndFlag);
 	}
