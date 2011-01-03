@@ -57,6 +57,7 @@ public final class TagCodes {
 	public static final int DefineShape4 = 83;
 	public static final int DefineMorphShape2 = 84;
 	public static final int DefineSceneAndFrameLabelData = 86;
+	public static final int DefineBinaryData = 87;
 	public static final int DefineFontName = 88;
 	public static final int StartSound2 = 89;
 	public static final int DefineBitsJPEG4 = 90;

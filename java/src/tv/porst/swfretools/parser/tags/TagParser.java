@@ -115,6 +115,7 @@ public class TagParser {
 		case TagCodes.DefineSprite: return DefineSpriteParser.parse(header, parser, version);
 		case TagCodes.DefineVideoStream: return DefineVideoStreamParser.parse(header, parser);
 		case TagCodes.VideoFrame: return VideoFrameParser.parse(header, parser);
+		case TagCodes.DefineBinaryData: return DefineBinaryDataParser.parse(header, parser);
 		}
 
 		return null;
