@@ -20,6 +20,20 @@ public class TagParser {
 		return tags;
 	}
 
+	public static List<Tag> parse(final BinaryParser parser, final int version, final int length) {
+
+		final int start = parser.getBytePosition();
+
+		final List<Tag> tags = new ArrayList<Tag>();
+
+		while (parser.getBytePosition() < start + length)
+		{
+			tags.add(parseTag(parser, version));
+		}
+
+		return tags;
+	}
+
 	private static RecordHeader parseRecordHeader(final BinaryParser parser) {
 
 		final int tagCodeAndLength = parser.readUInt16();
@@ -98,6 +112,7 @@ public class TagParser {
 		case TagCodes.DefineButton2: return DefineButton2Parser.parse(header, parser);
 		case TagCodes.DefineButtonCxform: return DefineButtonCxformParser.parse(header, parser);
 		case TagCodes.DefineButtonSound: return DefineButtonSoundParser.parse(header, parser);
+		case TagCodes.DefineSprite: return DefineSpriteParser.parse(header, parser, version);
 		}
 
 		return null;

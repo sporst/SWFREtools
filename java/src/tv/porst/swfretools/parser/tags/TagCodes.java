@@ -31,6 +31,7 @@ public final class TagCodes {
 	public static final int DefineBitsJPEG3 = 35;
 	public static final int DefineBitsLossless2 = 36;
 	public static final int DefineEditText = 37;
+	public static final int DefineSprite = 39;
 	public static final int FrameLabel = 43;
 	public static final int SoundStreamHead2 = 45;
 	public static final int DefineMorphShape = 46;
