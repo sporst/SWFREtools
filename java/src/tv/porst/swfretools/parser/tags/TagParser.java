@@ -94,6 +94,10 @@ public class TagParser {
 		case TagCodes.SoundStreamHead: return SoundStreamHeadParser.parse(header, parser);
 		case TagCodes.SoundStreamHead2: return SoundStreamHead2Parser.parse(header, parser);
 		case TagCodes.SoundStreamBlock: return SoundStreamBlockParser.parse(header, parser);
+		case TagCodes.DefineButton: return DefineButtonParser.parse(header, parser);
+		case TagCodes.DefineButton2: return DefineButton2Parser.parse(header, parser);
+		case TagCodes.DefineButtonCxform: return DefineButtonCxformParser.parse(header, parser);
+		case TagCodes.DefineButtonSound: return DefineButtonSoundParser.parse(header, parser);
 		}
 
 		return null;
