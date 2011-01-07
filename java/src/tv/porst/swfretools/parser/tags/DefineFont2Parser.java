@@ -3,13 +3,14 @@ package tv.porst.swfretools.parser.tags;
 import java.util.ArrayList;
 import java.util.List;
 
-import tv.porst.splib.io.BinaryParser;
 import tv.porst.splib.io.Flag;
 import tv.porst.splib.io.INT16;
 import tv.porst.splib.io.IParsedINTElement;
 import tv.porst.splib.io.PString;
 import tv.porst.splib.io.UINT16;
 import tv.porst.splib.io.UINT8;
+import tv.porst.swfretools.parser.SWFBinaryParser;
+import tv.porst.swfretools.parser.SWFParserException;
 import tv.porst.swfretools.parser.structures.KerningRecord;
 import tv.porst.swfretools.parser.structures.KerningRecordParser;
 import tv.porst.swfretools.parser.structures.RecordHeader;
@@ -20,7 +21,7 @@ import tv.porst.swfretools.parser.structures.ShapeParser;
 
 public class DefineFont2Parser {
 
-	public static Tag parse(final RecordHeader header, final BinaryParser parser) {
+	public static Tag parse(final RecordHeader header, final SWFBinaryParser parser) throws SWFParserException {
 		final UINT16 fontId = parser.readUInt16();
 		final Flag fontFlagsHasLayout = parser.readFlag();
 		final Flag fontFlagsShiftJIS = parser.readFlag();
@@ -51,7 +52,7 @@ public class DefineFont2Parser {
 		final List<Shape> glyphShapeTable = new ArrayList<Shape>();
 
 		for (int i=0;i<numGlyphs.value();i++) {
-			glyphShapeTable.add(ShapeParser.parse(parser));
+			glyphShapeTable.add(ShapeParser.parse(parser, String.format("GlyphShapeTable[%d]", i)));
 		}
 
 		final List<IParsedINTElement> codeTable = new ArrayList<IParsedINTElement>();

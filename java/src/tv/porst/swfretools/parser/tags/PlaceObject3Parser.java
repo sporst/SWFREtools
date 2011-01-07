@@ -1,11 +1,12 @@
 package tv.porst.swfretools.parser.tags;
 
 import static tv.porst.splib.io.BinaryParserHelpers.readStringIf;
-import tv.porst.splib.io.BinaryParser;
 import tv.porst.splib.io.Flag;
 import tv.porst.splib.io.PString;
 import tv.porst.splib.io.UINT16;
 import tv.porst.splib.io.UINT8;
+import tv.porst.swfretools.parser.SWFBinaryParser;
+import tv.porst.swfretools.parser.SWFParserException;
 import tv.porst.swfretools.parser.structures.ClipActions;
 import tv.porst.swfretools.parser.structures.ClipActionsParser;
 import tv.porst.swfretools.parser.structures.CxFormWithAlpha;
@@ -18,7 +19,7 @@ import tv.porst.swfretools.parser.structures.RecordHeader;
 
 public class PlaceObject3Parser {
 
-	public static Tag parse(final RecordHeader header, final BinaryParser parser, final int version) {
+	public static Tag parse(final RecordHeader header, final SWFBinaryParser parser, final int version) throws SWFParserException {
 
 		final Flag placeFlagHasClipActions = parser.readFlag();
 		final Flag placeFlagHasClipDepth = parser.readFlag();
@@ -39,7 +40,7 @@ public class PlaceObject3Parser {
 		final PString className = readStringIf(parser, placeFlagHasClassName.value() || (placeFlagHasImage.value() && placeFlagHasCharacter.value()));
 
 		final UINT16 characterId = placeFlagHasCharacter.value() ? parser.readUInt16() : null;
-		final Matrix matrix = placeFlagHasMatrix.value() ? MatrixParser.parse(parser) : null;
+		final Matrix matrix = placeFlagHasMatrix.value() ? MatrixParser.parse(parser, "Matrix") : null;
 		final CxFormWithAlpha colorTransform = placeFlagHasColorTransform.value() ? CxFormWithAlphaParser.parse(parser) : null;
 		final UINT16 ratio = placeFlagHasRatio.value() ? parser.readUInt16() : null;
 		final PString name = readStringIf(parser, placeFlagHasName.value());

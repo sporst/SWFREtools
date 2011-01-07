@@ -3,10 +3,8 @@ package tv.porst.swfretools.parser;
 import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.IOException;
-import java.util.List;
 import java.util.zip.InflaterInputStream;
 
-import tv.porst.splib.io.BinaryParser;
 import tv.porst.splib.io.FileHelpers;
 import tv.porst.splib.io.UINT16;
 import tv.porst.splib.io.UINT32;
@@ -14,8 +12,8 @@ import tv.porst.splib.io.UINT8;
 import tv.porst.swfretools.parser.structures.Rect;
 import tv.porst.swfretools.parser.structures.RectParser;
 import tv.porst.swfretools.parser.structures.SWFFile;
-import tv.porst.swfretools.parser.tags.Tag;
 import tv.porst.swfretools.parser.tags.TagParser;
+import tv.porst.swfretools.parser.tags.TagParserResult;
 
 /**
  * Class for parsing Flash SWF files.
@@ -85,7 +83,7 @@ public final class SWFParser {
 		try {
 			return isCompressed(fileData) ? decompress(fileData) : fileData;
 		} catch (final IOException e) {
-			throw new SWFParserException("Invalid SWF file: Compressed data could not be decompressed");
+			throw new SWFParserException(0x00001, 0, "Invalid SWF file: Compressed data could not be decompressed");
 		}
 	}
 
@@ -136,16 +134,16 @@ public final class SWFParser {
 		final byte[] fileData = FileHelpers.readFromStream(file);
 
 		if (fileData.length < 8) {
-			throw new SWFParserException("Invalid SWF file: File too small");
+			throw new SWFParserException(0x00002, 0, "Invalid SWF file: File too small");
 		}
 
 		if (!verifySignature(fileData)) {
-			throw new SWFParserException("Invalid SWF file: File signature not found");
+			throw new SWFParserException(0x00003, 0, "Invalid SWF file: File signature not found");
 		}
 
 		final byte[] parserInputData = concatPreprocessedData(fileData, decompressDataIfNecessary(fileData));
 
-		final BinaryParser parser = new BinaryParser(parserInputData);
+		final SWFBinaryParser parser = new SWFBinaryParser(parserInputData);
 
 		final UINT8 signature1 = parser.readUInt8();
 		final UINT8 signature2 = parser.readUInt8();
@@ -160,8 +158,8 @@ public final class SWFParser {
 		final UINT16 frameRate = parser.readUInt16();
 		final UINT16 frameCount = parser.readUInt16();
 
-		final List<Tag> tags = TagParser.parse(parser, version.value());
+		final TagParserResult tags = TagParser.parse(parser, version.value());
 
-		return new SWFFile(signature1, signature2, signature3, version, fileLength, frameSize, frameRate, frameCount, tags);
+		return new SWFFile(signature1, signature2, signature3, version, fileLength, frameSize, frameRate, frameCount, tags.getTags());
 	}
 }

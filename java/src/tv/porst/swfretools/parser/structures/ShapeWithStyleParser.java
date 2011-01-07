@@ -1,16 +1,17 @@
 package tv.porst.swfretools.parser.structures;
 
-import tv.porst.splib.io.BinaryParser;
+import tv.porst.swfretools.parser.SWFBinaryParser;
+import tv.porst.swfretools.parser.SWFParserException;
 
 public class ShapeWithStyleParser {
 
-	public static ShapeWithStyle parse(final BinaryParser parser) {
+	public static ShapeWithStyle parse(final SWFBinaryParser parser, final String fieldName) throws SWFParserException {
 
-		final FillStyleArray fillStyles = FillStyleArrayParser.parse(parser);
+		final FillStyleArray fillStyles = FillStyleArrayParser.parse(parser, fieldName + "::FillStyles");
 		final LineStyleArray lineStyles = LineStyleArrayParser.parse(parser);
 		final int numFillBits = parser.readBits(4);
 		final int numLineBits = parser.readBits(4);
-		final ShapeRecord shapeRecord = ShapeRecordParser.parse(parser, numFillBits, numLineBits);
+		final ShapeRecord shapeRecord = ShapeRecordParser.parse(parser, numFillBits, numLineBits, fieldName + "::ShapeRecord");
 
 		return new ShapeWithStyle(fillStyles, lineStyles, numFillBits, numLineBits, shapeRecord);
 

@@ -1,11 +1,12 @@
 package tv.porst.swfretools.parser.structures;
 
-import tv.porst.splib.io.BinaryParser;
 import tv.porst.splib.io.Flag;
+import tv.porst.swfretools.parser.SWFBinaryParser;
+import tv.porst.swfretools.parser.SWFParserException;
 
 public class StyleChangeRecord3Parser {
 
-	public static StyleChangeRecord3 parse(final BinaryParser parser, final int fillBits, final int lineBits) {
+	public static StyleChangeRecord3 parse(final SWFBinaryParser parser, final int fillBits, final int lineBits, final String fieldName) throws SWFParserException {
 
 		final Flag typeFlag = parser.readFlag();
 		final Flag stateNewStyles = parser.readFlag();
@@ -19,7 +20,7 @@ public class StyleChangeRecord3Parser {
 		final int fillStyle0 = stateFillStyle0.value() ? parser.readBits(fillBits) : 0;
 		final int fillStyle1 = stateFillStyle1.value() ? parser.readBits(fillBits) : 0;
 		final int lineStyle = stateLineStyle.value() ? parser.readBits(lineBits) : 0;
-		final FillStyle3Array fillStyles = stateNewStyles.value() ? FillStyle3ArrayParser.parse(parser) : null;
+		final FillStyle3Array fillStyles = stateNewStyles.value() ? FillStyle3ArrayParser.parse(parser, fieldName + "::FillStyles") : null;
 		final LineStyle3Array lineStyles = stateNewStyles.value() ? LineStyle3ArrayParser.parse(parser) : null;
 		final int numFillBits = stateNewStyles.value() ? parser.readBits(4) : 0;
 		final int numLineBits = stateNewStyles.value() ? parser.readBits(4) : 0;
