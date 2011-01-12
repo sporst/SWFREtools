@@ -17,10 +17,10 @@ public class DefineMorphShape2Parser {
 
 	public static Tag parse(final RecordHeader header, final SWFBinaryParser parser) throws SWFParserException {
 		final UINT16 characterId = parser.readUInt16();
-		final Rect startBounds = RectParser.parse(parser);
-		final Rect endBounds = RectParser.parse(parser);
-		final Rect startEdgeBounds = RectParser.parse(parser);
-		final Rect endEdgeBounds = RectParser.parse(parser);
+		final Rect startBounds = RectParser.parse(parser, "DefineMorphShape2::StartBounds");
+		final Rect endBounds = RectParser.parse(parser, "DefineMorphShape2::EndBounds");
+		final Rect startEdgeBounds = RectParser.parse(parser, "DefineMorphShape2::StartEdgeBounds");
+		final Rect endEdgeBounds = RectParser.parse(parser, "DefineMorphShape2::EndEdgeBounds");
 		final int reserved = parser.readBits(6);
 		final Flag useNonScalingStrokes = parser.readFlag();
 		final Flag useScalingStrokes = parser.readFlag();

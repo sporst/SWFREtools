@@ -1,6 +1,7 @@
 package tv.porst.swfretools.parser.structures;
 
 import tv.porst.splib.io.BinaryParser;
+import tv.porst.splib.io.SBits;
 
 /**
  * Parses SWF Rect structures.
@@ -13,10 +14,11 @@ public final class RectParser {
 	 * Parses a Rect structure from the current position of the input parser stream.
 	 * 
 	 * @param parser The parser that parses the input stream.
+	 * @param fieldName Name of the Rect structure in the parent structure.
 	 * 
 	 * @return The parsed Rect structure.
 	 */
-	public static Rect parse(final BinaryParser parser) {
+	public static Rect parse(final BinaryParser parser, final String fieldName) {
 
 		if (parser == null) {
 			throw new IllegalArgumentException("Parser argument must not be null");
@@ -28,13 +30,13 @@ public final class RectParser {
 		// in the SWF file format reference.
 
 		if (nBits == 0) {
-			return new Rect(0, 0, 0, 0, 0);
+			return new Rect(nBits, null, null, null, null);
 		}
 
-		final int xMin = parser.readSBits(nBits);
-		final int xMax = parser.readSBits(nBits);
-		final int yMin = parser.readSBits(nBits);
-		final int yMax = parser.readSBits(nBits);
+		final SBits xMin = parser.readSBits(nBits);
+		final SBits xMax = parser.readSBits(nBits);
+		final SBits yMin = parser.readSBits(nBits);
+		final SBits yMax = parser.readSBits(nBits);
 
 		return new Rect(nBits, xMin, xMax, yMin, yMax);
 	}

@@ -79,7 +79,7 @@ public class DefineFont2Parser {
 			}
 
 			for (int i=0;i<numGlyphs.value();i++) {
-				fontBoundsTable.add(RectParser.parse(parser));
+				fontBoundsTable.add(RectParser.parse(parser, String.format("DefineFont2::FontBoundsTable[%d]", i)));
 			}
 		}
 

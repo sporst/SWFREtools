@@ -74,7 +74,7 @@ public class DefineFont3Parser {
 			}
 
 			for (int i=0;i<numGlyphs.value();i++) {
-				fontBoundsTable.add(RectParser.parse(parser));
+				fontBoundsTable.add(RectParser.parse(parser, String.format("DefineFont3::FontBoundsTable[%d]", i)));
 			}
 		}
 

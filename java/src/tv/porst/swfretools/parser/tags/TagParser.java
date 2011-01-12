@@ -121,17 +121,13 @@ public final class TagParser {
 	 */
 	private static RecordHeader parseRecordHeader(final SWFBinaryParser parser) throws SWFParserException {
 
-		parser.setTag(parser.getBytePosition(), "RecordHeader");
-
-		SWFParserHelpers.throwIf(parser, UINT16.LENGTH, 0x00004, "TagCodeAndLength");
-
-		final UINT16 tagCodeAndLength = parser.readUInt16();
+		final UINT16 tagCodeAndLength = SWFParserHelpers.parseUINT16(parser, 0x00006, "RecordHeader::TagCodeAndLength");
 
 		final int length = tagCodeAndLength.value() & 0x3F;
 
 		if (length == 0x3F) {
-			SWFParserHelpers.throwIf(parser, INT32.LENGTH, 0x00005, "Length");
-			return new RecordHeader(tagCodeAndLength, parser.readSInt32());
+			final INT32 extraLength = SWFParserHelpers.parseINT32(parser, 0x00006, "RecordHeader::Length");
+			return new RecordHeader(tagCodeAndLength, extraLength);
 		}
 		else {
 			return new RecordHeader(tagCodeAndLength, null);
@@ -203,6 +199,7 @@ public final class TagParser {
 			case TagCodes.Metadata: return MetadataParser.parse(header, parser);
 			case TagCodes.DefineScalingGrid: return DefineScalingGridParser.parse(header, parser);
 			case TagCodes.DefineSceneAndFrameLabelData: return DefineSceneAndFrameLabelDataParser.parse(header, parser);
+			// TODO: Actions
 			case TagCodes.DefineShape: return DefineShapeParser.parse(header, parser);
 			case TagCodes.DefineShape2: return DefineShape2Parser.parse(header, parser);
 			case TagCodes.DefineShape3: return DefineShape3Parser.parse(header, parser);

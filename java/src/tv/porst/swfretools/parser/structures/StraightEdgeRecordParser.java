@@ -2,6 +2,7 @@ package tv.porst.swfretools.parser.structures;
 
 import tv.porst.splib.io.BinaryParser;
 import tv.porst.splib.io.Flag;
+import tv.porst.splib.io.SBits;
 
 public class StraightEdgeRecordParser {
 
@@ -11,8 +12,8 @@ public class StraightEdgeRecordParser {
 		final int numBits = parser.readBits(4);
 		final Flag generalLineFlag = parser.readFlag();
 		final Flag vertLineFlag = generalLineFlag.value() ? parser.readFlag() : null;
-		final int deltaX = generalLineFlag.value() || !vertLineFlag.value() ? parser.readSBits(numBits + 2) : 0;
-		final int deltaY = generalLineFlag.value() || vertLineFlag.value() ? parser.readSBits(numBits + 2) : 0;
+		final SBits deltaX = generalLineFlag.value() || !vertLineFlag.value() ? parser.readSBits(numBits + 2) : null;
+		final SBits deltaY = generalLineFlag.value() || vertLineFlag.value() ? parser.readSBits(numBits + 2) : null;
 
 		return new StraightEdgeRecord(typeFlag, straightFlag, numBits, generalLineFlag, vertLineFlag, deltaX, deltaY);
 	}

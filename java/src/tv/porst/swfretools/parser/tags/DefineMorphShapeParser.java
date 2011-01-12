@@ -16,8 +16,8 @@ public class DefineMorphShapeParser {
 
 	public static Tag parse(final RecordHeader header, final SWFBinaryParser parser) throws SWFParserException {
 		final UINT16 characterId = parser.readUInt16();
-		final Rect startBounds = RectParser.parse(parser);
-		final Rect endBounds = RectParser.parse(parser);
+		final Rect startBounds = RectParser.parse(parser, "DefineMorphShape::StartBounds");
+		final Rect endBounds = RectParser.parse(parser, "DefineMorphShape::EndBounds");
 		final UINT32 offset = parser.readUInt32();
 		final MorphFillStyleArray morphFillStyles = MorphFillStyleArrayParser.parse(parser, "MorphFillStyles");
 		final MorphLineStyleArray morphLineStyles = MorphLineStyleArrayParser.parse(parser);

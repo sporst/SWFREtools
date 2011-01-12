@@ -16,7 +16,7 @@ public class DefineEditTextParser {
 
 	public static Tag parse(final RecordHeader header, final BinaryParser parser) {
 		final UINT16 characterID = parser.readUInt16();
-		final Rect bounds = RectParser.parse(parser);
+		final Rect bounds = RectParser.parse(parser, "DefineEditText::Bounds");
 		final Flag hasText = parser.readFlag();
 		final Flag wordWrap = parser.readFlag();
 		final Flag multiline = parser.readFlag();

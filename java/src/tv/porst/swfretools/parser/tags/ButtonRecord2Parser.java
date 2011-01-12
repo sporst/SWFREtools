@@ -25,7 +25,7 @@ public class ButtonRecord2Parser {
 		final UINT16 characterID = parser.readUInt16();
 		final UINT16 placeDepth = parser.readUInt16();
 		final Matrix placeMatrix = MatrixParser.parse(parser, fieldName + "::PlaceMatrix");
-		final CxFormWithAlpha colorTransform = CxFormWithAlphaParser.parse(parser);
+		final CxFormWithAlpha colorTransform = CxFormWithAlphaParser.parse(parser, fieldName + "::CxFormWithAlpha");
 		final FilterList filterList = buttonHasFilterList.value() ? FilterListParser.parse(parser) : null;
 		final UINT8 blendMode = buttonHasBlendMode.value() ? parser.readUInt8() : null;
 

@@ -2,6 +2,7 @@ package tv.porst.swfretools.parser.structures;
 
 import tv.porst.splib.io.BinaryParser;
 import tv.porst.splib.io.BinaryParserHelpers;
+import tv.porst.swfretools.parser.SWFBinaryParser;
 
 public class AlphaColormapDataParser {
 
@@ -15,6 +16,10 @@ public class AlphaColormapDataParser {
 		final byte[] colormapPixelData = BinaryParserHelpers.readByteArray(parser, imageDataSize);
 
 		return new AlphaColormapData(colorTableRGB, colormapPixelData);
+	}
+
+	public static AlphaColormapData parseIf(final SWFBinaryParser parser, final boolean condition, final int colorTableSize, final int imageDataSize) {
+		return condition ? parse(parser, colorTableSize, imageDataSize) : null;
 	}
 
 }

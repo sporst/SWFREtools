@@ -1,6 +1,7 @@
 package tv.porst.swfretools.parser.tags;
 
 import tv.porst.splib.io.BinaryParser;
+import tv.porst.swfretools.parser.SWFBinaryParser;
 import tv.porst.swfretools.parser.structures.Pix24;
 import tv.porst.swfretools.parser.structures.Pix24Parser;
 
@@ -14,6 +15,10 @@ public class BitmapData24Parser {
 		}
 
 		return new BitmapData24(bitmapPixelData);
+	}
+
+	public static BitmapData24 parseIf(final SWFBinaryParser parser, final boolean condition, final int imageDataSize) {
+		return condition ? parse(parser, imageDataSize) : null;
 	}
 
 }

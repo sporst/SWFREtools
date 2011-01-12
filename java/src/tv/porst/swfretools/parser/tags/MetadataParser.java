@@ -1,15 +1,32 @@
 package tv.porst.swfretools.parser.tags;
 
-import tv.porst.splib.io.BinaryParser;
+import static tv.porst.swfretools.parser.SWFParserHelpers.parseString;
 import tv.porst.splib.io.PString;
+import tv.porst.swfretools.parser.SWFBinaryParser;
+import tv.porst.swfretools.parser.SWFParserException;
 import tv.porst.swfretools.parser.structures.RecordHeader;
 
-public class MetadataParser {
+/**
+ * Class for parsing Metadata tags.
+ * 
+ * @author sp
+ */
+public final class MetadataParser {
 
-	public static Tag parse(final RecordHeader header, final BinaryParser parser) {
-		final PString metadata = parser.readString();
+	/**
+	 * Parses a Metadata tag.
+	 * 
+	 * @param parser Provides the input data.
+	 * @param header Previously parsed header of the tag.
+	 * 
+	 * @return Returns the parsed tag.
+	 * 
+	 * @throws SWFParserException Thrown if parsing the tag failed.
+	 */
+	public static MetadataTag parse(final RecordHeader header, final SWFBinaryParser parser) throws SWFParserException {
+
+		final PString metadata = parseString(parser, 0x00006, "Metadata::Metadata");
 
 		return new MetadataTag(header, metadata);
 	}
-
 }

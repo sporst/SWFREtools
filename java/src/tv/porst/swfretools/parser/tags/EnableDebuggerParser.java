@@ -1,15 +1,32 @@
 package tv.porst.swfretools.parser.tags;
 
-import tv.porst.splib.io.BinaryParser;
+import static tv.porst.swfretools.parser.SWFParserHelpers.parseString;
 import tv.porst.splib.io.PString;
+import tv.porst.swfretools.parser.SWFBinaryParser;
+import tv.porst.swfretools.parser.SWFParserException;
 import tv.porst.swfretools.parser.structures.RecordHeader;
 
-public class EnableDebuggerParser {
+/**
+ * Class for parsing EnableDebugger tags.
+ * 
+ * @author sp
+ */
+public final class EnableDebuggerParser {
 
-	public static Tag parse(final RecordHeader header, final BinaryParser parser) {
-		final PString password = parser.readString();
+	/**
+	 * Parses an EnableDebugger tag.
+	 * 
+	 * @param parser Provides the input data.
+	 * @param header Previously parsed header of the tag.
+	 * 
+	 * @return Returns the parsed tag.
+	 * 
+	 * @throws SWFParserException Thrown if parsing the tag failed.
+	 */
+	public static EnableDebuggerTag parse(final RecordHeader header, final SWFBinaryParser parser) throws SWFParserException {
+
+		final PString password = parseString(parser, 0x00006, "EnableDebugger::Password");
 
 		return new EnableDebuggerTag(header, password);
 	}
-
 }

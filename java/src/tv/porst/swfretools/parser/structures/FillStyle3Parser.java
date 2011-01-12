@@ -1,6 +1,5 @@
 package tv.porst.swfretools.parser.structures;
 
-import tv.porst.splib.io.BinaryParser;
 import tv.porst.splib.io.UINT16;
 import tv.porst.splib.io.UINT8;
 import tv.porst.swfretools.parser.SWFBinaryParser;
@@ -8,7 +7,7 @@ import tv.porst.swfretools.parser.SWFParserException;
 
 public class FillStyle3Parser {
 
-	private static IGradient getGradient(final BinaryParser parser, final int fillStyleType) {
+	private static IGradient getGradient(final SWFBinaryParser parser, final int fillStyleType) throws SWFParserException {
 
 		if (fillStyleType == 0x10 || fillStyleType == 0x12) {
 			return Gradient3Parser.parse(parser);

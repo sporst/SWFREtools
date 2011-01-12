@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import tv.porst.splib.io.BinaryParser;
+import tv.porst.swfretools.parser.SWFParserException;
+import tv.porst.swfretools.parser.structures.EncodedU32;
 import tv.porst.swfretools.parser.structures.EncodedU32Parser;
 import tv.porst.swfretools.parser.structures.FrameLabel;
 import tv.porst.swfretools.parser.structures.FrameLabelsParser;
@@ -11,26 +13,41 @@ import tv.porst.swfretools.parser.structures.RecordHeader;
 import tv.porst.swfretools.parser.structures.SceneName;
 import tv.porst.swfretools.parser.structures.SceneNameParser;
 
-public class DefineSceneAndFrameLabelDataParser {
+/**
+ * Class for parsing DefineSceneAndFrameLabelData tags.
+ * 
+ * @author sp
+ */
+public final class DefineSceneAndFrameLabelDataParser {
 
-	public static Tag parse(final RecordHeader header, final BinaryParser parser) {
-		final long sceneCount = EncodedU32Parser.parse(parser);
+	/**
+	 * Parses a DefineSceneAndFrameLabelData tag.
+	 * 
+	 * @param parser Provides the input data.
+	 * @param header Previously parsed header of the tag.
+	 * 
+	 * @return Returns the parsed tag.
+	 * 
+	 * @throws SWFParserException Thrown if parsing the tag failed.
+	 */
+	public static DefineSceneAndFrameLabelDataTag parse(final RecordHeader header, final BinaryParser parser) {
+
+		final EncodedU32 sceneCount = EncodedU32Parser.parse(parser, "DefineSceneAndFrameLabelData::SceneCount");
 
 		final List<SceneName> sceneNames = new ArrayList<SceneName>();
 
-		for (int i=0;i<sceneCount;i++) {
-			sceneNames.add(SceneNameParser.parse(parser));
+		for (int i=0;i<sceneCount.value();i++) {
+			sceneNames.add(SceneNameParser.parse(parser, String.format("DefineSceneAndFrameLabelData::SceneNames[%d]", i)));
 		}
 
-		final long frameLabelCount = EncodedU32Parser.parse(parser);
+		final EncodedU32 frameLabelCount = EncodedU32Parser.parse(parser, "DefineSceneAndFrameLabelData::FrameLabelCount");
 
 		final List<FrameLabel> frameLabels = new ArrayList<FrameLabel>();
 
-		for (int i=0;i<frameLabelCount;i++) {
-			frameLabels.add(FrameLabelsParser.parse(parser));
+		for (int i=0;i<frameLabelCount.value();i++) {
+			frameLabels.add(FrameLabelsParser.parse(parser, String.format("DefineSceneAndFrameLabelData::FrameLabels[%d]", i)));
 		}
 
 		return new DefineSceneAndFrameLabelDataTag(header, sceneCount, sceneNames, frameLabelCount, frameLabels);
 	}
-
 }

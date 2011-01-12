@@ -1,6 +1,7 @@
 package tv.porst.swfretools.parser.structures;
 
 import tv.porst.splib.io.BinaryParser;
+import tv.porst.swfretools.parser.SWFBinaryParser;
 
 public class BitmapData15Parser {
 
@@ -12,6 +13,10 @@ public class BitmapData15Parser {
 		}
 
 		return new BitmapData15(bitmapPixelData);
+	}
+
+	public static BitmapData15 parseIf(final SWFBinaryParser parser, final boolean condition, final int imageDataSize) {
+		return condition ? parse(parser, imageDataSize) : null;
 	}
 
 }

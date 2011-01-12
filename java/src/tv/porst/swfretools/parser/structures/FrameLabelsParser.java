@@ -5,8 +5,8 @@ import tv.porst.splib.io.PString;
 
 public class FrameLabelsParser {
 
-	public static FrameLabel parse(final BinaryParser parser) {
-		final long offset = EncodedU32Parser.parse(parser);
+	public static FrameLabel parse(final BinaryParser parser, final String fieldName) {
+		final EncodedU32 offset = EncodedU32Parser.parse(parser, fieldName + "::Offset");
 		final PString name = parser.readString();
 
 		return new FrameLabel(offset, name);

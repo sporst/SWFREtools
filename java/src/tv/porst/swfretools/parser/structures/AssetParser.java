@@ -1,14 +1,18 @@
 package tv.porst.swfretools.parser.structures;
 
-import tv.porst.splib.io.BinaryParser;
+import static tv.porst.swfretools.parser.SWFParserHelpers.parseString;
+import static tv.porst.swfretools.parser.SWFParserHelpers.parseUINT16;
 import tv.porst.splib.io.PString;
 import tv.porst.splib.io.UINT16;
+import tv.porst.swfretools.parser.SWFBinaryParser;
+import tv.porst.swfretools.parser.SWFParserException;
 
 public class AssetParser {
 
-	public static AssetTag parse(final BinaryParser parser) {
-		final UINT16 tag = parser.readUInt16();
-		final PString name = parser.readString();
+	public static AssetTag parse(final SWFBinaryParser parser, final String fieldName) throws SWFParserException {
+
+		final UINT16 tag = parseUINT16(parser, 0x00006, fieldName + "::Tag");
+		final PString name = parseString(parser, 0x00006, fieldName + "::Name");
 
 		return new AssetTag(tag, name);
 	}

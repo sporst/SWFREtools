@@ -1,5 +1,6 @@
 package tv.porst.swfretools.parser.tags;
 
+import static tv.porst.swfretools.parser.SWFParserHelpers.parseUINT16;
 import tv.porst.splib.io.UINT16;
 import tv.porst.swfretools.parser.SWFBinaryParser;
 import tv.porst.swfretools.parser.SWFParserException;
@@ -9,14 +10,29 @@ import tv.porst.swfretools.parser.structures.RectParser;
 import tv.porst.swfretools.parser.structures.ShapeWithStyle;
 import tv.porst.swfretools.parser.structures.ShapeWithStyleParser;
 
-public class DefineShape2Parser {
+/**
+ * Class for parsing DefineShape2 tags.
+ * 
+ * @author sp
+ */
+public final class DefineShape2Parser {
 
-	public static Tag parse(final RecordHeader header, final SWFBinaryParser parser) throws SWFParserException {
-		final UINT16 shapeId = parser.readUInt16();
-		final Rect shapeBounds = RectParser.parse(parser);
-		final ShapeWithStyle shapes = ShapeWithStyleParser.parse(parser, "Shapes");
+	/**
+	 * Parses a DefineShape2 tag.
+	 * 
+	 * @param parser Provides the input data.
+	 * @param header Previously parsed header of the tag.
+	 * 
+	 * @return Returns the parsed tag.
+	 * 
+	 * @throws SWFParserException Thrown if parsing the tag failed.
+	 */
+	public static DefineShape2Tag parse(final RecordHeader header, final SWFBinaryParser parser) throws SWFParserException {
+
+		final UINT16 shapeId = parseUINT16(parser, 0x00006, "DefineShape2::ShapeID");
+		final Rect shapeBounds = RectParser.parse(parser, "DefineShape2::ShapeBounds");
+		final ShapeWithStyle shapes = ShapeWithStyleParser.parse(parser, "DefineShape2::Shapes");
 
 		return new DefineShape2Tag(header, shapeId, shapeBounds, shapes);
 	}
-
 }

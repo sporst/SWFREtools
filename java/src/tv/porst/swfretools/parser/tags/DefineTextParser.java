@@ -19,7 +19,7 @@ public class DefineTextParser {
 
 	public static Tag parse(final RecordHeader header, final SWFBinaryParser parser) throws SWFParserException {
 		final UINT16 characterID = parser.readUInt16();
-		final Rect textBounds = RectParser.parse(parser);
+		final Rect textBounds = RectParser.parse(parser, "DefineText::TextBounds");
 		final Matrix textMatrix = MatrixParser.parse(parser, "TextMatrix");
 		final UINT8 glyphBits = parser.readUInt8();
 		final UINT8 advanceBits = parser.readUInt8();

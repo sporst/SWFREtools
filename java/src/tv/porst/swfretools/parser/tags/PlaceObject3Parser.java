@@ -1,6 +1,12 @@
 package tv.porst.swfretools.parser.tags;
 
-import static tv.porst.splib.io.BinaryParserHelpers.readStringIf;
+import static tv.porst.swfretools.parser.SWFParserHelpers.parseBits;
+import static tv.porst.swfretools.parser.SWFParserHelpers.parseFlag;
+import static tv.porst.swfretools.parser.SWFParserHelpers.parseStringIf;
+import static tv.porst.swfretools.parser.SWFParserHelpers.parseUINT16;
+import static tv.porst.swfretools.parser.SWFParserHelpers.parseUINT16If;
+import static tv.porst.swfretools.parser.SWFParserHelpers.parseUINT8If;
+import static tv.porst.swfretools.parser.structures.ClipActionsParser.parseIf;
 import tv.porst.splib.io.Flag;
 import tv.porst.splib.io.PString;
 import tv.porst.splib.io.UINT16;
@@ -8,7 +14,6 @@ import tv.porst.splib.io.UINT8;
 import tv.porst.swfretools.parser.SWFBinaryParser;
 import tv.porst.swfretools.parser.SWFParserException;
 import tv.porst.swfretools.parser.structures.ClipActions;
-import tv.porst.swfretools.parser.structures.ClipActionsParser;
 import tv.porst.swfretools.parser.structures.CxFormWithAlpha;
 import tv.porst.swfretools.parser.structures.CxFormWithAlphaParser;
 import tv.porst.swfretools.parser.structures.FilterList;
@@ -17,40 +22,51 @@ import tv.porst.swfretools.parser.structures.Matrix;
 import tv.porst.swfretools.parser.structures.MatrixParser;
 import tv.porst.swfretools.parser.structures.RecordHeader;
 
-public class PlaceObject3Parser {
+/**
+ * Class for parsing PlaceObject3 tags.
+ * 
+ * @author sp
+ */
+public final class PlaceObject3Parser {
 
-	public static Tag parse(final RecordHeader header, final SWFBinaryParser parser, final int version) throws SWFParserException {
+	/**
+	 * Parses a PlaceObject3 tag.
+	 * 
+	 * @param parser Provides the input data.
+	 * @param header Previously parsed header of the tag.
+	 * 
+	 * @return Returns the parsed tag.
+	 * 
+	 * @throws SWFParserException Thrown if parsing the tag failed.
+	 */
+	public static PlaceObject3Tag parse(final RecordHeader header, final SWFBinaryParser parser, final int version) throws SWFParserException {
 
-		final Flag placeFlagHasClipActions = parser.readFlag();
-		final Flag placeFlagHasClipDepth = parser.readFlag();
-		final Flag placeFlagHasName = parser.readFlag();
-		final Flag placeFlagHasRatio = parser.readFlag();
-		final Flag placeFlagHasColorTransform = parser.readFlag();
-		final Flag placeFlagHasMatrix = parser.readFlag();
-		final Flag placeFlagHasCharacter = parser.readFlag();
-		final Flag placeFlagHasMove = parser.readFlag();
-		final int reserved = parser.readBits(3);
-		final Flag placeFlagHasImage = parser.readFlag();
-		final Flag placeFlagHasClassName = parser.readFlag();
-		final Flag placeFlagHasCacheAsBitmap = parser.readFlag();
-		final Flag placeFlagHasBlendMode = parser.readFlag();
-		final Flag placeFlagHasFilterList = parser.readFlag();
-
-		final UINT16 depth = parser.readUInt16();
-		final PString className = readStringIf(parser, placeFlagHasClassName.value() || (placeFlagHasImage.value() && placeFlagHasCharacter.value()));
-
-		final UINT16 characterId = placeFlagHasCharacter.value() ? parser.readUInt16() : null;
-		final Matrix matrix = placeFlagHasMatrix.value() ? MatrixParser.parse(parser, "Matrix") : null;
-		final CxFormWithAlpha colorTransform = placeFlagHasColorTransform.value() ? CxFormWithAlphaParser.parse(parser) : null;
-		final UINT16 ratio = placeFlagHasRatio.value() ? parser.readUInt16() : null;
-		final PString name = readStringIf(parser, placeFlagHasName.value());
-		final UINT16 clipDepth = placeFlagHasClipDepth.value() ? parser.readUInt16() : null;
-
-		final FilterList surfaceFilterList = placeFlagHasFilterList.value() ? FilterListParser.parse(parser) : null;
-		final UINT8 blendMode = placeFlagHasBlendMode.value() ? parser.readUInt8() : null;
-		final UINT8 bitmapCache = placeFlagHasCacheAsBitmap.value() ? parser.readUInt8() : null;
-
-		final ClipActions clipActions = placeFlagHasClipActions.value() ? ClipActionsParser.parse(parser, version) : null;
+		final Flag placeFlagHasClipActions = parseFlag(parser, 0x00006, "PlaceObject3::PlaceFlagHasClipActions");
+		final Flag placeFlagHasClipDepth = parseFlag(parser, 0x00006, "PlaceObject3::PlaceFlagHasClipDepth");
+		final Flag placeFlagHasName = parseFlag(parser, 0x00006, "PlaceObject3::PlaceFlagHasName");
+		final Flag placeFlagHasRatio = parseFlag(parser, 0x00006, "PlaceObject3::PlaceFlagHasRatio");
+		final Flag placeFlagHasColorTransform = parseFlag(parser, 0x00006, "PlaceObject3::PlaceFlagHasColorTransform");
+		final Flag placeFlagHasMatrix = parseFlag(parser, 0x00006, "PlaceObject3::PlaceFlagHasMatrix");
+		final Flag placeFlagHasCharacter = parseFlag(parser, 0x00006, "PlaceObject3::PlaceFlagHasCharacter");
+		final Flag placeFlagHasMove = parseFlag(parser, 0x00006, "PlaceObject3::PlaceFlagHasMove");
+		final int reserved = parseBits(parser, 0x0000006, 3, "PlaceObject3::Reserved");
+		final Flag placeFlagHasImage = parseFlag(parser, 0x00006, "PlaceObject3::PlaceFlagHasImage");
+		final Flag placeFlagHasClassName = parseFlag(parser, 0x00006, "PlaceObject3::PlaceFlagHasClassName");
+		final Flag placeFlagHasCacheAsBitmap = parseFlag(parser, 0x00006, "PlaceObject3::PlaceFlagHasCacheAsBitmap");
+		final Flag placeFlagHasBlendMode = parseFlag(parser, 0x00006, "PlaceObject3::PlaceFlagHasBlendMode");
+		final Flag placeFlagHasFilterList = parseFlag(parser, 0x00006, "PlaceObject3::PlaceFlagHasFilterList");
+		final UINT16 depth = parseUINT16(parser, 0x00005, "PlaceObject3::Depth");
+		final PString className = parseStringIf(parser, 0x00006, placeFlagHasClassName.value() || (placeFlagHasImage.value() && placeFlagHasCharacter.value()), "PlaceObject3::ClassName");
+		final UINT16 characterId = parseUINT16If(parser, 0x00006, placeFlagHasCharacter, "PlaceObject3::CharacterId");
+		final Matrix matrix = MatrixParser.parseIf(parser, placeFlagHasMatrix, "PlaceObject3::Matrix");
+		final CxFormWithAlpha colorTransform = CxFormWithAlphaParser.parseIf(parser, placeFlagHasColorTransform, "PlaceObject3::CxFormWithAlpha");
+		final UINT16 ratio = parseUINT16If(parser, 0x00006, placeFlagHasRatio, "PlaceObject3::Ratio");
+		final PString name = parseStringIf(parser, 0x00006, placeFlagHasName, "PlaceObject3::Name");
+		final UINT16 clipDepth = parseUINT16If(parser, 0x00006, placeFlagHasClipDepth, "PlaceObject3::ClipDepth");
+		final FilterList surfaceFilterList = FilterListParser.parseIf(parser, 0x00006, placeFlagHasFilterList, "PlaceObject3::SurfaceFilterList");
+		final UINT8 blendMode = parseUINT8If(parser, 0x00006, placeFlagHasBlendMode, "PlaceObject3::BlendMode");
+		final UINT8 bitmapCache = parseUINT8If(parser, 0x00006, placeFlagHasCacheAsBitmap, "PlaceObject3::BitmapCache");
+		final ClipActions clipActions = parseIf(parser, version, placeFlagHasClipActions, "PlaceObject3::ClipActions");
 
 		return new PlaceObject3Tag(header, placeFlagHasClipActions, placeFlagHasClipDepth, placeFlagHasName,
 				placeFlagHasRatio, placeFlagHasColorTransform, placeFlagHasMatrix,

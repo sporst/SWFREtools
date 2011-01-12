@@ -1,9 +1,9 @@
 package tv.porst.swfretools.parser.tags;
 
+import static tv.porst.swfretools.parser.SWFParserHelpers.parseUINT16;
 import tv.porst.splib.io.UINT16;
 import tv.porst.swfretools.parser.SWFBinaryParser;
 import tv.porst.swfretools.parser.SWFParserException;
-import tv.porst.swfretools.parser.SWFParserHelpers;
 import tv.porst.swfretools.parser.structures.CxForm;
 import tv.porst.swfretools.parser.structures.CxFormParser;
 import tv.porst.swfretools.parser.structures.Matrix;
@@ -11,7 +11,7 @@ import tv.porst.swfretools.parser.structures.MatrixParser;
 import tv.porst.swfretools.parser.structures.RecordHeader;
 
 /**
- * Class for parsing a PlaceObject tag.
+ * Class for parsing PlaceObject tags.
  * 
  * @author sp
  */
@@ -21,7 +21,7 @@ public final class PlaceObjectParser {
 	 * Parses a PlaceObject tag.
 	 * 
 	 * @param parser Provides the input data.
-	 * @param header Previously parsed header of the PlaceObject tag.
+	 * @param header Previously parsed header of the tag.
 	 * 
 	 * @return Returns the parsed tag.
 	 * 
@@ -29,17 +29,10 @@ public final class PlaceObjectParser {
 	 */
 	public static PlaceObjectTag parse(final SWFBinaryParser parser, final RecordHeader header) throws SWFParserException {
 
-		parser.setTag(header.getPosition(), "PlaceObject");
-
-		SWFParserHelpers.throwIf(parser, UINT16.LENGTH, 0x00006, "CharacterId");
-		final UINT16 characterId = parser.readUInt16();
-
-		SWFParserHelpers.throwIf(parser, UINT16.LENGTH, 0x00006, "Depth");
-		final UINT16 depth = parser.readUInt16();
-
-		final Matrix matrix = MatrixParser.parse(parser, "Matrix");
-
-		final CxForm colorTransform = CxFormParser.parse(parser);
+		final UINT16 characterId = parseUINT16(parser, 0x00006, "PlaceObject::CharacterId");
+		final UINT16 depth = parseUINT16(parser, 0x00006, "PlaceObject::Depth");
+		final Matrix matrix = MatrixParser.parse(parser, "PlaceObject::Matrix");
+		final CxForm colorTransform = CxFormParser.parse(parser, "PlaceObject::CxForm");
 
 		return new PlaceObjectTag(header, characterId, depth, matrix, colorTransform);
 	}

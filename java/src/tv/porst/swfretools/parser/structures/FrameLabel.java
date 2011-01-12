@@ -4,7 +4,7 @@ import tv.porst.splib.io.PString;
 
 public class FrameLabel {
 
-	public FrameLabel(final long offset, final PString name) {
+	public FrameLabel(final EncodedU32 offset, final PString name) {
 		// TODO Auto-generated constructor stub
 	}
 

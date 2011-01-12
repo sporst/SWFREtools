@@ -4,7 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import tv.porst.splib.io.BinaryParser;
+import tv.porst.splib.io.Flag;
 import tv.porst.splib.io.UINT8;
+import tv.porst.swfretools.parser.SWFBinaryParser;
 
 public class FilterListParser {
 
@@ -17,5 +19,9 @@ public class FilterListParser {
 		}
 
 		return new FilterList(numberOfFilters, filters);
+	}
+
+	public static FilterList parseIf(final SWFBinaryParser parser, final int errorCode, final Flag condition, final String filedName) {
+		return condition.value() ? parse(parser) : null;
 	}
 }

@@ -10,8 +10,8 @@ public class MorphFillStyleParser {
 	public static MorphFillStyle parse(final SWFBinaryParser parser, final String fieldName) throws SWFParserException {
 		final UINT8 fillStyleType = parser.readUInt8();
 		final int fillStyleTypeValue = fillStyleType.value();
-		final RGB startColor = fillStyleTypeValue == 0x00 ? RGBParser.parse(parser) : null;
-		final RGB endColor = fillStyleTypeValue == 0x00 ? RGBParser.parse(parser) : null;
+		final RGB startColor = fillStyleTypeValue == 0x00 ? RGBParser.parse(parser, fieldName + "::StartColor") : null;
+		final RGB endColor = fillStyleTypeValue == 0x00 ? RGBParser.parse(parser, fieldName + "::EndColor") : null;
 		final Matrix startGradientMatrix = fillStyleTypeValue == 0x10 || fillStyleTypeValue == 0x12 ? MatrixParser.parse(parser, fieldName + "::StartGradientMatrix") : null;
 		final Matrix endGradientMatrix = fillStyleTypeValue == 0x10 || fillStyleTypeValue == 0x12 ? MatrixParser.parse(parser, fieldName + "::EndGradientMatrix") : null;
 		final MorphGradient gradient = fillStyleTypeValue == 0x10 || fillStyleTypeValue == 0x12 ? MorphGradientParser.parse(parser) : null;

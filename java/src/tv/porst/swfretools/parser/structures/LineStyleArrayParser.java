@@ -3,13 +3,14 @@ package tv.porst.swfretools.parser.structures;
 import java.util.ArrayList;
 import java.util.List;
 
-import tv.porst.splib.io.BinaryParser;
 import tv.porst.splib.io.UINT16;
 import tv.porst.splib.io.UINT8;
+import tv.porst.swfretools.parser.SWFBinaryParser;
+import tv.porst.swfretools.parser.SWFParserException;
 
 public class LineStyleArrayParser {
 
-	public static LineStyleArray parse(final BinaryParser parser) {
+	public static LineStyleArray parse(final SWFBinaryParser parser) throws SWFParserException {
 
 		final UINT8 lineStyleCount = parser.readUInt8();
 		final UINT16 lineStyleCountExtended = lineStyleCount.value() == 0xFF ? parser.readUInt16() : null;
@@ -19,7 +20,7 @@ public class LineStyleArrayParser {
 		final List<LineStyle> lineStyles = new ArrayList<LineStyle>();
 
 		for (int i=0;i<normalizedCount;i++) {
-			lineStyles.add(LineStyleParser.parse(parser));
+			lineStyles.add(LineStyleParser.parse(parser, String.format("LineStyles[%d]", i)));
 		}
 
 		return new LineStyleArray(lineStyleCount, lineStyleCountExtended, lineStyles);

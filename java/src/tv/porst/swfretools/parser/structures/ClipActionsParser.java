@@ -4,8 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import tv.porst.splib.io.BinaryParser;
+import tv.porst.splib.io.Flag;
 import tv.porst.splib.io.IParsedINTElement;
 import tv.porst.splib.io.UINT16;
+import tv.porst.swfretools.parser.SWFBinaryParser;
 
 public class ClipActionsParser {
 
@@ -30,6 +32,10 @@ public class ClipActionsParser {
 		final IParsedINTElement clipActionEndFlag = version <= 5 ? parser.readUInt16() : parser.readUInt32();
 
 		return new ClipActions(reserved, allEventFlags, clipActionRecords, clipActionEndFlag);
+	}
+
+	public static ClipActions parseIf(final SWFBinaryParser parser, final int version, final Flag condition, final String fieldname) {
+		return condition.value() ? parse(parser, version) : null;
 	}
 
 }

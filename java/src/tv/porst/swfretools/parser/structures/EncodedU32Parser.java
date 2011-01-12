@@ -4,8 +4,8 @@ import tv.porst.splib.io.BinaryParser;
 
 public class EncodedU32Parser {
 
-	public static int parse(final BinaryParser parser) {
+	public static EncodedU32 parse(final BinaryParser parser, final String fieldName) {
 
-		return 0;
+		return null;
 	}
 }

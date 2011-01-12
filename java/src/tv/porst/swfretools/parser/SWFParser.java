@@ -153,7 +153,7 @@ public final class SWFParser {
 
 		final UINT32 fileLength = parser.readUInt32();
 
-		final Rect frameSize = RectParser.parse(parser);
+		final Rect frameSize = RectParser.parse(parser, "SWFHeader::FrameSize");
 
 		final UINT16 frameRate = parser.readUInt16();
 		final UINT16 frameCount = parser.readUInt16();
