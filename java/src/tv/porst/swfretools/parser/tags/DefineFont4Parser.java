@@ -1,27 +1,48 @@
 package tv.porst.swfretools.parser.tags;
 
-import tv.porst.splib.io.BinaryParser;
-import tv.porst.splib.io.BinaryParserHelpers;
+import static tv.porst.swfretools.parser.SWFParserHelpers.parseBits;
+import static tv.porst.swfretools.parser.SWFParserHelpers.parseByteArrayIf;
+import static tv.porst.swfretools.parser.SWFParserHelpers.parseFlag;
+import static tv.porst.swfretools.parser.SWFParserHelpers.parseString;
+import static tv.porst.swfretools.parser.SWFParserHelpers.parseUINT16;
 import tv.porst.splib.io.Flag;
 import tv.porst.splib.io.PString;
-import tv.porst.splib.io.UINT8;
+import tv.porst.splib.io.UINT16;
+import tv.porst.swfretools.parser.SWFBinaryParser;
+import tv.porst.swfretools.parser.SWFParserException;
+import tv.porst.swfretools.parser.structures.ByteArray;
 import tv.porst.swfretools.parser.structures.RecordHeader;
 
-public class DefineFont4Parser {
+/**
+ * Class for parsing DefineFont4 tags.
+ * 
+ * @author sp
+ */
+public final class DefineFont4Parser {
 
-	public static Tag parse(final RecordHeader header, final BinaryParser parser) {
-		final UINT8 fontID = parser.readUInt8();
-		final int fontFlagsReserved = parser.readBits(5);
-		final Flag fontFlagsHasFontData = parser.readFlag();
-		final Flag fontFlagsItalic = parser.readFlag();
-		final Flag fontFlagsBold = parser.readFlag();
-		final PString fontName = parser.readString();
+	/**
+	 * Parses a DefineFont4 tag.
+	 * 
+	 * @param parser Provides the input data.
+	 * @param header Previously parsed header of the tag.
+	 * 
+	 * @return Returns the parsed tag.
+	 * 
+	 * @throws SWFParserException Thrown if parsing the tag failed.
+	 */
+	public static DefineFont4Tag parse(final RecordHeader header, final SWFBinaryParser parser) throws SWFParserException {
+
+		final UINT16 fontId = parseUINT16(parser, 0x00006, "DefineText2::FontId");
+		final int fontFlagsReserved = parseBits(parser, 5, 0x00006, "DefineFont4::FontFlagsReserved");
+		final Flag fontFlagsHasFontData = parseFlag(parser, 0x00006, "DefineFont4::FontFlagsHasFontData");
+		final Flag fontFlagsItalic = parseFlag(parser, 0x00006, "DefineFont4::FontFlagsItalic");
+		final Flag fontFlagsBold = parseFlag(parser, 0x00006, "DefineFont4::FontFlagsBold");
+		final PString fontName = parseString(parser, 0x00006, "DefineFont4::FontName");
 
 		final int remainingLength = header.getNormalizedLength() - 1 - 1 - fontName.value().length() - 1;
 
-		final byte[] fontData = fontFlagsHasFontData.value() ? BinaryParserHelpers.readByteArray(parser, remainingLength) : null;
+		final ByteArray fontData = parseByteArrayIf(parser, remainingLength, 0x00006, fontFlagsHasFontData, "DefineFont4::FontData");
 
-		return new DefineFont4Tag(header, fontID, fontFlagsReserved, fontFlagsItalic, fontFlagsBold, fontName, fontData);
+		return new DefineFont4Tag(header, fontId, fontFlagsReserved, fontFlagsItalic, fontFlagsBold, fontName, fontData);
 	}
-
 }

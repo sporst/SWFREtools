@@ -1,5 +1,8 @@
 package tv.porst.swfretools.parser.tags;
 
+import static tv.porst.swfretools.parser.SWFParserHelpers.parseUINT16;
+import static tv.porst.swfretools.parser.SWFParserHelpers.parseUINT8;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,14 +18,30 @@ import tv.porst.swfretools.parser.structures.RectParser;
 import tv.porst.swfretools.parser.structures.TextRecord;
 import tv.porst.swfretools.parser.structures.TextRecordParser;
 
-public class DefineTextParser {
+/**
+ * Class for parsing DefineText tags.
+ * 
+ * @author sp
+ */
+public final class DefineTextParser {
 
-	public static Tag parse(final RecordHeader header, final SWFBinaryParser parser) throws SWFParserException {
-		final UINT16 characterID = parser.readUInt16();
+	/**
+	 * Parses a DefineText tag.
+	 * 
+	 * @param parser Provides the input data.
+	 * @param header Previously parsed header of the tag.
+	 * 
+	 * @return Returns the parsed tag.
+	 * 
+	 * @throws SWFParserException Thrown if parsing the tag failed.
+	 */
+	public static DefineTextTag parse(final RecordHeader header, final SWFBinaryParser parser) throws SWFParserException {
+
+		final UINT16 characterId = parseUINT16(parser, 0x00006, "DefineText::CharacterId");
 		final Rect textBounds = RectParser.parse(parser, "DefineText::TextBounds");
-		final Matrix textMatrix = MatrixParser.parse(parser, "TextMatrix");
-		final UINT8 glyphBits = parser.readUInt8();
-		final UINT8 advanceBits = parser.readUInt8();
+		final Matrix textMatrix = MatrixParser.parse(parser, "DefineText::TextMatrix");
+		final UINT8 glyphBits = parseUINT8(parser, 0x00006, "DefineText::GlyphBits");
+		final UINT8 advanceBits = parseUINT8(parser, 0x00006, "DefineText::AdvanceBits");
 
 		final List<TextRecord> textRecords = new ArrayList<TextRecord>();
 
@@ -32,11 +51,10 @@ public class DefineTextParser {
 				break;
 			}
 
-			textRecords.add(TextRecordParser.parse(parser, glyphBits.value(), advanceBits.value()));
+			textRecords.add(TextRecordParser.parse(parser, glyphBits.value(), advanceBits.value(), String.format("DefineText::TextRecords[%d]", textRecords.size())));
 
 		} while (true);
 
-		return new DefineTextTag(header, characterID, textBounds, textMatrix, glyphBits, advanceBits, textRecords);
+		return new DefineTextTag(header, characterId, textBounds, textMatrix, glyphBits, advanceBits, textRecords);
 	}
-
 }

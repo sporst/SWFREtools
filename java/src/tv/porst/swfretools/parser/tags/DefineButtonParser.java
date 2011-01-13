@@ -1,5 +1,8 @@
 package tv.porst.swfretools.parser.tags;
 
+import static tv.porst.swfretools.parser.SWFParserHelpers.parseUINT16;
+import static tv.porst.swfretools.parser.SWFParserHelpers.parseUINT8;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,10 +16,26 @@ import tv.porst.swfretools.parser.structures.ButtonRecord;
 import tv.porst.swfretools.parser.structures.ButtonRecordParser;
 import tv.porst.swfretools.parser.structures.RecordHeader;
 
-public class DefineButtonParser {
+/**
+ * Class for parsing DefineButton tags.
+ * 
+ * @author sp
+ */
+public final class DefineButtonParser {
 
-	public static Tag parse(final RecordHeader header, final SWFBinaryParser parser) throws SWFParserException {
-		final UINT16 buttonID = parser.readUInt16();
+	/**
+	 * Parses a DefineButton tag.
+	 * 
+	 * @param parser Provides the input data.
+	 * @param header Previously parsed header of the tag.
+	 * 
+	 * @return Returns the parsed tag.
+	 * 
+	 * @throws SWFParserException Thrown if parsing the tag failed.
+	 */
+	public static DefineButtonTag parse(final RecordHeader header, final SWFBinaryParser parser) throws SWFParserException {
+
+		final UINT16 buttonId = parseUINT16(parser, 0x00006, "DefineButton::ButtonId");
 
 		final List<ButtonRecord> characters = new ArrayList<ButtonRecord>();
 
@@ -26,7 +45,7 @@ public class DefineButtonParser {
 				break;
 			}
 
-			characters.add(ButtonRecordParser.parse(parser, String.format("Characters[%d]", characters.size())));
+			characters.add(ButtonRecordParser.parse(parser, String.format("DefineButton::Characters[%d]", characters.size())));
 
 		} while (true);
 
@@ -34,9 +53,8 @@ public class DefineButtonParser {
 
 		final List<Action> actions = ActionRecordParser.parse(parser, actionRecordSize);
 
-		final UINT8 actionEndFlag = parser.readUInt8();
+		final UINT8 actionEndFlag = parseUINT8(parser, 0x00006, "DefineButton::ActionEndFlag");
 
-		return new DefineButtonTag(header, buttonID, characters, actions, actionEndFlag);
+		return new DefineButtonTag(header, buttonId, characters, actions, actionEndFlag);
 	}
-
 }

@@ -11,8 +11,7 @@ import tv.porst.splib.io.UINT8;
 
 public class TextRecord2Parser {
 
-	public static TextRecord2 parse(final BinaryParser parser, final int glyphBits,
-			final int advanceBits) {
+	public static TextRecord2 parse(final BinaryParser parser, final int glyphBits, final int advanceBits, final String fieldName) {
 		final Flag textRecordType = parser.readFlag();
 		final int styleFlagsReserved = parser.readBits(3);
 		final Flag styleFlagsHasFont = parser.readFlag();

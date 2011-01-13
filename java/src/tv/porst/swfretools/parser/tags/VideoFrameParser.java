@@ -1,18 +1,36 @@
 package tv.porst.swfretools.parser.tags;
 
-import tv.porst.splib.io.BinaryParser;
-import tv.porst.splib.io.BinaryParserHelpers;
+import static tv.porst.swfretools.parser.SWFParserHelpers.parseByteArray;
+import static tv.porst.swfretools.parser.SWFParserHelpers.parseUINT16;
 import tv.porst.splib.io.UINT16;
+import tv.porst.swfretools.parser.SWFBinaryParser;
+import tv.porst.swfretools.parser.SWFParserException;
+import tv.porst.swfretools.parser.structures.ByteArray;
 import tv.porst.swfretools.parser.structures.RecordHeader;
 
-public class VideoFrameParser {
+/**
+ * Class for parsing VideoFrame tags.
+ * 
+ * @author sp
+ */
+public final class VideoFrameParser {
 
-	public static Tag parse(final RecordHeader header, final BinaryParser parser) {
-		final UINT16 streamID = parser.readUInt16();
-		final UINT16 frameNum = parser.readUInt16();
-		final byte[] videoData = BinaryParserHelpers.readByteArray(parser, header.getNormalizedLength() - 2 - 2);
+	/**
+	 * Parses a VideoFrame tag.
+	 * 
+	 * @param parser Provides the input data.
+	 * @param header Previously parsed header of the tag.
+	 * 
+	 * @return Returns the parsed tag.
+	 * 
+	 * @throws SWFParserException Thrown if parsing the tag failed.
+	 */
+	public static Tag parse(final RecordHeader header, final SWFBinaryParser parser) throws SWFParserException {
 
-		return new VideoFrameTag(header, streamID, frameNum, videoData);
+		final UINT16 streamId = parseUINT16(parser, 0x00006, "VideoFrame::StreamId");
+		final UINT16 frameNum = parseUINT16(parser, 0x00006, "VideoFrame::FrameNum");
+		final ByteArray videoData = parseByteArray(parser, header.getNormalizedLength() - 2 - 2, 0x00006, "VideoFrame::VideoData");
+
+		return new VideoFrameTag(header, streamId, frameNum, videoData);
 	}
-
 }

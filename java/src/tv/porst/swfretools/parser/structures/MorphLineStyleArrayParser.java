@@ -9,7 +9,7 @@ import tv.porst.splib.io.UINT8;
 
 public class MorphLineStyleArrayParser {
 
-	public static MorphLineStyleArray parse(final BinaryParser parser) {
+	public static MorphLineStyleArray parse(final BinaryParser parser, final String fieldName) {
 		final UINT8 lineStyleCount = parser.readUInt8();
 		final UINT16 lineStyleCountExtended = lineStyleCount.value() == 0xFF ? parser.readUInt16() : null;
 

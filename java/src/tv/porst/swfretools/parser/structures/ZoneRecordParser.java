@@ -9,7 +9,7 @@ import tv.porst.splib.io.UINT8;
 
 public class ZoneRecordParser {
 
-	public static ZoneRecord parse(final BinaryParser parser) {
+	public static ZoneRecord parse(final BinaryParser parser, final String fieldName) {
 		final UINT8 numZoneData = parser.readUInt8();
 
 		final List<ZoneData> zoneData = new ArrayList<ZoneData>();

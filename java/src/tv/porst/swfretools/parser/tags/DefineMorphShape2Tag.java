@@ -7,6 +7,7 @@ import tv.porst.swfretools.parser.structures.MorphFillStyleArray;
 import tv.porst.swfretools.parser.structures.MorphLineStyleArray2;
 import tv.porst.swfretools.parser.structures.RecordHeader;
 import tv.porst.swfretools.parser.structures.Rect;
+import tv.porst.swfretools.parser.structures.Shape;
 
 public class DefineMorphShape2Tag extends Tag {
 
@@ -15,7 +16,7 @@ public class DefineMorphShape2Tag extends Tag {
 			final Rect endEdgeBounds, final int reserved, final Flag useNonScalingStrokes,
 			final Flag useScalingStrokes, final UINT32 offset,
 			final MorphFillStyleArray morphFillStyles,
-			final MorphLineStyleArray2 morphLineStyles) {
+			final MorphLineStyleArray2 morphLineStyles, final Shape startEdges, final Shape endEdges) {
 		super(header);
 	}
 

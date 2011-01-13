@@ -2,6 +2,8 @@ package tv.porst.swfretools.parser;
 
 import tv.porst.splib.io.BinaryParserHelpers;
 import tv.porst.splib.io.Flag;
+import tv.porst.splib.io.Float32;
+import tv.porst.splib.io.INT16;
 import tv.porst.splib.io.INT32;
 import tv.porst.splib.io.PString;
 import tv.porst.splib.io.SBits;
@@ -33,10 +35,33 @@ public class SWFParserHelpers {
 		return null;
 	}
 
+	public static ByteArray parseByteArrayIf(final SWFBinaryParser parser, final int numberOfBytes, final int errorCode, final Flag condition, final String fieldName) throws SWFParserException {
+		return condition.value() ? parseByteArray(parser, numberOfBytes, errorCode, fieldName) : null;
+	}
+
 	public static Flag parseFlag(final SWFBinaryParser parser, final int errorCode, final String fieldName) throws SWFParserException {
 		throwIfB(parser, 1, errorCode, fieldName);
 
 		return parser.readFlag();
+	}
+
+	public static Float32 parseFloat(final SWFBinaryParser parser, final int errorCode, final String fieldName) throws SWFParserException {
+		throwIfB(parser, 1, errorCode, fieldName);
+
+		return parser.readFloat();
+	}
+
+	public static INT16 parseINT16(final SWFBinaryParser parser, final int errorCode, final String fieldName) throws SWFParserException {
+		throwIf(parser, UINT16.LENGTH, errorCode, fieldName);
+		return parser.readInt16();
+	}
+
+	public static INT16 parseINT16If(final SWFBinaryParser parser, final int errorCode, final boolean condition, final String fieldName) throws SWFParserException {
+		return condition ? parseINT16(parser, errorCode, fieldName) : null;
+	}
+
+	public static INT16 parseINT16If(final SWFBinaryParser parser, final int errorCode, final Flag condition, final String fieldName) throws SWFParserException {
+		return condition.value() ? parseINT16(parser, errorCode, fieldName) : null;
 	}
 
 	public static INT32 parseINT32(final SWFBinaryParser parser, final int errorCode, final String fieldName) throws SWFParserException {
@@ -57,6 +82,10 @@ public class SWFParserHelpers {
 		else {
 			return null;
 		}
+	}
+
+	public static PString parseString(final SWFBinaryParser parser, final int length, final int errorCode, final String fieldName) throws SWFParserException {
+		return null;
 	}
 
 	public static PString parseString(final SWFBinaryParser parser, final int errorCode, final String fieldName) throws SWFParserException {

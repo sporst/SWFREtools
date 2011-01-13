@@ -1,56 +1,79 @@
 package tv.porst.swfretools.parser.tags;
 
-import tv.porst.splib.io.BinaryParser;
+import static tv.porst.swfretools.parser.SWFParserHelpers.parseFlag;
+import static tv.porst.swfretools.parser.SWFParserHelpers.parseINT16If;
+import static tv.porst.swfretools.parser.SWFParserHelpers.parseString;
+import static tv.porst.swfretools.parser.SWFParserHelpers.parseStringIf;
+import static tv.porst.swfretools.parser.SWFParserHelpers.parseUINT16;
+import static tv.porst.swfretools.parser.SWFParserHelpers.parseUINT16If;
+import static tv.porst.swfretools.parser.SWFParserHelpers.parseUINT8If;
 import tv.porst.splib.io.Flag;
 import tv.porst.splib.io.INT16;
 import tv.porst.splib.io.PString;
 import tv.porst.splib.io.UINT16;
 import tv.porst.splib.io.UINT8;
+import tv.porst.swfretools.parser.SWFBinaryParser;
+import tv.porst.swfretools.parser.SWFParserException;
 import tv.porst.swfretools.parser.structures.RGBA;
 import tv.porst.swfretools.parser.structures.RGBAParser;
 import tv.porst.swfretools.parser.structures.RecordHeader;
 import tv.porst.swfretools.parser.structures.Rect;
 import tv.porst.swfretools.parser.structures.RectParser;
 
-public class DefineEditTextParser {
+/**
+ * Class for parsing DefineEditText tags.
+ * 
+ * @author sp
+ */
+public final class DefineEditTextParser {
 
-	public static Tag parse(final RecordHeader header, final BinaryParser parser) {
-		final UINT16 characterID = parser.readUInt16();
+	/**
+	 * Parses a DefineEditText tag.
+	 * 
+	 * @param parser Provides the input data.
+	 * @param header Previously parsed header of the tag.
+	 * 
+	 * @return Returns the parsed tag.
+	 * 
+	 * @throws SWFParserException Thrown if parsing the tag failed.
+	 */
+	public static DefineEditTextTag parse(final RecordHeader header, final SWFBinaryParser parser) throws SWFParserException {
+
+		final UINT16 characterId = parseUINT16(parser, 0x00006, "DefineEditText::CharacterId");
 		final Rect bounds = RectParser.parse(parser, "DefineEditText::Bounds");
-		final Flag hasText = parser.readFlag();
-		final Flag wordWrap = parser.readFlag();
-		final Flag multiline = parser.readFlag();
-		final Flag password = parser.readFlag();
-		final Flag readOnly = parser.readFlag();
-		final Flag hasTextColor = parser.readFlag();
-		final Flag hasMaxLength = parser.readFlag();
-		final Flag hasFont = parser.readFlag();
-		final Flag hasFontClass = parser.readFlag();
-		final Flag autoSize = parser.readFlag();
-		final Flag hasLayout = parser.readFlag();
-		final Flag noSelect = parser.readFlag();
-		final Flag border = parser.readFlag();
-		final Flag wasStatic = parser.readFlag();
-		final Flag html = parser.readFlag();
-		final Flag useOutlines = parser.readFlag();
-		final UINT16 fontID = hasFont.value() ? parser.readUInt16() : null;
-		final PString fontClass = hasFontClass.value() ? parser.readString() : null;
-		final UINT16 fontHeight = hasFont.value() ? parser.readUInt16() : null;
-		final RGBA textColor = hasTextColor.value() ? RGBAParser.parse(parser) : null;
-		final UINT16 maxLength = hasMaxLength.value() ? parser.readUInt16() : null;
-		final UINT8 align = hasLayout.value() ? parser.readUInt8() : null;
-		final UINT16 leftMargin = hasLayout.value() ? parser.readUInt16() : null;
-		final UINT16 rightMargin = hasLayout.value() ? parser.readUInt16() : null;
-		final UINT16 indent = hasLayout.value() ? parser.readUInt16() : null;
-		final INT16 leading = hasLayout.value() ? parser.readInt16() : null;
-		final PString variableName = parser.readString();
-		final PString initialText = hasText.value() ? parser.readString() : null;
+		final Flag hasText = parseFlag(parser, 0x00006, "DefineEditText::HasText");
+		final Flag wordWrap = parseFlag(parser, 0x00006, "DefineEditText::WordWrap");
+		final Flag multiline = parseFlag(parser, 0x00006, "DefineEditText::Multiline");
+		final Flag password = parseFlag(parser, 0x00006, "DefineEditText::Password");
+		final Flag readOnly = parseFlag(parser, 0x00006, "DefineEditText::ReadOnly");
+		final Flag hasTextColor = parseFlag(parser, 0x00006, "DefineEditText::HasTextColor");
+		final Flag hasMaxLength = parseFlag(parser, 0x00006, "DefineEditText::HasMaxLength");
+		final Flag hasFont = parseFlag(parser, 0x00006, "DefineEditText::HasFont");
+		final Flag hasFontClass = parseFlag(parser, 0x00006, "DefineEditText::HasFontClass");
+		final Flag autoSize = parseFlag(parser, 0x00006, "DefineEditText::HasAutoSize");
+		final Flag hasLayout = parseFlag(parser, 0x00006, "DefineEditText::HasLayout");
+		final Flag noSelect = parseFlag(parser, 0x00006, "DefineEditText::NoSelect");
+		final Flag border = parseFlag(parser, 0x00006, "DefineEditText::Border");
+		final Flag wasStatic = parseFlag(parser, 0x00006, "DefineEditText::WasStatic");
+		final Flag html = parseFlag(parser, 0x00006, "DefineEditText::HTML");
+		final Flag useOutlines = parseFlag(parser, 0x00006, "DefineEditText::UseOutlines");
+		final UINT16 fontID = parseUINT16If(parser, 0x00006, hasFont, "DefineEditText::FontID");
+		final PString fontClass = parseStringIf(parser, 0x00006, hasFontClass, "DefineEditText::FontClass");
+		final UINT16 fontHeight = parseUINT16If(parser, 0x00006, hasFont, "DefineEditText::FontHeight");
+		final RGBA textColor = RGBAParser.parseIf(parser, hasTextColor, "DefineEditText::TextColor");
+		final UINT16 maxLength = parseUINT16If(parser, 0x00006, hasMaxLength, "DefineEditText::MaxLength");
+		final UINT8 align = parseUINT8If(parser, 0x00006, hasLayout, "DefineEditText::Align");
+		final UINT16 leftMargin = parseUINT16If(parser, 0x00006, hasLayout, "DefineEditText::LeftMargin");
+		final UINT16 rightMargin = parseUINT16If(parser, 0x00006, hasLayout, "DefineEditText::RightMargin");
+		final UINT16 indent = parseUINT16If(parser, 0x00006, hasLayout, "DefineEditText::Indent");
+		final INT16 leading = parseINT16If(parser, 0x00006, hasLayout, "DefineEditText::Leading");
+		final PString variableName = parseString(parser, 0x00006, "DefineEditText::VariableName");
+		final PString initialText = parseStringIf(parser, 0x00006, hasText, "DefineEditText::InitialText");
 
-		return new DefineEditTextTag(header, characterID, bounds, hasText, wordWrap,
+		return new DefineEditTextTag(header, characterId, bounds, hasText, wordWrap,
 				multiline, password, readOnly, hasTextColor, hasMaxLength, hasFont,
 				hasFontClass, autoSize, hasLayout, noSelect, border, wasStatic, html,
 				useOutlines, fontID, fontClass, fontHeight, textColor, maxLength, align,
 				leftMargin, rightMargin, indent, leading, variableName, initialText);
 	}
-
 }

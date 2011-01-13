@@ -1,5 +1,10 @@
 package tv.porst.swfretools.parser.tags;
 
+import static tv.porst.swfretools.parser.SWFParserHelpers.parseBits;
+import static tv.porst.swfretools.parser.SWFParserHelpers.parseFlag;
+import static tv.porst.swfretools.parser.SWFParserHelpers.parseUINT16;
+import static tv.porst.swfretools.parser.SWFParserHelpers.parseUINT8;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,13 +17,29 @@ import tv.porst.swfretools.parser.actions.Action;
 import tv.porst.swfretools.parser.actions.ActionRecordParser;
 import tv.porst.swfretools.parser.structures.RecordHeader;
 
-public class DefineButton2Parser {
+/**
+ * Class for parsing DefineButton2 tags.
+ * 
+ * @author sp
+ */
+public final class DefineButton2Parser {
 
-	public static Tag parse(final RecordHeader header, final SWFBinaryParser parser) throws SWFParserException {
-		final UINT16 buttonID = parser.readUInt16();
-		final int reservedFlags = parser.readBits(7);
-		final Flag trackAsMenu = parser.readFlag();
-		final UINT16 actionOffset = parser.readUInt16();
+	/**
+	 * Parses a DefineButton2 tag.
+	 * 
+	 * @param parser Provides the input data.
+	 * @param header Previously parsed header of the tag.
+	 * 
+	 * @return Returns the parsed tag.
+	 * 
+	 * @throws SWFParserException Thrown if parsing the tag failed.
+	 */
+	public static DefineButton2Tag parse(final RecordHeader header, final SWFBinaryParser parser) throws SWFParserException {
+
+		final UINT16 buttonId = parseUINT16(parser, 0x00006, "DefineButton2::ButtonId");
+		final int reservedFlags = parseBits(parser, 7, 0x00006, "DefineButton2::ReservedFlags");
+		final Flag trackAsMenu = parseFlag(parser, 0x00006, "DefineButton2::TrackAsMenu");
+		final UINT16 actionOffset = parseUINT16(parser, 0x00006, "DefineButton2::ActionOffset");
 
 		final List<ButtonRecord2> characters = new ArrayList<ButtonRecord2>();
 
@@ -28,7 +49,7 @@ public class DefineButton2Parser {
 				break;
 			}
 
-			characters.add(ButtonRecord2Parser.parse(parser, String.format("Characters[%d]", characters.size())));
+			characters.add(ButtonRecord2Parser.parse(parser, String.format("DefineButton2::Characters[%d]", characters.size())));
 
 		} while (true);
 
@@ -36,9 +57,8 @@ public class DefineButton2Parser {
 
 		final List<Action> actions = ActionRecordParser.parse(parser, actionRecordSize);
 
-		final UINT8 actionEndFlag = parser.readUInt8();
+		final UINT8 actionEndFlag = parseUINT8(parser, 0x00006, "DefineButton::ActionEndFlag");
 
-		return new DefineButton2Tag(header, buttonID, reservedFlags, trackAsMenu, actionOffset, characters, actions, actionEndFlag);
+		return new DefineButton2Tag(header, buttonId, reservedFlags, trackAsMenu, actionOffset, characters, actions, actionEndFlag);
 	}
-
 }

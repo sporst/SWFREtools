@@ -2,7 +2,7 @@ package tv.porst.swfretools.parser.structures;
 
 import tv.porst.splib.io.Flag;
 
-public class StyleChangeRecord3 implements ShapeRecord {
+public class StyleChangeRecord3 implements ShapeRecord3 {
 
 	public StyleChangeRecord3(final Flag typeFlag, final Flag stateNewStyles,
 			final Flag stateLineStyle, final Flag stateFillStyle0,

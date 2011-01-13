@@ -6,12 +6,13 @@ import tv.porst.swfretools.parser.structures.MorphFillStyleArray;
 import tv.porst.swfretools.parser.structures.MorphLineStyleArray;
 import tv.porst.swfretools.parser.structures.RecordHeader;
 import tv.porst.swfretools.parser.structures.Rect;
+import tv.porst.swfretools.parser.structures.Shape;
 
 public class DefineMorphShapeTag extends Tag {
 
 	public DefineMorphShapeTag(final RecordHeader header, final UINT16 characterId, final Rect startBounds,
 			final Rect endBounds, final UINT32 offset, final MorphFillStyleArray morphFillStyles,
-			final MorphLineStyleArray morphLineStyles) {
+			final MorphLineStyleArray morphLineStyles, final Shape startEdges, final Shape endEdges) {
 		super(header);
 	}
 

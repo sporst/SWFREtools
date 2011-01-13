@@ -12,7 +12,7 @@ import tv.porst.swfretools.parser.SWFParserException;
 
 public class TextRecordParser {
 
-	public static TextRecord parse(final SWFBinaryParser parser, final int glyphBits, final int advanceBits) throws SWFParserException {
+	public static TextRecord parse(final SWFBinaryParser parser, final int glyphBits, final int advanceBits, final String fieldName) throws SWFParserException {
 		final Flag textRecordType = parser.readFlag();
 		final int styleFlagsReserved = parser.readBits(3);
 		final Flag styleFlagsHasFont = parser.readFlag();

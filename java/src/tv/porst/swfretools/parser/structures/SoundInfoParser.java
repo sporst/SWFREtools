@@ -8,6 +8,7 @@ import tv.porst.splib.io.Flag;
 import tv.porst.splib.io.UINT16;
 import tv.porst.splib.io.UINT32;
 import tv.porst.splib.io.UINT8;
+import tv.porst.swfretools.parser.SWFBinaryParser;
 
 public class SoundInfoParser {
 
@@ -36,6 +37,10 @@ public class SoundInfoParser {
 		return new SoundInfo(reserved, syncStop, syncNoMultiple, hasEnvelope, hasLoops,
 				hasOutPoint, hasInPoint, inPoint, outPoint, loopCount, envPoints,
 				envelopeRecords);
+	}
+
+	public static SoundInfo parseIf(final SWFBinaryParser parser, final boolean condition, final String fieldName) {
+		return condition ? parse(parser) : null;
 	}
 
 }

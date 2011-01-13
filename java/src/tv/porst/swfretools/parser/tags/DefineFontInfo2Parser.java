@@ -1,32 +1,55 @@
 package tv.porst.swfretools.parser.tags;
 
+import static tv.porst.swfretools.parser.SWFParserHelpers.parseBits;
+import static tv.porst.swfretools.parser.SWFParserHelpers.parseFlag;
+import static tv.porst.swfretools.parser.SWFParserHelpers.parseString;
+import static tv.porst.swfretools.parser.SWFParserHelpers.parseUINT16;
+import static tv.porst.swfretools.parser.SWFParserHelpers.parseUINT8;
+
 import java.util.ArrayList;
 import java.util.List;
 
-import tv.porst.splib.io.BinaryParser;
 import tv.porst.splib.io.Flag;
 import tv.porst.splib.io.IParsedINTElement;
 import tv.porst.splib.io.PString;
 import tv.porst.splib.io.UINT16;
 import tv.porst.splib.io.UINT8;
+import tv.porst.swfretools.parser.SWFBinaryParser;
+import tv.porst.swfretools.parser.SWFParserException;
 import tv.porst.swfretools.parser.structures.RecordHeader;
 
-public class DefineFontInfo2Parser {
+/**
+ * Class for parsing DefineFontInfo2 tags.
+ * 
+ * @author sp
+ */
+public final class DefineFontInfo2Parser {
 
-	public static Tag parse(final RecordHeader header, final BinaryParser parser) {
-		final UINT16 fontId = parser.readUInt16();
-		final UINT8 fontNameLen = parser.readUInt8();
-		final PString fontName = parser.readString(fontNameLen.value());
-		final int fontFlagsReserved = parser.readBits(2);
-		final Flag fontFlagsSmallText = parser.readFlag();
-		final Flag fontFlagsShiftJIS = parser.readFlag();
-		final Flag fontFlagsANSI = parser.readFlag();
-		final Flag fontFlagsItalic = parser.readFlag();
-		final Flag fontFlagsBold = parser.readFlag();
-		final Flag fontFlagsWideCodes = parser.readFlag();
-		final UINT8 languageCode = parser.readUInt8();
+	/**
+	 * Parses a DefineFontInfo2 tag.
+	 * 
+	 * @param parser Provides the input data.
+	 * @param header Previously parsed header of the tag.
+	 * 
+	 * @return Returns the parsed tag.
+	 * 
+	 * @throws SWFParserException Thrown if parsing the tag failed.
+	 */
+	public static DefineFontInfo2Tag parse(final RecordHeader header, final SWFBinaryParser parser) throws SWFParserException {
 
-		final int remainingBytes = header.getNormalizedLength() - 2 - 1 - fontNameLen.value() - 1 - 1;
+		final UINT16 fontId = parseUINT16(parser, 0x00006, "DefineFontInfo2::FontId");
+		final UINT8 fontNameLen = parseUINT8(parser, 0x00006, "DefineFontInfo2::FontNameLen");
+		final PString fontName = parseString(parser, fontNameLen.value(), 0x00006, "DefineFontInfo2::FontName");
+		final int fontFlagsReserved = parseBits(parser, 2, 0x00006, "DefineFontInfo2::FontFlagsReserved");
+		final Flag fontFlagsSmallText = parseFlag(parser, 0x00006, "DefineFontInfo2::FontFlagsSmallText");
+		final Flag fontFlagsShiftJIS = parseFlag(parser, 0x00006, "DefineFontInfo2::FontFlagsShiftJIS");
+		final Flag fontFlagsANSI = parseFlag(parser, 0x00006, "DefineFontInfo2::FontFlagsANSI");
+		final Flag fontFlagsItalic = parseFlag(parser, 0x00006, "DefineFontInfo2::FontFlagsItalic");
+		final Flag fontFlagsBold = parseFlag(parser, 0x00006, "DefineFontInfo2::FontFlagsBold");
+		final Flag fontFlagsWideCodes = parseFlag(parser, 0x00006, "DefineFontInfo2::FontFlagsWideCodes");
+		final UINT8 languageCode = parseUINT8(parser, 0x00006, "DefineFont2::LanguageCode");
+
+		final int remainingBytes = header.getNormalizedLength() - 2 - 1 - fontNameLen.value() - 1;
 
 		final int numberOfGlyphs = remainingBytes / (fontFlagsWideCodes.value() ? 2 : 1);
 
@@ -34,10 +57,10 @@ public class DefineFontInfo2Parser {
 
 		for (int i=0;i<numberOfGlyphs;i++) {
 			if (fontFlagsWideCodes.value()) {
-				codeTable.add(parser.readUInt16());
+				codeTable.add(parseUINT16(parser, 0x00006, String.format("DefineFontInfo2::CodeTable[%d]", i)));
 			}
 			else {
-				codeTable.add(parser.readUInt8());
+				codeTable.add(parseUINT8(parser, 0x00006, String.format("DefineFontInfo2::CodeTable[%d]", i)));
 			}
 		}
 
@@ -45,5 +68,4 @@ public class DefineFontInfo2Parser {
 				fontFlagsReserved, fontFlagsSmallText, fontFlagsShiftJIS,
 				fontFlagsANSI, fontFlagsItalic, fontFlagsBold, fontFlagsWideCodes, languageCode, codeTable);
 	}
-
 }
