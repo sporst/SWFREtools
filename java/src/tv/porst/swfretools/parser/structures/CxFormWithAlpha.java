@@ -1,5 +1,6 @@
 package tv.porst.swfretools.parser.structures;
 
+import tv.porst.splib.io.Bits;
 import tv.porst.splib.io.Flag;
 import tv.porst.splib.io.SBits;
 
@@ -7,7 +8,7 @@ public class CxFormWithAlpha {
 
 	private final Flag hasAddTerms;
 	private final Flag hasMultTerms;
-	private final int nBits;
+	private final Bits nBits;
 	private final SBits redMultTerm;
 	private final SBits greenMultTerm;
 	private final SBits blueMultTerm;
@@ -17,22 +18,22 @@ public class CxFormWithAlpha {
 	private final SBits blueAddTerm;
 	private final SBits alphaAddTerm;
 
-	public CxFormWithAlpha(final Flag hasAddTerms2, final Flag hasMultTerms2, final int nBits,
-			final SBits redMultTerm2, final SBits greenMultTerm2, final SBits blueMultTerm2,
-			final SBits alphaMultTerm2, final SBits redAddTerm2, final SBits greenAddTerm2,
-			final SBits blueAddTerm2, final SBits alphaAddTerm2) {
+	public CxFormWithAlpha(final Flag hasAddTerms, final Flag hasMultTerms, final Bits nBits,
+			final SBits redMultTerm, final SBits greenMultTerm, final SBits blueMultTerm,
+			final SBits alphaMultTerm, final SBits redAddTerm, final SBits greenAddTerm,
+			final SBits blueAddTerm, final SBits alphaAddTerm) {
 
-		this.hasAddTerms = hasAddTerms2;
-		this.hasMultTerms = hasMultTerms2;
+		this.hasAddTerms = hasAddTerms;
+		this.hasMultTerms = hasMultTerms;
 		this.nBits = nBits;
-		this.redMultTerm = redMultTerm2;
-		this.greenMultTerm = greenMultTerm2;
-		this.blueMultTerm = blueMultTerm2;
-		this.alphaMultTerm = alphaMultTerm2;
-		this.redAddTerm = redAddTerm2;
-		this.greenAddTerm = greenAddTerm2;
-		this.blueAddTerm = blueAddTerm2;
-		this.alphaAddTerm = alphaAddTerm2;
+		this.redMultTerm = redMultTerm;
+		this.greenMultTerm = greenMultTerm;
+		this.blueMultTerm = blueMultTerm;
+		this.alphaMultTerm = alphaMultTerm;
+		this.redAddTerm = redAddTerm;
+		this.greenAddTerm = greenAddTerm;
+		this.blueAddTerm = blueAddTerm;
+		this.alphaAddTerm = alphaAddTerm;
 	}
 
 }

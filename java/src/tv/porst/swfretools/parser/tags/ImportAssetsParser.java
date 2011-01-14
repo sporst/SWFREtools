@@ -10,8 +10,8 @@ import tv.porst.splib.io.PString;
 import tv.porst.splib.io.UINT16;
 import tv.porst.swfretools.parser.SWFBinaryParser;
 import tv.porst.swfretools.parser.SWFParserException;
-import tv.porst.swfretools.parser.structures.AssetParser;
-import tv.porst.swfretools.parser.structures.AssetTag;
+import tv.porst.swfretools.parser.structures.SymbolParser;
+import tv.porst.swfretools.parser.structures.Symbol;
 import tv.porst.swfretools.parser.structures.RecordHeader;
 
 /**
@@ -36,10 +36,10 @@ public final class ImportAssetsParser {
 		final PString url = parseString(parser, 0x00006, "ImportAssets::URL");
 		final UINT16 count= parseUINT16(parser, 0x00006, "ImportAssets::Count");
 
-		final List<AssetTag> tags = new ArrayList<AssetTag>();
+		final List<Symbol> tags = new ArrayList<Symbol>();
 
 		for (int i=0;i<count.value();i++) {
-			tags.add(AssetParser.parse(parser, String.format("ImportAssets::Tags[%d]", i)));
+			tags.add(SymbolParser.parse(parser, String.format("ImportAssets::Tags[%d]", i)));
 		}
 
 		return new ImportAssetsTag(header, url, count, tags);

@@ -7,6 +7,7 @@ import static tv.porst.swfretools.parser.SWFParserHelpers.parseUINT16;
 import static tv.porst.swfretools.parser.SWFParserHelpers.parseUINT16If;
 import static tv.porst.swfretools.parser.SWFParserHelpers.parseUINT8If;
 import static tv.porst.swfretools.parser.structures.ClipActionsParser.parseIf;
+import tv.porst.splib.io.Bits;
 import tv.porst.splib.io.Flag;
 import tv.porst.splib.io.PString;
 import tv.porst.splib.io.UINT16;
@@ -49,7 +50,7 @@ public final class PlaceObject3Parser {
 		final Flag placeFlagHasMatrix = parseFlag(parser, 0x00006, "PlaceObject3::PlaceFlagHasMatrix");
 		final Flag placeFlagHasCharacter = parseFlag(parser, 0x00006, "PlaceObject3::PlaceFlagHasCharacter");
 		final Flag placeFlagHasMove = parseFlag(parser, 0x00006, "PlaceObject3::PlaceFlagHasMove");
-		final int reserved = parseBits(parser, 0x0000006, 3, "PlaceObject3::Reserved");
+		final Bits reserved = parseBits(parser, 0x0000006, 3, "PlaceObject3::Reserved");
 		final Flag placeFlagHasImage = parseFlag(parser, 0x00006, "PlaceObject3::PlaceFlagHasImage");
 		final Flag placeFlagHasClassName = parseFlag(parser, 0x00006, "PlaceObject3::PlaceFlagHasClassName");
 		final Flag placeFlagHasCacheAsBitmap = parseFlag(parser, 0x00006, "PlaceObject3::PlaceFlagHasCacheAsBitmap");

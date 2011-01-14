@@ -1,13 +1,61 @@
 package tv.porst.swfretools.parser.tags;
 
 import tv.porst.splib.io.UINT16;
+import tv.porst.swfretools.parser.SWFParserHelpers;
 import tv.porst.swfretools.parser.structures.RecordHeader;
 import tv.porst.swfretools.parser.structures.SoundInfo;
 
-public class StartSoundTag extends Tag {
+/**
+ * Represents a StartSound tag.
+ * 
+ * @author sp
+ *
+ */
+public final class StartSoundTag extends Tag {
 
-	public StartSoundTag(final RecordHeader header, final UINT16 soundID, final SoundInfo soundInfo) {
+	/**
+	 * ID of sound character to play.
+	 */
+	private final UINT16 soundId;
+
+	/**
+	 * Sound style information.
+	 */
+	private final SoundInfo soundInfo;
+
+	/**
+	 * Creates a new StartSound tag object.
+	 * 
+	 * @param header Tag header.
+	 * @param soundId ID of sound character to play.
+	 * @param soundInfo Sound style information.
+	 */
+	public StartSoundTag(final RecordHeader header, final UINT16 soundId, final SoundInfo soundInfo) {
+
 		super(header);
+
+		SWFParserHelpers.checkNull(soundId, "SoundId");
+		SWFParserHelpers.checkNull(soundInfo, "SoundInfo");
+
+		this.soundId = soundId;
+		this.soundInfo = soundInfo;
 	}
 
+	/**
+	 * Returns the ID of sound character to play.
+	 * 
+	 * @return The ID of sound character to play.
+	 */
+	public UINT16 getSoundId() {
+		return soundId;
+	}
+
+	/**
+	 * Returns the sound style information.
+	 * 
+	 * @return The sound style information.
+	 */
+	public SoundInfo getSoundInfo() {
+		return soundInfo;
+	}
 }

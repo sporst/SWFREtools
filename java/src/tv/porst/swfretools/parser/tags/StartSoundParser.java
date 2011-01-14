@@ -28,7 +28,7 @@ public final class StartSoundParser {
 	public static StartSoundTag parse(final RecordHeader header, final SWFBinaryParser parser) throws SWFParserException {
 
 		final UINT16 soundId = parseUINT16(parser, 0x00006, "StartSound::SoundId");
-		final SoundInfo soundInfo = SoundInfoParser.parse(parser);
+		final SoundInfo soundInfo = SoundInfoParser.parse(parser, "StartSound::SoundInfo");
 
 		return new StartSoundTag(header, soundId, soundInfo);
 	}

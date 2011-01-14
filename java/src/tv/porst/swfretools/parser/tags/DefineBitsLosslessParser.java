@@ -9,6 +9,8 @@ import tv.porst.swfretools.parser.SWFBinaryParser;
 import tv.porst.swfretools.parser.SWFParserException;
 import tv.porst.swfretools.parser.structures.BitmapData15;
 import tv.porst.swfretools.parser.structures.BitmapData15Parser;
+import tv.porst.swfretools.parser.structures.BitmapData24;
+import tv.porst.swfretools.parser.structures.BitmapData24Parser;
 import tv.porst.swfretools.parser.structures.ColormapData;
 import tv.porst.swfretools.parser.structures.ColormapDataParser;
 import tv.porst.swfretools.parser.structures.RecordHeader;

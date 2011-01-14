@@ -9,6 +9,7 @@ import static tv.porst.swfretools.parser.SWFParserHelpers.parseUINT8;
 import java.util.ArrayList;
 import java.util.List;
 
+import tv.porst.splib.io.Bits;
 import tv.porst.splib.io.Flag;
 import tv.porst.splib.io.IParsedINTElement;
 import tv.porst.splib.io.PString;
@@ -40,7 +41,7 @@ public final class DefineFontInfo2Parser {
 		final UINT16 fontId = parseUINT16(parser, 0x00006, "DefineFontInfo2::FontId");
 		final UINT8 fontNameLen = parseUINT8(parser, 0x00006, "DefineFontInfo2::FontNameLen");
 		final PString fontName = parseString(parser, fontNameLen.value(), 0x00006, "DefineFontInfo2::FontName");
-		final int fontFlagsReserved = parseBits(parser, 2, 0x00006, "DefineFontInfo2::FontFlagsReserved");
+		final Bits fontFlagsReserved = parseBits(parser, 2, 0x00006, "DefineFontInfo2::FontFlagsReserved");
 		final Flag fontFlagsSmallText = parseFlag(parser, 0x00006, "DefineFontInfo2::FontFlagsSmallText");
 		final Flag fontFlagsShiftJIS = parseFlag(parser, 0x00006, "DefineFontInfo2::FontFlagsShiftJIS");
 		final Flag fontFlagsANSI = parseFlag(parser, 0x00006, "DefineFontInfo2::FontFlagsANSI");

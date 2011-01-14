@@ -14,7 +14,7 @@ public class ClipActionRecordParser {
 
 		final ClipEventFlags eventFlags = ClipEventFlagsParser.parse(parser, version);
 		final UINT32 actionRecordSize = parser.readUInt32();
-		final UINT8 keyCode = eventFlags.getClipEventKeyPress() == 1 ? parser.readUInt8() : null;
+		final UINT8 keyCode = eventFlags.getClipEventKeyPress().value() ? parser.readUInt8() : null;
 		final List<Action> actions = ActionRecordParser.parse(parser, actionRecordSize.value());
 
 		return new ClipActionRecord(eventFlags, actionRecordSize, keyCode, actions);

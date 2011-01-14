@@ -8,9 +8,9 @@ import java.util.List;
 import tv.porst.splib.io.UINT16;
 import tv.porst.swfretools.parser.SWFBinaryParser;
 import tv.porst.swfretools.parser.SWFParserException;
-import tv.porst.swfretools.parser.structures.AssetParser;
-import tv.porst.swfretools.parser.structures.AssetTag;
 import tv.porst.swfretools.parser.structures.RecordHeader;
+import tv.porst.swfretools.parser.structures.Symbol;
+import tv.porst.swfretools.parser.structures.SymbolParser;
 
 /**
  * Class for parsing SymbolClass tags.
@@ -33,10 +33,10 @@ public final class SymbolClassParser {
 
 		final UINT16 numSymbols = parseUINT16(parser, 0x00006, "SymbolClass::NumSymbols");
 
-		final List<AssetTag> tags = new ArrayList<AssetTag>();
+		final List<Symbol> tags = new ArrayList<Symbol>();
 
 		for (int i=0;i<numSymbols.value();i++) {
-			tags.add(AssetParser.parse(parser, String.format("SymbolClass::Tags[%d]", i)));
+			tags.add(SymbolParser.parse(parser, String.format("SymbolClass::Tags[%d]", i)));
 		}
 
 		return new SymbolClassTag(header, numSymbols, tags);

@@ -3,6 +3,7 @@ package tv.porst.swfretools.parser.structures;
 import static tv.porst.swfretools.parser.SWFParserHelpers.parseBits;
 import static tv.porst.swfretools.parser.SWFParserHelpers.parseFlag;
 import static tv.porst.swfretools.parser.SWFParserHelpers.parseSBitsIf;
+import tv.porst.splib.io.Bits;
 import tv.porst.splib.io.Flag;
 import tv.porst.splib.io.SBits;
 import tv.porst.swfretools.parser.SWFBinaryParser;
@@ -37,13 +38,13 @@ public final class CxFormParser {
 
 		final Flag hasAddTerms = parseFlag(parser, 0x00006, fieldName + "::HasAddTerms");
 		final Flag hasMultTerms = parseFlag(parser, 0x00006, fieldName + "::HasMultTerms");
-		final int nBits = parseBits(parser, 4, 0x00006, fieldName + "::NBits");
-		final SBits redMultTerm = parseSBitsIf(parser, nBits, 0x00006, hasMultTerms.value(), fieldName + "::RedMultTerm");
-		final SBits greenMultTerm = parseSBitsIf(parser, nBits, 0x00006, hasMultTerms.value(), fieldName + "::GreenMultTerm");
-		final SBits blueMultTerm = parseSBitsIf(parser, nBits, 0x00006, hasMultTerms.value(), fieldName + "::BlueMultTerm");
-		final SBits redAddTerm = parseSBitsIf(parser, nBits, 0x00006, hasAddTerms.value(), fieldName + "::RedAddTerm");
-		final SBits greenAddTerm = parseSBitsIf(parser, nBits, 0x00006, hasAddTerms.value(), fieldName + "::GreenAddTerm");
-		final SBits blueAddTerm = parseSBitsIf(parser, nBits, 0x00006, hasAddTerms.value(), fieldName + "::BlueAddTerm");
+		final Bits nBits = parseBits(parser, 4, 0x00006, fieldName + "::NBits");
+		final SBits redMultTerm = parseSBitsIf(parser, nBits.value(), 0x00006, hasMultTerms.value(), fieldName + "::RedMultTerm");
+		final SBits greenMultTerm = parseSBitsIf(parser, nBits.value(), 0x00006, hasMultTerms.value(), fieldName + "::GreenMultTerm");
+		final SBits blueMultTerm = parseSBitsIf(parser, nBits.value(), 0x00006, hasMultTerms.value(), fieldName + "::BlueMultTerm");
+		final SBits redAddTerm = parseSBitsIf(parser, nBits.value(), 0x00006, hasAddTerms.value(), fieldName + "::RedAddTerm");
+		final SBits greenAddTerm = parseSBitsIf(parser, nBits.value(), 0x00006, hasAddTerms.value(), fieldName + "::GreenAddTerm");
+		final SBits blueAddTerm = parseSBitsIf(parser, nBits.value(), 0x00006, hasAddTerms.value(), fieldName + "::BlueAddTerm");
 
 		return new CxForm(hasAddTerms, hasMultTerms, nBits, redMultTerm, greenMultTerm, blueMultTerm, redAddTerm, greenAddTerm, blueAddTerm);
 	}

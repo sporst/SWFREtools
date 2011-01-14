@@ -1,6 +1,7 @@
 package tv.porst.swfretools.parser;
 
 import tv.porst.splib.io.BinaryParserHelpers;
+import tv.porst.splib.io.Bits;
 import tv.porst.splib.io.Flag;
 import tv.porst.splib.io.Float32;
 import tv.porst.splib.io.INT16;
@@ -14,18 +15,34 @@ import tv.porst.swfretools.parser.structures.ByteArray;
 
 public class SWFParserHelpers {
 
-	public static int parseBits(final SWFBinaryParser parser, final int numberOfBits, final int errorCode, final String fieldName) throws SWFParserException {
+	public static void checkNull(final Object object, final String string) {
+		if (object == null) {
+			throw new IllegalArgumentException(String.format("%s variable must not be null"));
+		}
+
+	}
+
+	public static Bits parseBits(final SWFBinaryParser parser, final int numberOfBits, final int errorCode, final String fieldName) throws SWFParserException {
 		throwIfB(parser, numberOfBits, errorCode, fieldName);
 
 		return parser.readBits(numberOfBits);
 	}
 
-	public static int parseBitsIf(final SWFBinaryParser parser, final int numberOfBits, final int errorCode, final boolean condition, final String fieldName) throws SWFParserException {
+	public static Bits parseBitsIf(final SWFBinaryParser parser, final int numberOfBits, final int errorCode, final boolean condition, final String fieldName) throws SWFParserException {
 		if (condition) {
 			return parseBits(parser, numberOfBits, errorCode, fieldName);
 		}
 		else {
-			return 0;
+			return null;
+		}
+	}
+
+	public static Bits parseBitsIf(final SWFBinaryParser parser, final int numberOfBits, final int errorCode, final Flag condition, final String fieldName) throws SWFParserException {
+		if (condition.value()) {
+			return parseBits(parser, numberOfBits, errorCode, fieldName);
+		}
+		else {
+			return null;
 		}
 	}
 

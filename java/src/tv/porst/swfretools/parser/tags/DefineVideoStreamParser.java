@@ -4,6 +4,7 @@ import static tv.porst.swfretools.parser.SWFParserHelpers.parseBits;
 import static tv.porst.swfretools.parser.SWFParserHelpers.parseFlag;
 import static tv.porst.swfretools.parser.SWFParserHelpers.parseUINT16;
 import static tv.porst.swfretools.parser.SWFParserHelpers.parseUINT8;
+import tv.porst.splib.io.Bits;
 import tv.porst.splib.io.Flag;
 import tv.porst.splib.io.UINT16;
 import tv.porst.splib.io.UINT8;
@@ -34,8 +35,8 @@ public final class DefineVideoStreamParser {
 		final UINT16 numFrames = parseUINT16(parser, 0x00006, "DefineVideoStream::NumFrames");
 		final UINT16 width = parseUINT16(parser, 0x00006, "DefineVideoStream::Width");
 		final UINT16 height = parseUINT16(parser, 0x00006, "DefineVideoStream::Height");
-		final int videoFlagsReserved = parseBits(parser, 4, 0x00006, "DefineVideoStream::VideoFlagsReserved");
-		final int videoFlagsDeblocking = parseBits(parser, 4, 0x00006, "DefineVideoStream::VideoFlagsDeblocking");
+		final Bits videoFlagsReserved = parseBits(parser, 4, 0x00006, "DefineVideoStream::VideoFlagsReserved");
+		final Bits videoFlagsDeblocking = parseBits(parser, 4, 0x00006, "DefineVideoStream::VideoFlagsDeblocking");
 		final Flag videoFlagsSmoothing = parseFlag(parser, 0x00006, "DefineVideoStream::VideoFlagsSmoothing");
 		final UINT8 codecId = parseUINT8(parser, 0x00006, "DefineVideoStream::CodecID");
 

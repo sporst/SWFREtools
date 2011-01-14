@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import tv.porst.splib.io.BinaryParser;
+import tv.porst.splib.io.Bits;
 import tv.porst.splib.io.Flag;
 import tv.porst.splib.io.UINT16;
 import tv.porst.splib.io.UINT32;
@@ -12,8 +13,8 @@ import tv.porst.swfretools.parser.SWFBinaryParser;
 
 public class SoundInfoParser {
 
-	public static SoundInfo parse(final BinaryParser parser) {
-		final int reserved = parser.readBits(2);
+	public static SoundInfo parse(final BinaryParser parser, final String fieldName) {
+		final Bits reserved = parser.readBits(2);
 		final Flag syncStop = parser.readFlag();
 		final Flag syncNoMultiple = parser.readFlag();
 		final Flag hasEnvelope = parser.readFlag();
@@ -40,7 +41,7 @@ public class SoundInfoParser {
 	}
 
 	public static SoundInfo parseIf(final SWFBinaryParser parser, final boolean condition, final String fieldName) {
-		return condition ? parse(parser) : null;
+		return condition ? parse(parser, fieldName) : null;
 	}
 
 }

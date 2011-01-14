@@ -1,6 +1,7 @@
 package tv.porst.swfretools.parser.structures;
 
 import tv.porst.splib.io.BinaryParser;
+import tv.porst.splib.io.Bits;
 import tv.porst.splib.io.Flag;
 
 public class BevelFilterParser {
@@ -17,7 +18,7 @@ public class BevelFilterParser {
 		final Flag knockout = parser.readFlag();
 		final Flag compositeSource = parser.readFlag();
 		final Flag onTop = parser.readFlag();
-		final int passes = parser.readBits(4);
+		final Bits passes = parser.readBits(4);
 
 		return new BevelFilter(shadowColor, highlightColor, blurX, blurY, angle, distance, strength, innerShadow, knockout, compositeSource, onTop, passes);
 	}

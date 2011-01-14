@@ -27,8 +27,8 @@ public final class StartSound2Parser {
 	 */
 	public static StartSound2Tag parse(final RecordHeader header, final SWFBinaryParser parser) throws SWFParserException {
 
-		final PString soundClassName = parseString(parser, 0x00006, "StartSound::SoundClassName");
-		final SoundInfo soundInfo = SoundInfoParser.parse(parser);
+		final PString soundClassName = parseString(parser, 0x00006, "StartSound2::SoundClassName");
+		final SoundInfo soundInfo = SoundInfoParser.parse(parser, "StartSound2::SoundInfo");
 
 		return new StartSound2Tag(header, soundClassName, soundInfo);
 	}

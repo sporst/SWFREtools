@@ -3,6 +3,7 @@ package tv.porst.swfretools.parser.structures;
 import java.util.ArrayList;
 import java.util.List;
 
+import tv.porst.splib.io.Bits;
 import tv.porst.splib.io.Flag;
 import tv.porst.splib.io.INT16;
 import tv.porst.splib.io.UINT16;
@@ -14,7 +15,7 @@ public class TextRecordParser {
 
 	public static TextRecord parse(final SWFBinaryParser parser, final int glyphBits, final int advanceBits, final String fieldName) throws SWFParserException {
 		final Flag textRecordType = parser.readFlag();
-		final int styleFlagsReserved = parser.readBits(3);
+		final Bits styleFlagsReserved = parser.readBits(3);
 		final Flag styleFlagsHasFont = parser.readFlag();
 		final Flag styleFlagsHasColor = parser.readFlag();
 		final Flag styleFlagsHasYOffset = parser.readFlag();

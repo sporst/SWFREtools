@@ -25,11 +25,11 @@ public final class VideoFrameParser {
 	 * 
 	 * @throws SWFParserException Thrown if parsing the tag failed.
 	 */
-	public static Tag parse(final RecordHeader header, final SWFBinaryParser parser) throws SWFParserException {
+	public static VideoFrameTag parse(final RecordHeader header, final SWFBinaryParser parser) throws SWFParserException {
 
 		final UINT16 streamId = parseUINT16(parser, 0x00006, "VideoFrame::StreamId");
 		final UINT16 frameNum = parseUINT16(parser, 0x00006, "VideoFrame::FrameNum");
-		final ByteArray videoData = parseByteArray(parser, header.getNormalizedLength() - 2 - 2, 0x00006, "VideoFrame::VideoData");
+		final ByteArray videoData = parseByteArray(parser, header.getNormalizedLength() - UINT16.LENGTH - UINT16.LENGTH, 0x00006, "VideoFrame::VideoData");
 
 		return new VideoFrameTag(header, streamId, frameNum, videoData);
 	}

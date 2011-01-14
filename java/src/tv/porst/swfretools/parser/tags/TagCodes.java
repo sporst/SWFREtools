@@ -1,5 +1,8 @@
 package tv.porst.swfretools.parser.tags;
 
+/**
+ * Contains the numeric values of tag codes as they can be found in SWF files.
+ */
 public final class TagCodes {
 	public static final int End = 0;
 	public static final int ShowFrame = 1;

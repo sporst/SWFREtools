@@ -1,6 +1,7 @@
 package tv.porst.swfretools.parser.structures;
 
 import tv.porst.splib.io.BinaryParser;
+import tv.porst.splib.io.Bits;
 import tv.porst.splib.io.Flag;
 
 public class DropShadowFilterParser {
@@ -16,7 +17,7 @@ public class DropShadowFilterParser {
 		final Flag innerShadow = parser.readFlag();
 		final Flag knockout = parser.readFlag();
 		final Flag compositeSource = parser.readFlag();
-		final int passes = parser.readBits(5);
+		final Bits passes = parser.readBits(5);
 
 		return new DropShadowFilter(dropShadowColor, blurX, blurY, angle, distance, strength, innerShadow, knockout, compositeSource, passes);
 	}

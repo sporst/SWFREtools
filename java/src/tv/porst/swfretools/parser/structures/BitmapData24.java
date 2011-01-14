@@ -1,6 +1,5 @@
-package tv.porst.swfretools.parser.tags;
+package tv.porst.swfretools.parser.structures;
 
-import tv.porst.swfretools.parser.structures.Pix24;
 
 public class BitmapData24 {
 

@@ -1,6 +1,7 @@
 package tv.porst.swfretools.parser.structures;
 
 import tv.porst.splib.io.BinaryParser;
+import tv.porst.splib.io.Bits;
 import tv.porst.splib.io.Float32;
 import tv.porst.splib.io.UINT8;
 
@@ -20,9 +21,9 @@ public class ConvolutionFilterParser {
 
 		final RGBA defaultColor = RGBAParser.parse(parser);
 
-		final int reserved = parser.readBits(6);
-		final int clamp = parser.readBits(1);
-		final int preserveAlpha = parser.readBits(1);
+		final Bits reserved = parser.readBits(6);
+		final Bits clamp = parser.readBits(1);
+		final Bits preserveAlpha = parser.readBits(1);
 
 		return new ConvolutionFilter(matrixX, matrixY, divisor, bias, matrix, defaultColor, reserved, clamp, preserveAlpha);
 

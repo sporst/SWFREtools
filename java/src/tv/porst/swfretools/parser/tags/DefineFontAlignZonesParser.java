@@ -6,6 +6,7 @@ import static tv.porst.swfretools.parser.SWFParserHelpers.parseUINT16;
 import java.util.ArrayList;
 import java.util.List;
 
+import tv.porst.splib.io.Bits;
 import tv.porst.splib.io.UINT16;
 import tv.porst.swfretools.parser.SWFBinaryParser;
 import tv.porst.swfretools.parser.SWFParserException;
@@ -44,8 +45,8 @@ public final class DefineFontAlignZonesParser {
 	public static DefineFontAlignZonesTag parse(final RecordHeader header, final SWFBinaryParser parser) throws SWFParserException {
 
 		final UINT16 fontId = parseUINT16(parser, 0x00006, "DefineFontAlignZones::FontId");
-		final int csmTableHint = parseBits(parser, 2, 0x00006, "DefineFontAlignZones::CSMTableHint");
-		final int reserved = parseBits(parser, 2, 0x00006, "DefineFontAlignZones::Reserved");
+		final Bits csmTableHint = parseBits(parser, 2, 0x00006, "DefineFontAlignZones::CSMTableHint");
+		final Bits reserved = parseBits(parser, 2, 0x00006, "DefineFontAlignZones::Reserved");
 
 		final List<ZoneRecord> zoneTable = new ArrayList<ZoneRecord>();
 

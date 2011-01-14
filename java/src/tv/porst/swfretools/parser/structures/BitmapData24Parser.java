@@ -1,9 +1,7 @@
-package tv.porst.swfretools.parser.tags;
+package tv.porst.swfretools.parser.structures;
 
 import tv.porst.splib.io.BinaryParser;
 import tv.porst.swfretools.parser.SWFBinaryParser;
-import tv.porst.swfretools.parser.structures.Pix24;
-import tv.porst.swfretools.parser.structures.Pix24Parser;
 
 public class BitmapData24Parser {
 

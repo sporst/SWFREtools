@@ -1,5 +1,6 @@
 package tv.porst.swfretools.parser.structures;
 
+import tv.porst.splib.io.Bits;
 import tv.porst.splib.io.Flag;
 import tv.porst.splib.io.UINT16;
 import tv.porst.swfretools.parser.SWFBinaryParser;
@@ -8,7 +9,7 @@ import tv.porst.swfretools.parser.SWFParserException;
 public class ButtonRecordParser {
 
 	public static ButtonRecord parse(final SWFBinaryParser parser, final String fieldName) throws SWFParserException {
-		final int buttonReserved = parser.readBits(2);
+		final Bits buttonReserved = parser.readBits(2);
 		final Flag buttonHasBlendMode = parser.readFlag();
 		final Flag buttonHasFilterList = parser.readFlag();
 		final Flag buttonStateHitTest = parser.readFlag();

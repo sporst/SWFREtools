@@ -1,6 +1,7 @@
 package tv.porst.swfretools.parser.structures;
 
 import tv.porst.splib.io.BinaryParser;
+import tv.porst.splib.io.Bits;
 import tv.porst.splib.io.Flag;
 import tv.porst.splib.io.UINT8;
 
@@ -30,7 +31,7 @@ public class GradientBevelFilterParser {
 		final Flag knockout = parser.readFlag();
 		final Flag compositeSource = parser.readFlag();
 		final Flag onTop = parser.readFlag();
-		final int passes = parser.readBits(4);
+		final Bits passes = parser.readBits(4);
 
 		return new GradientBevelFilter(numColors, gradientColors, gradientRatio, blurX, blurY, angle, distance, strength, innerShadow, knockout, compositeSource, onTop, passes);
 	}

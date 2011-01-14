@@ -3,6 +3,7 @@ package tv.porst.swfretools.parser.tags;
 import tv.porst.splib.io.UINT16;
 import tv.porst.splib.io.UINT8;
 import tv.porst.swfretools.parser.structures.BitmapData15;
+import tv.porst.swfretools.parser.structures.BitmapData24;
 import tv.porst.swfretools.parser.structures.ColormapData;
 import tv.porst.swfretools.parser.structures.RecordHeader;
 

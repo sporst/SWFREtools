@@ -1,8 +1,10 @@
 package tv.porst.swfretools.parser.structures;
 
+import tv.porst.splib.io.Bits;
+
 public class Pix15 {
 
-	public Pix15(final int pix15Reserved, final int pix15Red, final int pix15Blue, final int pix15Green) {
+	public Pix15(final Bits pix15Reserved, final Bits pix15Red, final Bits pix15Blue, final Bits pix15Green) {
 		// TODO Auto-generated constructor stub
 	}
 

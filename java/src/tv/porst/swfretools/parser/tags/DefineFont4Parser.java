@@ -5,6 +5,7 @@ import static tv.porst.swfretools.parser.SWFParserHelpers.parseByteArrayIf;
 import static tv.porst.swfretools.parser.SWFParserHelpers.parseFlag;
 import static tv.porst.swfretools.parser.SWFParserHelpers.parseString;
 import static tv.porst.swfretools.parser.SWFParserHelpers.parseUINT16;
+import tv.porst.splib.io.Bits;
 import tv.porst.splib.io.Flag;
 import tv.porst.splib.io.PString;
 import tv.porst.splib.io.UINT16;
@@ -33,7 +34,7 @@ public final class DefineFont4Parser {
 	public static DefineFont4Tag parse(final RecordHeader header, final SWFBinaryParser parser) throws SWFParserException {
 
 		final UINT16 fontId = parseUINT16(parser, 0x00006, "DefineText2::FontId");
-		final int fontFlagsReserved = parseBits(parser, 5, 0x00006, "DefineFont4::FontFlagsReserved");
+		final Bits fontFlagsReserved = parseBits(parser, 5, 0x00006, "DefineFont4::FontFlagsReserved");
 		final Flag fontFlagsHasFontData = parseFlag(parser, 0x00006, "DefineFont4::FontFlagsHasFontData");
 		final Flag fontFlagsItalic = parseFlag(parser, 0x00006, "DefineFont4::FontFlagsItalic");
 		final Flag fontFlagsBold = parseFlag(parser, 0x00006, "DefineFont4::FontFlagsBold");
