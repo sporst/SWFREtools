@@ -71,7 +71,8 @@ public final class PlaceObject3Parser {
 
 		return new PlaceObject3Tag(header, placeFlagHasClipActions, placeFlagHasClipDepth, placeFlagHasName,
 				placeFlagHasRatio, placeFlagHasColorTransform, placeFlagHasMatrix,
-				placeFlagHasCharacter, placeFlagHasMove, reserved, depth, className, characterId,
+				placeFlagHasCharacter, placeFlagHasMove, reserved, placeFlagHasImage, placeFlagHasClassName,
+				placeFlagHasCacheAsBitmap, placeFlagHasBlendMode, placeFlagHasFilterList, depth, className, characterId,
 				matrix, colorTransform, ratio, name, clipDepth, surfaceFilterList, blendMode, bitmapCache, clipActions);
 	}
 

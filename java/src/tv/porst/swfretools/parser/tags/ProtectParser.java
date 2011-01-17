@@ -1,7 +1,9 @@
 package tv.porst.swfretools.parser.tags;
 
-import tv.porst.splib.io.BinaryParser;
+import tv.porst.swfretools.parser.SWFBinaryParser;
 import tv.porst.swfretools.parser.SWFParserException;
+import tv.porst.swfretools.parser.SWFParserHelpers;
+import tv.porst.swfretools.parser.structures.ByteArray;
 import tv.porst.swfretools.parser.structures.RecordHeader;
 
 /**
@@ -21,8 +23,10 @@ public final class ProtectParser {
 	 * 
 	 * @throws SWFParserException Thrown if parsing the tag failed.
 	 */
-	public static ProtectTag parse(final RecordHeader header, final BinaryParser parser) {
+	public static ProtectTag parse(final RecordHeader header, final SWFBinaryParser parser) throws SWFParserException {
 
-		return new ProtectTag(header);
+		final ByteArray data = SWFParserHelpers.parseByteArrayIf(parser, header.getNormalizedLength(), 0x00005, header.getNormalizedLength() != 0, "Data");
+
+		return new ProtectTag(header, data);
 	}
 }

@@ -15,7 +15,7 @@ import tv.porst.swfretools.parser.structures.RecordHeader;
  * 
  * @author sp
  */
-public class SoundStreamHead2Parser {
+public final class SoundStreamHead2Parser {
 
 	/**
 	 * Parses a SoundStreamHead2 tag.

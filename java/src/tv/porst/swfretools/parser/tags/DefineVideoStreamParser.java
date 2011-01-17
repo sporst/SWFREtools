@@ -43,6 +43,5 @@ public final class DefineVideoStreamParser {
 		return new DefineVideoStreamTag(header, characterId, numFrames, width, height,
 				videoFlagsReserved, videoFlagsDeblocking, videoFlagsSmoothing,
 				codecId);
-
 	}
 }

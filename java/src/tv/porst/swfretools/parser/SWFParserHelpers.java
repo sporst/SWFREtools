@@ -52,6 +52,10 @@ public class SWFParserHelpers {
 		return null;
 	}
 
+	public static ByteArray parseByteArrayIf(final SWFBinaryParser parser, final int numberOfBytes, final int errorCode, final boolean condition, final String fieldName) throws SWFParserException {
+		return condition ? parseByteArray(parser, numberOfBytes, errorCode, fieldName) : null;
+	}
+
 	public static ByteArray parseByteArrayIf(final SWFBinaryParser parser, final int numberOfBytes, final int errorCode, final Flag condition, final String fieldName) throws SWFParserException {
 		return condition.value() ? parseByteArray(parser, numberOfBytes, errorCode, fieldName) : null;
 	}

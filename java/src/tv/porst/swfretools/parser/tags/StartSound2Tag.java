@@ -30,8 +30,7 @@ public final class StartSound2Tag extends Tag {
 	 * @param soundClassName Name of the sound class to play.
 	 * @param soundInfo Sound style information.
 	 */
-	public StartSound2Tag(final RecordHeader header, final PString soundClassName,
-			final SoundInfo soundInfo) {
+	public StartSound2Tag(final RecordHeader header, final PString soundClassName, final SoundInfo soundInfo) {
 
 		super(header);
 

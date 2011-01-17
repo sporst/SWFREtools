@@ -2,10 +2,20 @@ package tv.porst.swfretools.parser.tags;
 
 import tv.porst.swfretools.parser.structures.RecordHeader;
 
-public class EndTag extends Tag {
+/**
+ * Represents an End tag.
+ * 
+ * @author sp
+ *
+ */
+public final class EndTag extends Tag {
 
+	/**
+	 * Creates a new End tag object.
+	 * 
+	 * @param header Tag header.
+	 */
 	public EndTag(final RecordHeader header) {
 		super(header);
 	}
-
 }
