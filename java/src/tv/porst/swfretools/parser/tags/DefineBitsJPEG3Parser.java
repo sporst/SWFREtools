@@ -34,6 +34,6 @@ public final class DefineBitsJPEG3Parser {
 		final ByteArray imageData = parseByteArray(parser, alphaDataOffset.value(), 0x00006, "DefineBitsJPEG3::ImageData");
 		final ByteArray bitmapAlphaData = parseByteArray(parser, header.getNormalizedLength() - alphaDataOffset.value(), 0x00006, "DefineBitsJPEG3::BitmapAlphaData");
 
-		return new DefineBitsJPEG3Tag(header, characterId, imageData, bitmapAlphaData);
+		return new DefineBitsJPEG3Tag(header, characterId, alphaDataOffset, imageData, bitmapAlphaData);
 	}
 }

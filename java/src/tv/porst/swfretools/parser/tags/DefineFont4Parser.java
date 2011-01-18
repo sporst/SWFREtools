@@ -44,6 +44,6 @@ public final class DefineFont4Parser {
 
 		final ByteArray fontData = parseByteArrayIf(parser, remainingLength, 0x00006, fontFlagsHasFontData, "DefineFont4::FontData");
 
-		return new DefineFont4Tag(header, fontId, fontFlagsReserved, fontFlagsItalic, fontFlagsBold, fontName, fontData);
+		return new DefineFont4Tag(header, fontId, fontFlagsReserved, fontFlagsHasFontData, fontFlagsItalic, fontFlagsBold, fontName, fontData);
 	}
 }

@@ -8,7 +8,7 @@ import tv.porst.swfretools.parser.structures.RecordHeader;
  * @author sp
  *
  */
-public class ShowFrameTag extends Tag {
+public final class ShowFrameTag extends Tag {
 
 	/**
 	 * Creates a new ShowFrame tag object.

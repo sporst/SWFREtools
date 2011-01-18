@@ -4,11 +4,69 @@ import tv.porst.splib.io.PString;
 import tv.porst.splib.io.UINT16;
 import tv.porst.swfretools.parser.structures.RecordHeader;
 
-public class DefineFontNameTag extends Tag {
+/**
+ * Represents a DefineFontName tag.
+ * 
+ * @author sp
+ *
+ */
+public final class DefineFontNameTag extends Tag {
 
-	public DefineFontNameTag(final RecordHeader header, final UINT16 fontID, final PString fontName,
-			final PString fontCopyright) {
+	/**
+	 * ID for this font to which this refers.
+	 */
+	private final UINT16 fontId;
+
+	/**
+	 * Name of the font.
+	 */
+	private final PString fontName;
+
+	/**
+	 * Arbitrary string of copyright information.
+	 */
+	private final PString fontCopyright;
+
+	/**
+	 * Creates a new ShowFrame tag object.
+	 * 
+	 * @param header Tag header.
+	 * @param fontId ID for this font to which this refers.
+	 * @param fontName Name of the font.
+	 * @param fontCopyright Arbitrary string of copyright information.
+	 */
+	public DefineFontNameTag(final RecordHeader header, final UINT16 fontId, final PString fontName, final PString fontCopyright) {
 		super(header);
+
+		this.fontId = fontId;
+		this.fontName = fontName;
+		this.fontCopyright = fontCopyright;
 	}
 
+	/**
+	 * Returns the arbitrary string of copyright information.
+	 * 
+	 * @return The arbitrary string of copyright information.
+	 */
+	public PString getFontCopyright() {
+		return fontCopyright;
+	}
+
+	/**
+	 * Returns the ID for this font to which this refers.
+	 * 
+	 * @return The ID for this font to which this refers.
+	 */
+	public UINT16 getFontId() {
+		return fontId;
+	}
+
+	/**
+	 * Returns the name of the font.
+	 * 
+	 * @return The name of the font.
+	 */
+	public PString getFontName() {
+		return fontName;
+	}
 }
