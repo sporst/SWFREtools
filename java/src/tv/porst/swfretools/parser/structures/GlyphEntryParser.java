@@ -6,7 +6,7 @@ import tv.porst.splib.io.SBits;
 
 public class GlyphEntryParser {
 
-	public static GlyphEntry parse(final BinaryParser parser, final int glyphBits, final int advanceBits) {
+	public static GlyphEntry parse(final BinaryParser parser, final int glyphBits, final int advanceBits, final String fieldName) {
 		final Bits glyphIndex = parser.readBits(glyphBits);
 		final SBits advanceIndex = parser.readSBits(glyphBits);
 

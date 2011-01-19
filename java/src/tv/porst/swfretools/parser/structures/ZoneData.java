@@ -1,9 +1,53 @@
 package tv.porst.swfretools.parser.structures;
 
-public class ZoneData {
+import tv.porst.splib.io.Float16;
 
-	public ZoneData(final float alignmentCoordinate, final float range) {
-		// TODO Auto-generated constructor stub
+/**
+ * Represents a ZoneData structure.
+ * 
+ * @author sp
+ *
+ */
+public final class ZoneData {
+
+	/**
+	 * X or Y coordinate of the alignment zone.
+	 */
+	private final Float16 alignmentCoordinate;
+
+	/**
+	 * Width or height of the alignment zone.
+	 */
+	private final Float16 range;
+
+	/**
+	 * Creates a new ZoneData object.
+	 * 
+	 * @param alignmentCoordinate X or Y coordinate of the alignment zone.
+	 * @param range Width or height of the alignment zone.
+	 */
+	public ZoneData(final Float16 alignmentCoordinate, final Float16 range) {
+
+		this.alignmentCoordinate = alignmentCoordinate;
+		this.range = range;
+
 	}
 
+	/**
+	 * Returns the X or Y coordinate of the alignment zone.
+	 *
+	 * @return The X or Y coordinate of the alignment zone.
+	 */
+	public Float16 getAlignmentCoordinate() {
+		return alignmentCoordinate;
+	}
+
+	/**
+	 * Returns the width or height of the alignment zone.
+	 *
+	 * @return The width or height of the alignment zone.
+	 */
+	public Float16 getRange() {
+		return range;
+	}
 }

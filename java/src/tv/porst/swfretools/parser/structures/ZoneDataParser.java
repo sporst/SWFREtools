@@ -1,14 +1,33 @@
 package tv.porst.swfretools.parser.structures;
 
-import tv.porst.splib.io.BinaryParser;
+import static tv.porst.swfretools.parser.SWFParserHelpers.parseFloat16;
+import tv.porst.splib.io.Float16;
+import tv.porst.swfretools.parser.SWFBinaryParser;
+import tv.porst.swfretools.parser.SWFParserException;
 
-public class ZoneDataParser {
+/**
+ * Parses a ZoneData structure.
+ * 
+ * @author sp
+ *
+ */
+public final class ZoneDataParser {
 
-	public static ZoneData parse(final BinaryParser parser) {
-		final float alignmentCoordinate = parser.readFloat16();
-		final float range = parser.readFloat16();
+	/**
+	 * Parses a zone data structure.
+	 * 
+	 * @param parser The parser that parses the structure.
+	 * @param fieldName The name of the structure in the parent structure.
+	 * 
+	 * @return  The parsed structure.
+	 * 
+	 * @throws SWFParserException Thrown if the structure could not be parsed.
+	 */
+	public static ZoneData parse(final SWFBinaryParser parser, final String fieldName) throws SWFParserException {
+
+		final Float16 alignmentCoordinate = parseFloat16(parser, 0x00006, fieldName + "::AlignmentCoordinate");
+		final Float16 range = parseFloat16(parser, 0x00006, fieldName + "::Range");
 
 		return new ZoneData(alignmentCoordinate, range);
 	}
-
 }

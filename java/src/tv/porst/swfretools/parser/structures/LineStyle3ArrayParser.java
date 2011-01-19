@@ -4,12 +4,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 import tv.porst.splib.io.BinaryParser;
+import tv.porst.splib.io.Flag;
 import tv.porst.splib.io.UINT16;
 import tv.porst.splib.io.UINT8;
+import tv.porst.swfretools.parser.SWFBinaryParser;
+import tv.porst.swfretools.parser.SWFParserException;
 
 public class LineStyle3ArrayParser {
 
-	public static LineStyle3Array parse(final BinaryParser parser) {
+	public static LineStyle3Array parse(final BinaryParser parser, final String fieldName) {
 
 		final UINT8 lineStyleCount = parser.readUInt8();
 		final UINT16 lineStyleCountExtended = lineStyleCount.value() == 0xFF ? parser.readUInt16() : null;
@@ -23,6 +26,10 @@ public class LineStyle3ArrayParser {
 		}
 
 		return new LineStyle3Array(lineStyleCount, lineStyleCountExtended, lineStyles);
+	}
+
+	public static LineStyle3Array parseIf(final SWFBinaryParser parser, final Flag condition, final String fieldName) throws SWFParserException {
+		return condition.value() ? parse(parser, fieldName) : null;
 	}
 
 }

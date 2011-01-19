@@ -9,7 +9,7 @@ public class ShapeWithStyleParser {
 	public static ShapeWithStyle parse(final SWFBinaryParser parser, final String fieldName) throws SWFParserException {
 
 		final FillStyleArray fillStyles = FillStyleArrayParser.parse(parser, fieldName + "::FillStyles");
-		final LineStyleArray lineStyles = LineStyleArrayParser.parse(parser);
+		final LineStyleArray lineStyles = LineStyleArrayParser.parse(parser, fieldName + "::LineStyle");
 		final Bits numFillBits = parser.readBits(4);
 		final Bits numLineBits = parser.readBits(4);
 		final ShapeRecord shapeRecord = ShapeRecordParser.parse(parser, numFillBits, numLineBits, fieldName + "::ShapeRecord");

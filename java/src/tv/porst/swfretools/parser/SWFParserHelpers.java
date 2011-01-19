@@ -3,6 +3,7 @@ package tv.porst.swfretools.parser;
 import tv.porst.splib.io.BinaryParserHelpers;
 import tv.porst.splib.io.Bits;
 import tv.porst.splib.io.Flag;
+import tv.porst.splib.io.Float16;
 import tv.porst.splib.io.Float32;
 import tv.porst.splib.io.INT16;
 import tv.porst.splib.io.INT32;
@@ -70,6 +71,12 @@ public class SWFParserHelpers {
 		throwIfB(parser, 1, errorCode, fieldName);
 
 		return parser.readFloat();
+	}
+
+	public static Float16 parseFloat16(final SWFBinaryParser parser, final int errorCode, final String fieldName) throws SWFParserException {
+		throwIfB(parser, 1, errorCode, fieldName);
+
+		return parser.readFloat16();
 	}
 
 	public static INT16 parseINT16(final SWFBinaryParser parser, final int errorCode, final String fieldName) throws SWFParserException {

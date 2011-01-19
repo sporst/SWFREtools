@@ -1,35 +1,53 @@
 package tv.porst.swfretools.parser.structures;
 
 import static tv.porst.swfretools.parser.SWFParserHelpers.parseBitsIf;
+import static tv.porst.swfretools.parser.SWFParserHelpers.parseFlag;
 import tv.porst.splib.io.Bits;
 import tv.porst.splib.io.Flag;
 import tv.porst.swfretools.parser.SWFBinaryParser;
 import tv.porst.swfretools.parser.SWFParserException;
 
-public class StyleChangeRecord3Parser {
+/**
+ * Parses a StyleChangeRecord3 structure.
+ * 
+ * @author sp
+ *
+ */
+public final class StyleChangeRecord3Parser {
 
+	/**
+	 * Parses a StyleChangeRecord3 structure.
+	 * 
+	 * @param parser The parser that parses the structure.
+	 * @param fillBits
+	 * @param lineBits
+	 * @param fieldName Name of the structure in the parent structure.
+	 * 
+	 * @return The parsed structure.
+	 * 
+	 * @throws SWFParserException Thrown if the structure could not be parsed.
+	 */
 	public static StyleChangeRecord3 parse(final SWFBinaryParser parser, final Bits fillBits, final Bits lineBits, final String fieldName) throws SWFParserException {
 
-		final Flag typeFlag = parser.readFlag();
-		final Flag stateNewStyles = parser.readFlag();
-		final Flag stateLineStyle = parser.readFlag();
-		final Flag stateFillStyle1 = parser.readFlag();
-		final Flag stateFillStyle0 = parser.readFlag();
-		final Flag stateMoveTo = parser.readFlag();
+		final Flag typeFlag = parseFlag(parser, 0x00006, fieldName + "::TypeFlag");
+		final Flag stateNewStyles = parseFlag(parser, 0x00006, fieldName + "::StateNewStyles");
+		final Flag stateLineStyle = parseFlag(parser, 0x00006, fieldName + "::StateLineStyle");
+		final Flag stateFillStyle1 = parseFlag(parser, 0x00006, fieldName + "::StateFillStyle1");
+		final Flag stateFillStyle0 = parseFlag(parser, 0x00006, fieldName + "::StateFillStyle0");
+		final Flag stateMoveTo = parseFlag(parser, 0x00006, fieldName + "::StateMoveTo");
 		final Bits moveBits = parseBitsIf(parser, 5, 0x00006, stateMoveTo, fieldName + "::MoveBits");
 		final Bits moveDeltaX = parseBitsIf(parser, moveBits.value(), 0x00006, stateMoveTo, fieldName + "::MoveDeltaX");
 		final Bits moveDeltaY = parseBitsIf(parser, 5, 0x00006, stateMoveTo, fieldName + "::MoveDeltaY");
 		final Bits fillStyle0 = parseBitsIf(parser, fillBits.value(), 0x00006, stateFillStyle0, fieldName + "::FillStyle0");
 		final Bits fillStyle1 = parseBitsIf(parser, fillBits.value(), 0x00006, stateFillStyle1, fieldName + "::FillStyle1");
 		final Bits lineStyle = parseBitsIf(parser, lineBits.value(), 0x00006, stateLineStyle, fieldName + "::LineStyle");
-		final FillStyle3Array fillStyles = stateNewStyles.value() ? FillStyle3ArrayParser.parse(parser, fieldName + "::FillStyles") : null;
-		final LineStyle3Array lineStyles = stateNewStyles.value() ? LineStyle3ArrayParser.parse(parser) : null;
+		final FillStyle3Array fillStyles = FillStyle3ArrayParser.parseIf(parser, stateNewStyles, fieldName + "::FillStyles");
+		final LineStyle3Array lineStyles = LineStyle3ArrayParser.parseIf(parser, stateNewStyles, fieldName + "::LineStyles");
 		final Bits numFillBits = parseBitsIf(parser, 4, 0x00006, stateNewStyles, fieldName + "::NumFillBits");
 		final Bits numLineBits = parseBitsIf(parser, 4, 0x00006, stateNewStyles, fieldName + "::NumLineBits");
 
-		return new StyleChangeRecord3(typeFlag, stateNewStyles, stateLineStyle, stateFillStyle0,
-				stateFillStyle1, stateMoveTo, moveBits, moveDeltaX, moveDeltaY, fillStyle0, fillStyle1,
+		return new StyleChangeRecord3(typeFlag, stateNewStyles, stateLineStyle, stateFillStyle1,
+				stateFillStyle0, stateMoveTo, moveBits, moveDeltaX, moveDeltaY, fillStyle0, fillStyle1,
 				lineStyle, fillStyles, lineStyles, numFillBits, numLineBits);
 	}
-
 }
