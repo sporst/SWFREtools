@@ -22,7 +22,7 @@ import tv.porst.swfretools.parser.SWFParserException;
 public final class ZoneRecordParser {
 
 	/**
-	 * Parses a Zoneecord structure.
+	 * Parses a ZoneRecord structure.
 	 * 
 	 * @param parser The parser that parses the structure.
 	 * @param fieldName The name of the structure in the parent structure.

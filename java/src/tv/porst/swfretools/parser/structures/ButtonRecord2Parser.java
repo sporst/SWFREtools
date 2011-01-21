@@ -21,7 +21,7 @@ public class ButtonRecord2Parser {
 		final UINT16 placeDepth = parser.readUInt16();
 		final Matrix placeMatrix = MatrixParser.parse(parser, fieldName + "::PlaceMatrix");
 		final CxFormWithAlpha colorTransform = CxFormWithAlphaParser.parse(parser, fieldName + "::CxFormWithAlpha");
-		final FilterList filterList = buttonHasFilterList.value() ? FilterListParser.parse(parser) : null;
+		final FilterList filterList = buttonHasFilterList.value() ? FilterListParser.parse(parser, fieldName + "::FilterList") : null;
 		final UINT8 blendMode = buttonHasBlendMode.value() ? parser.readUInt8() : null;
 
 		return new ButtonRecord2(buttonReserved, buttonHasBlendMode, buttonHasFilterList,

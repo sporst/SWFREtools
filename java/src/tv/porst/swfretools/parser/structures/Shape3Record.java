@@ -1,10 +1,10 @@
 package tv.porst.swfretools.parser.structures;
 
 /**
- * Represents a ShapeRecord structure.
+ * Represents a ShapeRecord3 structure.
  * 
  * @author sp
  *
  */
-public interface ShapeRecord {
+public interface Shape3Record {
 }

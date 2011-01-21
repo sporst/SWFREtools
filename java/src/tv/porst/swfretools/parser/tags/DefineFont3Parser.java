@@ -26,7 +26,7 @@ import tv.porst.swfretools.parser.structures.RecordHeader;
 import tv.porst.swfretools.parser.structures.Rect;
 import tv.porst.swfretools.parser.structures.RectParser;
 import tv.porst.swfretools.parser.structures.Shape3;
-import tv.porst.swfretools.parser.structures.ShapeParser3;
+import tv.porst.swfretools.parser.structures.Shape3Parser;
 
 /**
  * Class for parsing DefineFont3 tags.
@@ -77,7 +77,7 @@ public final class DefineFont3Parser {
 		final List<Shape3> glyphShapeTable = new ArrayList<Shape3>();
 
 		for (int i=0;i<numGlyphs.value();i++) {
-			glyphShapeTable.add(ShapeParser3.parse(parser, String.format("GlyphShapeTable[%d]", i)));
+			glyphShapeTable.add(Shape3Parser.parse(parser, String.format("GlyphShapeTable[%d]", i)));
 		}
 
 		final List<IParsedINTElement> codeTable = new ArrayList<IParsedINTElement>();

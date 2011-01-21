@@ -1,14 +1,15 @@
 package tv.porst.swfretools.parser.structures;
 
-import tv.porst.splib.io.BinaryParser;
 import tv.porst.splib.io.Bits;
 import tv.porst.splib.io.Flag;
+import tv.porst.swfretools.parser.SWFBinaryParser;
+import tv.porst.swfretools.parser.SWFParserException;
 
 public class BevelFilterParser {
 
-	public static BevelFilter parse(final BinaryParser parser) {
-		final RGBA shadowColor = RGBAParser.parse(parser);
-		final RGBA highlightColor = RGBAParser.parse(parser);
+	public static BevelFilter parse(final SWFBinaryParser parser, final String fieldName) throws SWFParserException {
+		final RGBA shadowColor = RGBAParser.parse(parser, fieldName + "::ShadowColor");
+		final RGBA highlightColor = RGBAParser.parse(parser, fieldName + "::HighlightColor");
 		final Fixed blurX = FixedParser.parse(parser);
 		final Fixed blurY = FixedParser.parse(parser);
 		final Fixed angle = FixedParser.parse(parser);

@@ -21,8 +21,8 @@ public class MorphLineStyle2Parser {
 		final Flag noClose = parser.readFlag();
 		final Bits endCapStyle = parser.readBits(2);
 		final UINT16 miterLimitFactor = joinStyle.value() == 2 ? parser.readUInt16() : null;
-		final RGBA startColor = !hasFillFlag.value() ? RGBAParser.parse(parser) : null;
-		final RGBA endColor = !hasFillFlag.value() ? RGBAParser.parse(parser) : null;
+		final RGBA startColor = !hasFillFlag.value() ? RGBAParser.parse(parser, fieldName + "::StartColor") : null;
+		final RGBA endColor = !hasFillFlag.value() ? RGBAParser.parse(parser, fieldName + "::EndColor") : null;
 		final MorphFillStyle fillType = hasFillFlag.value() ? MorphFillStyleParser.parse(parser, fieldName + "::FillType") : null;
 
 		return new MorphLineStyle2(startWidth, endWidth, startCapStyle, joinStyle, hasFillFlag,

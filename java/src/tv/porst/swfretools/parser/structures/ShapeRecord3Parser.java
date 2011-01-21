@@ -5,15 +5,15 @@ import tv.porst.swfretools.parser.SWFBinaryParser;
 import tv.porst.swfretools.parser.SWFParserException;
 
 /**
- * Parses a ShapeRecord structure.
+ * Parses a ShapeRecord3 structure.
  * 
  * @author sp
  *
  */
-public final class ShapeRecordParser {
+public final class ShapeRecord3Parser {
 
 	/**
-	 * Parses a ShapeRecord structure.
+	 * Parses a ShapeRecord3 structure.
 	 * 
 	 * @param parser The parser that parses the structure.
 	 * @param fieldName The name of the structure in the parent structure.
@@ -22,7 +22,7 @@ public final class ShapeRecordParser {
 	 * 
 	 * @throws SWFParserException Thrown if the structure could not be parsed.
 	 */
-	public static ShapeRecord parse(final SWFBinaryParser parser, final Bits fillBits, final Bits lineBits, final String fieldName) throws SWFParserException {
+	public static Shape3Record parse(final SWFBinaryParser parser, final Bits numFillBits, final Bits numLineBits, final String fieldName) throws SWFParserException {
 
 		final int first6 = parser.peekBits(6);
 
@@ -30,7 +30,7 @@ public final class ShapeRecordParser {
 			return EndShapeRecordParser.parse(parser);
 		}
 		else if ((first6 & 0x20) == 0x20) {
-			return StyleChangeRecordParser.parse(parser, fillBits, lineBits, fieldName);
+			return StyleChangeRecord3Parser.parse(parser, numFillBits, numLineBits, fieldName);
 		}
 		else if ((first6 & 0x10) == 0x10) {
 			return StraightEdgeRecordParser.parse(parser, fieldName);

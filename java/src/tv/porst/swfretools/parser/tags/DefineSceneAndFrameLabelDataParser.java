@@ -3,7 +3,8 @@ package tv.porst.swfretools.parser.tags;
 import java.util.ArrayList;
 import java.util.List;
 
-import tv.porst.splib.io.BinaryParser;
+import tv.porst.swfretools.parser.SWFBinaryParser;
+import tv.porst.swfretools.parser.SWFParserException;
 import tv.porst.swfretools.parser.structures.EncodedU32;
 import tv.porst.swfretools.parser.structures.EncodedU32Parser;
 import tv.porst.swfretools.parser.structures.FrameLabel;
@@ -26,8 +27,10 @@ public final class DefineSceneAndFrameLabelDataParser {
 	 * @param header Previously parsed header of the tag.
 	 * 
 	 * @return Returns the parsed tag.
+	 * 
+	 * @throws SWFParserException Thrown if parsing the tag failed.
 	 */
-	public static DefineSceneAndFrameLabelDataTag parse(final RecordHeader header, final BinaryParser parser) {
+	public static DefineSceneAndFrameLabelDataTag parse(final RecordHeader header, final SWFBinaryParser parser) throws SWFParserException {
 
 		final EncodedU32 sceneCount = EncodedU32Parser.parse(parser, "DefineSceneAndFrameLabelData::SceneCount");
 

@@ -21,7 +21,7 @@ public class LineStyle4Parser {
 		final Flag noClose = parser.readFlag();
 		final Bits endCapStyle = parser.readBits(2);
 		final UINT16 miterLimitFactor = joinStyle.value() == 2 ? parser.readUInt16() : null;
-		final RGBA color = !hasFillFlag.value() ? RGBAParser.parse(parser) : null;
+		final RGBA color = !hasFillFlag.value() ? RGBAParser.parse(parser, fieldName + "::Color") : null;
 		final FillStyle3 fillType = hasFillFlag.value() ? FillStyle3Parser.parse(parser, fieldName + "::FillType") : null;
 
 		return new LineStyle4(width, startCapStyle, joinStyle, hasFillFlag,

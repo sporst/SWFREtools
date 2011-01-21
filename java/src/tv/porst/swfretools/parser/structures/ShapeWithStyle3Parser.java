@@ -5,8 +5,24 @@ import tv.porst.splib.io.Bits;
 import tv.porst.swfretools.parser.SWFBinaryParser;
 import tv.porst.swfretools.parser.SWFParserException;
 
-public class ShapeWithStyle3Parser {
+/**
+ * Parses a ShapeWithStyle3 structure.
+ * 
+ * @author sp
+ *
+ */
+public final class ShapeWithStyle3Parser {
 
+	/**
+	 * Parses a ShapeWithStyle3 structure.
+	 * 
+	 * @param parser The parser that parses the structure.
+	 * @param fieldName The name of the structure in the parent structure.
+	 * 
+	 * @return The parsed structure.
+	 * 
+	 * @throws SWFParserException Thrown if the structure could not be parsed.
+	 */
 	public static ShapeWithStyle3 parse(final SWFBinaryParser parser, final String fieldName) throws SWFParserException {
 
 		final FillStyle3Array fillStyles = FillStyle3ArrayParser.parse(parser, fieldName + "::FillStyles");
@@ -16,7 +32,5 @@ public class ShapeWithStyle3Parser {
 		final ShapeRecord shapeRecord = ShapeRecordParser.parse(parser, numFillBits, numLineBits, fieldName + "::ShapeRecord");
 
 		return new ShapeWithStyle3(fillStyles, lineStyles, numFillBits, numLineBits, shapeRecord);
-
 	}
-
 }

@@ -9,7 +9,7 @@ import tv.porst.splib.io.Flag;
  * @author sp
  *
  */
-public final class StyleChangeRecord3 implements ShapeRecord3 {
+public final class StyleChangeRecord3 implements Shape3Record {
 
 	/**
 	 * Record type flag.

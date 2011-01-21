@@ -14,7 +14,7 @@ public class MorphFillStyleParser {
 		final RGB endColor = fillStyleTypeValue == 0x00 ? RGBParser.parse(parser, fieldName + "::EndColor") : null;
 		final Matrix startGradientMatrix = fillStyleTypeValue == 0x10 || fillStyleTypeValue == 0x12 ? MatrixParser.parse(parser, fieldName + "::StartGradientMatrix") : null;
 		final Matrix endGradientMatrix = fillStyleTypeValue == 0x10 || fillStyleTypeValue == 0x12 ? MatrixParser.parse(parser, fieldName + "::EndGradientMatrix") : null;
-		final MorphGradient gradient = fillStyleTypeValue == 0x10 || fillStyleTypeValue == 0x12 ? MorphGradientParser.parse(parser) : null;
+		final MorphGradient gradient = fillStyleTypeValue == 0x10 || fillStyleTypeValue == 0x12 ? MorphGradientParser.parse(parser, fieldName + "::Gradient") : null;
 		final UINT16 bitmapId = fillStyleTypeValue >= 0x40 && fillStyleTypeValue <= 0x43 ? parser.readUInt16() : null;
 		final Matrix startBitmapMatrix= fillStyleTypeValue >= 0x40 && fillStyleTypeValue <= 0x43 ? MatrixParser.parse(parser, fieldName + "::StartBitmapMatrix") : null;
 		final Matrix endBitmapMatrix= fillStyleTypeValue >= 0x40 && fillStyleTypeValue <= 0x43 ? MatrixParser.parse(parser, fieldName + "::EndBitmapMatrix") : null;

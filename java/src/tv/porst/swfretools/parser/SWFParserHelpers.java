@@ -67,6 +67,10 @@ public class SWFParserHelpers {
 		return parser.readFlag();
 	}
 
+	public static Flag parseFlagIf(final SWFBinaryParser parser, final int errorCode, final boolean condition, final String fieldName) throws SWFParserException {
+		return condition ? parseFlag(parser, errorCode, fieldName) : null;
+	}
+
 	public static Float32 parseFloat(final SWFBinaryParser parser, final int errorCode, final String fieldName) throws SWFParserException {
 		throwIfB(parser, 1, errorCode, fieldName);
 
@@ -140,6 +144,10 @@ public class SWFParserHelpers {
 	public static UINT32 parseUINT32(final SWFBinaryParser parser, final int errorCode, final String fieldName) throws SWFParserException {
 		throwIf(parser, UINT32.LENGTH, errorCode, fieldName);
 		return parser.readUInt32();
+	}
+
+	public static UINT32 parseUINT32If(final SWFBinaryParser parser, final int errorCode, final Flag condition, final String fieldName) throws SWFParserException {
+		return condition.value() ? parseUINT32(parser, errorCode, fieldName) : null;
 	}
 
 	public static UINT8 parseUINT8(final SWFBinaryParser parser, final int errorCode, final String fieldName) throws SWFParserException {

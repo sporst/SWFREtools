@@ -1,13 +1,14 @@
 package tv.porst.swfretools.parser.structures;
 
-import tv.porst.splib.io.BinaryParser;
 import tv.porst.splib.io.Bits;
 import tv.porst.splib.io.Float32;
 import tv.porst.splib.io.UINT8;
+import tv.porst.swfretools.parser.SWFBinaryParser;
+import tv.porst.swfretools.parser.SWFParserException;
 
 public class ConvolutionFilterParser {
 
-	public static ConvolutionFilter parse(final BinaryParser parser) {
+	public static ConvolutionFilter parse(final SWFBinaryParser parser, final String fieldName) throws SWFParserException {
 
 		final UINT8 matrixX = parser.readUInt8();
 		final UINT8 matrixY = parser.readUInt8();
@@ -19,7 +20,7 @@ public class ConvolutionFilterParser {
 			matrix[i] = parser.readFloat();
 		}
 
-		final RGBA defaultColor = RGBAParser.parse(parser);
+		final RGBA defaultColor = RGBAParser.parse(parser, fieldName + "::DefaultColor");
 
 		final Bits reserved = parser.readBits(6);
 		final Bits clamp = parser.readBits(1);
