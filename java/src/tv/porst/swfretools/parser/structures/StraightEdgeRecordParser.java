@@ -11,7 +11,7 @@ import tv.porst.swfretools.parser.SWFBinaryParser;
 import tv.porst.swfretools.parser.SWFParserException;
 
 /**
- * Parses a StraightEdgeRecord structure.
+ * Parses StraightEdgeRecord structures.
  * 
  * @author sp
  *

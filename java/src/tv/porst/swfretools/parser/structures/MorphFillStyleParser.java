@@ -1,5 +1,6 @@
 package tv.porst.swfretools.parser.structures;
 
+import tv.porst.splib.io.Flag;
 import tv.porst.splib.io.UINT16;
 import tv.porst.splib.io.UINT8;
 import tv.porst.swfretools.parser.SWFBinaryParser;
@@ -20,6 +21,10 @@ public class MorphFillStyleParser {
 		final Matrix endBitmapMatrix= fillStyleTypeValue >= 0x40 && fillStyleTypeValue <= 0x43 ? MatrixParser.parse(parser, fieldName + "::EndBitmapMatrix") : null;
 
 		return new MorphFillStyle(fillStyleType, startColor, endColor, startGradientMatrix, endGradientMatrix, gradient, bitmapId, startBitmapMatrix, endBitmapMatrix);
+	}
+
+	public static MorphFillStyle parseIf(final SWFBinaryParser parser, final Flag condition, final String fieldName) throws SWFParserException {
+		return condition.value() ? parse(parser, fieldName) : null;
 	}
 
 }

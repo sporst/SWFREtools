@@ -1,12 +1,10 @@
 package tv.porst.swfretools.parser.structures;
 
-import tv.porst.splib.io.UINT8;
+import tv.porst.splib.io.UINT16;
 
 public class MorphLineStyle {
 
-	public MorphLineStyle(final UINT8 startWidth, final RGBA startColor, final UINT8 endWidth,
-			final RGBA endColor) {
-		// TODO Auto-generated constructor stub
+	public MorphLineStyle(final UINT16 startWidth, final UINT16 endWidth, final RGBA startColor, final RGBA endColor) {
 	}
 
 }

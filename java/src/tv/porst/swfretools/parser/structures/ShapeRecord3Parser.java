@@ -5,7 +5,7 @@ import tv.porst.swfretools.parser.SWFBinaryParser;
 import tv.porst.swfretools.parser.SWFParserException;
 
 /**
- * Parses a ShapeRecord3 structure.
+ * Parses ShapeRecord3 structures.
  * 
  * @author sp
  *

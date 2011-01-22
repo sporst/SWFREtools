@@ -8,7 +8,7 @@ import tv.porst.swfretools.parser.SWFBinaryParser;
 import tv.porst.swfretools.parser.SWFParserException;
 
 /**
- * Parses a StyleChangeRecord3 structure.
+ * Parses StyleChangeRecord3 structures.
  * 
  * @author sp
  *

@@ -137,6 +137,10 @@ public class SWFParserHelpers {
 		return parser.readUInt16();
 	}
 
+	public static UINT16 parseUINT16If(final SWFBinaryParser parser, final int errorCode, final boolean condition, final String fieldName) throws SWFParserException {
+		return condition ? parseUINT16(parser, errorCode, fieldName) : null;
+	}
+
 	public static UINT16 parseUINT16If(final SWFBinaryParser parser, final int errorCode, final Flag condition, final String fieldName) throws SWFParserException {
 		return condition.value() ? parseUINT16(parser, errorCode, fieldName) : null;
 	}

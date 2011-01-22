@@ -7,7 +7,7 @@ import tv.porst.swfretools.parser.SWFBinaryParser;
 import tv.porst.swfretools.parser.SWFParserException;
 
 /**
- * Parses an RGB structure.
+ * Parses RGB structures.
  * 
  * @author sp
  *

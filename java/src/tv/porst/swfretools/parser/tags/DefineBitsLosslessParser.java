@@ -43,8 +43,8 @@ public final class DefineBitsLosslessParser {
 
 		final UINT8 bitmapColorTableSize = parseUINT8If(parser, 0x00006, bitmapFormatValue == 3, "DefineBitsLossless::BitmapColorTableSize");
 		final ColormapData zlibColormapData = ColormapDataParser.parseIf(parser, bitmapFormatValue == 3, bitmapColorTableSize.value(), header.getNormalizedLength() - bitmapColorTableSize.value());
-		final BitmapData15 zlibBitmapData15 = BitmapData15Parser.parseIf(parser, bitmapFormatValue == 4, header.getNormalizedLength());
-		final BitmapData24 zlibBitmapData24 = BitmapData24Parser.parseIf(parser, bitmapFormatValue == 5, header.getNormalizedLength());
+		final BitmapData15 zlibBitmapData15 = BitmapData15Parser.parseIf(parser, bitmapFormatValue == 4, header.getNormalizedLength(), "DefineBitsLossless::ZlibBitmapData15");
+		final BitmapData24 zlibBitmapData24 = BitmapData24Parser.parseIf(parser, bitmapFormatValue == 5, header.getNormalizedLength(), "DefineBitsLossless::ZlibBitmapData24");
 
 		return new DefineBitsLosslessTag(header, characterId, bitmapFormat, bitmapWidth, bitmapHeight, bitmapColorTableSize, zlibColormapData, zlibBitmapData15, zlibBitmapData24);
 	}

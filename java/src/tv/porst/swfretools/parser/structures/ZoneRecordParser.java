@@ -14,7 +14,7 @@ import tv.porst.swfretools.parser.SWFBinaryParser;
 import tv.porst.swfretools.parser.SWFParserException;
 
 /**
- * Parses a ZoneRecord structure.
+ * Parses ZoneRecord structures.
  * 
  * @author sp
  *

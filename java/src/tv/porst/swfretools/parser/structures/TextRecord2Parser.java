@@ -17,7 +17,7 @@ import tv.porst.swfretools.parser.SWFBinaryParser;
 import tv.porst.swfretools.parser.SWFParserException;
 
 /**
- * Parses a TextRecord2 structure.
+ * Parses TextRecord2 structures.
  * 
  * @author sp
  *

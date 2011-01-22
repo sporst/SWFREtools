@@ -8,7 +8,7 @@ import tv.porst.swfretools.parser.SWFBinaryParser;
 import tv.porst.swfretools.parser.SWFParserException;
 
 /**
- * Parses a Symbol structure.
+ * Parses Symbol structures.
  * 
  * @author sp
  *

@@ -18,7 +18,7 @@ import tv.porst.swfretools.parser.SWFBinaryParser;
 import tv.porst.swfretools.parser.SWFParserException;
 
 /**
- * Parses a SoundInfo structure.
+ * Parses SoundInfo structures.
  * 
  * @author sp
  *

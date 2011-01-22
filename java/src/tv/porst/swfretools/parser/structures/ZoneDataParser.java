@@ -6,7 +6,7 @@ import tv.porst.swfretools.parser.SWFBinaryParser;
 import tv.porst.swfretools.parser.SWFParserException;
 
 /**
- * Parses a ZoneData structure.
+ * Parses ZoneData structures.
  * 
  * @author sp
  *

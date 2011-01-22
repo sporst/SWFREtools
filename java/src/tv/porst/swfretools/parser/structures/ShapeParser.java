@@ -6,7 +6,7 @@ import tv.porst.swfretools.parser.SWFBinaryParser;
 import tv.porst.swfretools.parser.SWFParserException;
 
 /**
- * Parses a Shape structure.
+ * Parses Shape structures.
  * 
  * @author sp
  *

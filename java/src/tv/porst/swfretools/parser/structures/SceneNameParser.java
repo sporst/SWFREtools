@@ -6,7 +6,7 @@ import tv.porst.swfretools.parser.SWFBinaryParser;
 import tv.porst.swfretools.parser.SWFParserException;
 
 /**
- * Parses a SceneName structure.
+ * Parses SceneName structures.
  * 
  * @author sp
  *

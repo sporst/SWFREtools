@@ -1,6 +1,7 @@
 package tv.porst.swfretools.parser.structures;
 
 import static tv.porst.swfretools.parser.SWFParserHelpers.parseBits;
+import static tv.porst.swfretools.parser.SWFParserHelpers.parseSBits;
 import tv.porst.splib.io.Bits;
 import tv.porst.splib.io.SBits;
 import tv.porst.swfretools.parser.SWFBinaryParser;
@@ -38,12 +39,11 @@ public final class RectParser {
 			return new Rect(nBits, null, null, null, null);
 		}
 
-		final SBits xMin = parser.readSBits(nBits.value());
-		final SBits xMax = parser.readSBits(nBits.value());
-		final SBits yMin = parser.readSBits(nBits.value());
-		final SBits yMax = parser.readSBits(nBits.value());
+		final SBits xMin = parseSBits(parser, nBits.value(), 0x00006, fieldName + "::XMin");
+		final SBits xMax = parseSBits(parser, nBits.value(), 0x00006, fieldName + "::XMax");
+		final SBits yMin = parseSBits(parser, nBits.value(), 0x00006, fieldName + "::YMin");
+		final SBits yMax = parseSBits(parser, nBits.value(), 0x00006, fieldName + "::YMax");
 
 		return new Rect(nBits, xMin, xMax, yMin, yMax);
 	}
-
 }
