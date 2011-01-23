@@ -1,17 +1,32 @@
 package tv.porst.swfretools.parser.structures;
 
+import static tv.porst.swfretools.parser.SWFParserHelpers.parseUINT8;
 import tv.porst.splib.io.UINT8;
 import tv.porst.swfretools.parser.SWFBinaryParser;
 import tv.porst.swfretools.parser.SWFParserException;
 
-public class LineStyleParser {
+/**
+ * Parses LineStyle structures.
+ * 
+ * @author sp
+ */
+public final class LineStyleParser {
 
+	/**
+	 * Parses a LineStyle structure.
+	 * 
+	 * @param parser The parser that parses the structure.
+	 * @param fieldName Name of the structure in the parent structure.
+	 * 
+	 * @return The parsed structure.
+	 * 
+	 * @throws SWFParserException Thrown if the structure could not be parsed.
+	 */
 	public static LineStyle parse(final SWFBinaryParser parser, final String fieldName) throws SWFParserException {
 
-		final UINT8 lineStyleType = parser.readUInt8();
+		final UINT8 lineStyleType = parseUINT8(parser, 0x00006, fieldName + "::LineStyleType");
 		final RGB color = RGBParser.parse(parser, fieldName + "::Color");
 
 		return new LineStyle(lineStyleType, color);
-
 	}
 }

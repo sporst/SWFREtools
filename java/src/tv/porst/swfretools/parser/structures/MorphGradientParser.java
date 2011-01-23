@@ -38,4 +38,19 @@ public final class MorphGradientParser {
 
 		return new MorphGradient(numGradients, gradientRecords);
 	}
+
+	/**
+	 * Parses a MorphGradient structure.
+	 * 
+	 * @param parser The parser that parses the structure.
+	 * @param condition which must be true for the structure to be parsed.
+	 * @param fieldName Name of the structure in the parent structure.
+	 * 
+	 * @return The parsed structure or null if the passed condition was false.
+	 * 
+	 * @throws SWFParserException Thrown if the structure could not be parsed.
+	 */
+	public static MorphGradient parseIf(final SWFBinaryParser parser, final boolean condition, final String fieldName) throws SWFParserException {
+		return condition ? parse(parser, fieldName) : null;
+	}
 }

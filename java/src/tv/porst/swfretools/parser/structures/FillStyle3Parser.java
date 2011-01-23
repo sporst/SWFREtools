@@ -1,5 +1,6 @@
 package tv.porst.swfretools.parser.structures;
 
+import tv.porst.splib.io.Flag;
 import tv.porst.splib.io.UINT16;
 import tv.porst.splib.io.UINT8;
 import tv.porst.swfretools.parser.SWFBinaryParser;
@@ -34,4 +35,7 @@ public class FillStyle3Parser {
 
 	}
 
+	public static FillStyle3 parseIf(final SWFBinaryParser parser, final Flag condition, final String fieldName) throws SWFParserException {
+		return condition.value() ? parse(parser, fieldName) : null;
+	}
 }

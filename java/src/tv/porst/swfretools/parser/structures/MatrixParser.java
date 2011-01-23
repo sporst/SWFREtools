@@ -50,6 +50,32 @@ public final class MatrixParser {
 		return new Matrix(hasScale, nScaleBits, scaleX, scaleY, hasRotate, nRotateBits, rotateSkew0, rotateSkew1, nTranslateBits, translateX, translateY);
 	}
 
+	/**
+	 * Parses a Matrix structure.
+	 * 
+	 * @param parser Provides the input data.
+	 * @param condition The condition to be met for the structure to be parsed.
+	 * @param fieldName Name of the matrix field that is parsed.
+	 * 
+	 * @return The parsed Matrix value or null if the condition was true.
+	 * 
+	 * @throws SWFParserException Thrown if parsing the Matrix value failed.
+	 */
+	public static Matrix parseIf(final SWFBinaryParser parser, final boolean condition, final String fieldName) throws SWFParserException {
+		return condition ? parse(parser, fieldName) : null;
+	}
+
+	/**
+	 * Parses a Matrix structure.
+	 * 
+	 * @param parser Provides the input data.
+	 * @param condition The condition to be met for the structure to be parsed.
+	 * @param fieldName Name of the matrix field that is parsed.
+	 * 
+	 * @return The parsed Matrix value or null if the condition was true.
+	 * 
+	 * @throws SWFParserException Thrown if parsing the Matrix value failed.
+	 */
 	public static Matrix parseIf(final SWFBinaryParser parser, final Flag condition, final String fieldName) throws SWFParserException {
 		return condition.value() ? parse(parser, fieldName) : null;
 	}

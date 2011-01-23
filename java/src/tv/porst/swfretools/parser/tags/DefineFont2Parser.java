@@ -114,7 +114,7 @@ public final class DefineFont2Parser {
 
 		if (fontFlagsHasLayout.value()) {
 			for (int i=0;i<kerningCount.value();i++) {
-				fontKerningTable.add(KerningRecordParser.parse(parser, fontFlagsWideCodes.value()));
+				fontKerningTable.add(KerningRecordParser.parse(parser, fontFlagsWideCodes.value(), String.format("DefineFont2::FontKerningTable[%d]", i)));
 			}
 		}
 
