@@ -13,7 +13,7 @@ public class FillStyleParser {
 			return GradientParser.parse(parser, fieldName);
 		}
 		else if (fillStyleType == 0x13) {
-			return FocalGradientParser.parse(parser);
+			return FocalGradientParser.parse(parser, fieldName);
 		}
 		else {
 			return null;

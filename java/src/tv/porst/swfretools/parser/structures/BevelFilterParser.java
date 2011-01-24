@@ -10,11 +10,11 @@ public class BevelFilterParser {
 	public static BevelFilter parse(final SWFBinaryParser parser, final String fieldName) throws SWFParserException {
 		final RGBA shadowColor = RGBAParser.parse(parser, fieldName + "::ShadowColor");
 		final RGBA highlightColor = RGBAParser.parse(parser, fieldName + "::HighlightColor");
-		final Fixed blurX = FixedParser.parse(parser);
-		final Fixed blurY = FixedParser.parse(parser);
-		final Fixed angle = FixedParser.parse(parser);
-		final Fixed distance = FixedParser.parse(parser);
-		final Fixed8 strength = Fixed8Parser.parse(parser);
+		final Fixed blurX = FixedParser.parse(parser, fieldName + "::BlurX");
+		final Fixed blurY = FixedParser.parse(parser, fieldName + "::BlurY");
+		final Fixed angle = FixedParser.parse(parser, fieldName + "::Angle");
+		final Fixed distance = FixedParser.parse(parser, fieldName + "::Distance");
+		final Fixed8 strength = Fixed8Parser.parse(parser, fieldName + "::Strength");
 		final Flag innerShadow = parser.readFlag();
 		final Flag knockout = parser.readFlag();
 		final Flag compositeSource = parser.readFlag();

@@ -14,7 +14,7 @@ public class FillStyle3Parser {
 			return Gradient3Parser.parse(parser, fieldName);
 		}
 		else if (fillStyleType == 0x13) {
-			return FocalGradientParser.parse(parser);
+			return FocalGradientParser.parse(parser, fieldName);
 		}
 		else {
 			return null;
