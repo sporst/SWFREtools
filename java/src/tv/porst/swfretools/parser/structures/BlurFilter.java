@@ -2,10 +2,83 @@ package tv.porst.swfretools.parser.structures;
 
 import tv.porst.splib.io.Bits;
 
-public class BlurFilter {
+/**
+ * Represents a BlurFilter structure.
+ * 
+ * @author sp
+ *
+ */
+public final class BlurFilter {
 
+	/**
+	 * Horizontal blur amount.
+	 */
+	private final Fixed blurX;
+
+	/**
+	 * Vertical blur amount.
+	 */
+	private final Fixed blurY;
+
+	/**
+	 * Number of blur passes.
+	 */
+	private final Bits passes;
+
+	/**
+	 * Reserved bits.
+	 */
+	private final Bits reserved;
+
+	/**
+	 * Creates a new FocalGradient object.
+	 * 
+	 * @param blurX Horizontal blur amount.
+	 * @param blurY Vertical blur amount.
+	 * @param passes Number of blur passes.
+	 * @param reserved Reserved bits.
+	 */
 	public BlurFilter(final Fixed blurX, final Fixed blurY, final Bits passes, final Bits reserved) {
-		// TODO Auto-generated constructor stub
+
+		this.blurX = blurX;
+		this.blurY = blurY;
+		this.passes = passes;
+		this.reserved = reserved;
 	}
 
+	/**
+	 * Returns the horizontal blur amount.
+	 *
+	 * @return The horizontal blur amount.
+	 */
+	public Fixed getBlurX() {
+		return blurX;
+	}
+
+	/**
+	 * Returns the vertical blur amount.
+	 *
+	 * @return The vertical blur amount.
+	 */
+	public Fixed getBlurY() {
+		return blurY;
+	}
+
+	/**
+	 * Returns the number of blur passes.
+	 *
+	 * @return The number of blur passes.
+	 */
+	public Bits getPasses() {
+		return passes;
+	}
+
+	/**
+	 * Returns the reserved bits.
+	 *
+	 * @return The reserved bits.
+	 */
+	public Bits getReserved() {
+		return reserved;
+	}
 }

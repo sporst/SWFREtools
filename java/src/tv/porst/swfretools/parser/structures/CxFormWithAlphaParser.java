@@ -9,8 +9,23 @@ import tv.porst.splib.io.SBits;
 import tv.porst.swfretools.parser.SWFBinaryParser;
 import tv.porst.swfretools.parser.SWFParserException;
 
-public class CxFormWithAlphaParser {
+/**
+ * Parses CxFormWithAlphaParser structures.
+ * 
+ * @author sp
+ */
+public final class CxFormWithAlphaParser {
 
+	/**
+	 * Parses a CxFormwWithAlpha structure.
+	 * 
+	 * @param parser The parser that parses the structure.
+	 * @param fieldName The name of the structure in the parent structure.
+	 * 
+	 * @return The parsed structure.
+	 * 
+	 * @throws SWFParserException Thrown if the structure could not be parsed.
+	 */
 	public static CxFormWithAlpha parse(final SWFBinaryParser parser, final String fieldName) throws SWFParserException {
 
 		if (parser == null) {
@@ -36,8 +51,18 @@ public class CxFormWithAlphaParser {
 		return new CxFormWithAlpha(hasAddTerms, hasMultTerms, nBits, redMultTerm, greenMultTerm, blueMultTerm, alphaMultTerm, redAddTerm, greenAddTerm, blueAddTerm, alphaAddTerm);
 	}
 
+	/**
+	 * Parses a CxFormwWithAlpha structure if a condition is true.
+	 * 
+	 * @param parser The parser that parses the structure.
+	 * @param condition The condition to be true for the structure to be parsed.
+	 * @param fieldName The name of the structure in the parent structure.
+	 * 
+	 * @return The parsed structure or null if the condition was false.
+	 * 
+	 * @throws SWFParserException Thrown if the structure could not be parsed.
+	 */
 	public static CxFormWithAlpha parseIf(final SWFBinaryParser parser, final Flag condition, final String fieldName) throws SWFParserException {
 		return condition.value() ? parse(parser, fieldName) : null;
 	}
-
 }

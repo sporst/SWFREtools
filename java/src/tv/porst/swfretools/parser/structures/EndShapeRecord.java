@@ -3,10 +3,51 @@ package tv.porst.swfretools.parser.structures;
 import tv.porst.splib.io.Bits;
 import tv.porst.splib.io.Flag;
 
-public class EndShapeRecord implements ShapeRecord, Shape3Record {
+/**
+ * Represents an EndShape structure.
+ * 
+ * @author sp
+ *
+ */
+public final class EndShapeRecord implements ShapeRecord, Shape3Record {
 
+	/**
+	 * Type flag.
+	 */
+	private final Flag typeFlag;
+
+	/**
+	 * End of shape flag.
+	 */
+	private final Bits endOfShape;
+
+	/**
+	 * Creates a new FocalGradient object.
+	 * 
+	 * @param typeFlag Type flag.
+	 * @param endOfShape End of shape flag.
+	 */
 	public EndShapeRecord(final Flag typeFlag, final Bits endOfShape) {
-		// TODO Auto-generated constructor stub
+
+		this.typeFlag = typeFlag;
+		this.endOfShape = endOfShape;
 	}
 
+	/**
+	 * Returns the End of shape flag.
+	 *
+	 * @return The End of shape flag.
+	 */
+	public Bits getEndOfShape() {
+		return endOfShape;
+	}
+
+	/**
+	 * Returns the type flag.
+	 *
+	 * @return The type flag.
+	 */
+	public Flag getTypeFlag() {
+		return typeFlag;
+	}
 }

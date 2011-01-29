@@ -1,35 +1,55 @@
 package tv.porst.swfretools.parser.structures;
 
-import tv.porst.splib.io.BinaryParser;
+import static tv.porst.swfretools.parser.SWFParserHelpers.parseBitsIf;
+import static tv.porst.swfretools.parser.SWFParserHelpers.parseFlag;
+import static tv.porst.swfretools.parser.SWFParserHelpers.parseFlagIf;
 import tv.porst.splib.io.Bits;
 import tv.porst.splib.io.Flag;
+import tv.porst.swfretools.parser.SWFBinaryParser;
+import tv.porst.swfretools.parser.SWFParserException;
 
-public class ClipEventFlagsParser {
+/**
+ * Parses ClipEventFlags structures.
+ * 
+ * @author sp
+ */
+public final class ClipEventFlagsParser {
 
-	public static ClipEventFlags parse(final BinaryParser parser, final int version) {
+	/**
+	 * Parses a ClipEventFlags structure.
+	 * 
+	 * @param parser The parser that parses the structure.
+	 * @param version Flash version number which was read from the SWF file header.
+	 * @param fieldName The name of the structure in the parent structure.
+	 * 
+	 * @return The parsed structure.
+	 * 
+	 * @throws SWFParserException Thrown if the structure could not be parsed.
+	 */
+	public static ClipEventFlags parse(final SWFBinaryParser parser, final int version, final String fieldName) throws SWFParserException {
 
-		final Flag clipEventKeyUp = parser.readFlag();
-		final Flag clipEventKeyDown = parser.readFlag();
-		final Flag clipEventMouseUp = parser.readFlag();
-		final Flag clipEventMouseDown = parser.readFlag();
-		final Flag clipEventMouseMove = parser.readFlag();
-		final Flag clipEventUnload = parser.readFlag();
-		final Flag clipEventEnterFrame = parser.readFlag();
-		final Flag clipEventLoad = parser.readFlag();
-		final Flag clipEventDragOver = parser.readFlag();
-		final Flag clipEventRollOut = parser.readFlag();
-		final Flag clipEventRollOver = parser.readFlag();
-		final Flag clipEventReleaseOutside = parser.readFlag();
-		final Flag clipEventRelease = parser.readFlag();
-		final Flag clipEventPress = parser.readFlag();
-		final Flag clipEventInitialize = parser.readFlag();
-		final Flag clipEventData = parser.readFlag();
+		final Flag clipEventKeyUp = parseFlag(parser, 0x00006, fieldName + "::ClipEventKeyUp");
+		final Flag clipEventKeyDown = parseFlag(parser, 0x00006, fieldName + "::ClipEventKeyDown");
+		final Flag clipEventMouseUp = parseFlag(parser, 0x00006, fieldName + "::ClipEventMouseUp");
+		final Flag clipEventMouseDown = parseFlag(parser, 0x00006, fieldName + "::ClipEventMouseDown");
+		final Flag clipEventMouseMove = parseFlag(parser, 0x00006, fieldName + "::ClipEventMouseDown");
+		final Flag clipEventUnload = parseFlag(parser, 0x00006, fieldName + "::ClipEventUnload");
+		final Flag clipEventEnterFrame = parseFlag(parser, 0x00006, fieldName + "::ClipEventEnterFrame");
+		final Flag clipEventLoad = parseFlag(parser, 0x00006, fieldName + "::ClipEventLoad");
+		final Flag clipEventDragOver = parseFlag(parser, 0x00006, fieldName + "::ClipEventDragOver");
+		final Flag clipEventRollOut = parseFlag(parser, 0x00006, fieldName + "::ClipEventRollOut");
+		final Flag clipEventRollOver = parseFlag(parser, 0x00006, fieldName + "::ClipEventRollOver");
+		final Flag clipEventReleaseOutside = parseFlag(parser, 0x00006, fieldName + "::ClipEventReleaseOutside");
+		final Flag clipEventRelease = parseFlag(parser, 0x00006, fieldName + "::ClipEventRelease");
+		final Flag clipEventPress = parseFlag(parser, 0x00006, fieldName + "::ClipEventPress");
+		final Flag clipEventInitialize = parseFlag(parser, 0x00006, fieldName + "::ClipEventInitialize");
+		final Flag clipEventData = parseFlag(parser, 0x00006, fieldName + "::ClipEventData");
 
-		final Bits reserved = version >= 6 ? parser.readBits(5) : null;
-		final Flag clipEventConstruct = version >= 6 ? parser.readFlag() : null;
-		final Flag clipEventKeyPress = version >= 6 ? parser.readFlag() : null;
-		final Flag clipEventDragOut = version >= 6 ? parser.readFlag() : null;
-		final Bits reserved2 = version >= 6 ? parser.readBits(8) : null;
+		final Bits reserved = parseBitsIf(parser, 5, 0x00006, version >= 6, fieldName + "::Reserved");
+		final Flag clipEventConstruct = parseFlagIf(parser, 0x00006, version >= 6, fieldName + "::ClipEventConstruct");
+		final Flag clipEventKeyPress = parseFlagIf(parser, 0x00006, version >= 6, fieldName + "::ClipEventKeyPress");
+		final Flag clipEventDragOut = parseFlagIf(parser, 0x00006, version >= 6, fieldName + "::ClipEventDragOut");
+		final Bits reserved2 = parseBitsIf(parser, 8, 0x00006, version >= 6, fieldName + "::Reserved2");
 
 		return new ClipEventFlags(clipEventKeyUp, clipEventKeyDown,
 				clipEventMouseUp, clipEventMouseDown, clipEventMouseMove,

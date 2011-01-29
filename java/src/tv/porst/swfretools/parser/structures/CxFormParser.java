@@ -48,5 +48,4 @@ public final class CxFormParser {
 
 		return new CxForm(hasAddTerms, hasMultTerms, nBits, redMultTerm, greenMultTerm, blueMultTerm, redAddTerm, greenAddTerm, blueAddTerm);
 	}
-
 }

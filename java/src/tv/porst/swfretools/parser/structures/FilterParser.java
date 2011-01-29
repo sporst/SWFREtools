@@ -33,7 +33,7 @@ public final class FilterParser {
 		final BevelFilter bevelFilter = filterIdValue == 3 ? BevelFilterParser.parse(parser, fieldName + "::BevelFilter") : null;
 		final GradientGlowFilter gradientGlowFilter = filterIdValue == 4 ? GradientGlowFilterParser.parse(parser, fieldName + "::GradientGlowFilter") : null;
 		final ConvolutionFilter convolutionFilter = filterIdValue == 5 ? ConvolutionFilterParser.parse(parser, fieldName + "::ConvolutionFilter") : null;
-		final ColorMatrixFilter colorMatrixFilter = filterIdValue == 6 ? ColorMatrixFilterParser.parse(parser) : null;
+		final ColorMatrixFilter colorMatrixFilter = filterIdValue == 6 ? ColorMatrixFilterParser.parse(parser, fieldName) : null;
 		final GradientBevelFilter gradientBevelFilter = filterIdValue == 7 ? GradientBevelFilterParser.parse(parser, fieldName + "::GradientBevelFilter") : null;
 
 		return new Filter(filterId, dropShadowFilter, blurFilter, glowFilter, bevelFilter, gradientGlowFilter, convolutionFilter, colorMatrixFilter, gradientBevelFilter);

@@ -27,7 +27,7 @@ public final class ShapeRecordParser {
 		final int first6 = parser.peekBits(6);
 
 		if (first6 == 0) {
-			return EndShapeRecordParser.parse(parser);
+			return EndShapeRecordParser.parse(parser, fieldName);
 		}
 		else if ((first6 & 0x20) == 0x20) {
 			return StyleChangeRecordParser.parse(parser, fillBits, lineBits, fieldName);
@@ -36,7 +36,7 @@ public final class ShapeRecordParser {
 			return StraightEdgeRecordParser.parse(parser, fieldName);
 		}
 		else {
-			return CurvedEdgeRecordParser.parse(parser);
+			return CurvedEdgeRecordParser.parse(parser, fieldName);
 		}
 	}
 }

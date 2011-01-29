@@ -2,10 +2,35 @@ package tv.porst.swfretools.parser.structures;
 
 import tv.porst.splib.io.Float32;
 
-public class ColorMatrixFilter {
+/**
+ * Represents a ColorMatrixFilter structure.
+ * 
+ * @author sp
+ *
+ */
+public final class ColorMatrixFilter {
 
+	/**
+	 * Color matrix values.
+	 */
+	private final Float32[] matrix;
+
+	/**
+	 * Creates a new ColorMatrixFilter object.
+	 * 
+	 * @param matrix Color matrix values.
+	 */
 	public ColorMatrixFilter(final Float32[] matrix) {
-		// TODO Auto-generated constructor stub
+
+		this.matrix = matrix == null ? matrix : matrix.clone();
 	}
 
+	/**
+	 * Returns the color matrix values.
+	 *
+	 * @return The color matrix values.
+	 */
+	public Float32[] getMatrix() {
+		return matrix == null ? matrix : matrix.clone();
+	}
 }

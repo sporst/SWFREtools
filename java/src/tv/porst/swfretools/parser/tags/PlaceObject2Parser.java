@@ -29,6 +29,7 @@ public final class PlaceObject2Parser {
 	 * 
 	 * @param parser Provides the input data.
 	 * @param header Previously parsed header of the tag.
+	 * @param version Flash version number which was read from the SWF file header.
 	 * 
 	 * @return Returns the parsed tag.
 	 * 
