@@ -1,7 +1,7 @@
 package tv.porst.swfretools.parser.tags;
 
-import tv.porst.splib.io.PString;
-import tv.porst.splib.io.UINT8;
+import tv.porst.splib.binaryparser.AsciiString;
+import tv.porst.splib.binaryparser.UINT8;
 import tv.porst.swfretools.parser.structures.RecordHeader;
 
 /**
@@ -15,7 +15,7 @@ public final class FrameLabelTag extends Tag {
 	/**
 	 * Label for frame.
 	 */
-	private final PString name;
+	private final AsciiString name;
 
 	/**
 	 * Named anchor identifier.
@@ -29,7 +29,7 @@ public final class FrameLabelTag extends Tag {
 	 * @param name Label for frame.
 	 * @param namedAnchorFlag Named anchor identifier.
 	 */
-	public FrameLabelTag(final RecordHeader header, final PString name, final UINT8 namedAnchorFlag) {
+	public FrameLabelTag(final RecordHeader header, final AsciiString name, final UINT8 namedAnchorFlag) {
 
 		super(header);
 
@@ -42,7 +42,7 @@ public final class FrameLabelTag extends Tag {
 	 * 
 	 * @return The label for frame.
 	 */
-	public PString getName() {
+	public AsciiString getName() {
 		return name;
 	}
 

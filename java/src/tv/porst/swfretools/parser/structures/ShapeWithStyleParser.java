@@ -1,7 +1,7 @@
 package tv.porst.swfretools.parser.structures;
 
-import static tv.porst.swfretools.parser.SWFParserHelpers.parseBits;
-import tv.porst.splib.io.Bits;
+import static tv.porst.swfretools.parser.SWFParserHelpers.parseUBits;
+import tv.porst.splib.binaryparser.UBits;
 import tv.porst.swfretools.parser.SWFBinaryParser;
 import tv.porst.swfretools.parser.SWFParserException;
 
@@ -27,8 +27,8 @@ public final class ShapeWithStyleParser {
 
 		final FillStyleArray fillStyles = FillStyleArrayParser.parse(parser, fieldName + "::FillStyles");
 		final LineStyleArray lineStyles = LineStyleArrayParser.parse(parser, fieldName + "::LineStyle");
-		final Bits numFillBits = parseBits(parser, 4, 0x00006, fieldName + "::NumFillBits");
-		final Bits numLineBits = parseBits(parser, 4, 0x00006, fieldName + "::NumLineBits");
+		final UBits numFillBits = parseUBits(parser, 4, 0x00006, fieldName + "::NumFillBits");
+		final UBits numLineBits = parseUBits(parser, 4, 0x00006, fieldName + "::NumLineBits");
 		final ShapeRecord shapeRecord = ShapeRecordParser.parse(parser, numFillBits, numLineBits, fieldName + "::ShapeRecord");
 
 		return new ShapeWithStyle(fillStyles, lineStyles, numFillBits, numLineBits, shapeRecord);

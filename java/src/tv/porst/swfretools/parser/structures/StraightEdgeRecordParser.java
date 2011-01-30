@@ -1,12 +1,12 @@
 package tv.porst.swfretools.parser.structures;
 
-import static tv.porst.swfretools.parser.SWFParserHelpers.parseBits;
+import static tv.porst.swfretools.parser.SWFParserHelpers.parseUBits;
 import static tv.porst.swfretools.parser.SWFParserHelpers.parseFlag;
 import static tv.porst.swfretools.parser.SWFParserHelpers.parseFlagIf;
 import static tv.porst.swfretools.parser.SWFParserHelpers.parseSBitsIf;
-import tv.porst.splib.io.Bits;
-import tv.porst.splib.io.Flag;
-import tv.porst.splib.io.SBits;
+import tv.porst.splib.binaryparser.UBits;
+import tv.porst.splib.binaryparser.Flag;
+import tv.porst.splib.binaryparser.Bits;
 import tv.porst.swfretools.parser.SWFBinaryParser;
 import tv.porst.swfretools.parser.SWFParserException;
 
@@ -32,11 +32,11 @@ public final class StraightEdgeRecordParser {
 
 		final Flag typeFlag = parseFlag(parser, 0x00006, fieldName + "::TypeFlag");
 		final Flag straightFlag = parseFlag(parser, 0x00006, fieldName + "::StraightFlag");
-		final Bits numBits = parseBits(parser, 4, 0x00006, fieldName + "::NumBits");
+		final UBits numBits = parseUBits(parser, 4, 0x00006, fieldName + "::NumBits");
 		final Flag generalLineFlag = parseFlag(parser, 0x00006, fieldName + "::GeneralLineFlag");
 		final Flag vertLineFlag =  parseFlagIf(parser, 0x00006, !generalLineFlag.value(), fieldName + "::VertLineFlag");
-		final SBits deltaX = parseSBitsIf(parser, 0x00006, numBits.value() + 2, generalLineFlag.value() || !vertLineFlag.value(), fieldName + "::DeltaX");
-		final SBits deltaY = parseSBitsIf(parser, 0x00006, numBits.value() + 2, generalLineFlag.value() || vertLineFlag.value(), fieldName + "::DeltaY");
+		final Bits deltaX = parseSBitsIf(parser, 0x00006, numBits.value() + 2, generalLineFlag.value() || !vertLineFlag.value(), fieldName + "::DeltaX");
+		final Bits deltaY = parseSBitsIf(parser, 0x00006, numBits.value() + 2, generalLineFlag.value() || vertLineFlag.value(), fieldName + "::DeltaY");
 
 		return new StraightEdgeRecord(typeFlag, straightFlag, numBits, generalLineFlag, vertLineFlag, deltaX, deltaY);
 	}

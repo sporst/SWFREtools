@@ -1,72 +1,123 @@
 package tv.porst.swfretools.parser;
 
-import tv.porst.splib.io.BinaryParserHelpers;
-import tv.porst.splib.io.Bits;
-import tv.porst.splib.io.Flag;
-import tv.porst.splib.io.Float16;
-import tv.porst.splib.io.Float32;
-import tv.porst.splib.io.INT16;
-import tv.porst.splib.io.INT32;
-import tv.porst.splib.io.PString;
-import tv.porst.splib.io.SBits;
-import tv.porst.splib.io.UINT16;
-import tv.porst.splib.io.UINT32;
-import tv.porst.splib.io.UINT8;
+import tv.porst.splib.binaryparser.AsciiString;
+import tv.porst.splib.binaryparser.BinaryParserHelpers;
+import tv.porst.splib.binaryparser.Bits;
+import tv.porst.splib.binaryparser.Flag;
+import tv.porst.splib.binaryparser.Float16;
+import tv.porst.splib.binaryparser.Float32;
+import tv.porst.splib.binaryparser.INT16;
+import tv.porst.splib.binaryparser.INT32;
+import tv.porst.splib.binaryparser.UBits;
+import tv.porst.splib.binaryparser.UINT16;
+import tv.porst.splib.binaryparser.UINT32;
+import tv.porst.splib.binaryparser.UINT8;
 import tv.porst.swfretools.parser.structures.ByteArray;
 
-public class SWFParserHelpers {
+/**
+ * Contains helper functions for SWF parsing.
+ * 
+ * @author sp
+ *
+ */
+public final class SWFParserHelpers {
 
-	public static void checkNull(final Object object, final String string) {
-		if (object == null) {
-			throw new IllegalArgumentException(String.format("%s variable must not be null"));
-		}
-
-	}
-
-	public static Bits parseBits(final SWFBinaryParser parser, final int numberOfBits, final int errorCode, final String fieldName) throws SWFParserException {
-		throwIfB(parser, numberOfBits, errorCode, fieldName);
-
-		return parser.readBits(numberOfBits);
-	}
-
-	public static Bits parseBitsIf(final SWFBinaryParser parser, final int numberOfBits, final int errorCode, final boolean condition, final String fieldName) throws SWFParserException {
-		if (condition) {
-			return parseBits(parser, numberOfBits, errorCode, fieldName);
-		}
-		else {
-			return null;
+	/**
+	 * Throws an exception if an argument is null.
+	 * 
+	 * @param value The value to check.
+	 * @param valueName The name of the value to check.
+	 */
+	public static void checkNull(final Object value, final String valueName) {
+		if (value == null) {
+			throw new IllegalArgumentException(String.format("%s argument must not be null"));
 		}
 	}
 
-	public static Bits parseBitsIf(final SWFBinaryParser parser, final int numberOfBits, final int errorCode, final Flag condition, final String fieldName) throws SWFParserException {
-		if (condition.value()) {
-			return parseBits(parser, numberOfBits, errorCode, fieldName);
-		}
-		else {
-			return null;
-		}
-	}
-
-	public static ByteArray parseByteArray(final SWFBinaryParser parser, final int numberOfBytes, final int errorCode, final String fieldName) throws SWFParserException {
+	/**
+	 * Parses a byte array.
+	 * 
+	 * @param parser The parser that provides the input stream.
+	 * @param numberOfBytes Number of bytes to add to the byte array.
+	 * @param errorCode Error code in case parsing fails.
+	 * @param fieldName Name of the field to parse.
+	 * 
+	 * @return The parsed byte array.
+	 * 
+	 * @throws SWFParserException Thrown if parsing failed.
+	 */
+	public static ByteArray parseByteArray(final SWFBinaryParser parser, final long numberOfBytes, final int errorCode, final String fieldName) throws SWFParserException {
 		throwIf(parser, numberOfBytes, errorCode, fieldName);
 
-		return null;
+		return new ByteArray(parser.getBytePosition() - (int) numberOfBytes, BinaryParserHelpers.readByteArray(parser, (int) numberOfBytes));
 	}
 
+	/**
+	 * Parses a byte array if a condition is true.
+	 * 
+	 * @param parser The parser that provides the input stream.
+	 * @param numberOfBytes Number of bytes to add to the byte array.
+	 * @param errorCode Error code in case parsing fails.
+	 * @param condition The condition to be true for the array to be parsed.
+	 * @param fieldName Name of the field to parse.
+	 * 
+	 * @return The parsed byte array.
+	 * 
+	 * @throws SWFParserException Thrown if parsing failed.
+	 */
 	public static ByteArray parseByteArrayIf(final SWFBinaryParser parser, final int numberOfBytes, final int errorCode, final boolean condition, final String fieldName) throws SWFParserException {
 		return condition ? parseByteArray(parser, numberOfBytes, errorCode, fieldName) : null;
 	}
 
+	/**
+	 * Parses a byte array if a condition is true.
+	 * 
+	 * @param parser The parser that provides the input stream.
+	 * @param numberOfBytes Number of bytes to add to the byte array.
+	 * @param errorCode Error code in case parsing fails.
+	 * @param condition The condition to be true for the array to be parsed.
+	 * @param fieldName Name of the field to parse.
+	 * 
+	 * @return The parsed byte array.
+	 * 
+	 * @throws SWFParserException Thrown if parsing failed.
+	 */
 	public static ByteArray parseByteArrayIf(final SWFBinaryParser parser, final int numberOfBytes, final int errorCode, final Flag condition, final String fieldName) throws SWFParserException {
+
+		checkNull(condition, "Condition");
+
 		return condition.value() ? parseByteArray(parser, numberOfBytes, errorCode, fieldName) : null;
 	}
 
+	/**
+	 * Parses a flag.
+	 * 
+	 * @param parser The parser that provides the input stream.
+	 * @param errorCode Error code in case parsing fails.
+	 * @param fieldName Name of the field to parse.
+	 * 
+	 * @return The parsed flag.
+	 * 
+	 * @throws SWFParserException Thrown if parsing failed.
+	 */
 	public static Flag parseFlag(final SWFBinaryParser parser, final int errorCode, final String fieldName) throws SWFParserException {
 		throwIfB(parser, 1, errorCode, fieldName);
 
 		return parser.readFlag();
 	}
 
+	/**
+	 * Parses a flag if a given condition is true.
+	 * 
+	 * @param parser The parser that provides the input stream.
+	 * @param errorCode Error code in case parsing fails.
+	 * @param condition The condition to be true for the flag to be parsed.
+	 * @param fieldName Name of the field to parse.
+	 * 
+	 * @return The parsed flag.
+	 * 
+	 * @throws SWFParserException Thrown if parsing failed.
+	 */
 	public static Flag parseFlagIf(final SWFBinaryParser parser, final int errorCode, final boolean condition, final String fieldName) throws SWFParserException {
 		return condition ? parseFlag(parser, errorCode, fieldName) : null;
 	}
@@ -98,16 +149,16 @@ public class SWFParserHelpers {
 
 	public static INT32 parseINT32(final SWFBinaryParser parser, final int errorCode, final String fieldName) throws SWFParserException {
 		throwIf(parser, INT32.LENGTH, errorCode, fieldName);
-		return parser.readSInt32();
+		return parser.readInt32();
 	}
 
-	public static SBits parseSBits(final SWFBinaryParser parser, final int numberOfBits, final int errorCode, final String fieldName) throws SWFParserException {
+	public static Bits parseSBits(final SWFBinaryParser parser, final int numberOfBits, final int errorCode, final String fieldName) throws SWFParserException {
 		throwIfB(parser, numberOfBits, errorCode, fieldName);
 
 		return parser.readSBits(numberOfBits);
 	}
 
-	public static SBits parseSBitsIf(final SWFBinaryParser parser, final int numberOfBits, final int errorCode, final boolean condition, final String fieldName) throws SWFParserException {
+	public static Bits parseSBitsIf(final SWFBinaryParser parser, final int numberOfBits, final int errorCode, final boolean condition, final String fieldName) throws SWFParserException {
 		if (condition) {
 			return parseSBits(parser, numberOfBits, errorCode, fieldName);
 		}
@@ -116,20 +167,54 @@ public class SWFParserHelpers {
 		}
 	}
 
-	public static PString parseString(final SWFBinaryParser parser, final int length, final int errorCode, final String fieldName) throws SWFParserException {
+	public static AsciiString parseString(final SWFBinaryParser parser, final int length, final int errorCode, final String fieldName) throws SWFParserException {
 		return null;
 	}
 
-	public static PString parseString(final SWFBinaryParser parser, final int errorCode, final String fieldName) throws SWFParserException {
+	public static AsciiString parseString(final SWFBinaryParser parser, final int errorCode, final String fieldName) throws SWFParserException {
 		return null;
 	}
 
-	public static PString parseStringIf(final SWFBinaryParser parser, final int errorCode, final boolean condition, final String fieldName) throws SWFParserException {
+	public static AsciiString parseStringIf(final SWFBinaryParser parser, final int errorCode, final boolean condition, final String fieldName) throws SWFParserException {
 		return condition ? parseString(parser, errorCode, fieldName) : null;
 	}
 
-	public static PString parseStringIf(final SWFBinaryParser parser, final int errorCode, final Flag condition, final String fieldName) throws SWFParserException {
+	public static AsciiString parseStringIf(final SWFBinaryParser parser, final int errorCode, final Flag condition, final String fieldName) throws SWFParserException {
 		return condition.value() ? parseString(parser, errorCode, fieldName) : null;
+	}
+
+	/**
+	 * Parses an unsigned bit field.
+	 * 
+	 * @param parser
+	 * @param numberOfBits
+	 * @param errorCode
+	 * @param fieldName
+	 * @return
+	 * @throws SWFParserException
+	 */
+	public static UBits parseUBits(final SWFBinaryParser parser, final int numberOfBits, final int errorCode, final String fieldName) throws SWFParserException {
+		throwIfB(parser, numberOfBits, errorCode, fieldName);
+
+		return parser.readBits(numberOfBits);
+	}
+
+	public static UBits parseUBitsIf(final SWFBinaryParser parser, final int numberOfBits, final int errorCode, final boolean condition, final String fieldName) throws SWFParserException {
+		if (condition) {
+			return parseUBits(parser, numberOfBits, errorCode, fieldName);
+		}
+		else {
+			return null;
+		}
+	}
+
+	public static UBits parseUBitsIf(final SWFBinaryParser parser, final int numberOfBits, final int errorCode, final Flag condition, final String fieldName) throws SWFParserException {
+		if (condition.value()) {
+			return parseUBits(parser, numberOfBits, errorCode, fieldName);
+		}
+		else {
+			return null;
+		}
 	}
 
 	public static UINT16 parseUINT16(final SWFBinaryParser parser, final int errorCode, final String fieldName) throws SWFParserException {
@@ -167,7 +252,7 @@ public class SWFParserHelpers {
 		return condition.value() ? parseUINT8(parser, errorCode, fieldName) : null;
 	}
 
-	private static void throwIf(final SWFBinaryParser parser, final int numberOfBytes, final int errorCode, final String fieldName) throws SWFParserException {
+	private static void throwIf(final SWFBinaryParser parser, final long numberOfBytes, final int errorCode, final String fieldName) throws SWFParserException {
 		if (!BinaryParserHelpers.hasBytesLeft(parser, numberOfBytes)) {
 			throw new SWFParserException(errorCode, parser.getBytePosition(), String.format("Read beyond file while parsing %s (%08X)", fieldName, parser.getBytePosition()));
 		}

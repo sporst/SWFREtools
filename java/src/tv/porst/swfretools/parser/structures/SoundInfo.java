@@ -3,11 +3,11 @@ package tv.porst.swfretools.parser.structures;
 import java.util.ArrayList;
 import java.util.List;
 
-import tv.porst.splib.io.Bits;
-import tv.porst.splib.io.Flag;
-import tv.porst.splib.io.UINT16;
-import tv.porst.splib.io.UINT32;
-import tv.porst.splib.io.UINT8;
+import tv.porst.splib.binaryparser.UBits;
+import tv.porst.splib.binaryparser.Flag;
+import tv.porst.splib.binaryparser.UINT16;
+import tv.porst.splib.binaryparser.UINT32;
+import tv.porst.splib.binaryparser.UINT8;
 
 /**
  * Represents a SoundInfo structure.
@@ -20,7 +20,7 @@ public final class SoundInfo {
 	/**
 	 * Reserved bits.
 	 */
-	private final Bits reserved;
+	private final UBits reserved;
 
 	/**
 	 * Stop the sound now flag.
@@ -93,7 +93,7 @@ public final class SoundInfo {
 	 * @param envPoints Sound Envelope point count.
 	 * @param envelopeRecords Sound Envelope records.
 	 */
-	public SoundInfo(final Bits reserved, final Flag syncStop, final Flag syncNoMultiple,
+	public SoundInfo(final UBits reserved, final Flag syncStop, final Flag syncNoMultiple,
 			final Flag hasEnvelope, final Flag hasLoops, final Flag hasOutPoint,
 			final Flag hasInPoint, final UINT32 inPoint, final UINT32 outPoint, final UINT16 loopCount,
 			final UINT8 envPoints, final List<SoundEnvelope> envelopeRecords) {
@@ -198,7 +198,7 @@ public final class SoundInfo {
 	 *
 	 * @return The reserved bits.
 	 */
-	public Bits getReserved() {
+	public UBits getReserved() {
 		return reserved;
 	}
 

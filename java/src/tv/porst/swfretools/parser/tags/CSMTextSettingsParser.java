@@ -1,13 +1,13 @@
 package tv.porst.swfretools.parser.tags;
 
-import static tv.porst.swfretools.parser.SWFParserHelpers.parseBits;
+import static tv.porst.swfretools.parser.SWFParserHelpers.parseUBits;
 import static tv.porst.swfretools.parser.SWFParserHelpers.parseFloat;
 import static tv.porst.swfretools.parser.SWFParserHelpers.parseUINT16;
 import static tv.porst.swfretools.parser.SWFParserHelpers.parseUINT8;
-import tv.porst.splib.io.Bits;
-import tv.porst.splib.io.Float32;
-import tv.porst.splib.io.UINT16;
-import tv.porst.splib.io.UINT8;
+import tv.porst.splib.binaryparser.UBits;
+import tv.porst.splib.binaryparser.Float32;
+import tv.porst.splib.binaryparser.UINT16;
+import tv.porst.splib.binaryparser.UINT8;
 import tv.porst.swfretools.parser.SWFBinaryParser;
 import tv.porst.swfretools.parser.SWFParserException;
 import tv.porst.swfretools.parser.structures.RecordHeader;
@@ -32,9 +32,9 @@ public final class CSMTextSettingsParser {
 	public static CSMTextSettingsTag parse(final RecordHeader header, final SWFBinaryParser parser) throws SWFParserException {
 
 		final UINT16 textId = parseUINT16(parser, 0x00006, "CSMTextSettings::TextId");
-		final Bits useFlashType = parseBits(parser, 2, 0x00006, "CSMTextSettings::UseFlashType");
-		final Bits gridFit = parseBits(parser, 3, 0x00006, "CSMTextSettings::GridFit");
-		final Bits reserved = parseBits(parser, 3, 0x00006, "CSMTextSettings::Reserved");
+		final UBits useFlashType = parseUBits(parser, 2, 0x00006, "CSMTextSettings::UseFlashType");
+		final UBits gridFit = parseUBits(parser, 3, 0x00006, "CSMTextSettings::GridFit");
+		final UBits reserved = parseUBits(parser, 3, 0x00006, "CSMTextSettings::Reserved");
 		final Float32 thickness = parseFloat(parser, 0x00006, "CSMTextSettings::Thickness");
 		final Float32 sharpness = parseFloat(parser, 0x00006, "CSMTextSettings::Sharpness");
 		final UINT8 reserved2 = parseUINT8(parser, 0x00006, "CSMTextSettings::Reserveds");

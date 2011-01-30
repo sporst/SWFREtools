@@ -1,7 +1,7 @@
 package tv.porst.swfretools.parser.structures;
 
-import tv.porst.splib.io.INT32;
-import tv.porst.splib.io.UINT16;
+import tv.porst.splib.binaryparser.INT32;
+import tv.porst.splib.binaryparser.UINT16;
 
 /**
  * Represents a RecordHeader structure.
@@ -67,7 +67,7 @@ public final class RecordHeader {
 	 * @return The offset of the tag in the file in bytes.
 	 */
 	public int getPosition() {
-		return tagCodeAndLength.getPosition();
+		return tagCodeAndLength.getBytePosition();
 	}
 
 	/**

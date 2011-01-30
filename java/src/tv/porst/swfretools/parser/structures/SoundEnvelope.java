@@ -1,7 +1,7 @@
 package tv.porst.swfretools.parser.structures;
 
-import tv.porst.splib.io.UINT16;
-import tv.porst.splib.io.UINT32;
+import tv.porst.splib.binaryparser.UINT16;
+import tv.porst.splib.binaryparser.UINT32;
 
 /**
  * Represents a SoundEnvelope structure.

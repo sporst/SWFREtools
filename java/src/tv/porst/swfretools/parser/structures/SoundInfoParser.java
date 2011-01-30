@@ -1,6 +1,6 @@
 package tv.porst.swfretools.parser.structures;
 
-import static tv.porst.swfretools.parser.SWFParserHelpers.parseBits;
+import static tv.porst.swfretools.parser.SWFParserHelpers.parseUBits;
 import static tv.porst.swfretools.parser.SWFParserHelpers.parseFlag;
 import static tv.porst.swfretools.parser.SWFParserHelpers.parseUINT16If;
 import static tv.porst.swfretools.parser.SWFParserHelpers.parseUINT32If;
@@ -9,11 +9,11 @@ import static tv.porst.swfretools.parser.SWFParserHelpers.parseUINT8If;
 import java.util.ArrayList;
 import java.util.List;
 
-import tv.porst.splib.io.Bits;
-import tv.porst.splib.io.Flag;
-import tv.porst.splib.io.UINT16;
-import tv.porst.splib.io.UINT32;
-import tv.porst.splib.io.UINT8;
+import tv.porst.splib.binaryparser.UBits;
+import tv.porst.splib.binaryparser.Flag;
+import tv.porst.splib.binaryparser.UINT16;
+import tv.porst.splib.binaryparser.UINT32;
+import tv.porst.splib.binaryparser.UINT8;
 import tv.porst.swfretools.parser.SWFBinaryParser;
 import tv.porst.swfretools.parser.SWFParserException;
 
@@ -37,7 +37,7 @@ public final class SoundInfoParser {
 	 */
 	public static SoundInfo parse(final SWFBinaryParser parser, final String fieldName) throws SWFParserException {
 
-		final Bits reserved = parseBits(parser, 2, 0x00006, fieldName + "::Reserved");
+		final UBits reserved = parseUBits(parser, 2, 0x00006, fieldName + "::Reserved");
 		final Flag syncStop = parseFlag(parser, 0x00006, fieldName + "::SyncStopY");
 		final Flag syncNoMultiple = parseFlag(parser, 0x00006, fieldName + "::SyncNoMultiple");
 		final Flag hasEnvelope = parseFlag(parser, 0x00006, fieldName + "::HasMultiple");

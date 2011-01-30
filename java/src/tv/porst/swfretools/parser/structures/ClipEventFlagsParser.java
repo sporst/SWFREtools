@@ -1,10 +1,10 @@
 package tv.porst.swfretools.parser.structures;
 
-import static tv.porst.swfretools.parser.SWFParserHelpers.parseBitsIf;
+import static tv.porst.swfretools.parser.SWFParserHelpers.parseUBitsIf;
 import static tv.porst.swfretools.parser.SWFParserHelpers.parseFlag;
 import static tv.porst.swfretools.parser.SWFParserHelpers.parseFlagIf;
-import tv.porst.splib.io.Bits;
-import tv.porst.splib.io.Flag;
+import tv.porst.splib.binaryparser.UBits;
+import tv.porst.splib.binaryparser.Flag;
 import tv.porst.swfretools.parser.SWFBinaryParser;
 import tv.porst.swfretools.parser.SWFParserException;
 
@@ -45,11 +45,11 @@ public final class ClipEventFlagsParser {
 		final Flag clipEventInitialize = parseFlag(parser, 0x00006, fieldName + "::ClipEventInitialize");
 		final Flag clipEventData = parseFlag(parser, 0x00006, fieldName + "::ClipEventData");
 
-		final Bits reserved = parseBitsIf(parser, 5, 0x00006, version >= 6, fieldName + "::Reserved");
+		final UBits reserved = parseUBitsIf(parser, 5, 0x00006, version >= 6, fieldName + "::Reserved");
 		final Flag clipEventConstruct = parseFlagIf(parser, 0x00006, version >= 6, fieldName + "::ClipEventConstruct");
 		final Flag clipEventKeyPress = parseFlagIf(parser, 0x00006, version >= 6, fieldName + "::ClipEventKeyPress");
 		final Flag clipEventDragOut = parseFlagIf(parser, 0x00006, version >= 6, fieldName + "::ClipEventDragOut");
-		final Bits reserved2 = parseBitsIf(parser, 8, 0x00006, version >= 6, fieldName + "::Reserved2");
+		final UBits reserved2 = parseUBitsIf(parser, 8, 0x00006, version >= 6, fieldName + "::Reserved2");
 
 		return new ClipEventFlags(clipEventKeyUp, clipEventKeyDown,
 				clipEventMouseUp, clipEventMouseDown, clipEventMouseMove,

@@ -3,9 +3,9 @@ package tv.porst.swfretools.parser.structures;
 import java.util.ArrayList;
 import java.util.List;
 
-import tv.porst.splib.io.Bits;
-import tv.porst.splib.io.Flag;
-import tv.porst.splib.io.UINT8;
+import tv.porst.splib.binaryparser.UBits;
+import tv.porst.splib.binaryparser.Flag;
+import tv.porst.splib.binaryparser.UINT8;
 
 /**
  * Represents a ZoneRecord structure.
@@ -28,7 +28,7 @@ public final class ZoneRecord {
 	/**
 	 * Reserved bits.
 	 */
-	private final Bits reserved;
+	private final UBits reserved;
 
 	/**
 	 * Set if there are Y alignment zones.
@@ -49,7 +49,7 @@ public final class ZoneRecord {
 	 * @param zoneMaskY Set if there are Y alignment zones.
 	 * @param zoneMaskX Set if there are X alignment zones.
 	 */
-	public ZoneRecord(final UINT8 numZoneData, final List<ZoneData> zoneData, final Bits reserved,
+	public ZoneRecord(final UINT8 numZoneData, final List<ZoneData> zoneData, final UBits reserved,
 			final Flag zoneMaskY, final Flag zoneMaskX) {
 
 		this.numZoneData = numZoneData;
@@ -73,7 +73,7 @@ public final class ZoneRecord {
 	 *
 	 * @return The reserved bits.
 	 */
-	public Bits getReserved() {
+	public UBits getReserved() {
 		return reserved;
 	}
 

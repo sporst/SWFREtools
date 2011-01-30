@@ -1,8 +1,8 @@
 package tv.porst.swfretools.parser.structures;
 
-import tv.porst.splib.io.Bits;
-import tv.porst.splib.io.Flag;
-import tv.porst.splib.io.SBits;
+import tv.porst.splib.binaryparser.UBits;
+import tv.porst.splib.binaryparser.Flag;
+import tv.porst.splib.binaryparser.Bits;
 
 /**
  * Represents a CxFormWithAlpha structure.
@@ -25,47 +25,47 @@ public final class CxFormWithAlpha {
 	/**
 	 * Bits in each field.
 	 */
-	private final Bits nBits;
+	private final UBits nBits;
 
 	/**
 	 * Red multiply value.
 	 */
-	private final SBits redMultTerm;
+	private final Bits redMultTerm;
 
 	/**
 	 * Green multiply value.
 	 */
-	private final SBits greenMultTerm;
+	private final Bits greenMultTerm;
 
 	/**
 	 * Blue multiply value.
 	 */
-	private final SBits blueMultTerm;
+	private final Bits blueMultTerm;
 
 	/**
 	 * Alpha multiply value.
 	 */
-	private final SBits alphaMultTerm;
+	private final Bits alphaMultTerm;
 
 	/**
 	 * Red addition value.
 	 */
-	private final SBits redAddTerm;
+	private final Bits redAddTerm;
 
 	/**
 	 * Green addition value.
 	 */
-	private final SBits greenAddTerm;
+	private final Bits greenAddTerm;
 
 	/**
 	 * Blue addition value.
 	 */
-	private final SBits blueAddTerm;
+	private final Bits blueAddTerm;
 
 	/**
 	 * Alpha addition value.
 	 */
-	private final SBits alphaAddTerm;
+	private final Bits alphaAddTerm;
 
 	/**
 	 * Creates a new FocalGradient object.
@@ -82,10 +82,10 @@ public final class CxFormWithAlpha {
 	 * @param blueAddTerm Blue addition value.
 	 * @param alphaAddTerm Alpha addition value.
 	 */
-	public CxFormWithAlpha(final Flag hasAddTerms, final Flag hasMultTerms, final Bits nBits,
-			final SBits redMultTerm, final SBits greenMultTerm, final SBits blueMultTerm,
-			final SBits alphaMultTerm, final SBits redAddTerm, final SBits greenAddTerm,
-			final SBits blueAddTerm, final SBits alphaAddTerm) {
+	public CxFormWithAlpha(final Flag hasAddTerms, final Flag hasMultTerms, final UBits nBits,
+			final Bits redMultTerm, final Bits greenMultTerm, final Bits blueMultTerm,
+			final Bits alphaMultTerm, final Bits redAddTerm, final Bits greenAddTerm,
+			final Bits blueAddTerm, final Bits alphaAddTerm) {
 
 		this.hasAddTerms = hasAddTerms;
 		this.hasMultTerms = hasMultTerms;
@@ -105,7 +105,7 @@ public final class CxFormWithAlpha {
 	 *
 	 * @return The alpha addition value.
 	 */
-	public SBits getAlphaAddTerm() {
+	public Bits getAlphaAddTerm() {
 		return alphaAddTerm;
 	}
 
@@ -114,7 +114,7 @@ public final class CxFormWithAlpha {
 	 *
 	 * @return The alpha multiply value.
 	 */
-	public SBits getAlphaMultTerm() {
+	public Bits getAlphaMultTerm() {
 		return alphaMultTerm;
 	}
 
@@ -123,7 +123,7 @@ public final class CxFormWithAlpha {
 	 *
 	 * @return The blue addition value.
 	 */
-	public SBits getBlueAddTerm() {
+	public Bits getBlueAddTerm() {
 		return blueAddTerm;
 	}
 
@@ -132,7 +132,7 @@ public final class CxFormWithAlpha {
 	 *
 	 * @return The blue multiply value.
 	 */
-	public SBits getBlueMultTerm() {
+	public Bits getBlueMultTerm() {
 		return blueMultTerm;
 	}
 
@@ -141,7 +141,7 @@ public final class CxFormWithAlpha {
 	 *
 	 * @return The green addition value.
 	 */
-	public SBits getGreenAddTerm() {
+	public Bits getGreenAddTerm() {
 		return greenAddTerm;
 	}
 
@@ -150,7 +150,7 @@ public final class CxFormWithAlpha {
 	 *
 	 * @return The green multiply value.
 	 */
-	public SBits getGreenMultTerm() {
+	public Bits getGreenMultTerm() {
 		return greenMultTerm;
 	}
 
@@ -177,7 +177,7 @@ public final class CxFormWithAlpha {
 	 *
 	 * @return The bits in each field.
 	 */
-	public Bits getnBits() {
+	public UBits getnBits() {
 		return nBits;
 	}
 
@@ -186,7 +186,7 @@ public final class CxFormWithAlpha {
 	 *
 	 * @return The red addition value.
 	 */
-	public SBits getRedAddTerm() {
+	public Bits getRedAddTerm() {
 		return redAddTerm;
 	}
 
@@ -195,7 +195,7 @@ public final class CxFormWithAlpha {
 	 *
 	 * @return The red multiply value.
 	 */
-	public SBits getRedMultTerm() {
+	public Bits getRedMultTerm() {
 		return redMultTerm;
 	}
 }

@@ -3,8 +3,8 @@ package tv.porst.swfretools.parser.tags;
 import java.util.ArrayList;
 import java.util.List;
 
-import tv.porst.splib.io.Bits;
-import tv.porst.splib.io.UINT16;
+import tv.porst.splib.binaryparser.UBits;
+import tv.porst.splib.binaryparser.UINT16;
 import tv.porst.swfretools.parser.structures.RecordHeader;
 import tv.porst.swfretools.parser.structures.ZoneRecord;
 
@@ -24,12 +24,12 @@ public final class DefineFontAlignZonesTag extends Tag {
 	/**
 	 * Font thickness hint.
 	 */
-	private final Bits csmTableHint;
+	private final UBits csmTableHint;
 
 	/**
 	 * Reserved bits.
 	 */
-	private final Bits reserved;
+	private final UBits reserved;
 
 	/**
 	 * Alignment zone information for each glyph.
@@ -46,7 +46,7 @@ public final class DefineFontAlignZonesTag extends Tag {
 	 * @param zoneTable Alignment zone information for each glyph.
 	 */
 	public DefineFontAlignZonesTag(final RecordHeader header, final UINT16 fontId,
-			final Bits csmTableHint, final Bits reserved, final List<ZoneRecord> zoneTable) {
+			final UBits csmTableHint, final UBits reserved, final List<ZoneRecord> zoneTable) {
 
 		super(header);
 
@@ -61,7 +61,7 @@ public final class DefineFontAlignZonesTag extends Tag {
 	 * 
 	 * @return The font thickness hint.
 	 */
-	public Bits getCsmTableHint() {
+	public UBits getCsmTableHint() {
 		return csmTableHint;
 	}
 
@@ -79,7 +79,7 @@ public final class DefineFontAlignZonesTag extends Tag {
 	 * 
 	 * @return The reserved bits.
 	 */
-	public Bits getReserved() {
+	public UBits getReserved() {
 		return reserved;
 	}
 

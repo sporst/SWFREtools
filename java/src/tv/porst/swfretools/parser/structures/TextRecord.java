@@ -3,11 +3,11 @@ package tv.porst.swfretools.parser.structures;
 import java.util.ArrayList;
 import java.util.List;
 
-import tv.porst.splib.io.Bits;
-import tv.porst.splib.io.Flag;
-import tv.porst.splib.io.INT16;
-import tv.porst.splib.io.UINT16;
-import tv.porst.splib.io.UINT8;
+import tv.porst.splib.binaryparser.UBits;
+import tv.porst.splib.binaryparser.Flag;
+import tv.porst.splib.binaryparser.INT16;
+import tv.porst.splib.binaryparser.UINT16;
+import tv.porst.splib.binaryparser.UINT8;
 
 /**
  * Represents a TextRecord structure.
@@ -25,7 +25,7 @@ public final class TextRecord {
 	/**
 	 * Reserved bits.
 	 */
-	private final Bits styleFlagsReserved;
+	private final UBits styleFlagsReserved;
 
 	/**
 	 * Font specified flag.
@@ -99,7 +99,7 @@ public final class TextRecord {
 	 * @param glyphCount Number of glyphs in record.
 	 * @param glyphEntries List of glyph entries.
 	 */
-	public TextRecord(final Flag textRecordType, final Bits styleFlagsReserved,
+	public TextRecord(final Flag textRecordType, final UBits styleFlagsReserved,
 			final Flag styleFlagsHasFont, final Flag styleFlagsHasColor,
 			final Flag styleFlagsHasYOffset, final Flag styleFlagsHasXOffset,
 			final UINT16 fontId, final RGB textColor, final INT16 xOffset, final INT16 yOffset,
@@ -188,7 +188,7 @@ public final class TextRecord {
 	 *
 	 * @return The reserved bits.
 	 */
-	public Bits getStyleFlagsReserved() {
+	public UBits getStyleFlagsReserved() {
 		return styleFlagsReserved;
 	}
 

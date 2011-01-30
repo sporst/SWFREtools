@@ -3,9 +3,9 @@ package tv.porst.swfretools.parser.tags;
 import java.util.ArrayList;
 import java.util.List;
 
-import tv.porst.splib.io.BinaryParser;
-import tv.porst.splib.io.INT32;
-import tv.porst.splib.io.UINT16;
+import tv.porst.splib.binaryparser.BinaryParser;
+import tv.porst.splib.binaryparser.INT32;
+import tv.porst.splib.binaryparser.UINT16;
 import tv.porst.swfretools.parser.ParserError;
 import tv.porst.swfretools.parser.SWFBinaryParser;
 import tv.porst.swfretools.parser.SWFParserException;
@@ -241,7 +241,7 @@ public final class TagParser {
 			case TagCodes.DefineBinaryData: return DefineBinaryDataParser.parse(header, parser);
 			}
 
-			errors.add(new ParserError(header.getTagAndLength().getPosition(), String.format("Tried to parse tag with unknown tag code 0x%02X", header.getTagCode())));
+			errors.add(new ParserError(header.getTagAndLength().getBytePosition(), String.format("Tried to parse tag with unknown tag code 0x%02X", header.getTagCode())));
 
 			// We do not know the type of this tag but we can try to continue parsing at the next tag
 			jumpToNextTag(parser, header);

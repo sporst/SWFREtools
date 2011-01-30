@@ -1,6 +1,6 @@
 package tv.porst.swfretools.parser.structures;
 
-import tv.porst.splib.io.UINT8;
+import tv.porst.splib.binaryparser.UINT8;
 
 /**
  * Represents a LineStyle structure.

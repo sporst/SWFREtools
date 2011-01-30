@@ -1,6 +1,6 @@
 package tv.porst.swfretools.parser.structures;
 
-import tv.porst.splib.io.BinaryParser;
+import tv.porst.splib.binaryparser.BinaryParser;
 
 public class EncodedU32Parser {
 

@@ -5,10 +5,10 @@ import java.io.File;
 import java.io.IOException;
 import java.util.zip.InflaterInputStream;
 
+import tv.porst.splib.binaryparser.UINT16;
+import tv.porst.splib.binaryparser.UINT32;
+import tv.porst.splib.binaryparser.UINT8;
 import tv.porst.splib.io.FileHelpers;
-import tv.porst.splib.io.UINT16;
-import tv.porst.splib.io.UINT32;
-import tv.porst.splib.io.UINT8;
 import tv.porst.swfretools.parser.structures.Rect;
 import tv.porst.swfretools.parser.structures.RectParser;
 import tv.porst.swfretools.parser.structures.SWFFile;
@@ -131,7 +131,7 @@ public final class SWFParser {
 			throw new IllegalArgumentException("Argument file must not be null");
 		}
 
-		final byte[] fileData = FileHelpers.readFromStream(file);
+		final byte[] fileData = FileHelpers.readFile(file);
 
 		if (fileData.length < 8) {
 			throw new SWFParserException(0x00002, 0, "Invalid SWF file: File too small");

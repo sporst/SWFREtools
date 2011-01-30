@@ -1,9 +1,9 @@
 package tv.porst.swfretools.parser.tags;
 
-import tv.porst.splib.io.Bits;
-import tv.porst.splib.io.Flag;
-import tv.porst.splib.io.PString;
-import tv.porst.splib.io.UINT16;
+import tv.porst.splib.binaryparser.AsciiString;
+import tv.porst.splib.binaryparser.UBits;
+import tv.porst.splib.binaryparser.Flag;
+import tv.porst.splib.binaryparser.UINT16;
 import tv.porst.swfretools.parser.structures.ByteArray;
 import tv.porst.swfretools.parser.structures.RecordHeader;
 
@@ -23,7 +23,7 @@ public final class DefineFont4Tag extends Tag {
 	/**
 	 * Reserved bit fields.
 	 */
-	private final Bits fontFlagsReserved;
+	private final UBits fontFlagsReserved;
 
 	/**
 	 * Font is embedded flag.
@@ -43,7 +43,7 @@ public final class DefineFont4Tag extends Tag {
 	/**
 	 * Name of the font.
 	 */
-	private final PString fontName;
+	private final AsciiString fontName;
 
 	/**
 	 * Font data.
@@ -63,8 +63,8 @@ public final class DefineFont4Tag extends Tag {
 	 * @param fontData Font data.
 	 */
 	public DefineFont4Tag(final RecordHeader header, final UINT16 fontId,
-			final Bits fontFlagsReserved, final Flag fontFlagsHasFontData,
-			final Flag fontFlagsItalic, final Flag fontFlagsBold, final PString fontName, final ByteArray fontData) {
+			final UBits fontFlagsReserved, final Flag fontFlagsHasFontData,
+			final Flag fontFlagsItalic, final Flag fontFlagsBold, final AsciiString fontName, final ByteArray fontData) {
 		super(header);
 
 		this.fontId = fontId;
@@ -117,7 +117,7 @@ public final class DefineFont4Tag extends Tag {
 	 * 
 	 * @return The reserved bit fields.
 	 */
-	public Bits getFontFlagsReserved() {
+	public UBits getFontFlagsReserved() {
 		return fontFlagsReserved;
 	}
 
@@ -135,7 +135,7 @@ public final class DefineFont4Tag extends Tag {
 	 * 
 	 * @return The name of the font.
 	 */
-	public PString getFontName() {
+	public AsciiString getFontName() {
 		return fontName;
 	}
 }

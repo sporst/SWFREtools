@@ -1,7 +1,7 @@
 package tv.porst.swfretools.parser.structures;
 
-import static tv.porst.swfretools.parser.SWFParserHelpers.parseBits;
-import tv.porst.splib.io.Bits;
+import static tv.porst.swfretools.parser.SWFParserHelpers.parseUBits;
+import tv.porst.splib.binaryparser.UBits;
 import tv.porst.swfretools.parser.SWFBinaryParser;
 import tv.porst.swfretools.parser.SWFParserException;
 
@@ -26,8 +26,8 @@ public final class BlurFilterParser {
 
 		final Fixed blurX = FixedParser.parse(parser, fieldName + "::BlurX");
 		final Fixed blurY = FixedParser.parse(parser, fieldName + "::BlurY");
-		final Bits passes = parseBits(parser, 5, 0x00006, fieldName + "::Passes");
-		final Bits reserved = parseBits(parser, 5, 0x00006, fieldName + "::Reserved");
+		final UBits passes = parseUBits(parser, 5, 0x00006, fieldName + "::Passes");
+		final UBits reserved = parseUBits(parser, 5, 0x00006, fieldName + "::Reserved");
 
 		return new BlurFilter(blurX, blurY, passes, reserved);
 	}

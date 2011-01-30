@@ -1,6 +1,6 @@
 package tv.porst.swfretools.parser.structures;
 
-import tv.porst.splib.io.Bits;
+import tv.porst.splib.binaryparser.UBits;
 
 /**
  * Represents a BlurFilter structure.
@@ -23,12 +23,12 @@ public final class BlurFilter {
 	/**
 	 * Number of blur passes.
 	 */
-	private final Bits passes;
+	private final UBits passes;
 
 	/**
 	 * Reserved bits.
 	 */
-	private final Bits reserved;
+	private final UBits reserved;
 
 	/**
 	 * Creates a new FocalGradient object.
@@ -38,7 +38,7 @@ public final class BlurFilter {
 	 * @param passes Number of blur passes.
 	 * @param reserved Reserved bits.
 	 */
-	public BlurFilter(final Fixed blurX, final Fixed blurY, final Bits passes, final Bits reserved) {
+	public BlurFilter(final Fixed blurX, final Fixed blurY, final UBits passes, final UBits reserved) {
 
 		this.blurX = blurX;
 		this.blurY = blurY;
@@ -69,7 +69,7 @@ public final class BlurFilter {
 	 *
 	 * @return The number of blur passes.
 	 */
-	public Bits getPasses() {
+	public UBits getPasses() {
 		return passes;
 	}
 
@@ -78,7 +78,7 @@ public final class BlurFilter {
 	 *
 	 * @return The reserved bits.
 	 */
-	public Bits getReserved() {
+	public UBits getReserved() {
 		return reserved;
 	}
 }

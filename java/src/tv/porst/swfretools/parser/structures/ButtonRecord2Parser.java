@@ -1,13 +1,13 @@
 package tv.porst.swfretools.parser.structures;
 
-import static tv.porst.swfretools.parser.SWFParserHelpers.parseBits;
+import static tv.porst.swfretools.parser.SWFParserHelpers.parseUBits;
 import static tv.porst.swfretools.parser.SWFParserHelpers.parseFlag;
 import static tv.porst.swfretools.parser.SWFParserHelpers.parseUINT16;
 import static tv.porst.swfretools.parser.SWFParserHelpers.parseUINT8If;
-import tv.porst.splib.io.Bits;
-import tv.porst.splib.io.Flag;
-import tv.porst.splib.io.UINT16;
-import tv.porst.splib.io.UINT8;
+import tv.porst.splib.binaryparser.UBits;
+import tv.porst.splib.binaryparser.Flag;
+import tv.porst.splib.binaryparser.UINT16;
+import tv.porst.splib.binaryparser.UINT8;
 import tv.porst.swfretools.parser.SWFBinaryParser;
 import tv.porst.swfretools.parser.SWFParserException;
 
@@ -30,7 +30,7 @@ public final class ButtonRecord2Parser {
 	 */
 	public static ButtonRecord2 parse(final SWFBinaryParser parser, final String fieldName) throws SWFParserException {
 
-		final Bits buttonReserved = parseBits(parser, 2, 0x00006, fieldName + "::ButtonReserved");
+		final UBits buttonReserved = parseUBits(parser, 2, 0x00006, fieldName + "::ButtonReserved");
 		final Flag buttonHasBlendMode = parseFlag(parser, 0x00006, fieldName + "::ButtonHasBlendMode");
 		final Flag buttonHasFilterList = parseFlag(parser, 0x00006, fieldName + "::ButtonHasFilterList");
 		final Flag buttonStateHitTest = parseFlag(parser, 0x00006, fieldName + "::ButtonStateHitTest");

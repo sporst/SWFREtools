@@ -1,8 +1,8 @@
 package tv.porst.swfretools.parser.tags;
 
-import tv.porst.splib.io.Bits;
-import tv.porst.splib.io.INT16;
-import tv.porst.splib.io.UINT16;
+import tv.porst.splib.binaryparser.UBits;
+import tv.porst.splib.binaryparser.INT16;
+import tv.porst.splib.binaryparser.UINT16;
 import tv.porst.swfretools.parser.structures.RecordHeader;
 
 /**
@@ -16,42 +16,42 @@ public final class SoundStreamHeadTag extends Tag {
 	/**
 	 * Reserved bits.
 	 */
-	private final Bits reserved;
+	private final UBits reserved;
 
 	/**
 	 * Playback sampling rate.
 	 */
-	private final Bits playbackSoundRate;
+	private final UBits playbackSoundRate;
 
 	/**
 	 * Playback sample size.
 	 */
-	private final Bits playbackSoundSize;
+	private final UBits playbackSoundSize;
 
 	/**
 	 * Number of playback channels.
 	 */
-	private final Bits playbackSoundType;
+	private final UBits playbackSoundType;
 
 	/**
 	 * Format of streaming sound data.
 	 */
-	private final Bits streamSoundCompression;
+	private final UBits streamSoundCompression;
 
 	/**
 	 * The sampling rate of the streaming sound data.
 	 */
-	private final Bits streamSoundRate;
+	private final UBits streamSoundRate;
 
 	/**
 	 * The sample size of the streaming sound data.
 	 */
-	private final Bits streamSoundSize;
+	private final UBits streamSoundSize;
 
 	/**
 	 * Number of channels in the streaming sound data.
 	 */
-	private final Bits streamSoundType;
+	private final UBits streamSoundType;
 
 	/**
 	 * Average number of samples in each SoundStreamBlock.
@@ -78,10 +78,10 @@ public final class SoundStreamHeadTag extends Tag {
 	 * @param streamSoundSampleCount Average number of samples in each SoundStreamBlock.
 	 * @param latencySeek Latency seek value.
 	 */
-	public SoundStreamHeadTag(final RecordHeader header, final Bits reserved,
-			final Bits playbackSoundRate, final Bits playbackSoundSize,
-			final Bits playbackSoundType, final Bits streamSoundCompression,
-			final Bits streamSoundRate, final Bits streamSoundSize, final Bits streamSoundType,
+	public SoundStreamHeadTag(final RecordHeader header, final UBits reserved,
+			final UBits playbackSoundRate, final UBits playbackSoundSize,
+			final UBits playbackSoundType, final UBits streamSoundCompression,
+			final UBits streamSoundRate, final UBits streamSoundSize, final UBits streamSoundType,
 			final UINT16 streamSoundSampleCount, final INT16 latencySeek) {
 		super(header);
 
@@ -111,7 +111,7 @@ public final class SoundStreamHeadTag extends Tag {
 	 * 
 	 * @return The playback sampling rate.
 	 */
-	public Bits getPlaybackSoundRate() {
+	public UBits getPlaybackSoundRate() {
 		return playbackSoundRate;
 	}
 
@@ -120,7 +120,7 @@ public final class SoundStreamHeadTag extends Tag {
 	 * 
 	 * @return The playback sample size.
 	 */
-	public Bits getPlaybackSoundSize() {
+	public UBits getPlaybackSoundSize() {
 		return playbackSoundSize;
 	}
 
@@ -129,7 +129,7 @@ public final class SoundStreamHeadTag extends Tag {
 	 * 
 	 * @return The number of playback channels.
 	 */
-	public Bits getPlaybackSoundType() {
+	public UBits getPlaybackSoundType() {
 		return playbackSoundType;
 	}
 
@@ -138,7 +138,7 @@ public final class SoundStreamHeadTag extends Tag {
 	 * 
 	 * @return The reserved bits.
 	 */
-	public Bits getReserved() {
+	public UBits getReserved() {
 		return reserved;
 	}
 
@@ -147,7 +147,7 @@ public final class SoundStreamHeadTag extends Tag {
 	 * 
 	 * @return The format of streaming sound data.
 	 */
-	public Bits getStreamSoundCompression() {
+	public UBits getStreamSoundCompression() {
 		return streamSoundCompression;
 	}
 
@@ -156,7 +156,7 @@ public final class SoundStreamHeadTag extends Tag {
 	 * 
 	 * @return The sampling rate of the streaming sound data.
 	 */
-	public Bits getStreamSoundRate() {
+	public UBits getStreamSoundRate() {
 		return streamSoundRate;
 	}
 
@@ -174,7 +174,7 @@ public final class SoundStreamHeadTag extends Tag {
 	 * 
 	 * @return The sample size of the streaming sound data.
 	 */
-	public Bits getStreamSoundSize() {
+	public UBits getStreamSoundSize() {
 		return streamSoundSize;
 	}
 
@@ -183,7 +183,7 @@ public final class SoundStreamHeadTag extends Tag {
 	 * 
 	 * @return The number of channels in the streaming sound data.
 	 */
-	public Bits getStreamSoundType() {
+	public UBits getStreamSoundType() {
 		return streamSoundType;
 	}
 }

@@ -8,11 +8,11 @@ import static tv.porst.swfretools.parser.SWFParserHelpers.parseUINT8;
 import java.util.ArrayList;
 import java.util.List;
 
-import tv.porst.splib.io.Bits;
-import tv.porst.splib.io.Flag;
-import tv.porst.splib.io.INT16;
-import tv.porst.splib.io.UINT16;
-import tv.porst.splib.io.UINT8;
+import tv.porst.splib.binaryparser.UBits;
+import tv.porst.splib.binaryparser.Flag;
+import tv.porst.splib.binaryparser.INT16;
+import tv.porst.splib.binaryparser.UINT16;
+import tv.porst.splib.binaryparser.UINT8;
 import tv.porst.swfretools.parser.SWFBinaryParser;
 import tv.porst.swfretools.parser.SWFParserException;
 
@@ -39,7 +39,7 @@ public final class TextRecord2Parser {
 	public static TextRecord2 parse(final SWFBinaryParser parser, final int glyphBits, final int advanceBits, final String fieldName) throws SWFParserException {
 
 		final Flag textRecordType = parseFlag(parser, 0x00006, fieldName + "::TextRecordType");
-		final Bits styleFlagsReserved = parser.readBits(3);
+		final UBits styleFlagsReserved = parser.readBits(3);
 		final Flag styleFlagsHasFont = parseFlag(parser, 0x00006, fieldName + "::StyleFlagsHasFont");
 		final Flag styleFlagsHasColor = parseFlag(parser, 0x00006, fieldName + "::StyleFlagsHasColor");
 		final Flag styleFlagsHasYOffset = parseFlag(parser, 0x00006, fieldName + "::StyleFlagsHasYOffset");

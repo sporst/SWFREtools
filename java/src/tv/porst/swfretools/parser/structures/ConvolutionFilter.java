@@ -1,9 +1,9 @@
 package tv.porst.swfretools.parser.structures;
 
-import tv.porst.splib.io.Bits;
-import tv.porst.splib.io.Flag;
-import tv.porst.splib.io.Float32;
-import tv.porst.splib.io.UINT8;
+import tv.porst.splib.binaryparser.UBits;
+import tv.porst.splib.binaryparser.Flag;
+import tv.porst.splib.binaryparser.Float32;
+import tv.porst.splib.binaryparser.UINT8;
 
 /**
  * Represents a ConvolutionFilter structure.
@@ -46,7 +46,7 @@ public final class ConvolutionFilter {
 	/**
 	 * Reserved bits.
 	 */
-	private final Bits reserved;
+	private final UBits reserved;
 
 	/**
 	 * Clamp mode flag.
@@ -72,7 +72,7 @@ public final class ConvolutionFilter {
 	 * @param preserveAlpha Preserve the alpha flag.
 	 */
 	public ConvolutionFilter(final UINT8 matrixX, final UINT8 matrixY, final Float32 divisor,
-			final Float32 bias, final Float32[] matrix, final RGBA defaultColor, final Bits reserved,
+			final Float32 bias, final Float32[] matrix, final RGBA defaultColor, final UBits reserved,
 			final Flag clamp, final Flag preserveAlpha) {
 
 		this.matrixX = matrixX;
@@ -163,7 +163,7 @@ public final class ConvolutionFilter {
 	 *
 	 * @return The reserved bits.
 	 */
-	public Bits getReserved() {
+	public UBits getReserved() {
 		return reserved;
 	}
 }

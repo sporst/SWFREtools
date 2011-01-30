@@ -1,12 +1,12 @@
 package tv.porst.swfretools.parser.structures;
 
-import static tv.porst.swfretools.parser.SWFParserHelpers.parseBits;
+import static tv.porst.swfretools.parser.SWFParserHelpers.parseUBits;
 import static tv.porst.swfretools.parser.SWFParserHelpers.parseFlag;
 import static tv.porst.swfretools.parser.SWFParserHelpers.parseUINT16;
 import static tv.porst.swfretools.parser.SWFParserHelpers.parseUINT16If;
-import tv.porst.splib.io.Bits;
-import tv.porst.splib.io.Flag;
-import tv.porst.splib.io.UINT16;
+import tv.porst.splib.binaryparser.UBits;
+import tv.porst.splib.binaryparser.Flag;
+import tv.porst.splib.binaryparser.UINT16;
 import tv.porst.swfretools.parser.SWFBinaryParser;
 import tv.porst.swfretools.parser.SWFParserException;
 
@@ -30,15 +30,15 @@ public final class LineStyle4Parser {
 	public static LineStyle4 parse(final SWFBinaryParser parser, final String fieldName) throws SWFParserException {
 
 		final UINT16 width = parseUINT16(parser, 0x00006, fieldName + "::Width");
-		final Bits startCapStyle = parseBits(parser, 2, 0x00006, fieldName + "::StartCapStyle");
-		final Bits joinStyle = parseBits(parser, 2, 0x00006, fieldName + "::JoinStyle");
+		final UBits startCapStyle = parseUBits(parser, 2, 0x00006, fieldName + "::StartCapStyle");
+		final UBits joinStyle = parseUBits(parser, 2, 0x00006, fieldName + "::JoinStyle");
 		final Flag hasFillFlag = parseFlag(parser, 0x00006, fieldName + "::HasFillFlag");
 		final Flag noHScaleFlag = parseFlag(parser, 0x00006, fieldName + "::NoHScaleFlag");
 		final Flag noVScaleFlag = parseFlag(parser, 0x00006, fieldName + "::NoVScaleFlag");
 		final Flag pixelHintingFlag = parseFlag(parser, 0x00006, fieldName + "::PixelHintingFlag");
-		final Bits reserved = parseBits(parser, 5, 0x00006, fieldName + "::Reserved");
+		final UBits reserved = parseUBits(parser, 5, 0x00006, fieldName + "::Reserved");
 		final Flag noClose = parseFlag(parser, 0x00006, fieldName + "::NoClose");
-		final Bits endCapStyle = parseBits(parser, 2, 0x00006, fieldName + "::EndCapStyle");
+		final UBits endCapStyle = parseUBits(parser, 2, 0x00006, fieldName + "::EndCapStyle");
 		final UINT16 miterLimitFactor = parseUINT16If(parser, 0x00006, joinStyle.value() == 2, fieldName + "::MiterLimitFactor");
 		final RGBA color = RGBAParser.parseIf(parser, !hasFillFlag.value(), fieldName + "::Color");
 		final FillStyle3 fillType = FillStyle3Parser.parseIf(parser, hasFillFlag, fieldName + "::FillType");

@@ -1,12 +1,12 @@
 package tv.porst.swfretools.parser.tags;
 
-import static tv.porst.swfretools.parser.SWFParserHelpers.parseBits;
+import static tv.porst.swfretools.parser.SWFParserHelpers.parseUBits;
 import static tv.porst.swfretools.parser.SWFParserHelpers.parseByteArray;
 import static tv.porst.swfretools.parser.SWFParserHelpers.parseUINT16;
 import static tv.porst.swfretools.parser.SWFParserHelpers.parseUINT32;
-import tv.porst.splib.io.Bits;
-import tv.porst.splib.io.UINT16;
-import tv.porst.splib.io.UINT32;
+import tv.porst.splib.binaryparser.UBits;
+import tv.porst.splib.binaryparser.UINT16;
+import tv.porst.splib.binaryparser.UINT32;
 import tv.porst.swfretools.parser.SWFBinaryParser;
 import tv.porst.swfretools.parser.SWFParserException;
 import tv.porst.swfretools.parser.structures.ByteArray;
@@ -32,10 +32,10 @@ public final class DefineSoundParser {
 	public static DefineSoundTag parse(final RecordHeader header, final SWFBinaryParser parser) throws SWFParserException {
 
 		final UINT16 soundId = parseUINT16(parser, 0x00006, "DefineSound::SoundId");
-		final Bits soundFormat = parseBits(parser, 4, 0x00006, "DefineSound::SoundFormat");
-		final Bits soundRate = parseBits(parser, 2, 0x00006, "DefineSound::SoundRate");
-		final Bits soundSize = parseBits(parser, 1, 0x00006, "DefineSound::SoundSize");
-		final Bits soundType = parseBits(parser, 1, 0x00006, "DefineSound::SoundType");
+		final UBits soundFormat = parseUBits(parser, 4, 0x00006, "DefineSound::SoundFormat");
+		final UBits soundRate = parseUBits(parser, 2, 0x00006, "DefineSound::SoundRate");
+		final UBits soundSize = parseUBits(parser, 1, 0x00006, "DefineSound::SoundSize");
+		final UBits soundType = parseUBits(parser, 1, 0x00006, "DefineSound::SoundType");
 		final UINT32 soundSampleCount = parseUINT32(parser, 0x00006, "DefineSound::SoundSampleCount");
 
 		final int remainingBytes = header.getNormalizedLength() - 2 - 1 - 4;

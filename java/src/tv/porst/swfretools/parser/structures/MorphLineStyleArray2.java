@@ -3,8 +3,8 @@ package tv.porst.swfretools.parser.structures;
 import java.util.ArrayList;
 import java.util.List;
 
-import tv.porst.splib.io.UINT16;
-import tv.porst.splib.io.UINT8;
+import tv.porst.splib.binaryparser.UINT16;
+import tv.porst.splib.binaryparser.UINT8;
 
 /**
  * Represents a MorphLineStyleArray2 structure.

@@ -1,8 +1,8 @@
 package tv.porst.swfretools.parser.tags;
 
-import tv.porst.splib.io.Flag;
-import tv.porst.splib.io.PString;
-import tv.porst.splib.io.UINT16;
+import tv.porst.splib.binaryparser.AsciiString;
+import tv.porst.splib.binaryparser.Flag;
+import tv.porst.splib.binaryparser.UINT16;
 import tv.porst.swfretools.parser.structures.ClipActions;
 import tv.porst.swfretools.parser.structures.CxFormWithAlpha;
 import tv.porst.swfretools.parser.structures.Matrix;
@@ -84,7 +84,7 @@ public final class PlaceObject2Tag extends Tag {
 	/**
 	 * Name of character.
 	 */
-	private final PString name;
+	private final AsciiString name;
 
 	/**
 	 * Clip depth.
@@ -122,7 +122,7 @@ public final class PlaceObject2Tag extends Tag {
 			final Flag placeFlagHasRatio, final Flag placeFlagHasColorTransform,
 			final Flag placeFlagHasMatrix, final Flag placeFlagHasCharacter,
 			final Flag placeFlagHasMove, final UINT16 depth, final UINT16 characterId, final Matrix matrix,
-			final CxFormWithAlpha colorTransform, final UINT16 ratio, final PString name,
+			final CxFormWithAlpha colorTransform, final UINT16 ratio, final AsciiString name,
 			final UINT16 clipDepth, final ClipActions clipActions) {
 
 		super(header);
@@ -204,7 +204,7 @@ public final class PlaceObject2Tag extends Tag {
 	 * 
 	 * @return The name of character.
 	 */
-	public PString getName() {
+	public AsciiString getName() {
 		return name;
 	}
 

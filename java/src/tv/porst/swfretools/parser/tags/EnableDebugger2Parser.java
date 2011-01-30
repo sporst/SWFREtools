@@ -2,8 +2,8 @@ package tv.porst.swfretools.parser.tags;
 
 import static tv.porst.swfretools.parser.SWFParserHelpers.parseString;
 import static tv.porst.swfretools.parser.SWFParserHelpers.parseUINT16;
-import tv.porst.splib.io.PString;
-import tv.porst.splib.io.UINT16;
+import tv.porst.splib.binaryparser.AsciiString;
+import tv.porst.splib.binaryparser.UINT16;
 import tv.porst.swfretools.parser.SWFBinaryParser;
 import tv.porst.swfretools.parser.SWFParserException;
 import tv.porst.swfretools.parser.structures.RecordHeader;
@@ -28,7 +28,7 @@ public final class EnableDebugger2Parser {
 	public static EnableDebugger2Tag parse(final RecordHeader header, final SWFBinaryParser parser) throws SWFParserException {
 
 		final UINT16 reserved = parseUINT16(parser, 0x00006, "EnableDebugger2::Reserved");
-		final PString password = parseString(parser, 0x00006, "EnableDebugger2::Reserved");
+		final AsciiString password = parseString(parser, 0x00006, "EnableDebugger2::Reserved");
 
 		return new EnableDebugger2Tag(header, reserved, password);
 	}

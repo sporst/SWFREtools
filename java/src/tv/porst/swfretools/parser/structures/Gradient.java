@@ -3,7 +3,7 @@ package tv.porst.swfretools.parser.structures;
 import java.util.ArrayList;
 import java.util.List;
 
-import tv.porst.splib.io.Bits;
+import tv.porst.splib.binaryparser.UBits;
 
 /**
  * Represents a Gradient structure.
@@ -16,17 +16,17 @@ public final class Gradient implements IGradient {
 	/**
 	 * Spread mode.
 	 */
-	private final Bits spreadMode;
+	private final UBits spreadMode;
 
 	/**
 	 * Interpolation mode.
 	 */
-	private final Bits interpolationMode;
+	private final UBits interpolationMode;
 
 	/**
 	 * Number of gradient records.
 	 */
-	private final Bits numGradients;
+	private final UBits numGradients;
 
 	/**
 	 * Gradient records.
@@ -41,7 +41,7 @@ public final class Gradient implements IGradient {
 	 * @param numGradients Number of gradient records.
 	 * @param gradientRecords Gradient records.
 	 */
-	public Gradient(final Bits spreadMode, final Bits interpolationMode, final Bits numGradients,
+	public Gradient(final UBits spreadMode, final UBits interpolationMode, final UBits numGradients,
 			final List<GradRecord> gradientRecords) {
 
 		this.spreadMode = spreadMode;
@@ -65,7 +65,7 @@ public final class Gradient implements IGradient {
 	 *
 	 * @return The interpolation mode.
 	 */
-	public Bits getInterpolationMode() {
+	public UBits getInterpolationMode() {
 		return interpolationMode;
 	}
 
@@ -74,7 +74,7 @@ public final class Gradient implements IGradient {
 	 *
 	 * @return The number of gradient records.
 	 */
-	public Bits getNumGradients() {
+	public UBits getNumGradients() {
 		return numGradients;
 	}
 
@@ -83,7 +83,7 @@ public final class Gradient implements IGradient {
 	 *
 	 * @return The spread mode.
 	 */
-	public Bits getSpreadMode() {
+	public UBits getSpreadMode() {
 		return spreadMode;
 	}
 }

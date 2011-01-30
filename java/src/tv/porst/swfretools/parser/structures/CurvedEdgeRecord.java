@@ -1,8 +1,8 @@
 package tv.porst.swfretools.parser.structures;
 
-import tv.porst.splib.io.Bits;
-import tv.porst.splib.io.Flag;
-import tv.porst.splib.io.SBits;
+import tv.porst.splib.binaryparser.UBits;
+import tv.porst.splib.binaryparser.Flag;
+import tv.porst.splib.binaryparser.Bits;
 
 /**
  * Represents a CurvedEdgeRecord structure.
@@ -25,27 +25,27 @@ public final class CurvedEdgeRecord implements ShapeRecord, Shape3Record {
 	/**
 	 * Number of bits per value.
 	 */
-	private final Bits numBits;
+	private final UBits numBits;
 
 	/**
 	 * X control point change.
 	 */
-	private final SBits controlDeltaX;
+	private final Bits controlDeltaX;
 
 	/**
 	 * Y control point change.
 	 */
-	private final SBits controlDeltaY;
+	private final Bits controlDeltaY;
 
 	/**
 	 * X anchor point change.
 	 */
-	private final SBits anchorDeltaX;
+	private final Bits anchorDeltaX;
 
 	/**
 	 * Y anchor point change.
 	 */
-	private final SBits anchorDeltaY;
+	private final Bits anchorDeltaY;
 
 	/**
 	 * Creates a new CurvedEdgeRecord object.
@@ -59,8 +59,8 @@ public final class CurvedEdgeRecord implements ShapeRecord, Shape3Record {
 	 * @param anchorDeltaY Y anchor point change.
 	 */
 	public CurvedEdgeRecord(final Flag typeFlag, final Flag straightFlag,
-			final Bits numBits, final SBits controlDeltaX, final SBits controlDeltaY,
-			final SBits anchorDeltaX, final SBits anchorDeltaY) {
+			final UBits numBits, final Bits controlDeltaX, final Bits controlDeltaY,
+			final Bits anchorDeltaX, final Bits anchorDeltaY) {
 
 		this.typeFlag = typeFlag;
 		this.straightFlag = straightFlag;
@@ -76,7 +76,7 @@ public final class CurvedEdgeRecord implements ShapeRecord, Shape3Record {
 	 *
 	 * @return The X anchor point change.
 	 */
-	public SBits getAnchorDeltaX() {
+	public Bits getAnchorDeltaX() {
 		return anchorDeltaX;
 	}
 
@@ -85,7 +85,7 @@ public final class CurvedEdgeRecord implements ShapeRecord, Shape3Record {
 	 *
 	 * @return The Y anchor point change.
 	 */
-	public SBits getAnchorDeltaY() {
+	public Bits getAnchorDeltaY() {
 		return anchorDeltaY;
 	}
 
@@ -94,7 +94,7 @@ public final class CurvedEdgeRecord implements ShapeRecord, Shape3Record {
 	 *
 	 * @return The X control point change.
 	 */
-	public SBits getControlDeltaX() {
+	public Bits getControlDeltaX() {
 		return controlDeltaX;
 	}
 
@@ -103,7 +103,7 @@ public final class CurvedEdgeRecord implements ShapeRecord, Shape3Record {
 	 *
 	 * @return The Y control point change.
 	 */
-	public SBits getControlDeltaY() {
+	public Bits getControlDeltaY() {
 		return controlDeltaY;
 	}
 
@@ -112,7 +112,7 @@ public final class CurvedEdgeRecord implements ShapeRecord, Shape3Record {
 	 *
 	 * @return The number of bits per value.
 	 */
-	public Bits getNumBits() {
+	public UBits getNumBits() {
 		return numBits;
 	}
 

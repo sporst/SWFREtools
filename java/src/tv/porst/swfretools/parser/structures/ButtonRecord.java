@@ -1,8 +1,8 @@
 package tv.porst.swfretools.parser.structures;
 
-import tv.porst.splib.io.Bits;
-import tv.porst.splib.io.Flag;
-import tv.porst.splib.io.UINT16;
+import tv.porst.splib.binaryparser.UBits;
+import tv.porst.splib.binaryparser.Flag;
+import tv.porst.splib.binaryparser.UINT16;
 
 /**
  * Represents a ButtonRecord structure.
@@ -15,7 +15,7 @@ public final class ButtonRecord {
 	/**
 	 * Reserved bits.
 	 */
-	private final Bits buttonReserved;
+	private final UBits buttonReserved;
 
 	/**
 	 * Blend mode flag.
@@ -76,7 +76,7 @@ public final class ButtonRecord {
 	 * @param placeDepth Depth at which to place the character.
 	 * @param placeMatrix Transformation matrix for character placement.
 	 */
-	public ButtonRecord(final Bits buttonReserved, final Flag buttonHasBlendMode,
+	public ButtonRecord(final UBits buttonReserved, final Flag buttonHasBlendMode,
 			final Flag buttonHasFilterList, final Flag buttonStateHitTest,
 			final Flag buttonStateDown, final Flag buttonStateOver,
 			final Flag buttonStateUp, final UINT16 characterId, final UINT16 placeDepth,
@@ -117,7 +117,7 @@ public final class ButtonRecord {
 	 *
 	 * @return The reserved bits.
 	 */
-	public Bits getButtonReserved() {
+	public UBits getButtonReserved() {
 		return buttonReserved;
 	}
 

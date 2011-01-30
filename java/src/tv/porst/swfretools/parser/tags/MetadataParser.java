@@ -1,7 +1,7 @@
 package tv.porst.swfretools.parser.tags;
 
 import static tv.porst.swfretools.parser.SWFParserHelpers.parseString;
-import tv.porst.splib.io.PString;
+import tv.porst.splib.binaryparser.AsciiString;
 import tv.porst.swfretools.parser.SWFBinaryParser;
 import tv.porst.swfretools.parser.SWFParserException;
 import tv.porst.swfretools.parser.structures.RecordHeader;
@@ -25,7 +25,7 @@ public final class MetadataParser {
 	 */
 	public static MetadataTag parse(final RecordHeader header, final SWFBinaryParser parser) throws SWFParserException {
 
-		final PString metadata = parseString(parser, 0x00006, "Metadata::Metadata");
+		final AsciiString metadata = parseString(parser, 0x00006, "Metadata::Metadata");
 
 		return new MetadataTag(header, metadata);
 	}

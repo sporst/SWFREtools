@@ -1,6 +1,6 @@
 package tv.porst.swfretools.parser.structures;
 
-import tv.porst.splib.io.PString;
+import tv.porst.splib.binaryparser.AsciiString;
 
 /**
  * Represents a SceneName structure.
@@ -18,7 +18,7 @@ public final class SceneName {
 	/**
 	 * Name of the scene.
 	 */
-	private final PString name;
+	private final AsciiString name;
 
 	/**
 	 * Creates a new SceneName object.
@@ -26,7 +26,7 @@ public final class SceneName {
 	 * @param offset Frame offset of the scene.
 	 * @param name Name of the scene.
 	 */
-	public SceneName(final EncodedU32 offset, final PString name) {
+	public SceneName(final EncodedU32 offset, final AsciiString name) {
 
 		this.offset = offset;
 		this.name = name;
@@ -38,7 +38,7 @@ public final class SceneName {
 	 *
 	 * @return The name of the scene.
 	 */
-	public PString getName() {
+	public AsciiString getName() {
 		return name;
 	}
 

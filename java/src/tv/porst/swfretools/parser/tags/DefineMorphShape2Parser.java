@@ -1,13 +1,13 @@
 package tv.porst.swfretools.parser.tags;
 
-import static tv.porst.swfretools.parser.SWFParserHelpers.parseBits;
+import static tv.porst.swfretools.parser.SWFParserHelpers.parseUBits;
 import static tv.porst.swfretools.parser.SWFParserHelpers.parseFlag;
 import static tv.porst.swfretools.parser.SWFParserHelpers.parseUINT16;
 import static tv.porst.swfretools.parser.SWFParserHelpers.parseUINT32;
-import tv.porst.splib.io.Bits;
-import tv.porst.splib.io.Flag;
-import tv.porst.splib.io.UINT16;
-import tv.porst.splib.io.UINT32;
+import tv.porst.splib.binaryparser.UBits;
+import tv.porst.splib.binaryparser.Flag;
+import tv.porst.splib.binaryparser.UINT16;
+import tv.porst.splib.binaryparser.UINT32;
 import tv.porst.swfretools.parser.SWFBinaryParser;
 import tv.porst.swfretools.parser.SWFParserException;
 import tv.porst.swfretools.parser.structures.MorphFillStyleArray;
@@ -44,7 +44,7 @@ public final class DefineMorphShape2Parser {
 		final Rect endBounds = RectParser.parse(parser, "DefineMorphShape2::EndBounds");
 		final Rect startEdgeBounds = RectParser.parse(parser, "DefineMorphShape2::StartEdgeBounds");
 		final Rect endEdgeBounds = RectParser.parse(parser, "DefineMorphShape2::EndEdgeBounds");
-		final Bits reserved = parseBits(parser, 6, 0x00006, "DefineMorphShape::Reserved");
+		final UBits reserved = parseUBits(parser, 6, 0x00006, "DefineMorphShape::Reserved");
 		final Flag useNonScalingStrokes = parseFlag(parser, 0x00006, "DefineMorphShape2::UseNonScalingStrokes");
 		final Flag useScalingStrokes = parseFlag(parser, 0x00006, "DefineMorphShape2::UseScalingStrokes");
 		final UINT32 offset = parseUINT32(parser, 0x00006, "DefineMorphShape2::Offset");

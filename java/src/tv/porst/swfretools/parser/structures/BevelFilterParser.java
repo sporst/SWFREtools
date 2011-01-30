@@ -1,9 +1,9 @@
 package tv.porst.swfretools.parser.structures;
 
-import static tv.porst.swfretools.parser.SWFParserHelpers.parseBits;
+import static tv.porst.swfretools.parser.SWFParserHelpers.parseUBits;
 import static tv.porst.swfretools.parser.SWFParserHelpers.parseFlag;
-import tv.porst.splib.io.Bits;
-import tv.porst.splib.io.Flag;
+import tv.porst.splib.binaryparser.UBits;
+import tv.porst.splib.binaryparser.Flag;
 import tv.porst.swfretools.parser.SWFBinaryParser;
 import tv.porst.swfretools.parser.SWFParserException;
 
@@ -37,7 +37,7 @@ public final class BevelFilterParser {
 		final Flag knockout = parseFlag(parser, 0x00006, fieldName + "::Knockout");
 		final Flag compositeSource = parseFlag(parser, 0x00006, fieldName + "::CompositeSource");
 		final Flag onTop = parseFlag(parser, 0x00006, fieldName + "::OnTop");
-		final Bits passes = parseBits(parser, 4, 0x00006, fieldName + "::Passes");
+		final UBits passes = parseUBits(parser, 4, 0x00006, fieldName + "::Passes");
 
 		return new BevelFilter(shadowColor, highlightColor, blurX, blurY, angle, distance, strength, innerShadow, knockout, compositeSource, onTop, passes);
 	}

@@ -3,12 +3,12 @@ package tv.porst.swfretools.parser.tags;
 import java.util.ArrayList;
 import java.util.List;
 
-import tv.porst.splib.io.Flag;
-import tv.porst.splib.io.INT16;
-import tv.porst.splib.io.IParsedINTElement;
-import tv.porst.splib.io.PString;
-import tv.porst.splib.io.UINT16;
-import tv.porst.splib.io.UINT8;
+import tv.porst.splib.binaryparser.AsciiString;
+import tv.porst.splib.binaryparser.Flag;
+import tv.porst.splib.binaryparser.INT16;
+import tv.porst.splib.binaryparser.IParsedINTElement;
+import tv.porst.splib.binaryparser.UINT16;
+import tv.porst.splib.binaryparser.UINT8;
 import tv.porst.swfretools.parser.structures.KerningRecord;
 import tv.porst.swfretools.parser.structures.RecordHeader;
 import tv.porst.swfretools.parser.structures.Rect;
@@ -45,7 +45,7 @@ public final class DefineFont2Tag extends Tag {
 	/**
 	 * Name of the font.
 	 */
-	private final PString fontName;
+	private final AsciiString fontName;
 
 	/**
 	 * Font is small flag.
@@ -166,7 +166,7 @@ public final class DefineFont2Tag extends Tag {
 			final Flag fontFlagsSmallText, final Flag fontFlagsANSI,
 			final Flag fontFlagsWideOffsets, final Flag fontFlagsWideCodes,
 			final Flag fontFlagsItalic, final Flag fontFlagsBold, final UINT8 languageCode,
-			final UINT8 fontNameLen, final PString fontName, final UINT16 numGlyphs,
+			final UINT8 fontNameLen, final AsciiString fontName, final UINT16 numGlyphs,
 			final List<IParsedINTElement> offsetTable, final IParsedINTElement codeTableOffset,
 			final List<Shape> glyphShapeTable, final List<IParsedINTElement> codeTable,
 			final INT16 fontAscent, final INT16 fontDescent, final INT16 fontLeading,
@@ -348,7 +348,7 @@ public final class DefineFont2Tag extends Tag {
 	 * 
 	 * @return The name of the font.
 	 */
-	public PString getFontName() {
+	public AsciiString getFontName() {
 		return fontName;
 	}
 

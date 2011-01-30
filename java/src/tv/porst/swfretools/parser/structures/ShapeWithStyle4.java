@@ -1,6 +1,6 @@
 package tv.porst.swfretools.parser.structures;
 
-import tv.porst.splib.io.Bits;
+import tv.porst.splib.binaryparser.UBits;
 
 /**
  * Represents a ShapeWithStyle4 structure.
@@ -23,12 +23,12 @@ public final class ShapeWithStyle4 {
 	/**
 	 * Number of fill index bits.
 	 */
-	private final Bits numFillBits;
+	private final UBits numFillBits;
 
 	/**
 	 * Number of line index bits.
 	 */
-	private final Bits numLineBits;
+	private final UBits numLineBits;
 
 	/**
 	 * Shape records.
@@ -45,7 +45,7 @@ public final class ShapeWithStyle4 {
 	 * @param shapeRecord Shape records.
 	 */
 	public ShapeWithStyle4(final FillStyle3Array fillStyles, final LineStyle4Array lineStyles,
-			final Bits numFillBits, final Bits numLineBits, final ShapeRecord shapeRecord) {
+			final UBits numFillBits, final UBits numLineBits, final ShapeRecord shapeRecord) {
 
 		this.fillStyles = fillStyles;
 		this.lineStyles = lineStyles;
@@ -78,7 +78,7 @@ public final class ShapeWithStyle4 {
 	 *
 	 * @return The number of fill index bits.
 	 */
-	public Bits getNumFillBits() {
+	public UBits getNumFillBits() {
 		return numFillBits;
 	}
 
@@ -87,7 +87,7 @@ public final class ShapeWithStyle4 {
 	 *
 	 * @return The number of line index bits.
 	 */
-	public Bits getNumLineBits() {
+	public UBits getNumLineBits() {
 		return numLineBits;
 	}
 

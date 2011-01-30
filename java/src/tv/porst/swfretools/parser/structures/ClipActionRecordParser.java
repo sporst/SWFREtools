@@ -5,8 +5,8 @@ import static tv.porst.swfretools.parser.SWFParserHelpers.parseUINT8If;
 
 import java.util.List;
 
-import tv.porst.splib.io.UINT32;
-import tv.porst.splib.io.UINT8;
+import tv.porst.splib.binaryparser.UINT32;
+import tv.porst.splib.binaryparser.UINT8;
 import tv.porst.swfretools.parser.SWFBinaryParser;
 import tv.porst.swfretools.parser.SWFParserException;
 import tv.porst.swfretools.parser.actions.Action;

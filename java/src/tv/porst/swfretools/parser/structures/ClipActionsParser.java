@@ -6,9 +6,9 @@ import static tv.porst.swfretools.parser.SWFParserHelpers.parseUINT32;
 import java.util.ArrayList;
 import java.util.List;
 
-import tv.porst.splib.io.Flag;
-import tv.porst.splib.io.IParsedINTElement;
-import tv.porst.splib.io.UINT16;
+import tv.porst.splib.binaryparser.Flag;
+import tv.porst.splib.binaryparser.IParsedINTElement;
+import tv.porst.splib.binaryparser.UINT16;
 import tv.porst.swfretools.parser.SWFBinaryParser;
 import tv.porst.swfretools.parser.SWFParserException;
 
@@ -39,7 +39,7 @@ public final class ClipActionsParser {
 
 		do {
 
-			if (parser.peekUInt16() == 0) {
+			if (parser.peekUInt16().value() == 0) {
 				break;
 			}
 

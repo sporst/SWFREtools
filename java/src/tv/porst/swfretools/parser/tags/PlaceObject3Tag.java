@@ -1,11 +1,10 @@
 package tv.porst.swfretools.parser.tags;
 
-import tv.porst.splib.io.Bits;
-import tv.porst.splib.io.Flag;
-import tv.porst.splib.io.PString;
-import tv.porst.splib.io.UINT16;
-import tv.porst.splib.io.UINT8;
-import tv.porst.swfretools.parser.SWFParserHelpers;
+import tv.porst.splib.binaryparser.AsciiString;
+import tv.porst.splib.binaryparser.Flag;
+import tv.porst.splib.binaryparser.UBits;
+import tv.porst.splib.binaryparser.UINT16;
+import tv.porst.splib.binaryparser.UINT8;
 import tv.porst.swfretools.parser.structures.ClipActions;
 import tv.porst.swfretools.parser.structures.CxFormWithAlpha;
 import tv.porst.swfretools.parser.structures.FilterList;
@@ -63,7 +62,7 @@ public final class PlaceObject3Tag extends Tag {
 	/**
 	 * Reserved bits.
 	 */
-	private final Bits reserved;
+	private final UBits reserved;
 
 	/**
 	 * Has class name or character ID of bitmap to place.
@@ -93,7 +92,7 @@ public final class PlaceObject3Tag extends Tag {
 	/**
 	 * Name of the class to place.
 	 */
-	private final PString className;
+	private final AsciiString className;
 
 	/**
 	 * ID of the character to place.
@@ -118,7 +117,7 @@ public final class PlaceObject3Tag extends Tag {
 	/**
 	 * Name of character.
 	 */
-	private final PString name;
+	private final AsciiString name;
 
 	/**
 	 * Clip depth.
@@ -181,29 +180,14 @@ public final class PlaceObject3Tag extends Tag {
 			final Flag placeFlagHasName, final Flag placeFlagHasRatio,
 			final Flag placeFlagHasColorTransform, final Flag placeFlagHasMatrix,
 			final Flag placeFlagHasCharacter, final Flag placeFlagHasMove,
-			final Bits reserved, final Flag placeFlagHasImage, final Flag placeFlagHasClassName,
+			final UBits reserved, final Flag placeFlagHasImage, final Flag placeFlagHasClassName,
 			final Flag placeFlagHasCacheAsBitmap, final Flag placeFlagHasBlendMode,
-			final Flag placeFlagHasFilterList, final UINT16 depth, final PString className, final UINT16 characterId,
+			final Flag placeFlagHasFilterList, final UINT16 depth, final AsciiString className, final UINT16 characterId,
 			final Matrix matrix, final CxFormWithAlpha colorTransform, final UINT16 ratio,
-			final PString name, final UINT16 clipDepth, final FilterList surfaceFilterList,
+			final AsciiString name, final UINT16 clipDepth, final FilterList surfaceFilterList,
 			final UINT8 blendMode, final UINT8 bitmapCache, final ClipActions clipActions) {
 
 		super(header);
-
-		SWFParserHelpers.checkNull(placeFlagHasClipActions, "PlaceFlagHasClipActions");
-		SWFParserHelpers.checkNull(placeFlagHasClipDepth, "PlaceFlagHasClipDepth");
-		SWFParserHelpers.checkNull(placeFlagHasName, "PlaceFlagHasName");
-		SWFParserHelpers.checkNull(placeFlagHasRatio, "PlaceFlagRatio");
-		SWFParserHelpers.checkNull(placeFlagHasColorTransform, "PlaceFlagHasColorTransform");
-		SWFParserHelpers.checkNull(placeFlagHasMatrix, "PlaceFlagHasMatrix");
-		SWFParserHelpers.checkNull(placeFlagHasCharacter, "PlaceFlagHasCharacter");
-		SWFParserHelpers.checkNull(placeFlagHasMove, "PlaceFlagHasMove");
-		SWFParserHelpers.checkNull(reserved, "Reserved");
-		SWFParserHelpers.checkNull(placeFlagHasImage, "PlaceFlagHasImage");
-		SWFParserHelpers.checkNull(placeFlagHasClassName, "PlaceFlagHasClassName");
-		SWFParserHelpers.checkNull(placeFlagHasCacheAsBitmap, "PlaceFlagHasCacheAsBitmap");
-		SWFParserHelpers.checkNull(placeFlagHasBlendMode, "PlaceFlagHasBlendMode");
-		SWFParserHelpers.checkNull(depth, "Depth");
 
 		this.placeFlagHasClipActions = placeFlagHasClipActions;
 		this.placeFlagHasClipDepth = placeFlagHasClipDepth;
@@ -264,7 +248,7 @@ public final class PlaceObject3Tag extends Tag {
 	 * 
 	 * @return The name of the class to place.
 	 */
-	public PString getClassName() {
+	public AsciiString getClassName() {
 		return className;
 	}
 
@@ -318,7 +302,7 @@ public final class PlaceObject3Tag extends Tag {
 	 * 
 	 * @return The name of character.
 	 */
-	public PString getName() {
+	public AsciiString getName() {
 		return name;
 	}
 
@@ -444,7 +428,7 @@ public final class PlaceObject3Tag extends Tag {
 	 * 
 	 * @return The reserved bits.
 	 */
-	public Bits getReserved() {
+	public UBits getReserved() {
 		return reserved;
 	}
 

@@ -1,8 +1,8 @@
 package tv.porst.swfretools.parser.structures;
 
-import tv.porst.splib.io.Bits;
-import tv.porst.splib.io.Flag;
-import tv.porst.splib.io.SBits;
+import tv.porst.splib.binaryparser.UBits;
+import tv.porst.splib.binaryparser.Flag;
+import tv.porst.splib.binaryparser.Bits;
 
 /**
  * Represents a StraightEdgeRecord structure.
@@ -25,7 +25,7 @@ public final class StraightEdgeRecord implements ShapeRecord, Shape3Record {
 	/**
 	 * Number of bits per value.
 	 */
-	private final Bits numBits;
+	private final UBits numBits;
 
 	/**
 	 * General line flag.
@@ -40,12 +40,12 @@ public final class StraightEdgeRecord implements ShapeRecord, Shape3Record {
 	/**
 	 * X delta.
 	 */
-	private final SBits deltaX;
+	private final Bits deltaX;
 
 	/**
 	 * Y delta.
 	 */
-	private final SBits deltaY;
+	private final Bits deltaY;
 
 	/**
 	 * Creates a new S-traightEdgeRecord object.
@@ -59,8 +59,8 @@ public final class StraightEdgeRecord implements ShapeRecord, Shape3Record {
 	 * @param deltaY Y delta.
 	 */
 	public StraightEdgeRecord(final Flag typeFlag, final Flag straightFlag,
-			final Bits numBits, final Flag generalLineFlag, final Flag vertLineFlag,
-			final SBits deltaX, final SBits deltaY) {
+			final UBits numBits, final Flag generalLineFlag, final Flag vertLineFlag,
+			final Bits deltaX, final Bits deltaY) {
 
 		this.typeFlag = typeFlag;
 		this.straightFlag = straightFlag;
@@ -76,7 +76,7 @@ public final class StraightEdgeRecord implements ShapeRecord, Shape3Record {
 	 *
 	 * @return The X delta.
 	 */
-	public SBits getDeltaX() {
+	public Bits getDeltaX() {
 		return deltaX;
 	}
 
@@ -85,7 +85,7 @@ public final class StraightEdgeRecord implements ShapeRecord, Shape3Record {
 	 *
 	 * @return The Y delta.
 	 */
-	public SBits getDeltaY() {
+	public Bits getDeltaY() {
 		return deltaY;
 	}
 
@@ -103,7 +103,7 @@ public final class StraightEdgeRecord implements ShapeRecord, Shape3Record {
 	 *
 	 * @return The number of bits per value.
 	 */
-	public Bits getNumBits() {
+	public UBits getNumBits() {
 		return numBits;
 	}
 

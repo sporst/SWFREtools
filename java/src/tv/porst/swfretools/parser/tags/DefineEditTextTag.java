@@ -1,10 +1,10 @@
 package tv.porst.swfretools.parser.tags;
 
-import tv.porst.splib.io.Flag;
-import tv.porst.splib.io.INT16;
-import tv.porst.splib.io.PString;
-import tv.porst.splib.io.UINT16;
-import tv.porst.splib.io.UINT8;
+import tv.porst.splib.binaryparser.AsciiString;
+import tv.porst.splib.binaryparser.Flag;
+import tv.porst.splib.binaryparser.INT16;
+import tv.porst.splib.binaryparser.UINT16;
+import tv.porst.splib.binaryparser.UINT8;
 import tv.porst.swfretools.parser.structures.RGBA;
 import tv.porst.swfretools.parser.structures.RecordHeader;
 import tv.porst.swfretools.parser.structures.Rect;
@@ -115,7 +115,7 @@ public final class DefineEditTextTag extends Tag {
 	/**
 	 * Class name of font to be loaded.
 	 */
-	private final PString fontClass;
+	private final AsciiString fontClass;
 
 	/**
 	 * Height of font in twips.
@@ -160,12 +160,12 @@ public final class DefineEditTextTag extends Tag {
 	/**
 	 * Name of the variable where the contents of the text field are stored.
 	 */
-	private final PString variableName;
+	private final AsciiString variableName;
 
 	/**
 	 * Text that is initially displayed.
 	 */
-	private final PString initialText;
+	private final AsciiString initialText;
 
 	/**
 	 * Creates a new DefineEditText tag object.
@@ -208,10 +208,10 @@ public final class DefineEditTextTag extends Tag {
 			final Flag hasMaxLength, final Flag hasFont, final Flag hasFontClass,
 			final Flag autoSize, final Flag hasLayout, final Flag noSelect,
 			final Flag border, final Flag wasStatic, final Flag html,
-			final Flag useOutlines, final UINT16 fontId, final PString fontClass, final UINT16 fontHeight,
+			final Flag useOutlines, final UINT16 fontId, final AsciiString fontClass, final UINT16 fontHeight,
 			final RGBA textColor, final UINT16 maxLength, final UINT8 align, final UINT16 leftMargin,
-			final UINT16 rightMargin, final UINT16 indent, final INT16 leading, final PString variableName,
-			final PString initialText) {
+			final UINT16 rightMargin, final UINT16 indent, final INT16 leading, final AsciiString variableName,
+			final AsciiString initialText) {
 
 		super(header);
 
@@ -297,7 +297,7 @@ public final class DefineEditTextTag extends Tag {
 	 *
 	 * @return The class name of font to be loaded.
 	 */
-	public PString getFontClass() {
+	public AsciiString getFontClass() {
 		return fontClass;
 	}
 
@@ -396,7 +396,7 @@ public final class DefineEditTextTag extends Tag {
 	 *
 	 * @return The text that is initially displayed.
 	 */
-	public PString getInitialText() {
+	public AsciiString getInitialText() {
 		return initialText;
 	}
 
@@ -495,7 +495,7 @@ public final class DefineEditTextTag extends Tag {
 	 *
 	 * @return The name of the variable where the contents of the text field are stored.
 	 */
-	public PString getVariableName() {
+	public AsciiString getVariableName() {
 		return variableName;
 	}
 

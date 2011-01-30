@@ -1,10 +1,10 @@
 package tv.porst.swfretools.parser.structures;
 
-import static tv.porst.swfretools.parser.SWFParserHelpers.parseBits;
-import static tv.porst.swfretools.parser.SWFParserHelpers.parseBitsIf;
+import static tv.porst.swfretools.parser.SWFParserHelpers.parseUBits;
+import static tv.porst.swfretools.parser.SWFParserHelpers.parseUBitsIf;
 import static tv.porst.swfretools.parser.SWFParserHelpers.parseFlag;
-import tv.porst.splib.io.Bits;
-import tv.porst.splib.io.Flag;
+import tv.porst.splib.binaryparser.UBits;
+import tv.porst.splib.binaryparser.Flag;
 import tv.porst.swfretools.parser.SWFBinaryParser;
 import tv.porst.swfretools.parser.SWFParserException;
 
@@ -36,16 +36,16 @@ public final class MatrixParser {
 		}
 
 		final Flag hasScale = parseFlag(parser, 0x00006, fieldName + "::HasScale");
-		final Bits nScaleBits = parseBitsIf(parser, 5, 0x00006, hasScale.value(), fieldName + "::NScaleBits");
-		final Bits scaleX = parseBitsIf(parser, nScaleBits.value(), 0x00006, hasScale.value(), fieldName + "::ScaleX");
-		final Bits scaleY = parseBitsIf(parser, nScaleBits.value(), 0x00006, hasScale.value(), fieldName + "::ScaleY");
+		final UBits nScaleBits = parseUBitsIf(parser, 5, 0x00006, hasScale.value(), fieldName + "::NScaleBits");
+		final UBits scaleX = parseUBitsIf(parser, nScaleBits.value(), 0x00006, hasScale.value(), fieldName + "::ScaleX");
+		final UBits scaleY = parseUBitsIf(parser, nScaleBits.value(), 0x00006, hasScale.value(), fieldName + "::ScaleY");
 		final Flag hasRotate = parseFlag(parser, 0x00006, fieldName + "::HasRotate");
-		final Bits nRotateBits = parseBitsIf(parser, 5, 0x00006, hasRotate.value(), fieldName + "::NRotateBits");
-		final Bits rotateSkew0 = parseBitsIf(parser, nRotateBits.value(), 0x00006, hasRotate.value(), fieldName + "::rotateSkew0");
-		final Bits rotateSkew1 = parseBitsIf(parser, nRotateBits.value(), 0x00006, hasRotate.value(), fieldName + "::rotateSkew1");
-		final Bits nTranslateBits = parseBits(parser, 5, 0x00006, fieldName + "::NTranslateBits");
-		final Bits translateX = parseBitsIf(parser, nTranslateBits.value(), 0x00006, hasScale.value(), fieldName + "::TranslateX");
-		final Bits translateY = parseBitsIf(parser, nTranslateBits.value(), 0x00006, hasScale.value(), fieldName + "::TranslateY");
+		final UBits nRotateBits = parseUBitsIf(parser, 5, 0x00006, hasRotate.value(), fieldName + "::NRotateBits");
+		final UBits rotateSkew0 = parseUBitsIf(parser, nRotateBits.value(), 0x00006, hasRotate.value(), fieldName + "::rotateSkew0");
+		final UBits rotateSkew1 = parseUBitsIf(parser, nRotateBits.value(), 0x00006, hasRotate.value(), fieldName + "::rotateSkew1");
+		final UBits nTranslateBits = parseUBits(parser, 5, 0x00006, fieldName + "::NTranslateBits");
+		final UBits translateX = parseUBitsIf(parser, nTranslateBits.value(), 0x00006, hasScale.value(), fieldName + "::TranslateX");
+		final UBits translateY = parseUBitsIf(parser, nTranslateBits.value(), 0x00006, hasScale.value(), fieldName + "::TranslateY");
 
 		return new Matrix(hasScale, nScaleBits, scaleX, scaleY, hasRotate, nRotateBits, rotateSkew0, rotateSkew1, nTranslateBits, translateX, translateY);
 	}

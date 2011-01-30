@@ -1,6 +1,6 @@
 package tv.porst.swfretools.parser.tags;
 
-import static tv.porst.swfretools.parser.SWFParserHelpers.parseBits;
+import static tv.porst.swfretools.parser.SWFParserHelpers.parseUBits;
 import static tv.porst.swfretools.parser.SWFParserHelpers.parseFlag;
 import static tv.porst.swfretools.parser.SWFParserHelpers.parseUINT16;
 import static tv.porst.swfretools.parser.SWFParserHelpers.parseUINT8;
@@ -8,10 +8,10 @@ import static tv.porst.swfretools.parser.SWFParserHelpers.parseUINT8;
 import java.util.ArrayList;
 import java.util.List;
 
-import tv.porst.splib.io.Bits;
-import tv.porst.splib.io.Flag;
-import tv.porst.splib.io.UINT16;
-import tv.porst.splib.io.UINT8;
+import tv.porst.splib.binaryparser.UBits;
+import tv.porst.splib.binaryparser.Flag;
+import tv.porst.splib.binaryparser.UINT16;
+import tv.porst.splib.binaryparser.UINT8;
 import tv.porst.swfretools.parser.SWFBinaryParser;
 import tv.porst.swfretools.parser.SWFParserException;
 import tv.porst.swfretools.parser.actions.Action;
@@ -40,7 +40,7 @@ public final class DefineButton2Parser {
 	public static DefineButton2Tag parse(final RecordHeader header, final SWFBinaryParser parser) throws SWFParserException {
 
 		final UINT16 buttonId = parseUINT16(parser, 0x00006, "DefineButton2::ButtonId");
-		final Bits reservedFlags = parseBits(parser, 7, 0x00006, "DefineButton2::ReservedFlags");
+		final UBits reservedFlags = parseUBits(parser, 7, 0x00006, "DefineButton2::ReservedFlags");
 		final Flag trackAsMenu = parseFlag(parser, 0x00006, "DefineButton2::TrackAsMenu");
 		final UINT16 actionOffset = parseUINT16(parser, 0x00006, "DefineButton2::ActionOffset");
 
@@ -48,7 +48,7 @@ public final class DefineButton2Parser {
 
 		do
 		{
-			if (parser.peekUInt8() == 0) {
+			if (parser.peekUInt8().value() == 0) {
 				break;
 			}
 

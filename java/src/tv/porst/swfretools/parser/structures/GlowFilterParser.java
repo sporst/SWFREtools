@@ -1,9 +1,9 @@
 package tv.porst.swfretools.parser.structures;
 
-import static tv.porst.swfretools.parser.SWFParserHelpers.parseBits;
+import static tv.porst.swfretools.parser.SWFParserHelpers.parseUBits;
 import static tv.porst.swfretools.parser.SWFParserHelpers.parseFlag;
-import tv.porst.splib.io.Bits;
-import tv.porst.splib.io.Flag;
+import tv.porst.splib.binaryparser.UBits;
+import tv.porst.splib.binaryparser.Flag;
 import tv.porst.swfretools.parser.SWFBinaryParser;
 import tv.porst.swfretools.parser.SWFParserException;
 
@@ -33,7 +33,7 @@ public final class GlowFilterParser {
 		final Flag innerShadow = parseFlag(parser, 0x00006, fieldName + "::InnerShadow");
 		final Flag knockout = parseFlag(parser, 0x00006, fieldName + "::KnockOut");
 		final Flag compositeSource = parseFlag(parser, 0x00006, fieldName + "::CompositeSource");
-		final Bits passes = parseBits(parser, 5, 0x00006, fieldName + "::Passes");
+		final UBits passes = parseUBits(parser, 5, 0x00006, fieldName + "::Passes");
 
 		return new GlowFilter(glowColor, blurX, blurY, strength, innerShadow, knockout, compositeSource, passes);
 	}

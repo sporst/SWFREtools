@@ -1,7 +1,7 @@
 package tv.porst.swfretools.parser.structures;
 
-import tv.porst.splib.io.INT16;
-import tv.porst.splib.io.IParsedINTElement;
+import tv.porst.splib.binaryparser.INT16;
+import tv.porst.splib.binaryparser.IParsedINTElement;
 
 /**
  * Represents a KerningRecord structure.

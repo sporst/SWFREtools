@@ -1,7 +1,7 @@
 package tv.porst.swfretools.parser.structures;
 
-import tv.porst.splib.io.Bits;
-import tv.porst.splib.io.Flag;
+import tv.porst.splib.binaryparser.UBits;
+import tv.porst.splib.binaryparser.Flag;
 
 /**
  * Represents a ClipEventFlags structure.
@@ -94,7 +94,7 @@ public final class ClipEventFlags {
 	/**
 	 * Reserved bits.
 	 */
-	private final Bits reserved;
+	private final UBits reserved;
 
 	/**
 	 * Construct event flag.
@@ -114,7 +114,7 @@ public final class ClipEventFlags {
 	/**
 	 * Reserved bits.
 	 */
-	private final Bits reserved2;
+	private final UBits reserved2;
 
 	/**
 	 * Creates a new ClipEventFlags object.
@@ -148,8 +148,8 @@ public final class ClipEventFlags {
 			final Flag clipEventRollOut, final Flag clipEventRollOver,
 			final Flag clipEventReleaseOutside, final Flag clipEventRelease,
 			final Flag clipEventPress, final Flag clipEventInitialize, final Flag clipEventData,
-			final Bits reserved, final Flag clipEventConstruct, final Flag clipEventKeyPress,
-			final Flag clipEventDragOut, final Bits reserved2) {
+			final UBits reserved, final Flag clipEventConstruct, final Flag clipEventKeyPress,
+			final Flag clipEventDragOut, final UBits reserved2) {
 
 		this.clipEventKeyUp = clipEventKeyUp;
 		this.clipEventKeyDown = clipEventKeyDown;
@@ -350,7 +350,7 @@ public final class ClipEventFlags {
 	 *
 	 * @return The Reserved bits.
 	 */
-	public Bits getReserved() {
+	public UBits getReserved() {
 		return reserved;
 	}
 
@@ -359,7 +359,7 @@ public final class ClipEventFlags {
 	 *
 	 * @return The Reserved bits.
 	 */
-	public Bits getReserved2() {
+	public UBits getReserved2() {
 		return reserved2;
 	}
 }

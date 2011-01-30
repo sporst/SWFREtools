@@ -1,9 +1,9 @@
 package tv.porst.swfretools.parser.tags;
 
-import tv.porst.splib.io.Bits;
-import tv.porst.splib.io.Flag;
-import tv.porst.splib.io.UINT16;
-import tv.porst.splib.io.UINT32;
+import tv.porst.splib.binaryparser.UBits;
+import tv.porst.splib.binaryparser.Flag;
+import tv.porst.splib.binaryparser.UINT16;
+import tv.porst.splib.binaryparser.UINT32;
 import tv.porst.swfretools.parser.structures.MorphFillStyleArray;
 import tv.porst.swfretools.parser.structures.MorphLineStyleArray2;
 import tv.porst.swfretools.parser.structures.RecordHeader;
@@ -46,7 +46,7 @@ public final class DefineMorphShape2Tag extends Tag {
 	/**
 	 * Reserved bits.
 	 */
-	private final Bits reserved;
+	private final UBits reserved;
 
 	/**
 	 * Non-scaling strokes flag.
@@ -103,7 +103,7 @@ public final class DefineMorphShape2Tag extends Tag {
 	 */
 	public DefineMorphShape2Tag(final RecordHeader header, final UINT16 characterId,
 			final Rect startBounds, final Rect endBounds, final Rect startEdgeBounds,
-			final Rect endEdgeBounds, final Bits reserved, final Flag usesNonScalingStrokes,
+			final Rect endEdgeBounds, final UBits reserved, final Flag usesNonScalingStrokes,
 			final Flag usesScalingStrokes, final UINT32 offset,
 			final MorphFillStyleArray morphFillStyles,
 			final MorphLineStyleArray2 morphLineStyles, final Shape startEdges, final Shape endEdges) {
@@ -193,7 +193,7 @@ public final class DefineMorphShape2Tag extends Tag {
 	 * 
 	 * @return The reserved bit.
 	 */
-	public Bits getReserved() {
+	public UBits getReserved() {
 		return reserved;
 	}
 

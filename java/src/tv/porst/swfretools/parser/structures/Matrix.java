@@ -1,7 +1,7 @@
 package tv.porst.swfretools.parser.structures;
 
-import tv.porst.splib.io.Bits;
-import tv.porst.splib.io.Flag;
+import tv.porst.splib.binaryparser.UBits;
+import tv.porst.splib.binaryparser.Flag;
 
 /**
  * Represents a Matrix structure.
@@ -19,17 +19,17 @@ public final class Matrix {
 	/**
 	 * Bits in each scale value field.
 	 */
-	private final Bits nScaleBits;
+	private final UBits nScaleBits;
 
 	/**
 	 * X scale value.
 	 */
-	private final Bits scaleX;
+	private final UBits scaleX;
 
 	/**
 	 * Y scale value.
 	 */
-	private final Bits scaleY;
+	private final UBits scaleY;
 
 	/**
 	 * Has rotate and skew values if set.
@@ -39,32 +39,32 @@ public final class Matrix {
 	/**
 	 * Bits in each rotate value field.
 	 */
-	private final Bits nRotateBits;
+	private final UBits nRotateBits;
 
 	/**
 	 * First rotate and skew value.
 	 */
-	private final Bits rotateSkew0;
+	private final UBits rotateSkew0;
 
 	/**
 	 * Second rotate and skew value.
 	 */
-	private final Bits rotateSkew1;
+	private final UBits rotateSkew1;
 
 	/**
 	 * Bits in each translate value field.
 	 */
-	private final Bits nTranslateBits;
+	private final UBits nTranslateBits;
 
 	/**
 	 * X translate value in twips.
 	 */
-	private final Bits translateX;
+	private final UBits translateX;
 
 	/**
 	 * Y translate value in twips.
 	 */
-	private final Bits translateY;
+	private final UBits translateY;
 
 	/**
 	 * Creates a new Matrix object.
@@ -81,9 +81,9 @@ public final class Matrix {
 	 * @param translateX X translate value in twips.
 	 * @param translateY Y translate value in twips.
 	 */
-	public Matrix(final Flag hasScale, final Bits nScaleBits, final Bits scaleX, final Bits scaleY,
-			final Flag hasRotate, final Bits nRotateBits, final Bits rotateSkew0, final Bits rotateSkew1,
-			final Bits nTranslateBits, final Bits translateX, final Bits translateY) {
+	public Matrix(final Flag hasScale, final UBits nScaleBits, final UBits scaleX, final UBits scaleY,
+			final Flag hasRotate, final UBits nRotateBits, final UBits rotateSkew0, final UBits rotateSkew1,
+			final UBits nTranslateBits, final UBits translateX, final UBits translateY) {
 
 		this.hasScale = hasScale;
 		this.nScaleBits = nScaleBits;
@@ -121,7 +121,7 @@ public final class Matrix {
 	 *
 	 * @return The bits in each rotate value field.
 	 */
-	public Bits getnRotateBits() {
+	public UBits getnRotateBits() {
 		return nRotateBits;
 	}
 
@@ -130,7 +130,7 @@ public final class Matrix {
 	 *
 	 * @return The bits in each scale value field.
 	 */
-	public Bits getnScaleBits() {
+	public UBits getnScaleBits() {
 		return nScaleBits;
 	}
 
@@ -139,7 +139,7 @@ public final class Matrix {
 	 *
 	 * @return The bits in each translate value field.
 	 */
-	public Bits getnTranslateBits() {
+	public UBits getnTranslateBits() {
 		return nTranslateBits;
 	}
 
@@ -148,7 +148,7 @@ public final class Matrix {
 	 *
 	 * @return The first rotate and skew value.
 	 */
-	public Bits getRotateSkew0() {
+	public UBits getRotateSkew0() {
 		return rotateSkew0;
 	}
 
@@ -157,7 +157,7 @@ public final class Matrix {
 	 *
 	 * @return The second rotate and skew value.
 	 */
-	public Bits getRotateSkew1() {
+	public UBits getRotateSkew1() {
 		return rotateSkew1;
 	}
 
@@ -166,7 +166,7 @@ public final class Matrix {
 	 *
 	 * @return The X scale value.
 	 */
-	public Bits getScaleX() {
+	public UBits getScaleX() {
 		return scaleX;
 	}
 
@@ -175,7 +175,7 @@ public final class Matrix {
 	 *
 	 * @return The Y scale value.
 	 */
-	public Bits getScaleY() {
+	public UBits getScaleY() {
 		return scaleY;
 	}
 
@@ -184,7 +184,7 @@ public final class Matrix {
 	 *
 	 * @return The X translate value in twips.
 	 */
-	public Bits getTranslateX() {
+	public UBits getTranslateX() {
 		return translateX;
 	}
 
@@ -193,7 +193,7 @@ public final class Matrix {
 	 *
 	 * @return The Y translate value in twips.
 	 */
-	public Bits getTranslateY() {
+	public UBits getTranslateY() {
 		return translateY;
 	}
 }

@@ -1,6 +1,6 @@
 package tv.porst.swfretools.parser.tags;
 
-import tv.porst.splib.io.BinaryParser;
+import tv.porst.splib.binaryparser.BinaryParser;
 import tv.porst.swfretools.parser.structures.RecordHeader;
 
 /**

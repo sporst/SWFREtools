@@ -1,7 +1,7 @@
 package tv.porst.swfretools.parser.structures;
 
 import static tv.porst.swfretools.parser.SWFParserHelpers.parseString;
-import tv.porst.splib.io.PString;
+import tv.porst.splib.binaryparser.AsciiString;
 import tv.porst.swfretools.parser.SWFBinaryParser;
 import tv.porst.swfretools.parser.SWFParserException;
 
@@ -26,7 +26,7 @@ public final class SceneNameParser {
 	public static SceneName parse(final SWFBinaryParser parser, final String fieldName) throws SWFParserException {
 
 		final EncodedU32 offset = EncodedU32Parser.parse(parser, fieldName + "::Offset");
-		final PString name = parseString(parser, 0x00006, fieldName + "::Name");
+		final AsciiString name = parseString(parser, 0x00006, fieldName + "::Name");
 
 		return new SceneName(offset, name);
 	}

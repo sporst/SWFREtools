@@ -1,11 +1,11 @@
 package tv.porst.swfretools.parser.structures;
 
-import static tv.porst.swfretools.parser.SWFParserHelpers.parseBits;
+import static tv.porst.swfretools.parser.SWFParserHelpers.parseUBits;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import tv.porst.splib.io.Bits;
+import tv.porst.splib.binaryparser.UBits;
 import tv.porst.swfretools.parser.SWFBinaryParser;
 import tv.porst.swfretools.parser.SWFParserException;
 
@@ -28,9 +28,9 @@ public final class Gradient3Parser {
 	 */
 	public static Gradient3 parse(final SWFBinaryParser parser, final String fieldName) throws SWFParserException {
 
-		final Bits spreadMode = parseBits(parser, 2, 0x00006, fieldName + "::SpreadMode");
-		final Bits interpolationMode = parseBits(parser, 2, 0x00006, fieldName + "::InterpolationMode");
-		final Bits numGradients = parseBits(parser, 4, 0x00006, fieldName + "::NumGradients");
+		final UBits spreadMode = parseUBits(parser, 2, 0x00006, fieldName + "::SpreadMode");
+		final UBits interpolationMode = parseUBits(parser, 2, 0x00006, fieldName + "::InterpolationMode");
+		final UBits numGradients = parseUBits(parser, 4, 0x00006, fieldName + "::NumGradients");
 
 		final List<GradRecord3> gradientRecords = new ArrayList<GradRecord3>();
 

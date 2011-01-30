@@ -1,7 +1,7 @@
 package tv.porst.swfretools.parser.structures;
 
-import tv.porst.splib.io.Bits;
-import tv.porst.splib.io.Flag;
+import tv.porst.splib.binaryparser.UBits;
+import tv.porst.splib.binaryparser.Flag;
 
 /**
  * Represents a StyleChangeRecord3 structure.
@@ -44,32 +44,32 @@ public final class StyleChangeRecord3 implements Shape3Record {
 	/**
 	 * Move bit count.
 	 */
-	private final Bits moveBits;
+	private final UBits moveBits;
 
 	/**
 	 * Delta X value.
 	 */
-	private final Bits moveDeltaX;
+	private final UBits moveDeltaX;
 
 	/**
 	 * Delta Y value.
 	 */
-	private final Bits moveDeltaY;
+	private final UBits moveDeltaY;
 
 	/**
 	 * Fill 0 style.
 	 */
-	private final Bits fillStyle0;
+	private final UBits fillStyle0;
 
 	/**
 	 * Fill 1 style.
 	 */
-	private final Bits fillStyle1;
+	private final UBits fillStyle1;
 
 	/**
 	 * Line style.
 	 */
-	private final Bits lineStyle;
+	private final UBits lineStyle;
 
 	/**
 	 * Array of new fill styles.
@@ -84,12 +84,12 @@ public final class StyleChangeRecord3 implements Shape3Record {
 	/**
 	 * Number of fill index bits for new styles.
 	 */
-	private final Bits numFillBits;
+	private final UBits numFillBits;
 
 	/**
 	 * Number of line index bits for new styles.
 	 */
-	private final Bits numLineBits;
+	private final UBits numLineBits;
 
 	/**
 	 * Creates a new TextRecord object.
@@ -113,10 +113,10 @@ public final class StyleChangeRecord3 implements Shape3Record {
 	 */
 	public StyleChangeRecord3(final Flag typeFlag, final Flag stateNewStyles,
 			final Flag stateLineStyle, final Flag stateFillStyle1, final Flag stateFillStyle0,
-			final Flag stateMoveTo, final Bits moveBits,
-			final Bits moveDeltaX, final Bits moveDeltaY, final Bits fillStyle0, final Bits fillStyle1,
-			final Bits lineStyle, final FillStyle3Array fillStyles,
-			final LineStyle3Array lineStyles, final Bits numFillBits, final Bits numLineBits) {
+			final Flag stateMoveTo, final UBits moveBits,
+			final UBits moveDeltaX, final UBits moveDeltaY, final UBits fillStyle0, final UBits fillStyle1,
+			final UBits lineStyle, final FillStyle3Array fillStyles,
+			final LineStyle3Array lineStyles, final UBits numFillBits, final UBits numLineBits) {
 
 		this.typeFlag = typeFlag;
 		this.stateNewStyles = stateNewStyles;
@@ -141,7 +141,7 @@ public final class StyleChangeRecord3 implements Shape3Record {
 	 *
 	 * @return The fill 0 style.
 	 */
-	public Bits getFillStyle0() {
+	public UBits getFillStyle0() {
 		return fillStyle0;
 	}
 
@@ -150,7 +150,7 @@ public final class StyleChangeRecord3 implements Shape3Record {
 	 *
 	 * @return The fill 1 style.
 	 */
-	public Bits getFillStyle1() {
+	public UBits getFillStyle1() {
 		return fillStyle1;
 	}
 
@@ -168,7 +168,7 @@ public final class StyleChangeRecord3 implements Shape3Record {
 	 *
 	 * @return The line style.
 	 */
-	public Bits getLineStyle() {
+	public UBits getLineStyle() {
 		return lineStyle;
 	}
 
@@ -186,7 +186,7 @@ public final class StyleChangeRecord3 implements Shape3Record {
 	 *
 	 * @return The move bit count.
 	 */
-	public Bits getMoveBits() {
+	public UBits getMoveBits() {
 		return moveBits;
 	}
 
@@ -195,7 +195,7 @@ public final class StyleChangeRecord3 implements Shape3Record {
 	 *
 	 * @return The delta X value.
 	 */
-	public Bits getMoveDeltaX() {
+	public UBits getMoveDeltaX() {
 		return moveDeltaX;
 	}
 
@@ -204,7 +204,7 @@ public final class StyleChangeRecord3 implements Shape3Record {
 	 *
 	 * @return The delta Y value.
 	 */
-	public Bits getMoveDeltaY() {
+	public UBits getMoveDeltaY() {
 		return moveDeltaY;
 	}
 
@@ -213,7 +213,7 @@ public final class StyleChangeRecord3 implements Shape3Record {
 	 *
 	 * @return The number of fill index bits for new styles.
 	 */
-	public Bits getNumFillBits() {
+	public UBits getNumFillBits() {
 		return numFillBits;
 	}
 
@@ -222,7 +222,7 @@ public final class StyleChangeRecord3 implements Shape3Record {
 	 *
 	 * @return The number of line index bits for new styles.
 	 */
-	public Bits getNumLineBits() {
+	public UBits getNumLineBits() {
 		return numLineBits;
 	}
 

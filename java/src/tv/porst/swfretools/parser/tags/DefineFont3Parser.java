@@ -12,12 +12,12 @@ import static tv.porst.swfretools.parser.SWFParserHelpers.parseUINT8;
 import java.util.ArrayList;
 import java.util.List;
 
-import tv.porst.splib.io.Flag;
-import tv.porst.splib.io.INT16;
-import tv.porst.splib.io.IParsedINTElement;
-import tv.porst.splib.io.PString;
-import tv.porst.splib.io.UINT16;
-import tv.porst.splib.io.UINT8;
+import tv.porst.splib.binaryparser.AsciiString;
+import tv.porst.splib.binaryparser.Flag;
+import tv.porst.splib.binaryparser.INT16;
+import tv.porst.splib.binaryparser.IParsedINTElement;
+import tv.porst.splib.binaryparser.UINT16;
+import tv.porst.splib.binaryparser.UINT8;
 import tv.porst.swfretools.parser.SWFBinaryParser;
 import tv.porst.swfretools.parser.SWFParserException;
 import tv.porst.swfretools.parser.structures.KerningRecord;
@@ -58,7 +58,7 @@ public final class DefineFont3Parser {
 		final Flag fontFlagsBold = parseFlag(parser, 0x00006, "DefineFont3::FontFlagsBold");
 		final UINT8 languageCode = parseUINT8(parser, 0x00006, "Define2::LanguageCode");
 		final UINT8 fontNameLen = parseUINT8(parser, 0x00006, "DefineFont3::FontNameLen");
-		final PString fontName = parseString(parser, fontNameLen.value(), 0x00006, "DefineFont3::FontName");
+		final AsciiString fontName = parseString(parser, fontNameLen.value(), 0x00006, "DefineFont3::FontName");
 		final UINT16 numGlyphs = parseUINT16(parser, 0x00006, "DefineFont3::NumGlyphs");
 
 		final List<IParsedINTElement> offsetTable = new ArrayList<IParsedINTElement>();

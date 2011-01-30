@@ -1,8 +1,8 @@
 package tv.porst.swfretools.parser.structures;
 
-import tv.porst.splib.io.Bits;
-import tv.porst.splib.io.Flag;
-import tv.porst.splib.io.UINT8;
+import tv.porst.splib.binaryparser.UBits;
+import tv.porst.splib.binaryparser.Flag;
+import tv.porst.splib.binaryparser.UINT8;
 
 /**
  * Represents an GradientBevelFilter structure.
@@ -75,7 +75,7 @@ public final class GradientBevelFilter {
 	/**
 	 * Number of blur passes.
 	 */
-	private final Bits passes;
+	private final UBits passes;
 
 	/**
 	 * Creates a new GradientGlowFilter object.
@@ -97,7 +97,7 @@ public final class GradientBevelFilter {
 	public GradientBevelFilter(final UINT8 numColors, final RGBA[] gradientColors,
 			final UINT8[] gradientRatio, final Fixed blurX, final Fixed blurY, final Fixed angle,
 			final Fixed distance, final Fixed8 strength, final Flag innerShadow,
-			final Flag knockout, final Flag compositeSource, final Flag onTop, final Bits passes) {
+			final Flag knockout, final Flag compositeSource, final Flag onTop, final UBits passes) {
 
 		this.numColors = numColors;
 		this.gradientColors = gradientColors;
@@ -219,7 +219,7 @@ public final class GradientBevelFilter {
 	 *
 	 * @return The number of blur passes.
 	 */
-	public Bits getPasses() {
+	public UBits getPasses() {
 		return passes;
 	}
 

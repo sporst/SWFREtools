@@ -1,13 +1,13 @@
 package tv.porst.swfretools.parser.structures;
 
-import static tv.porst.swfretools.parser.SWFParserHelpers.parseBits;
+import static tv.porst.swfretools.parser.SWFParserHelpers.parseUBits;
 import static tv.porst.swfretools.parser.SWFParserHelpers.parseFlag;
 import static tv.porst.swfretools.parser.SWFParserHelpers.parseFloat;
 import static tv.porst.swfretools.parser.SWFParserHelpers.parseUINT8;
-import tv.porst.splib.io.Bits;
-import tv.porst.splib.io.Flag;
-import tv.porst.splib.io.Float32;
-import tv.porst.splib.io.UINT8;
+import tv.porst.splib.binaryparser.UBits;
+import tv.porst.splib.binaryparser.Flag;
+import tv.porst.splib.binaryparser.Float32;
+import tv.porst.splib.binaryparser.UINT8;
 import tv.porst.swfretools.parser.SWFBinaryParser;
 import tv.porst.swfretools.parser.SWFParserException;
 
@@ -42,7 +42,7 @@ public final class ConvolutionFilterParser {
 
 		final RGBA defaultColor = RGBAParser.parse(parser, fieldName + "::DefaultColor");
 
-		final Bits reserved = parseBits(parser, 6, 0x00006, fieldName + "Reserved");
+		final UBits reserved = parseUBits(parser, 6, 0x00006, fieldName + "Reserved");
 		final Flag clamp = parseFlag(parser, 0x00006, fieldName + "::Clamp");
 		final Flag preserveAlpha = parseFlag(parser, 0x00006, fieldName + "::PreserveAlpha");
 

@@ -20,7 +20,5 @@ public final class ParserError {
 		if (description == null) {
 			throw new IllegalStateException("Error description must not be null");
 		}
-
 	}
-
 }

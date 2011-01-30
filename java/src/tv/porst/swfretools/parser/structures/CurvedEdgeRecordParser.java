@@ -1,11 +1,11 @@
 package tv.porst.swfretools.parser.structures;
 
-import static tv.porst.swfretools.parser.SWFParserHelpers.parseBits;
+import static tv.porst.swfretools.parser.SWFParserHelpers.parseUBits;
 import static tv.porst.swfretools.parser.SWFParserHelpers.parseFlag;
 import static tv.porst.swfretools.parser.SWFParserHelpers.parseSBits;
-import tv.porst.splib.io.Bits;
-import tv.porst.splib.io.Flag;
-import tv.porst.splib.io.SBits;
+import tv.porst.splib.binaryparser.UBits;
+import tv.porst.splib.binaryparser.Flag;
+import tv.porst.splib.binaryparser.Bits;
 import tv.porst.swfretools.parser.SWFBinaryParser;
 import tv.porst.swfretools.parser.SWFParserException;
 
@@ -30,11 +30,11 @@ public final class CurvedEdgeRecordParser {
 
 		final Flag typeFlag = parseFlag(parser, 0x00006, fieldName + "::TypeFlag");
 		final Flag straightFlag = parseFlag(parser, 0x00006, fieldName + "::StraightFlag");
-		final Bits numBits = parseBits(parser, 4, 0x00006, fieldName + "::NumBits");
-		final SBits controlDeltaX = parseSBits(parser, numBits.value() + 2, 0x00006, fieldName + "::ControlDeltaX");
-		final SBits controlDeltaY = parseSBits(parser, numBits.value() + 2, 0x00006, fieldName + "::ControlDeltaY");
-		final SBits anchorDeltaX = parseSBits(parser, numBits.value() + 2, 0x00006, fieldName + "::AnchorDeltaX");
-		final SBits anchorDeltaY = parseSBits(parser, numBits.value() + 2, 0x00006, fieldName + "::AnchorDeltaY");
+		final UBits numBits = parseUBits(parser, 4, 0x00006, fieldName + "::NumBits");
+		final Bits controlDeltaX = parseSBits(parser, numBits.value() + 2, 0x00006, fieldName + "::ControlDeltaX");
+		final Bits controlDeltaY = parseSBits(parser, numBits.value() + 2, 0x00006, fieldName + "::ControlDeltaY");
+		final Bits anchorDeltaX = parseSBits(parser, numBits.value() + 2, 0x00006, fieldName + "::AnchorDeltaX");
+		final Bits anchorDeltaY = parseSBits(parser, numBits.value() + 2, 0x00006, fieldName + "::AnchorDeltaY");
 
 		return new CurvedEdgeRecord(typeFlag, straightFlag, numBits, controlDeltaX, controlDeltaY, anchorDeltaX, anchorDeltaY);
 	}

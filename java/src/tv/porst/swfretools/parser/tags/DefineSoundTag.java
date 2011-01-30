@@ -1,8 +1,8 @@
 package tv.porst.swfretools.parser.tags;
 
-import tv.porst.splib.io.Bits;
-import tv.porst.splib.io.UINT16;
-import tv.porst.splib.io.UINT32;
+import tv.porst.splib.binaryparser.UBits;
+import tv.porst.splib.binaryparser.UINT16;
+import tv.porst.splib.binaryparser.UINT32;
 import tv.porst.swfretools.parser.structures.ByteArray;
 import tv.porst.swfretools.parser.structures.RecordHeader;
 
@@ -22,22 +22,22 @@ public final class DefineSoundTag extends Tag {
 	/**
 	 * Format of sound data.
 	 */
-	private final Bits soundFormat;
+	private final UBits soundFormat;
 
 	/**
 	 * The sampling rate.
 	 */
-	private final Bits soundRate;
+	private final UBits soundRate;
 
 	/**
 	 * Size of each sample.
 	 */
-	private final Bits soundSize;
+	private final UBits soundSize;
 
 	/**
 	 * Sound type flag.
 	 */
-	private final Bits soundType;
+	private final UBits soundType;
 
 	/**
 	 * Number of samples.
@@ -61,8 +61,8 @@ public final class DefineSoundTag extends Tag {
 	 * @param soundSampleCount Number of samples.
 	 * @param soundData The sound data.
 	 */
-	public DefineSoundTag(final RecordHeader header, final UINT16 soundId, final Bits soundFormat,
-			final Bits soundRate, final Bits soundSize, final Bits soundType, final UINT32 soundSampleCount,
+	public DefineSoundTag(final RecordHeader header, final UINT16 soundId, final UBits soundFormat,
+			final UBits soundRate, final UBits soundSize, final UBits soundType, final UINT32 soundSampleCount,
 			final ByteArray soundData) {
 		super(header);
 
@@ -89,7 +89,7 @@ public final class DefineSoundTag extends Tag {
 	 * 
 	 * @return The format of sound data.
 	 */
-	public Bits getSoundFormat() {
+	public UBits getSoundFormat() {
 		return soundFormat;
 	}
 
@@ -107,7 +107,7 @@ public final class DefineSoundTag extends Tag {
 	 * 
 	 * @return The sampling rate.
 	 */
-	public Bits getSoundRate() {
+	public UBits getSoundRate() {
 		return soundRate;
 	}
 
@@ -125,7 +125,7 @@ public final class DefineSoundTag extends Tag {
 	 * 
 	 * @return The size of each sample.
 	 */
-	public Bits getSoundSize() {
+	public UBits getSoundSize() {
 		return soundSize;
 	}
 
@@ -134,7 +134,7 @@ public final class DefineSoundTag extends Tag {
 	 * 
 	 * @return The sound type flag.
 	 */
-	public Bits getSoundType() {
+	public UBits getSoundType() {
 		return soundType;
 	}
 }

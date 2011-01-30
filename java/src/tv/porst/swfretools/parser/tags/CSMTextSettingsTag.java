@@ -1,9 +1,9 @@
 package tv.porst.swfretools.parser.tags;
 
-import tv.porst.splib.io.Bits;
-import tv.porst.splib.io.Float32;
-import tv.porst.splib.io.UINT16;
-import tv.porst.splib.io.UINT8;
+import tv.porst.splib.binaryparser.UBits;
+import tv.porst.splib.binaryparser.Float32;
+import tv.porst.splib.binaryparser.UINT16;
+import tv.porst.splib.binaryparser.UINT8;
 import tv.porst.swfretools.parser.structures.RecordHeader;
 
 /**
@@ -22,17 +22,17 @@ public final class CSMTextSettingsTag extends Tag {
 	/**
 	 * Rendering engine flag.
 	 */
-	private final Bits useFlashType;
+	private final UBits useFlashType;
 
 	/**
 	 * Grid fitting flag.
 	 */
-	private final Bits gridFit;
+	private final UBits gridFit;
 
 	/**
 	 * First reserved bit field.
 	 */
-	private final Bits reserved;
+	private final UBits reserved;
 
 	/**
 	 * Thickness attribute of the associated text field.
@@ -62,7 +62,7 @@ public final class CSMTextSettingsTag extends Tag {
 	 * @param reserved2 Second reserved bit field.
 	 */
 	public CSMTextSettingsTag(final RecordHeader header, final UINT16 textId,
-			final Bits useFlashType, final Bits gridFit, final Bits reserved, final Float32 thickness,
+			final UBits useFlashType, final UBits gridFit, final UBits reserved, final Float32 thickness,
 			final Float32 sharpness, final UINT8 reserved2) {
 
 		super(header);
@@ -81,7 +81,7 @@ public final class CSMTextSettingsTag extends Tag {
 	 * 
 	 * @return The grid fitting flag.
 	 */
-	public Bits getGridFit() {
+	public UBits getGridFit() {
 		return gridFit;
 	}
 
@@ -90,7 +90,7 @@ public final class CSMTextSettingsTag extends Tag {
 	 * 
 	 * @return The first reserved bit field.
 	 */
-	public Bits getReserved() {
+	public UBits getReserved() {
 		return reserved;
 	}
 
@@ -130,7 +130,7 @@ public final class CSMTextSettingsTag extends Tag {
 	 * 
 	 * @return The rendering engine flag.
 	 */
-	public Bits getUseFlashType() {
+	public UBits getUseFlashType() {
 		return useFlashType;
 	}
 }

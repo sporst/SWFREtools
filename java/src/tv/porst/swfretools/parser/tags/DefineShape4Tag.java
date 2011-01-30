@@ -1,8 +1,8 @@
 package tv.porst.swfretools.parser.tags;
 
-import tv.porst.splib.io.Bits;
-import tv.porst.splib.io.Flag;
-import tv.porst.splib.io.UINT16;
+import tv.porst.splib.binaryparser.UBits;
+import tv.porst.splib.binaryparser.Flag;
+import tv.porst.splib.binaryparser.UINT16;
 import tv.porst.swfretools.parser.structures.RecordHeader;
 import tv.porst.swfretools.parser.structures.Rect;
 import tv.porst.swfretools.parser.structures.ShapeWithStyle4;
@@ -33,7 +33,7 @@ public final class DefineShape4Tag extends Tag {
 	/**
 	 * Reserved bits.
 	 */
-	private final Bits reserved;
+	private final UBits reserved;
 
 	/**
 	 * Fill winding rule flag.
@@ -69,7 +69,7 @@ public final class DefineShape4Tag extends Tag {
 	 * @param shapes Shape information.
 	 */
 	public DefineShape4Tag(final RecordHeader header, final UINT16 shapeId, final Rect shapeBounds,
-			final Rect edgeBounds, final Bits reserved, final Flag usesFillWindingRule,
+			final Rect edgeBounds, final UBits reserved, final Flag usesFillWindingRule,
 			final Flag usesNonScalingStrokes, final Flag usesScalingStrokes, final ShapeWithStyle4 shapes) {
 		super(header);
 
@@ -97,7 +97,7 @@ public final class DefineShape4Tag extends Tag {
 	 * 
 	 * @return The reserved bits.
 	 */
-	public Bits getReserved() {
+	public UBits getReserved() {
 		return reserved;
 	}
 

@@ -1,7 +1,7 @@
 package tv.porst.swfretools.parser.tags;
 
-import tv.porst.splib.io.Bits;
-import tv.porst.splib.io.Flag;
+import tv.porst.splib.binaryparser.UBits;
+import tv.porst.splib.binaryparser.Flag;
 import tv.porst.swfretools.parser.structures.RecordHeader;
 
 /**
@@ -15,7 +15,7 @@ public final class FileAttributesTag extends Tag {
 	/**
 	 * First reserved bits.
 	 */
-	private final Bits reserved;
+	private final UBits reserved;
 
 	/**
 	 * Hardware acceleration flag.
@@ -40,7 +40,7 @@ public final class FileAttributesTag extends Tag {
 	/**
 	 * Second reserved bits.
 	 */
-	private final Bits reserved2;
+	private final UBits reserved2;
 
 	/**
 	 * Network access flags.
@@ -50,7 +50,7 @@ public final class FileAttributesTag extends Tag {
 	/**
 	 * Third reserved bits.
 	 */
-	private final Bits reserved3;
+	private final UBits reserved3;
 
 	/**
 	 * Creates a new FileAttributes tag object.
@@ -65,10 +65,10 @@ public final class FileAttributesTag extends Tag {
 	 * @param useNetwork Network access flags.
 	 * @param reserved3 Third reserved bits.
 	 */
-	public FileAttributesTag(final RecordHeader header, final Bits reserved,
+	public FileAttributesTag(final RecordHeader header, final UBits reserved,
 			final Flag useDirectBit, final Flag useGPU, final Flag hasMetadata,
-			final Flag actionScript3, final Bits reserved2, final Flag useNetwork,
-			final Bits reserved3) {
+			final Flag actionScript3, final UBits reserved2, final Flag useNetwork,
+			final UBits reserved3) {
 		super(header);
 
 		this.reserved = reserved;
@@ -104,7 +104,7 @@ public final class FileAttributesTag extends Tag {
 	 * 
 	 * @return The first reserved bits.
 	 */
-	public Bits getReserved() {
+	public UBits getReserved() {
 		return reserved;
 	}
 
@@ -113,7 +113,7 @@ public final class FileAttributesTag extends Tag {
 	 * 
 	 * @return The second reserved bits.
 	 */
-	public Bits getReserved2() {
+	public UBits getReserved2() {
 		return reserved2;
 	}
 
@@ -122,7 +122,7 @@ public final class FileAttributesTag extends Tag {
 	 * 
 	 * @return The third reserved bits.
 	 */
-	public Bits getReserved3() {
+	public UBits getReserved3() {
 		return reserved3;
 	}
 

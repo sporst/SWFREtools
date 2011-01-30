@@ -1,7 +1,7 @@
 package tv.porst.swfretools.parser.structures;
 
-import tv.porst.splib.io.PString;
-import tv.porst.splib.io.UINT16;
+import tv.porst.splib.binaryparser.AsciiString;
+import tv.porst.splib.binaryparser.UINT16;
 
 /**
  * Represents a Symbol structure.
@@ -19,7 +19,7 @@ public final class Symbol {
 	/**
 	 * Symbol identifier.
 	 */
-	private final PString name;
+	private final AsciiString name;
 
 	/**
 	 * Creates a new Symbol object.
@@ -27,7 +27,7 @@ public final class Symbol {
 	 * @param tag Character ID.
 	 * @param name Symbol identifier.
 	 */
-	public Symbol(final UINT16 tag, final PString name) {
+	public Symbol(final UINT16 tag, final AsciiString name) {
 
 		this.tag = tag;
 		this.name = name;
@@ -39,7 +39,7 @@ public final class Symbol {
 	 *
 	 * @return The symbol identifier.
 	 */
-	public PString getName() {
+	public AsciiString getName() {
 		return name;
 	}
 

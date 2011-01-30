@@ -1,7 +1,7 @@
 package tv.porst.swfretools.parser.structures;
 
-import tv.porst.splib.io.Bits;
-import tv.porst.splib.io.SBits;
+import tv.porst.splib.binaryparser.UBits;
+import tv.porst.splib.binaryparser.Bits;
 
 /**
  * Represents a Rectangle structure.
@@ -14,27 +14,27 @@ public final class Rect {
 	/**
 	 * Bits used for each subsequent field.
 	 */
-	private final Bits nBits;
+	private final UBits nBits;
 
 	/**
 	 * X minimum position for rectangle in twips.
 	 */
-	private final SBits xMin;
+	private final Bits xMin;
 
 	/**
 	 * X maximum position for rectangle in twips.
 	 */
-	private final SBits xMax;
+	private final Bits xMax;
 
 	/**
 	 * Y minimum position for rectangle in twips.
 	 */
-	private final SBits yMin;
+	private final Bits yMin;
 
 	/**
 	 * Y maximum position for rectangle in twips.
 	 */
-	private final SBits yMax;
+	private final Bits yMax;
 
 	/**
 	 * Creates a new Rect object.
@@ -45,7 +45,7 @@ public final class Rect {
 	 * @param yMin Y minimum position for rectangle in twips.
 	 * @param yMax Y maximum position for rectangle in twips.
 	 */
-	public Rect(final Bits nBits, final SBits xMin, final SBits xMax, final SBits yMin, final SBits yMax) {
+	public Rect(final UBits nBits, final Bits xMin, final Bits xMax, final Bits yMin, final Bits yMax) {
 
 		this.nBits = nBits;
 		this.xMin = xMin;
@@ -60,7 +60,7 @@ public final class Rect {
 	 *
 	 * @return The bits used for each subsequent field.
 	 */
-	public Bits getnBits() {
+	public UBits getnBits() {
 		return nBits;
 	}
 
@@ -69,7 +69,7 @@ public final class Rect {
 	 *
 	 * @return The X maximum position for rectangle in twips.
 	 */
-	public SBits getxMax() {
+	public Bits getxMax() {
 		return xMax;
 	}
 
@@ -78,7 +78,7 @@ public final class Rect {
 	 *
 	 * @return The X minimum position for rectangle in twips.
 	 */
-	public SBits getxMin() {
+	public Bits getxMin() {
 		return xMin;
 	}
 
@@ -87,7 +87,7 @@ public final class Rect {
 	 *
 	 * @return The Y maximum position for rectangle in twips.
 	 */
-	public SBits getyMax() {
+	public Bits getyMax() {
 		return yMax;
 	}
 
@@ -96,7 +96,7 @@ public final class Rect {
 	 *
 	 * @return The Y minimum position for rectangle in twips.
 	 */
-	public SBits getyMin() {
+	public Bits getyMin() {
 		return yMin;
 	}
 }

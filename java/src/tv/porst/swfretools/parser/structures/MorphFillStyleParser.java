@@ -2,9 +2,9 @@ package tv.porst.swfretools.parser.structures;
 
 import static tv.porst.swfretools.parser.SWFParserHelpers.parseUINT16If;
 import static tv.porst.swfretools.parser.SWFParserHelpers.parseUINT8;
-import tv.porst.splib.io.Flag;
-import tv.porst.splib.io.UINT16;
-import tv.porst.splib.io.UINT8;
+import tv.porst.splib.binaryparser.Flag;
+import tv.porst.splib.binaryparser.UINT16;
+import tv.porst.splib.binaryparser.UINT8;
 import tv.porst.swfretools.parser.SWFBinaryParser;
 import tv.porst.swfretools.parser.SWFParserException;
 

@@ -3,10 +3,10 @@ package tv.porst.swfretools.parser.tags;
 import java.util.ArrayList;
 import java.util.List;
 
-import tv.porst.splib.io.Bits;
-import tv.porst.splib.io.Flag;
-import tv.porst.splib.io.UINT16;
-import tv.porst.splib.io.UINT8;
+import tv.porst.splib.binaryparser.UBits;
+import tv.porst.splib.binaryparser.Flag;
+import tv.porst.splib.binaryparser.UINT16;
+import tv.porst.splib.binaryparser.UINT8;
 import tv.porst.swfretools.parser.actions.Action;
 import tv.porst.swfretools.parser.structures.ButtonRecord2;
 import tv.porst.swfretools.parser.structures.RecordHeader;
@@ -27,7 +27,7 @@ public final class DefineButton2Tag extends Tag {
 	/**
 	 * Reserved flags.
 	 */
-	private final Bits reservedFlags;
+	private final UBits reservedFlags;
 
 	/**
 	 * Track as menu flag.
@@ -67,7 +67,7 @@ public final class DefineButton2Tag extends Tag {
 	 * @param actionEndFlag Action end flag.
 	 */
 	public DefineButton2Tag(final RecordHeader header, final UINT16 buttonId,
-			final Bits reservedFlags, final Flag trackAsMenu, final UINT16 actionOffset,
+			final UBits reservedFlags, final Flag trackAsMenu, final UINT16 actionOffset,
 			final List<ButtonRecord2> characters, final List<Action> actions,
 			final UINT8 actionEndFlag) {
 
@@ -132,7 +132,7 @@ public final class DefineButton2Tag extends Tag {
 	 * 
 	 * @return The reserved flags.
 	 */
-	public Bits getReservedFlags() {
+	public UBits getReservedFlags() {
 		return reservedFlags;
 	}
 

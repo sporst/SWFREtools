@@ -1,9 +1,9 @@
 package tv.porst.swfretools.parser.structures;
 
-import static tv.porst.swfretools.parser.SWFParserHelpers.parseBitsIf;
+import static tv.porst.swfretools.parser.SWFParserHelpers.parseUBitsIf;
 import static tv.porst.swfretools.parser.SWFParserHelpers.parseFlag;
-import tv.porst.splib.io.Bits;
-import tv.porst.splib.io.Flag;
+import tv.porst.splib.binaryparser.UBits;
+import tv.porst.splib.binaryparser.Flag;
 import tv.porst.swfretools.parser.SWFBinaryParser;
 import tv.porst.swfretools.parser.SWFParserException;
 
@@ -27,7 +27,7 @@ public final class StyleChangeRecordParser {
 	 * 
 	 * @throws SWFParserException Thrown if the structure could not be parsed.
 	 */
-	public static StyleChangeRecord parse(final SWFBinaryParser parser, final Bits fillBits, final Bits lineBits, final String fieldName) throws SWFParserException {
+	public static StyleChangeRecord parse(final SWFBinaryParser parser, final UBits fillBits, final UBits lineBits, final String fieldName) throws SWFParserException {
 
 		final Flag typeFlag = parseFlag(parser, 0x00006, fieldName + "::TypeFlag");
 		final Flag stateNewStyles = parseFlag(parser, 0x00006, fieldName + "::StateNewStyles");
@@ -35,16 +35,16 @@ public final class StyleChangeRecordParser {
 		final Flag stateFillStyle1 = parseFlag(parser, 0x00006, fieldName + "::StateFillStyle1");
 		final Flag stateFillStyle0 = parseFlag(parser, 0x00006, fieldName + "::StateFillStyle0");
 		final Flag stateMoveTo = parseFlag(parser, 0x00006, fieldName + "::StateMoveTo");
-		final Bits moveBits = parseBitsIf(parser, 5, 0x00006, stateMoveTo, fieldName + "::MoveBits");
-		final Bits moveDeltaX = parseBitsIf(parser, moveBits.value(), 0x00006, stateMoveTo, fieldName + "::MoveDeltaX");
-		final Bits moveDeltaY = parseBitsIf(parser, 5, 0x00006, stateMoveTo, fieldName + "::MoveDeltaY");
-		final Bits fillStyle0 = parseBitsIf(parser, fillBits.value(), 0x00006, stateFillStyle0, fieldName + "::FillStyle0");
-		final Bits fillStyle1 = parseBitsIf(parser, fillBits.value(), 0x00006, stateFillStyle1, fieldName + "::FillStyle1");
-		final Bits lineStyle = parseBitsIf(parser, lineBits.value(), 0x00006, stateLineStyle, fieldName + "::LineStyle");
+		final UBits moveBits = parseUBitsIf(parser, 5, 0x00006, stateMoveTo, fieldName + "::MoveBits");
+		final UBits moveDeltaX = parseUBitsIf(parser, moveBits.value(), 0x00006, stateMoveTo, fieldName + "::MoveDeltaX");
+		final UBits moveDeltaY = parseUBitsIf(parser, 5, 0x00006, stateMoveTo, fieldName + "::MoveDeltaY");
+		final UBits fillStyle0 = parseUBitsIf(parser, fillBits.value(), 0x00006, stateFillStyle0, fieldName + "::FillStyle0");
+		final UBits fillStyle1 = parseUBitsIf(parser, fillBits.value(), 0x00006, stateFillStyle1, fieldName + "::FillStyle1");
+		final UBits lineStyle = parseUBitsIf(parser, lineBits.value(), 0x00006, stateLineStyle, fieldName + "::LineStyle");
 		final FillStyleArray fillStyles = FillStyleArrayParser.parseIf(parser, stateNewStyles, fieldName + "::FillStyles");
 		final LineStyleArray lineStyles = LineStyleArrayParser.parseIf(parser, stateNewStyles, fieldName + "LineStyles");
-		final Bits numFillBits = parseBitsIf(parser, 4, 0x00006, stateNewStyles, fieldName + "::NumFillBits");
-		final Bits numLineBits = parseBitsIf(parser, 4, 0x00006, stateNewStyles, fieldName + "::NumLineBits");
+		final UBits numFillBits = parseUBitsIf(parser, 4, 0x00006, stateNewStyles, fieldName + "::NumFillBits");
+		final UBits numLineBits = parseUBitsIf(parser, 4, 0x00006, stateNewStyles, fieldName + "::NumLineBits");
 
 		return new StyleChangeRecord(typeFlag, stateNewStyles, stateLineStyle, stateFillStyle1,
 				stateFillStyle0, stateMoveTo, moveBits, moveDeltaX, moveDeltaY, fillStyle0, fillStyle1,

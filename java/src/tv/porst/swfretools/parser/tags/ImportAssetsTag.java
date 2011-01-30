@@ -3,8 +3,8 @@ package tv.porst.swfretools.parser.tags;
 import java.util.ArrayList;
 import java.util.List;
 
-import tv.porst.splib.io.PString;
-import tv.porst.splib.io.UINT16;
+import tv.porst.splib.binaryparser.AsciiString;
+import tv.porst.splib.binaryparser.UINT16;
 import tv.porst.swfretools.parser.structures.RecordHeader;
 import tv.porst.swfretools.parser.structures.Symbol;
 
@@ -19,7 +19,7 @@ public final class ImportAssetsTag extends Tag {
 	/**
 	 * URL where the source SWF file can be found.
 	 */
-	private final PString url;
+	private final AsciiString url;
 
 	/**
 	 * Number of assets to import.
@@ -39,7 +39,7 @@ public final class ImportAssetsTag extends Tag {
 	 * @param count Number of assets to import.
 	 * @param tags List of imported assets.
 	 */
-	public ImportAssetsTag(final RecordHeader header, final PString url, final UINT16 count, final List<Symbol> tags) {
+	public ImportAssetsTag(final RecordHeader header, final AsciiString url, final UINT16 count, final List<Symbol> tags) {
 		super(header);
 
 		this.url = url;
@@ -70,7 +70,7 @@ public final class ImportAssetsTag extends Tag {
 	 * 
 	 * @return The URL where the source SWF file can be found.
 	 */
-	public PString getUrl() {
+	public AsciiString getUrl() {
 		return url;
 	}
 }

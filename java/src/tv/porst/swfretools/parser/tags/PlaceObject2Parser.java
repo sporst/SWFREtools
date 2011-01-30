@@ -5,9 +5,9 @@ import static tv.porst.swfretools.parser.SWFParserHelpers.parseStringIf;
 import static tv.porst.swfretools.parser.SWFParserHelpers.parseUINT16;
 import static tv.porst.swfretools.parser.SWFParserHelpers.parseUINT16If;
 import static tv.porst.swfretools.parser.structures.ClipActionsParser.parseIf;
-import tv.porst.splib.io.Flag;
-import tv.porst.splib.io.PString;
-import tv.porst.splib.io.UINT16;
+import tv.porst.splib.binaryparser.AsciiString;
+import tv.porst.splib.binaryparser.Flag;
+import tv.porst.splib.binaryparser.UINT16;
 import tv.porst.swfretools.parser.SWFBinaryParser;
 import tv.porst.swfretools.parser.SWFParserException;
 import tv.porst.swfretools.parser.structures.ClipActions;
@@ -50,7 +50,7 @@ public final class PlaceObject2Parser {
 		final Matrix matrix = MatrixParser.parseIf(parser, placeFlagHasMatrix, "PlaceObject2::Matrix");
 		final CxFormWithAlpha colorTransform = CxFormWithAlphaParser.parseIf(parser, placeFlagHasColorTransform, "PlaceObject2::CxFormWithAlpha");
 		final UINT16 ratio = parseUINT16If(parser, 0x00006, placeFlagHasRatio, "PlaceObject2::Ratio");
-		final PString name = parseStringIf(parser, 0x00006, placeFlagHasName, "PlaceObject2::Name");
+		final AsciiString name = parseStringIf(parser, 0x00006, placeFlagHasName, "PlaceObject2::Name");
 		final UINT16 clipDepth = parseUINT16If(parser, 0x00006, placeFlagHasClipDepth, "PlaceObject2::ClipDepth");
 		final ClipActions clipActions = parseIf(parser, version, placeFlagHasClipActions, "PlaceObject2::ClipActions");
 

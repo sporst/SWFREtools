@@ -1,7 +1,7 @@
 package tv.porst.swfretools.parser.structures;
 
-import tv.porst.splib.io.Bits;
-import tv.porst.splib.io.Flag;
+import tv.porst.splib.binaryparser.UBits;
+import tv.porst.splib.binaryparser.Flag;
 
 /**
  * Represents a BevelFilter structure.
@@ -69,7 +69,7 @@ public final class BevelFilter {
 	/**
 	 * Number of blur passes.
 	 */
-	private final Bits passes;
+	private final UBits passes;
 
 	/**
 	 * Creates a new BevelFilter object.
@@ -90,7 +90,7 @@ public final class BevelFilter {
 	public BevelFilter(final RGBA shadowColor, final RGBA highlightColor, final Fixed blurX,
 			final Fixed blurY, final Fixed angle, final Fixed distance, final Fixed8 strength,
 			final Flag innerShadow, final Flag knockout, final Flag compositeSource,
-			final Flag onTop, final Bits passes) {
+			final Flag onTop, final UBits passes) {
 
 		this.shadowColor = shadowColor;
 		this.highlightColor = highlightColor;
@@ -192,7 +192,7 @@ public final class BevelFilter {
 	 *
 	 * @return The number of blur passes.
 	 */
-	public Bits getPasses() {
+	public UBits getPasses() {
 		return passes;
 	}
 

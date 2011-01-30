@@ -1,7 +1,7 @@
 package tv.porst.swfretools.parser.tags;
 
-import tv.porst.splib.io.PString;
-import tv.porst.splib.io.UINT16;
+import tv.porst.splib.binaryparser.AsciiString;
+import tv.porst.splib.binaryparser.UINT16;
 import tv.porst.swfretools.parser.structures.RecordHeader;
 
 /**
@@ -20,12 +20,12 @@ public final class DefineFontNameTag extends Tag {
 	/**
 	 * Name of the font.
 	 */
-	private final PString fontName;
+	private final AsciiString fontName;
 
 	/**
 	 * Arbitrary string of copyright information.
 	 */
-	private final PString fontCopyright;
+	private final AsciiString fontCopyright;
 
 	/**
 	 * Creates a new ShowFrame tag object.
@@ -35,7 +35,7 @@ public final class DefineFontNameTag extends Tag {
 	 * @param fontName Name of the font.
 	 * @param fontCopyright Arbitrary string of copyright information.
 	 */
-	public DefineFontNameTag(final RecordHeader header, final UINT16 fontId, final PString fontName, final PString fontCopyright) {
+	public DefineFontNameTag(final RecordHeader header, final UINT16 fontId, final AsciiString fontName, final AsciiString fontCopyright) {
 		super(header);
 
 		this.fontId = fontId;
@@ -48,7 +48,7 @@ public final class DefineFontNameTag extends Tag {
 	 * 
 	 * @return The arbitrary string of copyright information.
 	 */
-	public PString getFontCopyright() {
+	public AsciiString getFontCopyright() {
 		return fontCopyright;
 	}
 
@@ -66,7 +66,7 @@ public final class DefineFontNameTag extends Tag {
 	 * 
 	 * @return The name of the font.
 	 */
-	public PString getFontName() {
+	public AsciiString getFontName() {
 		return fontName;
 	}
 }

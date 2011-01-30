@@ -1,9 +1,9 @@
 package tv.porst.swfretools.parser.tags;
 
-import tv.porst.splib.io.Bits;
-import tv.porst.splib.io.Flag;
-import tv.porst.splib.io.UINT16;
-import tv.porst.splib.io.UINT8;
+import tv.porst.splib.binaryparser.UBits;
+import tv.porst.splib.binaryparser.Flag;
+import tv.porst.splib.binaryparser.UINT16;
+import tv.porst.splib.binaryparser.UINT8;
 import tv.porst.swfretools.parser.structures.RecordHeader;
 
 /**
@@ -37,12 +37,12 @@ public final class DefineVideoStreamTag extends Tag {
 	/**
 	 * Reserved video flags.
 	 */
-	private final Bits videoFlagsReserved;
+	private final UBits videoFlagsReserved;
 
 	/**
 	 * Deblocking video flags.
 	 */
-	private final Bits videoFlagsDeblocking;
+	private final UBits videoFlagsDeblocking;
 
 	/**
 	 * Smoothing flag.
@@ -68,8 +68,8 @@ public final class DefineVideoStreamTag extends Tag {
 	 * @param codecId Codec ID.
 	 */
 	public DefineVideoStreamTag(final RecordHeader header, final UINT16 characterId,
-			final UINT16 numFrames, final UINT16 width, final UINT16 height, final Bits videoFlagsReserved,
-			final Bits videoFlagsDeblocking, final Flag videoFlagsSmoothing, final UINT8 codecId) {
+			final UINT16 numFrames, final UINT16 width, final UINT16 height, final UBits videoFlagsReserved,
+			final UBits videoFlagsDeblocking, final Flag videoFlagsSmoothing, final UINT8 codecId) {
 		super(header);
 
 		this.characterId = characterId;
@@ -123,7 +123,7 @@ public final class DefineVideoStreamTag extends Tag {
 	 * 
 	 * @return The deblocking video flags.
 	 */
-	public Bits getVideoFlagsDeblocking() {
+	public UBits getVideoFlagsDeblocking() {
 		return videoFlagsDeblocking;
 	}
 
@@ -132,7 +132,7 @@ public final class DefineVideoStreamTag extends Tag {
 	 * 
 	 * @return The reserved video flags.
 	 */
-	public Bits getVideoFlagsReserved() {
+	public UBits getVideoFlagsReserved() {
 		return videoFlagsReserved;
 	}
 

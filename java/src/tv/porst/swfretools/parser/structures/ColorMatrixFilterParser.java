@@ -1,7 +1,7 @@
 package tv.porst.swfretools.parser.structures;
 
 import static tv.porst.swfretools.parser.SWFParserHelpers.parseFloat;
-import tv.porst.splib.io.Float32;
+import tv.porst.splib.binaryparser.Float32;
 import tv.porst.swfretools.parser.SWFBinaryParser;
 import tv.porst.swfretools.parser.SWFParserException;
 

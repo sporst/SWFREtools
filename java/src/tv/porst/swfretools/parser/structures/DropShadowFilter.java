@@ -1,7 +1,7 @@
 package tv.porst.swfretools.parser.structures;
 
-import tv.porst.splib.io.Bits;
-import tv.porst.splib.io.Flag;
+import tv.porst.splib.binaryparser.UBits;
+import tv.porst.splib.binaryparser.Flag;
 
 /**
  * Represents a DropShadowFilter structure.
@@ -59,7 +59,7 @@ public final class DropShadowFilter {
 	/**
 	 * Number of blur passes.
 	 */
-	private final Bits passes;
+	private final UBits passes;
 
 	/**
 	 * Creates a new DropShadowFilter object.
@@ -77,7 +77,7 @@ public final class DropShadowFilter {
 	 */
 	public DropShadowFilter(final RGBA dropShadowColor, final Fixed blurX, final Fixed blurY,
 			final Fixed angle, final Fixed distance, final Fixed8 strength, final Flag innerShadow,
-			final Flag knockout, final Flag compositeSource, final Bits passes) {
+			final Flag knockout, final Flag compositeSource, final UBits passes) {
 
 		this.dropShadowColor = dropShadowColor;
 		this.blurX = blurX;
@@ -168,7 +168,7 @@ public final class DropShadowFilter {
 	 *
 	 * @return The number of blur passes.
 	 */
-	public Bits getPasses() {
+	public UBits getPasses() {
 		return passes;
 	}
 

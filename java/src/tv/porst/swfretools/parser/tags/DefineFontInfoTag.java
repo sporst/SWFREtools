@@ -3,12 +3,12 @@ package tv.porst.swfretools.parser.tags;
 import java.util.ArrayList;
 import java.util.List;
 
-import tv.porst.splib.io.Bits;
-import tv.porst.splib.io.Flag;
-import tv.porst.splib.io.IParsedINTElement;
-import tv.porst.splib.io.PString;
-import tv.porst.splib.io.UINT16;
-import tv.porst.splib.io.UINT8;
+import tv.porst.splib.binaryparser.AsciiString;
+import tv.porst.splib.binaryparser.UBits;
+import tv.porst.splib.binaryparser.Flag;
+import tv.porst.splib.binaryparser.IParsedINTElement;
+import tv.porst.splib.binaryparser.UINT16;
+import tv.porst.splib.binaryparser.UINT8;
 import tv.porst.swfretools.parser.structures.RecordHeader;
 
 /**
@@ -32,12 +32,12 @@ public final class DefineFontInfoTag extends Tag {
 	/**
 	 * Name of the font.
 	 */
-	private final PString fontName;
+	private final AsciiString fontName;
 
 	/**
 	 * Reserved bit fields.
 	 */
-	private final Bits fontFlagsReserved;
+	private final UBits fontFlagsReserved;
 
 	/**
 	 * Font is small flag.
@@ -91,7 +91,7 @@ public final class DefineFontInfoTag extends Tag {
 	 * @param codeTable Glyph to code table.
 	 */
 	public DefineFontInfoTag(final RecordHeader header, final UINT16 fontId, final UINT8 fontNameLen,
-			final PString fontName, final Bits fontFlagsReserved, final Flag fontFlagsSmallText,
+			final AsciiString fontName, final UBits fontFlagsReserved, final Flag fontFlagsSmallText,
 			final Flag fontFlagsShiftJIS, final Flag fontFlagsANSI,
 			final Flag fontFlagsItalic, final Flag fontFlagsBold,
 			final Flag fontFlagsWideCodes, final List<IParsedINTElement> codeTable) {
@@ -153,7 +153,7 @@ public final class DefineFontInfoTag extends Tag {
 	 * 
 	 * @return The reserved bit fields.
 	 */
-	public Bits getFontFlagsReserved() {
+	public UBits getFontFlagsReserved() {
 		return fontFlagsReserved;
 	}
 
@@ -198,7 +198,7 @@ public final class DefineFontInfoTag extends Tag {
 	 * 
 	 * @return The name of the font.
 	 */
-	public PString getFontName() {
+	public AsciiString getFontName() {
 		return fontName;
 	}
 

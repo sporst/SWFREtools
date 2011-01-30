@@ -1,6 +1,6 @@
 package tv.porst.swfretools.parser.structures;
 
-import tv.porst.splib.io.Bits;
+import tv.porst.splib.binaryparser.UBits;
 import tv.porst.swfretools.parser.SWFBinaryParser;
 import tv.porst.swfretools.parser.SWFParserException;
 
@@ -22,17 +22,17 @@ public final class ShapeRecordParser {
 	 * 
 	 * @throws SWFParserException Thrown if the structure could not be parsed.
 	 */
-	public static ShapeRecord parse(final SWFBinaryParser parser, final Bits fillBits, final Bits lineBits, final String fieldName) throws SWFParserException {
+	public static ShapeRecord parse(final SWFBinaryParser parser, final UBits fillBits, final UBits lineBits, final String fieldName) throws SWFParserException {
 
-		final int first6 = parser.peekBits(6);
+		final UBits first6 = parser.peekBits(6);
 
-		if (first6 == 0) {
+		if (first6.value() == 0) {
 			return EndShapeRecordParser.parse(parser, fieldName);
 		}
-		else if ((first6 & 0x20) == 0x20) {
+		else if ((first6.value() & 0x20) == 0x20) {
 			return StyleChangeRecordParser.parse(parser, fillBits, lineBits, fieldName);
 		}
-		else if ((first6 & 0x10) == 0x10) {
+		else if ((first6.value() & 0x10) == 0x10) {
 			return StraightEdgeRecordParser.parse(parser, fieldName);
 		}
 		else {

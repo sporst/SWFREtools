@@ -1,7 +1,7 @@
 package tv.porst.swfretools.parser.structures;
 
-import static tv.porst.swfretools.parser.SWFParserHelpers.parseBits;
-import tv.porst.splib.io.Bits;
+import static tv.porst.swfretools.parser.SWFParserHelpers.parseUBits;
+import tv.porst.splib.binaryparser.UBits;
 import tv.porst.swfretools.parser.SWFBinaryParser;
 import tv.porst.swfretools.parser.SWFParserException;
 
@@ -24,10 +24,10 @@ public final class Pix15Parser {
 	 */
 	public static Pix15 parse(final SWFBinaryParser parser, final String fieldName) throws SWFParserException {
 
-		final Bits pix15Reserved = parseBits(parser, 1, 0x00006, fieldName + "::Pix15Reserved");
-		final Bits pix15Red = parseBits(parser, 5, 0x00006, fieldName + "::Pix15Red");
-		final Bits pix15Green = parseBits(parser, 5, 0x00006, fieldName + "::Pix15Green");
-		final Bits pix15Blue = parseBits(parser, 5, 0x00006, fieldName + "::Pix15Blue");
+		final UBits pix15Reserved = parseUBits(parser, 1, 0x00006, fieldName + "::Pix15Reserved");
+		final UBits pix15Red = parseUBits(parser, 5, 0x00006, fieldName + "::Pix15Red");
+		final UBits pix15Green = parseUBits(parser, 5, 0x00006, fieldName + "::Pix15Green");
+		final UBits pix15Blue = parseUBits(parser, 5, 0x00006, fieldName + "::Pix15Blue");
 
 		return new Pix15(pix15Reserved, pix15Red, pix15Blue, pix15Green);
 	}

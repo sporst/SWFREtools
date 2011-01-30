@@ -1,6 +1,6 @@
 package tv.porst.swfretools.parser.tags;
 
-import static tv.porst.swfretools.parser.SWFParserHelpers.parseBits;
+import static tv.porst.swfretools.parser.SWFParserHelpers.parseUBits;
 import static tv.porst.swfretools.parser.SWFParserHelpers.parseFlag;
 import static tv.porst.swfretools.parser.SWFParserHelpers.parseString;
 import static tv.porst.swfretools.parser.SWFParserHelpers.parseUINT16;
@@ -9,12 +9,12 @@ import static tv.porst.swfretools.parser.SWFParserHelpers.parseUINT8;
 import java.util.ArrayList;
 import java.util.List;
 
-import tv.porst.splib.io.Bits;
-import tv.porst.splib.io.Flag;
-import tv.porst.splib.io.IParsedINTElement;
-import tv.porst.splib.io.PString;
-import tv.porst.splib.io.UINT16;
-import tv.porst.splib.io.UINT8;
+import tv.porst.splib.binaryparser.AsciiString;
+import tv.porst.splib.binaryparser.UBits;
+import tv.porst.splib.binaryparser.Flag;
+import tv.porst.splib.binaryparser.IParsedINTElement;
+import tv.porst.splib.binaryparser.UINT16;
+import tv.porst.splib.binaryparser.UINT8;
 import tv.porst.swfretools.parser.SWFBinaryParser;
 import tv.porst.swfretools.parser.SWFParserException;
 import tv.porst.swfretools.parser.structures.RecordHeader;
@@ -40,8 +40,8 @@ public final class DefineFontInfoParser {
 
 		final UINT16 fontId = parseUINT16(parser, 0x00006, "DefineFontInfo::FontId");
 		final UINT8 fontNameLen = parseUINT8(parser, 0x00006, "DefineFontInfo::FontNameLen");
-		final PString fontName = parseString(parser, fontNameLen.value(), 0x00006, "DefineFontInfo::FontName");
-		final Bits fontFlagsReserved = parseBits(parser, 2, 0x00006, "DefineFontInfo::FontFlagsReserved");
+		final AsciiString fontName = parseString(parser, fontNameLen.value(), 0x00006, "DefineFontInfo::FontName");
+		final UBits fontFlagsReserved = parseUBits(parser, 2, 0x00006, "DefineFontInfo::FontFlagsReserved");
 		final Flag fontFlagsSmallText = parseFlag(parser, 0x00006, "DefineFontInfo::FontFlagsSmallText");
 		final Flag fontFlagsShiftJIS = parseFlag(parser, 0x00006, "DefineFontInfo::FontFlagsShiftJIS");
 		final Flag fontFlagsANSI = parseFlag(parser, 0x00006, "DefineFontInfo::FontFlagsANSI");

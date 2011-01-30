@@ -1,9 +1,9 @@
 package tv.porst.swfretools.parser.structures;
 
-import static tv.porst.swfretools.parser.SWFParserHelpers.parseBits;
+import static tv.porst.swfretools.parser.SWFParserHelpers.parseUBits;
 import static tv.porst.swfretools.parser.SWFParserHelpers.parseFlag;
-import tv.porst.splib.io.Bits;
-import tv.porst.splib.io.Flag;
+import tv.porst.splib.binaryparser.UBits;
+import tv.porst.splib.binaryparser.Flag;
 import tv.porst.swfretools.parser.SWFBinaryParser;
 import tv.porst.swfretools.parser.SWFParserException;
 
@@ -27,7 +27,7 @@ public final class EndShapeRecordParser {
 	public static EndShapeRecord parse(final SWFBinaryParser parser, final String fieldName) throws SWFParserException {
 
 		final Flag typeFlag = parseFlag(parser, 0x00006, fieldName + "::NumberOfFilters");
-		final Bits endOfShape = parseBits(parser, 5, 0x00006, fieldName + "::EndOfShape");
+		final UBits endOfShape = parseUBits(parser, 5, 0x00006, fieldName + "::EndOfShape");
 
 		return new EndShapeRecord(typeFlag, endOfShape);
 	}

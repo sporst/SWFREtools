@@ -2,7 +2,7 @@ package tv.porst.swfretools.parser.actions;
 
 import java.util.List;
 
-import tv.porst.splib.io.BinaryParser;
+import tv.porst.splib.binaryparser.BinaryParser;
 
 public class ActionRecordParser {
 

@@ -3,8 +3,8 @@ package tv.porst.swfretools.parser.structures;
 import static tv.porst.swfretools.parser.SWFParserHelpers.parseINT16;
 import static tv.porst.swfretools.parser.SWFParserHelpers.parseUINT16;
 import static tv.porst.swfretools.parser.SWFParserHelpers.parseUINT8;
-import tv.porst.splib.io.INT16;
-import tv.porst.splib.io.IParsedINTElement;
+import tv.porst.splib.binaryparser.INT16;
+import tv.porst.splib.binaryparser.IParsedINTElement;
 import tv.porst.swfretools.parser.SWFBinaryParser;
 import tv.porst.swfretools.parser.SWFParserException;
 

@@ -1,6 +1,6 @@
 package tv.porst.swfretools.parser.structures;
 
-import tv.porst.splib.io.Float16;
+import tv.porst.splib.binaryparser.Float16;
 
 /**
  * Represents a ZoneData structure.

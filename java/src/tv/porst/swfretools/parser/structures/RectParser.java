@@ -1,9 +1,9 @@
 package tv.porst.swfretools.parser.structures;
 
-import static tv.porst.swfretools.parser.SWFParserHelpers.parseBits;
+import static tv.porst.swfretools.parser.SWFParserHelpers.parseUBits;
 import static tv.porst.swfretools.parser.SWFParserHelpers.parseSBits;
-import tv.porst.splib.io.Bits;
-import tv.porst.splib.io.SBits;
+import tv.porst.splib.binaryparser.UBits;
+import tv.porst.splib.binaryparser.Bits;
 import tv.porst.swfretools.parser.SWFBinaryParser;
 import tv.porst.swfretools.parser.SWFParserException;
 
@@ -30,7 +30,7 @@ public final class RectParser {
 			throw new IllegalArgumentException("Parser argument must not be null");
 		}
 
-		final Bits nBits = parseBits(parser, 5, 0x00006, fieldName + "::NBits");
+		final UBits nBits = parseUBits(parser, 5, 0x00006, fieldName + "::NBits");
 
 		// It is unclear what happens if nBits is 0. This situation is not specified
 		// in the SWF file format reference.
@@ -39,10 +39,10 @@ public final class RectParser {
 			return new Rect(nBits, null, null, null, null);
 		}
 
-		final SBits xMin = parseSBits(parser, nBits.value(), 0x00006, fieldName + "::XMin");
-		final SBits xMax = parseSBits(parser, nBits.value(), 0x00006, fieldName + "::XMax");
-		final SBits yMin = parseSBits(parser, nBits.value(), 0x00006, fieldName + "::YMin");
-		final SBits yMax = parseSBits(parser, nBits.value(), 0x00006, fieldName + "::YMax");
+		final Bits xMin = parseSBits(parser, nBits.value(), 0x00006, fieldName + "::XMin");
+		final Bits xMax = parseSBits(parser, nBits.value(), 0x00006, fieldName + "::XMax");
+		final Bits yMin = parseSBits(parser, nBits.value(), 0x00006, fieldName + "::YMin");
+		final Bits yMax = parseSBits(parser, nBits.value(), 0x00006, fieldName + "::YMax");
 
 		return new Rect(nBits, xMin, xMax, yMin, yMax);
 	}

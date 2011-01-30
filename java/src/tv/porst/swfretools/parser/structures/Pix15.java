@@ -1,6 +1,6 @@
 package tv.porst.swfretools.parser.structures;
 
-import tv.porst.splib.io.Bits;
+import tv.porst.splib.binaryparser.UBits;
 
 /**
  * Represents a Pix15 structure.
@@ -13,22 +13,22 @@ public final class Pix15 {
 	/**
 	 * Reserved bits.
 	 */
-	private final Bits pix15Reserved;
+	private final UBits pix15Reserved;
 
 	/**
 	 * Red value.
 	 */
-	private final Bits pix15Red;
+	private final UBits pix15Red;
 
 	/**
 	 * Green value.
 	 */
-	private final Bits pix15Green;
+	private final UBits pix15Green;
 
 	/**
 	 * Blue value.
 	 */
-	private final Bits pix15Blue;
+	private final UBits pix15Blue;
 
 	/**
 	 * Creates a new Pix15 object.
@@ -38,7 +38,7 @@ public final class Pix15 {
 	 * @param pix15Green Green value.
 	 * @param pix15Blue Blue value.
 	 */
-	public Pix15(final Bits pix15Reserved, final Bits pix15Red, final Bits pix15Blue, final Bits pix15Green) {
+	public Pix15(final UBits pix15Reserved, final UBits pix15Red, final UBits pix15Blue, final UBits pix15Green) {
 
 		this.pix15Reserved = pix15Reserved;
 		this.pix15Red = pix15Red;
@@ -52,7 +52,7 @@ public final class Pix15 {
 	 *
 	 * @return The blue value.
 	 */
-	public Bits getPix15Blue() {
+	public UBits getPix15Blue() {
 		return pix15Blue;
 	}
 
@@ -61,7 +61,7 @@ public final class Pix15 {
 	 *
 	 * @return The green value.
 	 */
-	public Bits getPix15Green() {
+	public UBits getPix15Green() {
 		return pix15Green;
 	}
 
@@ -70,7 +70,7 @@ public final class Pix15 {
 	 *
 	 * @return The red value.
 	 */
-	public Bits getPix15Red() {
+	public UBits getPix15Red() {
 		return pix15Red;
 	}
 
@@ -79,7 +79,7 @@ public final class Pix15 {
 	 *
 	 * @return The reserved bits.
 	 */
-	public Bits getPix15Reserved() {
+	public UBits getPix15Reserved() {
 		return pix15Reserved;
 	}
 }

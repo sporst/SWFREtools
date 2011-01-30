@@ -1,8 +1,8 @@
 package tv.porst.swfretools.parser.structures;
 
-import tv.porst.splib.io.Bits;
-import tv.porst.splib.io.Flag;
-import tv.porst.splib.io.UINT16;
+import tv.porst.splib.binaryparser.UBits;
+import tv.porst.splib.binaryparser.Flag;
+import tv.porst.splib.binaryparser.UINT16;
 
 /**
  * Represents a MorphLineStyle2 structure.
@@ -25,12 +25,12 @@ public final class MorphLineStyle2 {
 	/**
 	 * Start-cap style.
 	 */
-	private final Bits startCapStyle;
+	private final UBits startCapStyle;
 
 	/**
 	 * Join style.
 	 */
-	private final Bits joinStyle;
+	private final UBits joinStyle;
 
 	/**
 	 * Has fill flag.
@@ -55,7 +55,7 @@ public final class MorphLineStyle2 {
 	/**
 	 * Reserved bits.
 	 */
-	private final Bits reserved;
+	private final UBits reserved;
 
 	/**
 	 * Close flag.
@@ -65,7 +65,7 @@ public final class MorphLineStyle2 {
 	/**
 	 * End-cap style.
 	 */
-	private final Bits endCapStyle;
+	private final UBits endCapStyle;
 
 	/**
 	 * Miter limit factor.
@@ -106,10 +106,10 @@ public final class MorphLineStyle2 {
 	 * @param endColor Color value of end shape.
 	 * @param fillType Fill style.
 	 */
-	public MorphLineStyle2(final UINT16 startWidth, final UINT16 endWidth, final Bits startCapStyle,
-			final Bits joinStyle, final Flag hasFillFlag, final Flag noHScaleFlag,
-			final Flag noVScaleFlag, final Flag pixelHintingFlag, final Bits reserved,
-			final Flag noClose, final Bits endCapStyle, final UINT16 miterLimitFactor,
+	public MorphLineStyle2(final UINT16 startWidth, final UINT16 endWidth, final UBits startCapStyle,
+			final UBits joinStyle, final Flag hasFillFlag, final Flag noHScaleFlag,
+			final Flag noVScaleFlag, final Flag pixelHintingFlag, final UBits reserved,
+			final Flag noClose, final UBits endCapStyle, final UINT16 miterLimitFactor,
 			final RGBA startColor, final RGBA endColor, final MorphFillStyle fillType) {
 
 		this.startWidth = startWidth;
@@ -135,7 +135,7 @@ public final class MorphLineStyle2 {
 	 *
 	 * @return The end-cap style.
 	 */
-	public Bits getEndCapStyle() {
+	public UBits getEndCapStyle() {
 		return endCapStyle;
 	}
 
@@ -180,7 +180,7 @@ public final class MorphLineStyle2 {
 	 *
 	 * @return The join style.
 	 */
-	public Bits getJoinStyle() {
+	public UBits getJoinStyle() {
 		return joinStyle;
 	}
 
@@ -234,7 +234,7 @@ public final class MorphLineStyle2 {
 	 *
 	 * @return The reserved bits.
 	 */
-	public Bits getReserved() {
+	public UBits getReserved() {
 		return reserved;
 	}
 
@@ -243,7 +243,7 @@ public final class MorphLineStyle2 {
 	 *
 	 * @return The start-cap style.
 	 */
-	public Bits getStartCapStyle() {
+	public UBits getStartCapStyle() {
 		return startCapStyle;
 	}
 

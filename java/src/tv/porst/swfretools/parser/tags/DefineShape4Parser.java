@@ -1,11 +1,11 @@
 package tv.porst.swfretools.parser.tags;
 
-import static tv.porst.swfretools.parser.SWFParserHelpers.parseBits;
+import static tv.porst.swfretools.parser.SWFParserHelpers.parseUBits;
 import static tv.porst.swfretools.parser.SWFParserHelpers.parseFlag;
 import static tv.porst.swfretools.parser.SWFParserHelpers.parseUINT16;
-import tv.porst.splib.io.Bits;
-import tv.porst.splib.io.Flag;
-import tv.porst.splib.io.UINT16;
+import tv.porst.splib.binaryparser.UBits;
+import tv.porst.splib.binaryparser.Flag;
+import tv.porst.splib.binaryparser.UINT16;
 import tv.porst.swfretools.parser.SWFBinaryParser;
 import tv.porst.swfretools.parser.SWFParserException;
 import tv.porst.swfretools.parser.structures.RecordHeader;
@@ -36,7 +36,7 @@ public final class DefineShape4Parser {
 		final UINT16 shapeId = parseUINT16(parser, 0x00006, "DefineShape4::ShapeID");
 		final Rect shapeBounds = RectParser.parse(parser, "DefineShape4::ShapeBounds");
 		final Rect edgeBounds = RectParser.parse(parser, "DefineShape4::EdgeBounds");
-		final Bits reserved = parseBits(parser, 5, 0x00006, "DefineShape4::Reserved");
+		final UBits reserved = parseUBits(parser, 5, 0x00006, "DefineShape4::Reserved");
 		final Flag usesFillWindingRule = parseFlag(parser, 0x00006, "DefineShape4::UsesFillWindingRule");
 		final Flag usesNonScalingStrokes = parseFlag(parser, 0x00006, "DefineShape4::UsesNonScalingStrokes");
 		final Flag usesScalingStrokes = parseFlag(parser, 0x00006, "DefineShape4::UsesScalingStrokes");

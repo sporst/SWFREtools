@@ -7,11 +7,11 @@ import static tv.porst.swfretools.parser.SWFParserHelpers.parseStringIf;
 import static tv.porst.swfretools.parser.SWFParserHelpers.parseUINT16;
 import static tv.porst.swfretools.parser.SWFParserHelpers.parseUINT16If;
 import static tv.porst.swfretools.parser.SWFParserHelpers.parseUINT8If;
-import tv.porst.splib.io.Flag;
-import tv.porst.splib.io.INT16;
-import tv.porst.splib.io.PString;
-import tv.porst.splib.io.UINT16;
-import tv.porst.splib.io.UINT8;
+import tv.porst.splib.binaryparser.AsciiString;
+import tv.porst.splib.binaryparser.Flag;
+import tv.porst.splib.binaryparser.INT16;
+import tv.porst.splib.binaryparser.UINT16;
+import tv.porst.splib.binaryparser.UINT8;
 import tv.porst.swfretools.parser.SWFBinaryParser;
 import tv.porst.swfretools.parser.SWFParserException;
 import tv.porst.swfretools.parser.structures.RGBA;
@@ -58,7 +58,7 @@ public final class DefineEditTextParser {
 		final Flag html = parseFlag(parser, 0x00006, "DefineEditText::HTML");
 		final Flag useOutlines = parseFlag(parser, 0x00006, "DefineEditText::UseOutlines");
 		final UINT16 fontID = parseUINT16If(parser, 0x00006, hasFont, "DefineEditText::FontID");
-		final PString fontClass = parseStringIf(parser, 0x00006, hasFontClass, "DefineEditText::FontClass");
+		final AsciiString fontClass = parseStringIf(parser, 0x00006, hasFontClass, "DefineEditText::FontClass");
 		final UINT16 fontHeight = parseUINT16If(parser, 0x00006, hasFont, "DefineEditText::FontHeight");
 		final RGBA textColor = RGBAParser.parseIf(parser, hasTextColor, "DefineEditText::TextColor");
 		final UINT16 maxLength = parseUINT16If(parser, 0x00006, hasMaxLength, "DefineEditText::MaxLength");
@@ -67,8 +67,8 @@ public final class DefineEditTextParser {
 		final UINT16 rightMargin = parseUINT16If(parser, 0x00006, hasLayout, "DefineEditText::RightMargin");
 		final UINT16 indent = parseUINT16If(parser, 0x00006, hasLayout, "DefineEditText::Indent");
 		final INT16 leading = parseINT16If(parser, 0x00006, hasLayout, "DefineEditText::Leading");
-		final PString variableName = parseString(parser, 0x00006, "DefineEditText::VariableName");
-		final PString initialText = parseStringIf(parser, 0x00006, hasText, "DefineEditText::InitialText");
+		final AsciiString variableName = parseString(parser, 0x00006, "DefineEditText::VariableName");
+		final AsciiString initialText = parseStringIf(parser, 0x00006, hasText, "DefineEditText::InitialText");
 
 		return new DefineEditTextTag(header, characterId, bounds, hasText, wordWrap,
 				multiline, password, readOnly, hasTextColor, hasMaxLength, hasFont,

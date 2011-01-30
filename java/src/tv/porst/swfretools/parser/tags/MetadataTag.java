@@ -1,6 +1,6 @@
 package tv.porst.swfretools.parser.tags;
 
-import tv.porst.splib.io.PString;
+import tv.porst.splib.binaryparser.AsciiString;
 import tv.porst.swfretools.parser.structures.RecordHeader;
 
 /**
@@ -14,7 +14,7 @@ public final class MetadataTag extends Tag {
 	/**
 	 * XML metadata
 	 */
-	private final PString metadata;
+	private final AsciiString metadata;
 
 	/**
 	 * Creates a new Metadata tag object.
@@ -22,7 +22,7 @@ public final class MetadataTag extends Tag {
 	 * @param header Tag header.
 	 * @param metadata XML metadata.
 	 */
-	public MetadataTag(final RecordHeader header, final PString metadata) {
+	public MetadataTag(final RecordHeader header, final AsciiString metadata) {
 		super(header);
 
 		this.metadata = metadata;
@@ -33,7 +33,7 @@ public final class MetadataTag extends Tag {
 	 * 
 	 * @return The XML metadata.
 	 */
-	public PString getMetadata() {
+	public AsciiString getMetadata() {
 		return metadata;
 	}
 }

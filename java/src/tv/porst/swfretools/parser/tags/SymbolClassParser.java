@@ -5,7 +5,7 @@ import static tv.porst.swfretools.parser.SWFParserHelpers.parseUINT16;
 import java.util.ArrayList;
 import java.util.List;
 
-import tv.porst.splib.io.UINT16;
+import tv.porst.splib.binaryparser.UINT16;
 import tv.porst.swfretools.parser.SWFBinaryParser;
 import tv.porst.swfretools.parser.SWFParserException;
 import tv.porst.swfretools.parser.structures.RecordHeader;

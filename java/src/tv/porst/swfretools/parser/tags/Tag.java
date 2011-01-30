@@ -1,6 +1,5 @@
 package tv.porst.swfretools.parser.tags;
 
-import tv.porst.swfretools.parser.SWFParserHelpers;
 import tv.porst.swfretools.parser.structures.RecordHeader;
 
 /**
@@ -14,7 +13,7 @@ public abstract class Tag {
 	/**
 	 * The tag header.
 	 */
-	private RecordHeader header;
+	private final RecordHeader header;
 
 	/**
 	 * Creates a new tag object.
@@ -23,7 +22,6 @@ public abstract class Tag {
 	 */
 	public Tag(final RecordHeader header) {
 
-		SWFParserHelpers.checkNull(header, "Header");
 		this.header = header;
 	}
 
@@ -34,16 +32,5 @@ public abstract class Tag {
 	 */
 	public RecordHeader getHeader() {
 		return header;
-	}
-
-	/**
-	 * Changes the tag header.
-	 * 
-	 * @param header The new tag header.
-	 */
-	public void setHeader(final RecordHeader header) {
-
-		SWFParserHelpers.checkNull(header, "Header");
-		this.header = header;
 	}
 }

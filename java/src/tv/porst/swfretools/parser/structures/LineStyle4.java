@@ -1,8 +1,8 @@
 package tv.porst.swfretools.parser.structures;
 
-import tv.porst.splib.io.Bits;
-import tv.porst.splib.io.Flag;
-import tv.porst.splib.io.UINT16;
+import tv.porst.splib.binaryparser.UBits;
+import tv.porst.splib.binaryparser.Flag;
+import tv.porst.splib.binaryparser.UINT16;
 
 /**
  * Represents a LineStyle4 structure.
@@ -20,12 +20,12 @@ public class LineStyle4 {
 	/**
 	 * Start-cap style.
 	 */
-	private final Bits startCapStyle;
+	private final UBits startCapStyle;
 
 	/**
 	 * Join style.
 	 */
-	private final Bits joinStyle;
+	private final UBits joinStyle;
 
 	/**
 	 * Has fill flag.
@@ -50,7 +50,7 @@ public class LineStyle4 {
 	/**
 	 * Reserved bits.
 	 */
-	private final Bits reserved;
+	private final UBits reserved;
 
 	/**
 	 * Close flag.
@@ -60,7 +60,7 @@ public class LineStyle4 {
 	/**
 	 * End-cap style.
 	 */
-	private final Bits endCapStyle;
+	private final UBits endCapStyle;
 
 	/**
 	 * Miter limit factor.
@@ -94,10 +94,10 @@ public class LineStyle4 {
 	 * @param color Color value including alpha channel.
 	 * @param fillType Fill style.
 	 */
-	public LineStyle4(final UINT16 width, final Bits startCapStyle, final Bits joinStyle,
+	public LineStyle4(final UINT16 width, final UBits startCapStyle, final UBits joinStyle,
 			final Flag hasFillFlag, final Flag noHScaleFlag, final Flag noVScaleFlag,
-			final Flag pixelHintingFlag, final Bits reserved, final Flag noClose,
-			final Bits endCapStyle, final UINT16 miterLimitFactor, final RGBA color,
+			final Flag pixelHintingFlag, final UBits reserved, final Flag noClose,
+			final UBits endCapStyle, final UINT16 miterLimitFactor, final RGBA color,
 			final FillStyle3 fillType) {
 
 		this.width = width;
@@ -130,7 +130,7 @@ public class LineStyle4 {
 	 *
 	 * @return The end-cap style.
 	 */
-	public Bits getEndCapStyle() {
+	public UBits getEndCapStyle() {
 		return endCapStyle;
 	}
 
@@ -157,7 +157,7 @@ public class LineStyle4 {
 	 *
 	 * @return The join style.
 	 */
-	public Bits getJoinStyle() {
+	public UBits getJoinStyle() {
 		return joinStyle;
 	}
 
@@ -211,7 +211,7 @@ public class LineStyle4 {
 	 *
 	 * @return The reserved bits.
 	 */
-	public Bits getReserved() {
+	public UBits getReserved() {
 		return reserved;
 	}
 
@@ -220,7 +220,7 @@ public class LineStyle4 {
 	 *
 	 * @return The start-cap style.
 	 */
-	public Bits getStartCapStyle() {
+	public UBits getStartCapStyle() {
 		return startCapStyle;
 	}
 

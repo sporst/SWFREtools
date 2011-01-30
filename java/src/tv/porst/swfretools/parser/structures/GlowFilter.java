@@ -1,7 +1,7 @@
 package tv.porst.swfretools.parser.structures;
 
-import tv.porst.splib.io.Bits;
-import tv.porst.splib.io.Flag;
+import tv.porst.splib.binaryparser.UBits;
+import tv.porst.splib.binaryparser.Flag;
 
 /**
  * Represents a GlowFilter structure.
@@ -49,7 +49,7 @@ public final class GlowFilter {
 	/**
 	 * Number of blur passes.
 	 */
-	private final Bits passes;
+	private final UBits passes;
 
 	/**
 	 * Creates a new GradientGlowFilter object.
@@ -65,7 +65,7 @@ public final class GlowFilter {
 	 */
 	public GlowFilter(final RGBA glowColor, final Fixed blurX, final Fixed blurY,
 			final Fixed8 strength, final Flag innerShadow, final Flag knockout,
-			final Flag compositeSource, final Bits passes) {
+			final Flag compositeSource, final UBits passes) {
 
 		this.glowColor = glowColor;
 		this.blurX = blurX;
@@ -137,7 +137,7 @@ public final class GlowFilter {
 	 *
 	 * @return The number of blur passes.
 	 */
-	public Bits getPasses() {
+	public UBits getPasses() {
 		return passes;
 	}
 

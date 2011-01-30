@@ -1,6 +1,6 @@
 package tv.porst.swfretools.parser.structures;
 
-import tv.porst.splib.io.Float32;
+import tv.porst.splib.binaryparser.Float32;
 
 /**
  * Represents a ColorMatrixFilter structure.

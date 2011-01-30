@@ -1,6 +1,6 @@
 package tv.porst.swfretools.parser.tags;
 
-import tv.porst.splib.io.PString;
+import tv.porst.splib.binaryparser.AsciiString;
 import tv.porst.swfretools.parser.structures.RecordHeader;
 
 /**
@@ -14,7 +14,7 @@ public final class EnableDebuggerTag extends Tag {
 	/**
 	 * MD5-encrypted password.
 	 */
-	private final PString password;
+	private final AsciiString password;
 
 	/**
 	 * Creates a new EnableDebugger tag object.
@@ -22,7 +22,7 @@ public final class EnableDebuggerTag extends Tag {
 	 * @param header Tag header.
 	 * @param password MD5-encrypted password.
 	 */
-	public EnableDebuggerTag(final RecordHeader header, final PString password) {
+	public EnableDebuggerTag(final RecordHeader header, final AsciiString password) {
 
 		super(header);
 
@@ -34,7 +34,7 @@ public final class EnableDebuggerTag extends Tag {
 	 * 
 	 * @return The MD5-encrypted password.
 	 */
-	public PString getPassword() {
+	public AsciiString getPassword() {
 		return password;
 	}
 }

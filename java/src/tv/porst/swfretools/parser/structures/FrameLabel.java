@@ -1,6 +1,6 @@
 package tv.porst.swfretools.parser.structures;
 
-import tv.porst.splib.io.PString;
+import tv.porst.splib.binaryparser.AsciiString;
 
 /**
  * Represents a FrameLabel structure.
@@ -18,7 +18,7 @@ public final class FrameLabel {
 	/**
 	 * Name of scene.
 	 */
-	private final PString name;
+	private final AsciiString name;
 
 	/**
 	 * Creates a new RGBA object.
@@ -26,7 +26,7 @@ public final class FrameLabel {
 	 * @param offset Offset for scene.
 	 * @param name Name of scene.
 	 */
-	public FrameLabel(final EncodedU32 offset, final PString name) {
+	public FrameLabel(final EncodedU32 offset, final AsciiString name) {
 
 		this.offset = offset;
 		this.name = name;
@@ -38,7 +38,7 @@ public final class FrameLabel {
 	 *
 	 * @return The name of scene.
 	 */
-	public PString getName() {
+	public AsciiString getName() {
 		return name;
 	}
 
