@@ -1,7 +1,6 @@
 package tv.porst.swfretools.parser.tags;
 
 import tv.porst.splib.binaryparser.UINT16;
-import tv.porst.swfretools.parser.SWFParserHelpers;
 import tv.porst.swfretools.parser.structures.RecordHeader;
 import tv.porst.swfretools.parser.structures.SoundInfo;
 

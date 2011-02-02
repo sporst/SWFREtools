@@ -1,15 +1,15 @@
 package tv.porst.swfretools.parser.tags;
 
-import static tv.porst.swfretools.parser.SWFParserHelpers.parseUBits;
 import static tv.porst.swfretools.parser.SWFParserHelpers.parseFlag;
+import static tv.porst.swfretools.parser.SWFParserHelpers.parseUBits;
 import static tv.porst.swfretools.parser.SWFParserHelpers.parseUINT16;
 import static tv.porst.swfretools.parser.SWFParserHelpers.parseUINT8;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import tv.porst.splib.binaryparser.UBits;
 import tv.porst.splib.binaryparser.Flag;
+import tv.porst.splib.binaryparser.UBits;
 import tv.porst.splib.binaryparser.UINT16;
 import tv.porst.splib.binaryparser.UINT8;
 import tv.porst.swfretools.parser.SWFBinaryParser;
@@ -46,8 +46,7 @@ public final class DefineButton2Parser {
 
 		final List<ButtonRecord2> characters = new ArrayList<ButtonRecord2>();
 
-		do
-		{
+		do {
 			if (parser.peekUInt8().value() == 0) {
 				break;
 			}

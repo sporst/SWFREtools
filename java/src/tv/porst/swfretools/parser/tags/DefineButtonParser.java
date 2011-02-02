@@ -39,8 +39,7 @@ public final class DefineButtonParser {
 
 		final List<ButtonRecord> characters = new ArrayList<ButtonRecord>();
 
-		do
-		{
+		do {
 			if (parser.peekUInt8().value() == 0) {
 				break;
 			}

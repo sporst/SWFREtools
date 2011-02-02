@@ -1,9 +1,9 @@
 package tv.porst.swfretools.parser.structures;
 
-import static tv.porst.swfretools.parser.SWFParserHelpers.parseUBitsIf;
 import static tv.porst.swfretools.parser.SWFParserHelpers.parseFlag;
-import tv.porst.splib.binaryparser.UBits;
+import static tv.porst.swfretools.parser.SWFParserHelpers.parseUBitsIf;
 import tv.porst.splib.binaryparser.Flag;
+import tv.porst.splib.binaryparser.UBits;
 import tv.porst.swfretools.parser.SWFBinaryParser;
 import tv.porst.swfretools.parser.SWFParserException;
 
@@ -19,8 +19,8 @@ public final class StyleChangeRecordParser {
 	 * Parses a StyleChangeRecord structure.
 	 * 
 	 * @param parser The parser that parses the structure.
-	 * @param fillBits
-	 * @param lineBits
+	 * @param fillBits Number of bits for fill style values.
+	 * @param lineBits Number of bits for line style values.
 	 * @param fieldName Name of the structure in the parent structure.
 	 * 
 	 * @return The parsed structure.

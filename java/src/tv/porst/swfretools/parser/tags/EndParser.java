@@ -1,6 +1,5 @@
 package tv.porst.swfretools.parser.tags;
 
-import tv.porst.splib.binaryparser.BinaryParser;
 import tv.porst.swfretools.parser.structures.RecordHeader;
 
 /**
@@ -17,7 +16,7 @@ public final class EndParser {
 	 * 
 	 * @return Returns the parsed tag.
 	 */
-	public static EndTag parse(final RecordHeader header, final BinaryParser parser) {
+	public static EndTag parse(final RecordHeader header) {
 
 		return new EndTag(header);
 	}

@@ -45,8 +45,7 @@ public final class DefineText2Parser {
 
 		final List<TextRecord2> textRecords = new ArrayList<TextRecord2>();
 
-		do
-		{
+		do {
 			if (parser.peekUInt8().value() == 0) {
 				break;
 			}

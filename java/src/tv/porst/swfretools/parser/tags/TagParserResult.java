@@ -42,6 +42,15 @@ public final class TagParserResult {
 	}
 
 	/**
+	 * Returns the parser errors list.
+	 *
+	 * @return The parser errors list.
+	 */
+	public List<ParserError> getErrors() {
+		return new ArrayList<ParserError>(errors);
+	}
+
+	/**
 	 * Returns the list of parsed tags.
 	 * 
 	 * @return The list of parsed tags.
@@ -49,5 +58,4 @@ public final class TagParserResult {
 	public List<Tag> getTags() {
 		return new ArrayList<Tag>(tags);
 	}
-
 }

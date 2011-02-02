@@ -16,8 +16,9 @@ public final class DefineSpriteParser {
 	/**
 	 * Parses a DefineSprite tag.
 	 * 
-	 * @param parser Provides the input data.
 	 * @param header Previously parsed header of the tag.
+	 * @param parser Provides the input data.
+	 * @param version Flash version number which was read from the SWF file header.
 	 * 
 	 * @return Returns the parsed tag.
 	 * 

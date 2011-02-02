@@ -16,6 +16,8 @@ public final class ShapeRecord3Parser {
 	 * Parses a ShapeRecord3 structure.
 	 * 
 	 * @param parser The parser that parses the structure.
+	 * @param numFillBits Number of bits for fill style values.
+	 * @param numLineBits Number of bits for line style values.
 	 * @param fieldName The name of the structure in the parent structure.
 	 * 
 	 * @return The parsed structure.

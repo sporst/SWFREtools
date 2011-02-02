@@ -45,12 +45,11 @@ public final class FilterListParser {
 	 * @param parser The parser that parses the structure.
 	 * @param condition Condition to be true for the structure to be parsed.
 	 * @param fieldName The name of the structure in the parent structure.
-	 * 
 	 * @return The parsed structure or null if the condition was false.
 	 * 
 	 * @throws SWFParserException Thrown if the structure could not be parsed.
 	 */
-	public static FilterList parseIf(final SWFBinaryParser parser, final int errorCode, final Flag condition, final String fieldName) throws SWFParserException {
+	public static FilterList parseIf(final SWFBinaryParser parser, final Flag condition, final String fieldName) throws SWFParserException {
 		return condition.value() ? parse(parser, fieldName) : null;
 	}
 }

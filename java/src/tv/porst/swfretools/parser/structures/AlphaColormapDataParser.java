@@ -15,6 +15,8 @@ public final class AlphaColormapDataParser {
 	 * Parses an AlphaColormap structure.
 	 * 
 	 * @param parser The parser that parses the structure.
+	 * @param colorTableSize Size of the color table.
+	 * @param imageDataSize Size of the image data.
 	 * @param fieldName The name of the structure in the parent structure.
 	 * 
 	 * @return The parsed structure.
@@ -39,6 +41,8 @@ public final class AlphaColormapDataParser {
 	 * 
 	 * @param parser The parser that parses the structure.
 	 * @param condition The condition to be true.
+	 * @param colorTableSize Size of the color table.
+	 * @param imageDataSize Size of the image data.
 	 * @param fieldName The name of the structure in the parent structure.
 	 * 
 	 * @return The parsed structure.

@@ -23,6 +23,7 @@ public final class ClipActionRecordParser {
 	 * Parses a ClipActionRecord structure.
 	 * 
 	 * @param parser The parser that parses the structure.
+	 * @param version Flash version number which was read from the SWF file header.
 	 * @param fieldName The name of the structure in the parent structure.
 	 * 
 	 * @return The parsed structure.

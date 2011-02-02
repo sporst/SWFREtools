@@ -88,6 +88,20 @@ public final class SWFParser {
 	}
 
 	/**
+	 * Verifies the signature of the SWF file to be parsed.
+	 * 
+	 * @param fileData File data to be parsed.
+	 * 
+	 * @return True, if the file data starts with a Flash signature. False, otherwise.
+	 */
+	private static boolean hasValidSignature(final byte[] fileData) {
+
+		assert fileData != null && fileData.length >= 3 : "Invalid SWF file data passed to function";
+
+		return (fileData[0] == 'C' || fileData[0] == 'F') && fileData[1] == 'W' && fileData[2] == 'S';
+	}
+
+	/**
 	 * Determines whether file data to be parsed is compressed or not.
 	 * 
 	 * @param fileData File data to be parsed.
@@ -99,20 +113,6 @@ public final class SWFParser {
 		assert fileData != null && fileData.length >= 1 : "Invalid SWF file data passed to function";
 
 		return fileData[0] == 'C';
-	}
-
-	/**
-	 * Verifies the signature of the SWF file to be parsed.
-	 * 
-	 * @param fileData File data to be parsed.
-	 * 
-	 * @return True, if the file data starts with a Flash signature. False, otherwise.
-	 */
-	private static boolean verifySignature(final byte[] fileData) {
-
-		assert fileData != null && fileData.length >= 3 : "Invalid SWF file data passed to function";
-
-		return (fileData[0] == 'C' || fileData[0] == 'F') && fileData[1] == 'W' && fileData[2] == 'S';
 	}
 
 	/**
@@ -137,7 +137,7 @@ public final class SWFParser {
 			throw new SWFParserException(0x00002, 0, "Invalid SWF file: File too small");
 		}
 
-		if (!verifySignature(fileData)) {
+		if (!hasValidSignature(fileData)) {
 			throw new SWFParserException(0x00003, 0, "Invalid SWF file: File signature not found");
 		}
 

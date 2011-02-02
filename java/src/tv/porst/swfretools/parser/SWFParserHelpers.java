@@ -122,63 +122,198 @@ public final class SWFParserHelpers {
 		return condition ? parseFlag(parser, errorCode, fieldName) : null;
 	}
 
+	/**
+	 * Parses a float.
+	 * 
+	 * @param parser The parser that provides the input stream.
+	 * @param errorCode Error code in case parsing fails.
+	 * @param fieldName Name of the field to parse.
+	 * 
+	 * @return The parsed float.
+	 * 
+	 * @throws SWFParserException Thrown if parsing failed.
+	 */
 	public static Float32 parseFloat(final SWFBinaryParser parser, final int errorCode, final String fieldName) throws SWFParserException {
 		throwIfB(parser, 1, errorCode, fieldName);
 
 		return parser.readFloat();
 	}
 
+	/**
+	 * Parses a short float.
+	 * 
+	 * @param parser The parser that provides the input stream.
+	 * @param errorCode Error code in case parsing fails.
+	 * @param fieldName Name of the field to parse.
+	 * 
+	 * @return The parsed short float.
+	 * 
+	 * @throws SWFParserException Thrown if parsing failed.
+	 */
 	public static Float16 parseFloat16(final SWFBinaryParser parser, final int errorCode, final String fieldName) throws SWFParserException {
 		throwIfB(parser, 1, errorCode, fieldName);
 
 		return parser.readFloat16();
 	}
 
+	/**
+	 * Parses a 16 bit integer.
+	 * 
+	 * @param parser The parser that provides the input stream.
+	 * @param errorCode Error code in case parsing fails.
+	 * @param fieldName Name of the field to parse.
+	 * 
+	 * @return The parsed 16 bit integer.
+	 * 
+	 * @throws SWFParserException Thrown if parsing failed.
+	 */
 	public static INT16 parseINT16(final SWFBinaryParser parser, final int errorCode, final String fieldName) throws SWFParserException {
 		throwIf(parser, UINT16.LENGTH, errorCode, fieldName);
 		return parser.readInt16();
 	}
 
+	/**
+	 * Parses a 16 bit integer if a given condition is true.
+	 * 
+	 * @param parser The parser that provides the input stream.
+	 * @param errorCode Error code in case parsing fails.
+	 * @param condition The condition to be true for the integer to be parsed.
+	 * @param fieldName Name of the field to parse.
+	 * 
+	 * @return The parsed 16 bit integer.
+	 * 
+	 * @throws SWFParserException Thrown if parsing failed.
+	 */
 	public static INT16 parseINT16If(final SWFBinaryParser parser, final int errorCode, final boolean condition, final String fieldName) throws SWFParserException {
 		return condition ? parseINT16(parser, errorCode, fieldName) : null;
 	}
 
+	/**
+	 * Parses a 16 bit integer if a given condition is true.
+	 * 
+	 * @param parser The parser that provides the input stream.
+	 * @param errorCode Error code in case parsing fails.
+	 * @param condition The condition to be true for the integer to be parsed.
+	 * @param fieldName Name of the field to parse.
+	 * 
+	 * @return The parsed 16 bit integer.
+	 * 
+	 * @throws SWFParserException Thrown if parsing failed.
+	 */
 	public static INT16 parseINT16If(final SWFBinaryParser parser, final int errorCode, final Flag condition, final String fieldName) throws SWFParserException {
 		return condition.value() ? parseINT16(parser, errorCode, fieldName) : null;
 	}
 
+	/**
+	 * Parses a 32 bit integer.
+	 * 
+	 * @param parser The parser that provides the input stream.
+	 * @param errorCode Error code in case parsing fails.
+	 * @param fieldName Name of the field to parse.
+	 * 
+	 * @return The parsed 32 bit integer.
+	 * 
+	 * @throws SWFParserException Thrown if parsing failed.
+	 */
 	public static INT32 parseINT32(final SWFBinaryParser parser, final int errorCode, final String fieldName) throws SWFParserException {
 		throwIf(parser, INT32.LENGTH, errorCode, fieldName);
 		return parser.readInt32();
 	}
 
+	/**
+	 * Parses a signed bit field.
+	 * 
+	 * @param parser The parser that provides the input stream.
+	 * @param numberOfBits Number of bits to parse.
+	 * @param errorCode Error code in case parsing fails.
+	 * @param fieldName Name of the field to parse.
+	 * 
+	 * @return The parsed signed bit field.
+	 * 
+	 * @throws SWFParserException Thrown if parsing failed.
+	 */
 	public static Bits parseSBits(final SWFBinaryParser parser, final int numberOfBits, final int errorCode, final String fieldName) throws SWFParserException {
 		throwIfB(parser, numberOfBits, errorCode, fieldName);
 
 		return parser.readSBits(numberOfBits);
 	}
 
+	/**
+	 * Parses a signed bit field if a given condition is true.
+	 * 
+	 * @param parser The parser that provides the input stream.
+	 * @param numberOfBits Number of bits to parse.
+	 * @param errorCode Error code in case parsing fails.
+	 * @param condition The condition to be true for the integer to be parsed.
+	 * @param fieldName Name of the field to parse.
+	 * 
+	 * @return The parsed signed bit field.
+	 * 
+	 * @throws SWFParserException Thrown if parsing failed.
+	 */
 	public static Bits parseSBitsIf(final SWFBinaryParser parser, final int numberOfBits, final int errorCode, final boolean condition, final String fieldName) throws SWFParserException {
-		if (condition) {
-			return parseSBits(parser, numberOfBits, errorCode, fieldName);
-		}
-		else {
-			return null;
-		}
+		return condition ? parseSBits(parser, numberOfBits, errorCode, fieldName) : null;
 	}
 
+	/**
+	 * Parses an ASCII string of a given length.
+	 * 
+	 * @param parser The parser that provides the input stream.
+	 * @param length The number of bytes to read.
+	 * @param errorCode Error code in case parsing fails.
+	 * @param fieldName Name of the field to parse.
+	 * 
+	 * @return The parsed ASCII string.
+	 * 
+	 * @throws SWFParserException Thrown if parsing failed.
+	 */
 	public static AsciiString parseString(final SWFBinaryParser parser, final int length, final int errorCode, final String fieldName) throws SWFParserException {
-		return null;
+		return parser.readString(length);
 	}
 
+	/**
+	 * Parses an ASCII string.
+	 * 
+	 * @param parser The parser that provides the input stream.
+	 * @param errorCode Error code in case parsing fails.
+	 * @param fieldName Name of the field to parse.
+	 * 
+	 * @return The parsed ASCII string.
+	 * 
+	 * @throws SWFParserException Thrown if parsing failed.
+	 */
 	public static AsciiString parseString(final SWFBinaryParser parser, final int errorCode, final String fieldName) throws SWFParserException {
-		return null;
+		return parser.readString();
 	}
 
+	/**
+	 * Parses an ASCII string if a given condition is true.
+	 * 
+	 * @param parser The parser that provides the input stream.
+	 * @param errorCode Error code in case parsing fails.
+	 * @param condition The condition to be true for the integer to be parsed.
+	 * @param fieldName Name of the field to parse.
+	 * 
+	 * @return The parsed ASCII string.
+	 * 
+	 * @throws SWFParserException Thrown if parsing failed.
+	 */
 	public static AsciiString parseStringIf(final SWFBinaryParser parser, final int errorCode, final boolean condition, final String fieldName) throws SWFParserException {
 		return condition ? parseString(parser, errorCode, fieldName) : null;
 	}
 
+	/**
+	 * Parses an ASCII string if a given condition is true.
+	 * 
+	 * @param parser The parser that provides the input stream.
+	 * @param errorCode Error code in case parsing fails.
+	 * @param condition The condition to be true for the integer to be parsed.
+	 * @param fieldName Name of the field to parse.
+	 * 
+	 * @return The parsed ASCII string.
+	 * 
+	 * @throws SWFParserException Thrown if parsing failed.
+	 */
 	public static AsciiString parseStringIf(final SWFBinaryParser parser, final int errorCode, final Flag condition, final String fieldName) throws SWFParserException {
 		return condition.value() ? parseString(parser, errorCode, fieldName) : null;
 	}
@@ -186,12 +321,14 @@ public final class SWFParserHelpers {
 	/**
 	 * Parses an unsigned bit field.
 	 * 
-	 * @param parser
-	 * @param numberOfBits
-	 * @param errorCode
-	 * @param fieldName
-	 * @return
-	 * @throws SWFParserException
+	 * @param parser The parser that provides the input stream.
+	 * @param numberOfBits Number of bits to parse.
+	 * @param errorCode Error code in case parsing fails.
+	 * @param fieldName Name of the field to parse.
+	 * 
+	 * @return The parsed unsigned bit field.
+	 * 
+	 * @throws SWFParserException Thrown if parsing failed.
 	 */
 	public static UBits parseUBits(final SWFBinaryParser parser, final int numberOfBits, final int errorCode, final String fieldName) throws SWFParserException {
 		throwIfB(parser, numberOfBits, errorCode, fieldName);
@@ -199,67 +336,196 @@ public final class SWFParserHelpers {
 		return parser.readBits(numberOfBits);
 	}
 
+	/**
+	 * Parses an unsigned bit field if a given condition is true.
+	 * 
+	 * @param parser The parser that provides the input stream.
+	 * @param numberOfBits Number of bits to parse.
+	 * @param errorCode Error code in case parsing fails.
+	 * @param condition The condition to be true for the integer to be parsed.
+	 * @param fieldName Name of the field to parse.
+	 * 
+	 * @return The parsed unsigned bit field.
+	 * 
+	 * @throws SWFParserException Thrown if parsing failed.
+	 */
 	public static UBits parseUBitsIf(final SWFBinaryParser parser, final int numberOfBits, final int errorCode, final boolean condition, final String fieldName) throws SWFParserException {
-		if (condition) {
-			return parseUBits(parser, numberOfBits, errorCode, fieldName);
-		}
-		else {
-			return null;
-		}
+		return condition ? parseUBits(parser, numberOfBits, errorCode, fieldName) : null;
 	}
 
+	/**
+	 * Parses an unsigned bit field if a given condition is true.
+	 * 
+	 * @param parser The parser that provides the input stream.
+	 * @param numberOfBits Number of bits to parse.
+	 * @param errorCode Error code in case parsing fails.
+	 * @param condition The condition to be true for the integer to be parsed.
+	 * @param fieldName Name of the field to parse.
+	 * 
+	 * @return The parsed unsigned bit field.
+	 * 
+	 * @throws SWFParserException Thrown if parsing failed.
+	 */
 	public static UBits parseUBitsIf(final SWFBinaryParser parser, final int numberOfBits, final int errorCode, final Flag condition, final String fieldName) throws SWFParserException {
-		if (condition.value()) {
-			return parseUBits(parser, numberOfBits, errorCode, fieldName);
-		}
-		else {
-			return null;
-		}
+		return condition.value() ? parseUBits(parser, numberOfBits, errorCode, fieldName) : null;
 	}
 
+	/**
+	 * Parses a 16 bit unsigned integer.
+	 * 
+	 * @param parser The parser that provides the input stream.
+	 * @param errorCode Error code in case parsing fails.
+	 * @param fieldName Name of the field to parse.
+	 * 
+	 * @return The parsed 16 bit unsigned integer.
+	 * 
+	 * @throws SWFParserException Thrown if parsing failed.
+	 */
 	public static UINT16 parseUINT16(final SWFBinaryParser parser, final int errorCode, final String fieldName) throws SWFParserException {
 		throwIf(parser, UINT16.LENGTH, errorCode, fieldName);
 		return parser.readUInt16();
 	}
 
+	/**
+	 * Parses a 16 bit unsigned integer if a given condition is true.
+	 * 
+	 * @param parser The parser that provides the input stream.
+	 * @param errorCode Error code in case parsing fails.
+	 * @param condition The condition to be true for the integer to be parsed.
+	 * @param fieldName Name of the field to parse.
+	 * 
+	 * @return The parsed 16 bit unsigned integer.
+	 * 
+	 * @throws SWFParserException Thrown if parsing failed.
+	 */
 	public static UINT16 parseUINT16If(final SWFBinaryParser parser, final int errorCode, final boolean condition, final String fieldName) throws SWFParserException {
 		return condition ? parseUINT16(parser, errorCode, fieldName) : null;
 	}
 
+	/**
+	 * Parses a 16 bit unsigned integer if a given condition is true.
+	 * 
+	 * @param parser The parser that provides the input stream.
+	 * @param errorCode Error code in case parsing fails.
+	 * @param condition The condition to be true for the integer to be parsed.
+	 * @param fieldName Name of the field to parse.
+	 * 
+	 * @return The parsed 16 bit unsigned integer.
+	 * 
+	 * @throws SWFParserException Thrown if parsing failed.
+	 */
 	public static UINT16 parseUINT16If(final SWFBinaryParser parser, final int errorCode, final Flag condition, final String fieldName) throws SWFParserException {
 		return condition.value() ? parseUINT16(parser, errorCode, fieldName) : null;
 	}
 
+	/**
+	 * Parses a 32 bit unsigned integer.
+	 * 
+	 * @param parser The parser that provides the input stream.
+	 * @param errorCode Error code in case parsing fails.
+	 * @param fieldName Name of the field to parse.
+	 * 
+	 * @return The parsed 32 bit unsigned integer.
+	 * 
+	 * @throws SWFParserException Thrown if parsing failed.
+	 */
 	public static UINT32 parseUINT32(final SWFBinaryParser parser, final int errorCode, final String fieldName) throws SWFParserException {
 		throwIf(parser, UINT32.LENGTH, errorCode, fieldName);
 		return parser.readUInt32();
 	}
 
+	/**
+	 * Parses a 32 bit unsigned integer if a given condition is true.
+	 * 
+	 * @param parser The parser that provides the input stream.
+	 * @param errorCode Error code in case parsing fails.
+	 * @param condition The condition to be true for the integer to be parsed.
+	 * @param fieldName Name of the field to parse.
+	 * 
+	 * @return The parsed 32 bit unsigned integer.
+	 * 
+	 * @throws SWFParserException Thrown if parsing failed.
+	 */
 	public static UINT32 parseUINT32If(final SWFBinaryParser parser, final int errorCode, final Flag condition, final String fieldName) throws SWFParserException {
 		return condition.value() ? parseUINT32(parser, errorCode, fieldName) : null;
 	}
 
+	/**
+	 * Parses a 8 bit unsigned integer.
+	 * 
+	 * @param parser The parser that provides the input stream.
+	 * @param errorCode Error code in case parsing fails.
+	 * @param fieldName Name of the field to parse.
+	 * 
+	 * @return The parsed 8 bit unsigned integer.
+	 * 
+	 * @throws SWFParserException Thrown if parsing failed.
+	 */
 	public static UINT8 parseUINT8(final SWFBinaryParser parser, final int errorCode, final String fieldName) throws SWFParserException {
 		throwIf(parser, UINT8.LENGTH, errorCode, fieldName);
 		return parser.readUInt8();
 	}
 
+	/**
+	 * Parses a 8 bit unsigned integer if a given condition is true.
+	 * 
+	 * @param parser The parser that provides the input stream.
+	 * @param errorCode Error code in case parsing fails.
+	 * @param condition The condition to be true for the integer to be parsed.
+	 * @param fieldName Name of the field to parse.
+	 * 
+	 * @return The parsed 8 bit unsigned integer.
+	 * 
+	 * @throws SWFParserException Thrown if parsing failed.
+	 */
 	public static UINT8 parseUINT8If(final SWFBinaryParser parser, final int errorCode, final boolean condition, final String fieldName) throws SWFParserException {
 		return condition ? parseUINT8(parser, errorCode, fieldName) : null;
 	}
 
+	/**
+	 * Parses a 8 bit unsigned integer if a given condition is true.
+	 * 
+	 * @param parser The parser that provides the input stream.
+	 * @param errorCode Error code in case parsing fails.
+	 * @param condition The condition to be true for the integer to be parsed.
+	 * @param fieldName Name of the field to parse.
+	 * 
+	 * @return The parsed 8 bit unsigned integer.
+	 * 
+	 * @throws SWFParserException Thrown if parsing failed.
+	 */
 	public static UINT8 parseUINT8If(final SWFBinaryParser parser, final int errorCode, final Flag condition, final String fieldName) throws SWFParserException {
 		return condition.value() ? parseUINT8(parser, errorCode, fieldName) : null;
 	}
 
+	/**
+	 * Throws an exception if less than a given number of bytes remain unparsed in the input stream.
+	 * 
+	 * @param parser The parser that provides the stream.
+	 * @param numberOfBytes The number of remaining bytes to check for.
+	 * @param errorCode The error code of the exception to be thrown.
+	 * @param fieldName Name of the field to be parsed.
+	 * 
+	 * @throws SWFParserException Thrown if fewer than the given number of bytes are left in the input stream.
+	 */
 	private static void throwIf(final SWFBinaryParser parser, final long numberOfBytes, final int errorCode, final String fieldName) throws SWFParserException {
 		if (!BinaryParserHelpers.hasBytesLeft(parser, numberOfBytes)) {
 			throw new SWFParserException(errorCode, parser.getBytePosition(), String.format("Read beyond file while parsing %s (%08X)", fieldName, parser.getBytePosition()));
 		}
 	}
 
-	private static void throwIfB(final SWFBinaryParser parser, final int numberOfBytes, final int errorCode, final String fieldName) throws SWFParserException {
-		if (!BinaryParserHelpers.hasBitsLeft(parser, numberOfBytes)) {
+	/**
+	 * Throws an exception if less than a given number of bits remain unparsed in the input stream.
+	 * 
+	 * @param parser The parser that provides the stream.
+	 * @param numberOfBits The number of remaining bits to check for.
+	 * @param errorCode The error code of the exception to be thrown.
+	 * @param fieldName Name of the field to be parsed.
+	 * 
+	 * @throws SWFParserException Thrown if fewer than the given number of bits are left in the input stream.
+	 */
+	private static void throwIfB(final SWFBinaryParser parser, final int numberOfBits, final int errorCode, final String fieldName) throws SWFParserException {
+		if (!BinaryParserHelpers.hasBitsLeft(parser, numberOfBits)) {
 			throw new SWFParserException(errorCode, parser.getBytePosition(), String.format("Read beyond file while parsing %s (%08X)", fieldName, parser.getBytePosition()));
 		}
 	}

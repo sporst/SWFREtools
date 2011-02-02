@@ -186,7 +186,7 @@ public final class TagParser {
 			case TagCodes.SetBackgroundColor: return SetBackgroundColorParser.parse(header, parser);
 			case TagCodes.FrameLabel: return FrameLabelParser.parse(header, parser);
 			case TagCodes.Protect: return ProtectParser.parse(header, parser);
-			case TagCodes.End: return EndParser.parse(header, parser);
+			case TagCodes.End: return EndParser.parse(header);
 			case TagCodes.ExportAssets: return ExportAssetsParser.parse(header, parser);
 			case TagCodes.ImportAssets: return ImportAssetsParser.parse(header, parser);
 			case TagCodes.EnableDebugger: return EnableDebuggerParser.parse(header, parser);

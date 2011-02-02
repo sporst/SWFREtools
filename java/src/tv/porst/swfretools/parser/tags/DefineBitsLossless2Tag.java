@@ -59,6 +59,7 @@ public final class DefineBitsLossless2Tag extends Tag {
 	 * @param bitmapHeight Bitmap height.
 	 * @param bitmapColorTableSize Size of the color table.
 	 * @param zlibColormapData ZLIB compressed bitmap data.
+	 * @param zlibBitmapData ZLIB compressed bitmap data.
 	 */
 	public DefineBitsLossless2Tag(final RecordHeader header, final UINT16 characterId,
 			final UINT8 bitmapFormat, final UINT16 bitmapWidth, final UINT16 bitmapHeight,

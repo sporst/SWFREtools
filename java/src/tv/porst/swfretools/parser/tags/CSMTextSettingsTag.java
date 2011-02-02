@@ -1,7 +1,7 @@
 package tv.porst.swfretools.parser.tags;
 
-import tv.porst.splib.binaryparser.UBits;
 import tv.porst.splib.binaryparser.Float32;
+import tv.porst.splib.binaryparser.UBits;
 import tv.porst.splib.binaryparser.UINT16;
 import tv.porst.splib.binaryparser.UINT8;
 import tv.porst.swfretools.parser.structures.RecordHeader;
@@ -112,6 +112,11 @@ public final class CSMTextSettingsTag extends Tag {
 		return sharpness;
 	}
 
+	/**
+	 * Returns the ID for the text to which this tag applies.
+	 * 
+	 * @return The ID for the text to which this tag applies.
+	 */
 	public UINT16 getTextId() {
 		return textId;
 	}

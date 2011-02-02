@@ -1,15 +1,15 @@
 package tv.porst.swfretools.parser.tags;
 
-import static tv.porst.swfretools.parser.SWFParserHelpers.parseUBits;
 import static tv.porst.swfretools.parser.SWFParserHelpers.parseFlag;
 import static tv.porst.swfretools.parser.SWFParserHelpers.parseStringIf;
+import static tv.porst.swfretools.parser.SWFParserHelpers.parseUBits;
 import static tv.porst.swfretools.parser.SWFParserHelpers.parseUINT16;
 import static tv.porst.swfretools.parser.SWFParserHelpers.parseUINT16If;
 import static tv.porst.swfretools.parser.SWFParserHelpers.parseUINT8If;
 import static tv.porst.swfretools.parser.structures.ClipActionsParser.parseIf;
 import tv.porst.splib.binaryparser.AsciiString;
-import tv.porst.splib.binaryparser.UBits;
 import tv.porst.splib.binaryparser.Flag;
+import tv.porst.splib.binaryparser.UBits;
 import tv.porst.splib.binaryparser.UINT16;
 import tv.porst.splib.binaryparser.UINT8;
 import tv.porst.swfretools.parser.SWFBinaryParser;
@@ -33,8 +33,9 @@ public final class PlaceObject3Parser {
 	/**
 	 * Parses a PlaceObject3 tag.
 	 * 
-	 * @param parser Provides the input data.
 	 * @param header Previously parsed header of the tag.
+	 * @param parser Provides the input data.
+	 * @param version Flash version number which was read from the SWF file header.
 	 * 
 	 * @return Returns the parsed tag.
 	 * 
@@ -64,7 +65,7 @@ public final class PlaceObject3Parser {
 		final UINT16 ratio = parseUINT16If(parser, 0x00006, placeFlagHasRatio, "PlaceObject3::Ratio");
 		final AsciiString name = parseStringIf(parser, 0x00006, placeFlagHasName, "PlaceObject3::Name");
 		final UINT16 clipDepth = parseUINT16If(parser, 0x00006, placeFlagHasClipDepth, "PlaceObject3::ClipDepth");
-		final FilterList surfaceFilterList = FilterListParser.parseIf(parser, 0x00006, placeFlagHasFilterList, "PlaceObject3::SurfaceFilterList");
+		final FilterList surfaceFilterList = FilterListParser.parseIf(parser, placeFlagHasFilterList, "PlaceObject3::SurfaceFilterList");
 		final UINT8 blendMode = parseUINT8If(parser, 0x00006, placeFlagHasBlendMode, "PlaceObject3::BlendMode");
 		final UINT8 bitmapCache = parseUINT8If(parser, 0x00006, placeFlagHasCacheAsBitmap, "PlaceObject3::BitmapCache");
 		final ClipActions clipActions = parseIf(parser, version, placeFlagHasClipActions, "PlaceObject3::ClipActions");
