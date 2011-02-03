@@ -28,6 +28,11 @@ public final class DefineButtonTag extends Tag {
 	private final List<ButtonRecord> characters;
 
 	/**
+	 * Character end flag.
+	 */
+	private final UINT8 characterEndFlag;
+
+	/**
 	 * Actions to perform.
 	 */
 	private final List<Action> actions;
@@ -43,17 +48,19 @@ public final class DefineButtonTag extends Tag {
 	 * @param header Tag header.
 	 * @param buttonId ID for this character.
 	 * @param characters Characters that make up the button.
+	 * @param characterEndFlag Character end flag.
 	 * @param actions Actions to perform.
 	 * @param actionEndFlag Action end flag.
 	 */
 	public DefineButtonTag(final RecordHeader header, final UINT16 buttonId,
-			final List<ButtonRecord> characters, final List<Action> actions,
+			final List<ButtonRecord> characters, final UINT8 characterEndFlag, final List<Action> actions,
 			final UINT8 actionEndFlag) {
 
 		super(header);
 
 		this.buttonId = buttonId;
 		this.characters = new ArrayList<ButtonRecord>(characters);
+		this.characterEndFlag = characterEndFlag;
 		this.actions = new ArrayList<Action>(actions);
 		this.actionEndFlag = actionEndFlag;
 	}
@@ -83,6 +90,15 @@ public final class DefineButtonTag extends Tag {
 	 */
 	public UINT16 getButtonId() {
 		return buttonId;
+	}
+
+	/**
+	 * Returns the character end flag.
+	 *
+	 * @return The character end flag.
+	 */
+	public UINT8 getCharacterEndFlag() {
+		return characterEndFlag;
 	}
 
 	/**

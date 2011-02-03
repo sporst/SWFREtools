@@ -55,12 +55,14 @@ public final class DefineButton2Parser {
 
 		} while (true);
 
-		final int actionRecordSize = header.getNormalizedLength() - parser.getBytePosition() - 1;
+		final UINT8 characterEndFlag = parseUINT8(parser, 0x00006, "DefineButton2::CharacterEndFlag");
+
+		final int actionRecordSize = header.getNormalizedLength() - (parser.getBytePosition() - header.getPosition()) - 1;
 
 		final List<Action> actions = ActionRecordParser.parse(parser, actionRecordSize);
 
 		final UINT8 actionEndFlag = parseUINT8(parser, 0x00006, "DefineButton::ActionEndFlag");
 
-		return new DefineButton2Tag(header, buttonId, reservedFlags, trackAsMenu, actionOffset, characters, actions, actionEndFlag);
+		return new DefineButton2Tag(header, buttonId, reservedFlags, trackAsMenu, actionOffset, characters, characterEndFlag, actions, actionEndFlag);
 	}
 }

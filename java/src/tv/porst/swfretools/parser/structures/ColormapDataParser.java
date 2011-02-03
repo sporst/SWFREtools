@@ -25,7 +25,7 @@ public final class ColormapDataParser {
 	 */
 	public static ColormapData parse(final SWFBinaryParser parser, final int colorTableSize, final int imageDataSize, final String fieldName) throws SWFParserException {
 
-		final RGB[] colorTableRGB = new RGB[colorTableSize];
+		final RGB[] colorTableRGB = new RGB[colorTableSize + 1];
 
 		for (int i=0;i<colorTableRGB.length;i++) {
 			colorTableRGB[i] = RGBParser.parse(parser, String.format(fieldName + "ColorTableRGB[%d]", i));

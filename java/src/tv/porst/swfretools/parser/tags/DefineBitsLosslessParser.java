@@ -23,6 +23,24 @@ import tv.porst.swfretools.parser.structures.RecordHeader;
 public final class DefineBitsLosslessParser {
 
 	/**
+	 * Calculates the size of the image data without the color table.
+	 * 
+	 * @param header Tag header.
+	 * @param bitmapColorTableSize Size of the color table.
+	 * 
+	 * @return The length of the image data in bytes.
+	 */
+	private static int getImageSize(final RecordHeader header, final UINT8 bitmapColorTableSize) {
+
+		if (bitmapColorTableSize == null) {
+			return 0;
+		}
+		else {
+			return header.getNormalizedLength() - (bitmapColorTableSize.getBytePosition() - (header.getPosition() + header.getHeaderLength()) + 3 * (bitmapColorTableSize.value() + 1) + 1);
+		}
+	}
+
+	/**
 	 * Parses a DefineBitsLossless tag.
 	 * 
 	 * @param parser Provides the input data.
@@ -42,7 +60,7 @@ public final class DefineBitsLosslessParser {
 		final int bitmapFormatValue = bitmapFormat.value();
 
 		final UINT8 bitmapColorTableSize = parseUINT8If(parser, 0x00006, bitmapFormatValue == 3, "DefineBitsLossless::BitmapColorTableSize");
-		final ColormapData zlibColormapData = ColormapDataParser.parseIf(parser, bitmapFormatValue == 3, bitmapColorTableSize.value(), header.getNormalizedLength() - bitmapColorTableSize.value(), "DefineBitsLossless::ZlibColormapData");
+		final ColormapData zlibColormapData = ColormapDataParser.parseIf(parser, bitmapFormatValue == 3, bitmapColorTableSize == null ? 0 : bitmapColorTableSize.value(), getImageSize(header, bitmapColorTableSize), "DefineBitsLossless::ZlibColormapData");
 		final BitmapData15 zlibBitmapData15 = BitmapData15Parser.parseIf(parser, bitmapFormatValue == 4, header.getNormalizedLength(), "DefineBitsLossless::ZlibBitmapData15");
 		final BitmapData24 zlibBitmapData24 = BitmapData24Parser.parseIf(parser, bitmapFormatValue == 5, header.getNormalizedLength(), "DefineBitsLossless::ZlibBitmapData24");
 

@@ -68,7 +68,7 @@ public final class SWFParser {
 	}
 
 	/**
-	 * Decompresses compressed SWF file data if necessary.
+	 * Decompresses compressed SWF file data.
 	 * 
 	 * @param fileData File data to be parsed.
 	 * 
@@ -76,12 +76,12 @@ public final class SWFParser {
 	 * 
 	 * @throws SWFParserException Thrown if decompressing the data failed.
 	 */
-	private static byte[] decompressDataIfNecessary(final byte[] fileData) throws SWFParserException {
+	private static byte[] decompressData(final byte[] fileData) throws SWFParserException {
 
 		assert fileData != null : "Invalid SWF file data passed to function";
 
 		try {
-			return isCompressed(fileData) ? decompress(fileData) : fileData;
+			return concatPreprocessedData(fileData, decompress(fileData));
 		} catch (final IOException e) {
 			throw new SWFParserException(0x00001, 0, "Invalid SWF file: Compressed data could not be decompressed");
 		}
@@ -125,7 +125,7 @@ public final class SWFParser {
 	 * @throws IOException Thrown if the given file could not be read.
 	 * @throws SWFParserException Thrown if the given file could not be parsed.
 	 */
-	public SWFFile parse(final File file) throws IOException, SWFParserException {
+	public static SWFFile parse(final File file) throws IOException, SWFParserException {
 
 		if (file == null) {
 			throw new IllegalArgumentException("Argument file must not be null");
@@ -141,7 +141,7 @@ public final class SWFParser {
 			throw new SWFParserException(0x00003, 0, "Invalid SWF file: File signature not found");
 		}
 
-		final byte[] parserInputData = concatPreprocessedData(fileData, decompressDataIfNecessary(fileData));
+		final byte[] parserInputData = isCompressed(fileData) ? decompressData(fileData) : fileData;
 
 		final SWFBinaryParser parser = new SWFBinaryParser(parserInputData);
 

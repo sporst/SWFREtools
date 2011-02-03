@@ -3,8 +3,8 @@ package tv.porst.swfretools.parser.tags;
 import java.util.ArrayList;
 import java.util.List;
 
-import tv.porst.splib.binaryparser.UBits;
 import tv.porst.splib.binaryparser.Flag;
+import tv.porst.splib.binaryparser.UBits;
 import tv.porst.splib.binaryparser.UINT16;
 import tv.porst.splib.binaryparser.UINT8;
 import tv.porst.swfretools.parser.actions.Action;
@@ -45,6 +45,11 @@ public final class DefineButton2Tag extends Tag {
 	private final List<ButtonRecord2> characters;
 
 	/**
+	 * Character end flag.
+	 */
+	private final UINT8 characterEndFlag;
+
+	/**
 	 * Actions to perform.
 	 */
 	private final List<Action> actions;
@@ -63,12 +68,13 @@ public final class DefineButton2Tag extends Tag {
 	 * @param trackAsMenu Track as menu flag.
 	 * @param actionOffset Offset in bytes from the start of this field to the first action.
 	 * @param characters Characters that make up the button.
+	 * @param characterEndFlag Character end flag.
 	 * @param actions Actions to perform.
 	 * @param actionEndFlag Action end flag.
 	 */
 	public DefineButton2Tag(final RecordHeader header, final UINT16 buttonId,
 			final UBits reservedFlags, final Flag trackAsMenu, final UINT16 actionOffset,
-			final List<ButtonRecord2> characters, final List<Action> actions,
+			final List<ButtonRecord2> characters, final UINT8 characterEndFlag, final List<Action> actions,
 			final UINT8 actionEndFlag) {
 
 		super(header);
@@ -78,6 +84,7 @@ public final class DefineButton2Tag extends Tag {
 		this.trackAsMenu = trackAsMenu;
 		this.actionOffset = actionOffset;
 		this.characters = new ArrayList<ButtonRecord2>(characters);
+		this.characterEndFlag = characterEndFlag;
 		this.actions = new ArrayList<Action>(actions);
 		this.actionEndFlag = actionEndFlag;
 	}
@@ -116,6 +123,15 @@ public final class DefineButton2Tag extends Tag {
 	 */
 	public UINT16 getButtonId() {
 		return buttonId;
+	}
+
+	/**
+	 * Returns the character end flag.
+	 *
+	 * @return The character end flag.
+	 */
+	public UINT8 getCharacterEndFlag() {
+		return characterEndFlag;
 	}
 
 	/**

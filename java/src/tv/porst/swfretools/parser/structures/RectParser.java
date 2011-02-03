@@ -1,9 +1,9 @@
 package tv.porst.swfretools.parser.structures;
 
-import static tv.porst.swfretools.parser.SWFParserHelpers.parseUBits;
 import static tv.porst.swfretools.parser.SWFParserHelpers.parseSBits;
-import tv.porst.splib.binaryparser.UBits;
+import static tv.porst.swfretools.parser.SWFParserHelpers.parseUBits;
 import tv.porst.splib.binaryparser.Bits;
+import tv.porst.splib.binaryparser.UBits;
 import tv.porst.swfretools.parser.SWFBinaryParser;
 import tv.porst.swfretools.parser.SWFParserException;
 
@@ -43,6 +43,8 @@ public final class RectParser {
 		final Bits xMax = parseSBits(parser, nBits.value(), 0x00006, fieldName + "::XMax");
 		final Bits yMin = parseSBits(parser, nBits.value(), 0x00006, fieldName + "::YMin");
 		final Bits yMax = parseSBits(parser, nBits.value(), 0x00006, fieldName + "::YMax");
+
+		parser.align();
 
 		return new Rect(nBits, xMin, xMax, yMin, yMax);
 	}

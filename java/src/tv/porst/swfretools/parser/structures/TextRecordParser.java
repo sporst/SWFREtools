@@ -8,9 +8,9 @@ import static tv.porst.swfretools.parser.SWFParserHelpers.parseUINT8;
 import java.util.ArrayList;
 import java.util.List;
 
-import tv.porst.splib.binaryparser.UBits;
 import tv.porst.splib.binaryparser.Flag;
 import tv.porst.splib.binaryparser.INT16;
+import tv.porst.splib.binaryparser.UBits;
 import tv.porst.splib.binaryparser.UINT16;
 import tv.porst.splib.binaryparser.UINT8;
 import tv.porst.swfretools.parser.SWFBinaryParser;
@@ -56,6 +56,8 @@ public final class TextRecordParser {
 		for (int i=0;i<glyphCount.value();i++) {
 			glyphEntries.add(GlyphEntryParser.parse(parser, glyphBits, advanceBits, String.format("GlyphEntries[%d]", i)));
 		}
+
+		parser.align();
 
 		return new TextRecord(textRecordType, styleFlagsReserved, styleFlagsHasFont,
 				styleFlagsHasColor, styleFlagsHasYOffset, styleFlagsHasXOffset,

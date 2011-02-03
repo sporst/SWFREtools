@@ -54,6 +54,8 @@ public final class DefineTextParser {
 
 		} while (true);
 
-		return new DefineTextTag(header, characterId, textBounds, textMatrix, glyphBits, advanceBits, textRecords);
+		final UINT8 end = parseUINT8(parser, 0x00006, "DefineTextParser::EndOfRecordsFlag");
+
+		return new DefineTextTag(header, characterId, textBounds, textMatrix, glyphBits, advanceBits, textRecords, end);
 	}
 }

@@ -36,11 +36,11 @@ public final class StyleChangeRecordParser {
 		final Flag stateFillStyle0 = parseFlag(parser, 0x00006, fieldName + "::StateFillStyle0");
 		final Flag stateMoveTo = parseFlag(parser, 0x00006, fieldName + "::StateMoveTo");
 		final UBits moveBits = parseUBitsIf(parser, 5, 0x00006, stateMoveTo, fieldName + "::MoveBits");
-		final UBits moveDeltaX = parseUBitsIf(parser, moveBits.value(), 0x00006, stateMoveTo, fieldName + "::MoveDeltaX");
-		final UBits moveDeltaY = parseUBitsIf(parser, 5, 0x00006, stateMoveTo, fieldName + "::MoveDeltaY");
-		final UBits fillStyle0 = parseUBitsIf(parser, fillBits.value(), 0x00006, stateFillStyle0, fieldName + "::FillStyle0");
-		final UBits fillStyle1 = parseUBitsIf(parser, fillBits.value(), 0x00006, stateFillStyle1, fieldName + "::FillStyle1");
-		final UBits lineStyle = parseUBitsIf(parser, lineBits.value(), 0x00006, stateLineStyle, fieldName + "::LineStyle");
+		final UBits moveDeltaX = parseUBitsIf(parser, moveBits == null ? 0 : moveBits.value(), 0x00006, stateMoveTo, fieldName + "::MoveDeltaX");
+		final UBits moveDeltaY = parseUBitsIf(parser, moveBits == null ? 0 : moveBits.value(), 0x00006, stateMoveTo, fieldName + "::MoveDeltaY");
+		final UBits fillStyle0 = parseUBitsIf(parser, fillBits == null ? 0 : fillBits.value(), 0x00006, stateFillStyle0, fieldName + "::FillStyle0");
+		final UBits fillStyle1 = parseUBitsIf(parser, fillBits == null ? 0 : fillBits.value(), 0x00006, stateFillStyle1, fieldName + "::FillStyle1");
+		final UBits lineStyle = parseUBitsIf(parser, lineBits == null ? 0 : lineBits.value(), 0x00006, stateLineStyle, fieldName + "::LineStyle");
 		final FillStyleArray fillStyles = FillStyleArrayParser.parseIf(parser, stateNewStyles, fieldName + "::FillStyles");
 		final LineStyleArray lineStyles = LineStyleArrayParser.parseIf(parser, stateNewStyles, fieldName + "LineStyles");
 		final UBits numFillBits = parseUBitsIf(parser, 4, 0x00006, stateNewStyles, fieldName + "::NumFillBits");

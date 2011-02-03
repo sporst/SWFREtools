@@ -61,6 +61,11 @@ public final class TagCodes {
 	public static final int DefineText = 11;
 
 	/**
+	 * Tag identifier for the DoAction tag.
+	 */
+	public static final int DoAction = 12;
+
+	/**
 	 * Tag identifier for the DefineFontInfo tag.
 	 */
 	public static final int DefineFontInfo = 13;

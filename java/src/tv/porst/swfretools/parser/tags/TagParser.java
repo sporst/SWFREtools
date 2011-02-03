@@ -56,10 +56,19 @@ public final class TagParser {
 
 		while (!parser.isDone())
 		{
+			final int before = parser.getBytePosition();
+
 			final Tag parsedTag = parseTag(parser, version, errors);
 
 			if (parsedTag != null) {
 				tags.add(parsedTag);
+
+				if (parser.getBytePosition() != before + parsedTag.getHeader().getNormalizedLength() + (parsedTag.getHeader().getHeaderLength()))
+				{
+					System.out.println(String.format("No: Wanted %X but was %X", before + parsedTag.getHeader().getNormalizedLength() + (parsedTag.getHeader().getHeaderLength()), parser.getBytePosition()));
+
+					parser.setPosition(before + parsedTag.getHeader().getNormalizedLength() + (parsedTag.getHeader().getHeaderLength()), 0);
+				}
 			}
 		}
 
@@ -100,10 +109,20 @@ public final class TagParser {
 		{
 			// TODO: I suspect checking parser.isDone here is not needed but I have to test that.
 
+			final int before = parser.getBytePosition();
+
 			final Tag parsedTag = parseTag(parser, version, errors);
 
 			if (parsedTag != null) {
 				tags.add(parsedTag);
+			}
+
+
+			if (parser.getBytePosition() != before + parsedTag.getHeader().getNormalizedLength() + (parsedTag.getHeader().getHeaderLength()))
+			{
+				System.out.println(String.format("No: Wanted %X but was %X", before + parsedTag.getHeader().getNormalizedLength() + (parsedTag.getHeader().getHeaderLength()), parser.getBytePosition()));
+
+				parser.setPosition(before + parsedTag.getHeader().getNormalizedLength() + (parsedTag.getHeader().getHeaderLength()), 0);
 			}
 		}
 
@@ -149,6 +168,8 @@ public final class TagParser {
 		try {
 
 			final RecordHeader header = parseRecordHeader(parser);
+
+			System.out.printf("Parsing at %X [%d]\n", parser.getBytePosition() - header.getHeaderLength(), header.getTagCode());
 
 			return parseTag(parser, header, version, errors);
 
@@ -199,7 +220,7 @@ public final class TagParser {
 			case TagCodes.Metadata: return MetadataParser.parse(header, parser);
 			case TagCodes.DefineScalingGrid: return DefineScalingGridParser.parse(header, parser);
 			case TagCodes.DefineSceneAndFrameLabelData: return DefineSceneAndFrameLabelDataParser.parse(header, parser);
-			// TODO: Actions
+			case TagCodes.DoAction: return DoActionParser.parse(header, parser);
 			case TagCodes.DefineShape: return DefineShapeParser.parse(header, parser);
 			case TagCodes.DefineShape2: return DefineShape2Parser.parse(header, parser);
 			case TagCodes.DefineShape3: return DefineShape3Parser.parse(header, parser);
@@ -250,6 +271,8 @@ public final class TagParser {
 		} catch (final SWFParserException exception) {
 
 			errors.add(new ParserError(exception.getOffset(), exception.getMessage()));
+
+			exception.printStackTrace();
 
 			// Parsing this tag failed but we can try to continue parsing at the next tag
 			jumpToNextTag(parser, header);

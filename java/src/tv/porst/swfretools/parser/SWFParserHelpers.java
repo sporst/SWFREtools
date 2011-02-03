@@ -49,7 +49,7 @@ public final class SWFParserHelpers {
 	public static ByteArray parseByteArray(final SWFBinaryParser parser, final long numberOfBytes, final int errorCode, final String fieldName) throws SWFParserException {
 		throwIf(parser, numberOfBytes, errorCode, fieldName);
 
-		return new ByteArray(parser.getBytePosition() - (int) numberOfBytes, BinaryParserHelpers.readByteArray(parser, (int) numberOfBytes));
+		return new ByteArray(parser.getBytePosition(), BinaryParserHelpers.readByteArray(parser, (int) numberOfBytes));
 	}
 
 	/**

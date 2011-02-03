@@ -31,14 +31,14 @@ public final class ShapeRecord3Parser {
 		if (first6.value() == 0) {
 			return EndShapeRecordParser.parse(parser, fieldName);
 		}
-		else if ((first6.value() & 0x20) == 0x20) {
-			return StyleChangeRecord3Parser.parse(parser, numFillBits, numLineBits, fieldName);
-		}
-		else if ((first6.value() & 0x10) == 0x10) {
+		else if ((first6.value() & 0x30) == 0x30) {
 			return StraightEdgeRecordParser.parse(parser, fieldName);
 		}
-		else {
+		else if ((first6.value() & 0x20) == 0x20) {
 			return CurvedEdgeRecordParser.parse(parser, fieldName);
+		}
+		else {
+			return StyleChangeRecord3Parser.parse(parser, numFillBits, numLineBits, fieldName);
 		}
 	}
 }

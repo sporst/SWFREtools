@@ -1,11 +1,11 @@
 package tv.porst.swfretools.parser.structures;
 
-import static tv.porst.swfretools.parser.SWFParserHelpers.parseUBits;
 import static tv.porst.swfretools.parser.SWFParserHelpers.parseFlag;
 import static tv.porst.swfretools.parser.SWFParserHelpers.parseSBitsIf;
-import tv.porst.splib.binaryparser.UBits;
-import tv.porst.splib.binaryparser.Flag;
+import static tv.porst.swfretools.parser.SWFParserHelpers.parseUBits;
 import tv.porst.splib.binaryparser.Bits;
+import tv.porst.splib.binaryparser.Flag;
+import tv.porst.splib.binaryparser.UBits;
 import tv.porst.swfretools.parser.SWFBinaryParser;
 import tv.porst.swfretools.parser.SWFParserException;
 
@@ -45,6 +45,8 @@ public final class CxFormParser {
 		final Bits redAddTerm = parseSBitsIf(parser, nBits.value(), 0x00006, hasAddTerms.value(), fieldName + "::RedAddTerm");
 		final Bits greenAddTerm = parseSBitsIf(parser, nBits.value(), 0x00006, hasAddTerms.value(), fieldName + "::GreenAddTerm");
 		final Bits blueAddTerm = parseSBitsIf(parser, nBits.value(), 0x00006, hasAddTerms.value(), fieldName + "::BlueAddTerm");
+
+		parser.align();
 
 		return new CxForm(hasAddTerms, hasMultTerms, nBits, redMultTerm, greenMultTerm, blueMultTerm, redAddTerm, greenAddTerm, blueAddTerm);
 	}

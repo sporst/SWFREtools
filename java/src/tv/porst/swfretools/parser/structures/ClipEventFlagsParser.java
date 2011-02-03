@@ -1,10 +1,10 @@
 package tv.porst.swfretools.parser.structures;
 
-import static tv.porst.swfretools.parser.SWFParserHelpers.parseUBitsIf;
 import static tv.porst.swfretools.parser.SWFParserHelpers.parseFlag;
 import static tv.porst.swfretools.parser.SWFParserHelpers.parseFlagIf;
-import tv.porst.splib.binaryparser.UBits;
+import static tv.porst.swfretools.parser.SWFParserHelpers.parseUBitsIf;
 import tv.porst.splib.binaryparser.Flag;
+import tv.porst.splib.binaryparser.UBits;
 import tv.porst.swfretools.parser.SWFBinaryParser;
 import tv.porst.swfretools.parser.SWFParserException;
 
@@ -50,6 +50,8 @@ public final class ClipEventFlagsParser {
 		final Flag clipEventKeyPress = parseFlagIf(parser, 0x00006, version >= 6, fieldName + "::ClipEventKeyPress");
 		final Flag clipEventDragOut = parseFlagIf(parser, 0x00006, version >= 6, fieldName + "::ClipEventDragOut");
 		final UBits reserved2 = parseUBitsIf(parser, 8, 0x00006, version >= 6, fieldName + "::Reserved2");
+
+		parser.align();
 
 		return new ClipEventFlags(clipEventKeyUp, clipEventKeyDown,
 				clipEventMouseUp, clipEventMouseDown, clipEventMouseMove,

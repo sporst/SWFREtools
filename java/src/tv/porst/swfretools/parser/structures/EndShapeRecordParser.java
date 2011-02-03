@@ -1,9 +1,9 @@
 package tv.porst.swfretools.parser.structures;
 
-import static tv.porst.swfretools.parser.SWFParserHelpers.parseUBits;
 import static tv.porst.swfretools.parser.SWFParserHelpers.parseFlag;
-import tv.porst.splib.binaryparser.UBits;
+import static tv.porst.swfretools.parser.SWFParserHelpers.parseUBits;
 import tv.porst.splib.binaryparser.Flag;
+import tv.porst.splib.binaryparser.UBits;
 import tv.porst.swfretools.parser.SWFBinaryParser;
 import tv.porst.swfretools.parser.SWFParserException;
 
