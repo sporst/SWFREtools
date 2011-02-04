@@ -36,7 +36,9 @@ public final class DefineBitsLosslessParser {
 			return 0;
 		}
 		else {
-			return header.getNormalizedLength() - (bitmapColorTableSize.getBytePosition() - (header.getPosition() + header.getHeaderLength()) + 3 * (bitmapColorTableSize.value() + 1) + 1);
+			final int size = header.getNormalizedLength() - (8 + 3 * (bitmapColorTableSize.value() + 1));
+
+			return size < 0 ? 0 : size;
 		}
 	}
 

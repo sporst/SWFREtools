@@ -47,8 +47,14 @@ public final class ShapeWithStyle4Parser {
 			shapeRecords.add(shapeRecord);
 
 			if (shapeRecord instanceof StyleChangeRecord) {
-				currentNumFillBits = ((StyleChangeRecord) shapeRecord).getNumFillBits();
-				currentNumLineBits = ((StyleChangeRecord) shapeRecord).getNumLineBits();
+
+				if (((StyleChangeRecord) shapeRecord).getNumFillBits() != null) {
+					currentNumFillBits = ((StyleChangeRecord) shapeRecord).getNumFillBits();
+				}
+
+				if (((StyleChangeRecord) shapeRecord).getNumLineBits() != null) {
+					currentNumLineBits = ((StyleChangeRecord) shapeRecord).getNumLineBits();
+				}
 			}
 
 		} while (!(shapeRecord instanceof EndShapeRecord));

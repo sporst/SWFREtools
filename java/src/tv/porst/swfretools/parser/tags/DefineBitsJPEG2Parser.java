@@ -28,7 +28,7 @@ public final class DefineBitsJPEG2Parser {
 	public static DefineBitsJPEG2Tag parse(final RecordHeader header, final SWFBinaryParser parser) throws SWFParserException {
 
 		final UINT16 characterId = parseUINT16(parser, 0x00006, "DefineBitsJPEG2::CharacterId");
-		final ByteArray imageData = parseByteArray(parser, header.getNormalizedLength(), 0x00006, "DefineBitsJPEG2::ImageData");
+		final ByteArray imageData = parseByteArray(parser, header.getNormalizedLength() - 2, 0x00006, "DefineBitsJPEG2::ImageData");
 
 		return new DefineBitsJPEG2Tag(header, characterId, imageData);
 	}

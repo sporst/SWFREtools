@@ -1,7 +1,7 @@
 package tv.porst.swfretools.parser.structures;
 
-import static tv.porst.swfretools.parser.SWFParserHelpers.parseUINT8;
-import tv.porst.splib.binaryparser.UINT8;
+import static tv.porst.swfretools.parser.SWFParserHelpers.parseUINT16;
+import tv.porst.splib.binaryparser.UINT16;
 import tv.porst.swfretools.parser.SWFBinaryParser;
 import tv.porst.swfretools.parser.SWFParserException;
 
@@ -24,7 +24,7 @@ public final class LineStyle3Parser {
 	 */
 	public static LineStyle3 parse(final SWFBinaryParser parser, final String fieldName) throws SWFParserException {
 
-		final UINT8 width = parseUINT8(parser, 0x00006, fieldName + "::Width");
+		final UINT16 width = parseUINT16(parser, 0x00006, fieldName + "::Width");
 		final RGBA color = RGBAParser.parse(parser, fieldName + "::Color");
 
 		return new LineStyle3(width, color);

@@ -62,7 +62,7 @@ public final class SWFParser {
 		final InflaterInputStream decompressor = new InflaterInputStream(inputStream);
 		final byte[] decompressed = new byte[inputStream.available()];
 
-		decompressor.read(decompressed);
+		final int read = decompressor.read(decompressed, 0, decompressed.length);
 
 		return decompressed;
 	}

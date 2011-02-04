@@ -25,7 +25,7 @@ public final class AlphaColormapDataParser {
 	 */
 	public static AlphaColormapData parse(final SWFBinaryParser parser, final int colorTableSize, final int imageDataSize, final String fieldName) throws SWFParserException {
 
-		final RGBA[] colorTableRGB = new RGBA[colorTableSize];
+		final RGBA[] colorTableRGB = new RGBA[colorTableSize + 1];
 
 		for (int i=0;i<colorTableRGB.length;i++) {
 			colorTableRGB[i] = RGBAParser.parse(parser, String.format(fieldName + "::ColorTableRGB[%d]", i));

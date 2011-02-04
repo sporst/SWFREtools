@@ -28,7 +28,7 @@ public final class DefineBitsParser {
 	public static DefineBitsTag parse(final RecordHeader header, final SWFBinaryParser parser) throws SWFParserException {
 
 		final UINT16 characterId = parseUINT16(parser, 0x00006, "DefineBits::CharacterId");
-		final ByteArray jpegData = parseByteArray(parser, header.getNormalizedLength(), 0x00006, "DefineBits::JPEGData");
+		final ByteArray jpegData = parseByteArray(parser, header.getNormalizedLength() - 2, 0x00006, "DefineBits::JPEGData");
 
 		return new DefineBitsTag(header, characterId, jpegData);
 	}

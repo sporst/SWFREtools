@@ -1,6 +1,6 @@
 package tv.porst.swfretools.parser.structures;
 
-import tv.porst.splib.binaryparser.UINT8;
+import tv.porst.splib.binaryparser.UINT16;
 
 /**
  * Represents a LineStyle3 structure.
@@ -13,7 +13,7 @@ public final class LineStyle3 {
 	/**
 	 * Width of line in twips.
 	 */
-	private final UINT8 width;
+	private final UINT16 width;
 
 	/**
 	 * Color value including alpha channel.
@@ -26,7 +26,7 @@ public final class LineStyle3 {
 	 * @param width Width of line in twips.
 	 * @param color Color value including alpha channel.
 	 */
-	public LineStyle3(final UINT8 width, final RGBA color) {
+	public LineStyle3(final UINT16 width, final RGBA color) {
 
 		this.width = width;
 		this.color = color;
@@ -46,7 +46,7 @@ public final class LineStyle3 {
 	 *
 	 * @return The width of line in twips.
 	 */
-	public UINT8 getWidth() {
+	public UINT16 getWidth() {
 		return width;
 	}
 }

@@ -31,6 +31,8 @@ public final class LineStyleArrayParser {
 	 */
 	public static LineStyleArray parse(final SWFBinaryParser parser, final String fieldName) throws SWFParserException {
 
+		parser.align();
+
 		final UINT8 lineStyleCount = parseUINT8(parser, 0x00006, fieldName + "::LineStyleCount");
 		final UINT16 lineStyleCountExtended = parseUINT16If(parser, 0x00006, lineStyleCount.value() == 0xFF, fieldName + "::LineStyleCountExtended");
 

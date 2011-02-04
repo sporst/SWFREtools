@@ -14,8 +14,8 @@ import tv.porst.splib.binaryparser.UINT16;
 import tv.porst.splib.binaryparser.UINT8;
 import tv.porst.swfretools.parser.SWFBinaryParser;
 import tv.porst.swfretools.parser.SWFParserException;
-import tv.porst.swfretools.parser.actions.Action;
-import tv.porst.swfretools.parser.actions.ActionRecordParser;
+import tv.porst.swfretools.parser.structures.ButtonCondAction;
+import tv.porst.swfretools.parser.structures.ButtonCondActionParser;
 import tv.porst.swfretools.parser.structures.ButtonRecord2;
 import tv.porst.swfretools.parser.structures.ButtonRecord2Parser;
 import tv.porst.swfretools.parser.structures.RecordHeader;
@@ -57,12 +57,19 @@ public final class DefineButton2Parser {
 
 		final UINT8 characterEndFlag = parseUINT8(parser, 0x00006, "DefineButton2::CharacterEndFlag");
 
-		final int actionRecordSize = header.getNormalizedLength() - (parser.getBytePosition() - header.getPosition()) - 1;
+		final List<ButtonCondAction> actions = new ArrayList<ButtonCondAction>();
 
-		final List<Action> actions = ActionRecordParser.parse(parser, actionRecordSize);
+		do {
+			final ButtonCondAction action = ButtonCondActionParser.parse(parser, header, String.format("DefineButton2::ButtonCondAction[%d]", actions.size()));
 
-		final UINT8 actionEndFlag = parseUINT8(parser, 0x00006, "DefineButton::ActionEndFlag");
+			actions.add(action);
 
-		return new DefineButton2Tag(header, buttonId, reservedFlags, trackAsMenu, actionOffset, characters, characterEndFlag, actions, actionEndFlag);
+			if (action.getCondActionSize().value() == 0) {
+				break;
+			}
+
+		} while (true);
+
+		return new DefineButton2Tag(header, buttonId, reservedFlags, trackAsMenu, actionOffset, characters, characterEndFlag, actions);
 	}
 }

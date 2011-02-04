@@ -7,7 +7,7 @@ import tv.porst.splib.binaryparser.Flag;
 import tv.porst.splib.binaryparser.UBits;
 import tv.porst.splib.binaryparser.UINT16;
 import tv.porst.splib.binaryparser.UINT8;
-import tv.porst.swfretools.parser.actions.Action;
+import tv.porst.swfretools.parser.structures.ButtonCondAction;
 import tv.porst.swfretools.parser.structures.ButtonRecord2;
 import tv.porst.swfretools.parser.structures.RecordHeader;
 
@@ -52,12 +52,7 @@ public final class DefineButton2Tag extends Tag {
 	/**
 	 * Actions to perform.
 	 */
-	private final List<Action> actions;
-
-	/**
-	 * Action end flag.
-	 */
-	private final UINT8 actionEndFlag;
+	private final List<ButtonCondAction> actions;
 
 	/**
 	 * Creates a new DefineButton tag object.
@@ -70,12 +65,10 @@ public final class DefineButton2Tag extends Tag {
 	 * @param characters Characters that make up the button.
 	 * @param characterEndFlag Character end flag.
 	 * @param actions Actions to perform.
-	 * @param actionEndFlag Action end flag.
 	 */
 	public DefineButton2Tag(final RecordHeader header, final UINT16 buttonId,
 			final UBits reservedFlags, final Flag trackAsMenu, final UINT16 actionOffset,
-			final List<ButtonRecord2> characters, final UINT8 characterEndFlag, final List<Action> actions,
-			final UINT8 actionEndFlag) {
+			final List<ButtonRecord2> characters, final UINT8 characterEndFlag, final List<ButtonCondAction> actions) {
 
 		super(header);
 
@@ -85,17 +78,7 @@ public final class DefineButton2Tag extends Tag {
 		this.actionOffset = actionOffset;
 		this.characters = new ArrayList<ButtonRecord2>(characters);
 		this.characterEndFlag = characterEndFlag;
-		this.actions = new ArrayList<Action>(actions);
-		this.actionEndFlag = actionEndFlag;
-	}
-
-	/**
-	 * Returns the action end flag.
-	 * 
-	 * @return The action end flag.
-	 */
-	public UINT8 getActionEndFlag() {
-		return actionEndFlag;
+		this.actions = new ArrayList<ButtonCondAction>(actions);
 	}
 
 	/**
@@ -112,8 +95,8 @@ public final class DefineButton2Tag extends Tag {
 	 * 
 	 * @return The actions to perform.
 	 */
-	public List<Action> getActions() {
-		return new ArrayList<Action>(actions);
+	public List<ButtonCondAction> getActions() {
+		return new ArrayList<ButtonCondAction>(actions);
 	}
 
 	/**
