@@ -33,7 +33,7 @@ public final class ShapeWithStyle3 {
 	/**
 	 * Shape records.
 	 */
-	private final ShapeRecord shapeRecord;
+	private final Shape3Record shapeRecord;
 
 	/**
 	 * Creates a new ShapeWithStyle object.
@@ -45,7 +45,7 @@ public final class ShapeWithStyle3 {
 	 * @param shapeRecord Shape records.
 	 */
 	public ShapeWithStyle3(final FillStyle3Array fillStyles, final LineStyle3Array lineStyles,
-			final UBits numFillBits, final UBits numLineBits, final ShapeRecord shapeRecord) {
+			final UBits numFillBits, final UBits numLineBits, final Shape3Record shapeRecord) {
 
 		this.fillStyles = fillStyles;
 		this.lineStyles = lineStyles;
@@ -96,7 +96,7 @@ public final class ShapeWithStyle3 {
 	 *
 	 * @return The shape records.
 	 */
-	public ShapeRecord getShapeRecord() {
+	public Shape3Record getShapeRecord() {
 		return shapeRecord;
 	}
 }

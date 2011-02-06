@@ -51,7 +51,7 @@ public final class PlaceObject3Parser {
 		final Flag placeFlagHasMatrix = parseFlag(parser, 0x00006, "PlaceObject3::PlaceFlagHasMatrix");
 		final Flag placeFlagHasCharacter = parseFlag(parser, 0x00006, "PlaceObject3::PlaceFlagHasCharacter");
 		final Flag placeFlagHasMove = parseFlag(parser, 0x00006, "PlaceObject3::PlaceFlagHasMove");
-		final UBits reserved = parseUBits(parser, 0x0000006, 3, "PlaceObject3::Reserved");
+		final UBits reserved = parseUBits(parser, 3, 0x0000006, "PlaceObject3::Reserved");
 		final Flag placeFlagHasImage = parseFlag(parser, 0x00006, "PlaceObject3::PlaceFlagHasImage");
 		final Flag placeFlagHasClassName = parseFlag(parser, 0x00006, "PlaceObject3::PlaceFlagHasClassName");
 		final Flag placeFlagHasCacheAsBitmap = parseFlag(parser, 0x00006, "PlaceObject3::PlaceFlagHasCacheAsBitmap");

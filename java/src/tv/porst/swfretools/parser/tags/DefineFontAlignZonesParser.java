@@ -46,7 +46,7 @@ public final class DefineFontAlignZonesParser {
 
 		final UINT16 fontId = parseUINT16(parser, 0x00006, "DefineFontAlignZones::FontId");
 		final UBits csmTableHint = parseUBits(parser, 2, 0x00006, "DefineFontAlignZones::CSMTableHint");
-		final UBits reserved = parseUBits(parser, 2, 0x00006, "DefineFontAlignZones::Reserved");
+		final UBits reserved = parseUBits(parser, 6, 0x00006, "DefineFontAlignZones::Reserved");
 
 		final List<ZoneRecord> zoneTable = new ArrayList<ZoneRecord>();
 

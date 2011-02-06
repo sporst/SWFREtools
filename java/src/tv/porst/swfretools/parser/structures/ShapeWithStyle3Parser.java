@@ -33,27 +33,27 @@ public final class ShapeWithStyle3Parser {
 		final LineStyle3Array lineStyles = LineStyle3ArrayParser.parse(parser, fieldName + "::LineStyles");
 		final UBits numFillBits = parseUBits(parser, 4, 0x00006, fieldName + "::NumFillBits");
 		final UBits numLineBits = parseUBits(parser, 4, 0x00006, fieldName + "::NumLineBits");
-		final List<ShapeRecord> shapeRecords = new ArrayList<ShapeRecord>();
+		final List<Shape3Record> shapeRecords = new ArrayList<Shape3Record>();
 
-		ShapeRecord shapeRecord = null;
+		Shape3Record shapeRecord = null;
 
 		UBits currentNumFillBits = numFillBits;
 		UBits currentNumLineBits = numLineBits;
 
 		do {
 
-			shapeRecord = ShapeRecordParser.parse(parser, currentNumFillBits, currentNumLineBits, fieldName + "::ShapeRecord");
+			shapeRecord = ShapeRecord3Parser.parse(parser, currentNumFillBits, currentNumLineBits, fieldName + "::ShapeRecord");
 
 			shapeRecords.add(shapeRecord);
 
-			if (shapeRecord instanceof StyleChangeRecord) {
+			if (shapeRecord instanceof StyleChangeRecord3) {
 
-				if (((StyleChangeRecord) shapeRecord).getNumFillBits() != null) {
-					currentNumFillBits = ((StyleChangeRecord) shapeRecord).getNumFillBits();
+				if (((StyleChangeRecord3) shapeRecord).getNumFillBits() != null) {
+					currentNumFillBits = ((StyleChangeRecord3) shapeRecord).getNumFillBits();
 				}
 
-				if (((StyleChangeRecord) shapeRecord).getNumLineBits() != null) {
-					currentNumLineBits = ((StyleChangeRecord) shapeRecord).getNumLineBits();
+				if (((StyleChangeRecord3) shapeRecord).getNumLineBits() != null) {
+					currentNumLineBits = ((StyleChangeRecord3) shapeRecord).getNumLineBits();
 				}
 			}
 

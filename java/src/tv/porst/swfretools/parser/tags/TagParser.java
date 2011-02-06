@@ -221,6 +221,7 @@ public final class TagParser {
 			case TagCodes.DefineScalingGrid: return DefineScalingGridParser.parse(header, parser);
 			case TagCodes.DefineSceneAndFrameLabelData: return DefineSceneAndFrameLabelDataParser.parse(header, parser);
 			case TagCodes.DoAction: return DoActionParser.parse(header, parser);
+			case TagCodes.DoInitAction: return DoInitActionParser.parse(header, parser);
 			case TagCodes.DefineShape: return DefineShapeParser.parse(header, parser);
 			case TagCodes.DefineShape2: return DefineShape2Parser.parse(header, parser);
 			case TagCodes.DefineShape3: return DefineShape3Parser.parse(header, parser);

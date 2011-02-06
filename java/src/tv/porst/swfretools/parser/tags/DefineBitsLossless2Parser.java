@@ -60,7 +60,7 @@ public final class DefineBitsLossless2Parser {
 
 		final UINT8 bitmapColorTableSize = parseUINT8If(parser, 0x00006, bitmapFormatValue == 3, "DefineBitsLossless2::BitmapColorTableSize");
 		final AlphaColormapData zlibColormapData = AlphaColormapDataParser.parseIf(parser, bitmapFormatValue == 3, bitmapColorTableSize == null ? 0 : bitmapColorTableSize.value(), getImageSize(header, bitmapColorTableSize), "DefineBitsLossless2::ZlibColorMapData");
-		final AlphaBitmapData zlibBitmapData = AlphaBitmapDataParser.parseIf(parser, bitmapFormatValue == 4 || bitmapFormatValue == 5, header.getNormalizedLength(), "DefineBitsLossless2::ZlibBitmapData");
+		final AlphaBitmapData zlibBitmapData = AlphaBitmapDataParser.parseIf(parser, bitmapFormatValue == 4 || bitmapFormatValue == 5, (header.getNormalizedLength() - 7) / 4, "DefineBitsLossless2::ZlibBitmapData");
 
 		return new DefineBitsLossless2Tag(header, characterId, bitmapFormat, bitmapWidth, bitmapHeight, bitmapColorTableSize, zlibColormapData, zlibBitmapData);
 	}

@@ -31,8 +31,6 @@ public final class FillStyleArrayParser {
 	 */
 	public static FillStyleArray parse(final SWFBinaryParser parser, final String fieldName) throws SWFParserException {
 
-		parser.align();
-
 		final UINT8 fillStyleCount = parseUINT8(parser, 0x00006, fieldName + "::FillStyleCount");
 		final UINT16 fillStyleCountExtended = fillStyleCount.value() == 0xFF ? parseUINT16(parser, 0x00006, fieldName + "::FillStyleCountExtended") : null;
 

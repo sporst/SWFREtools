@@ -1,6 +1,7 @@
 package tv.porst.swfretools.parser;
 
 import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.util.zip.InflaterInputStream;
@@ -58,13 +59,25 @@ public final class SWFParser {
 
 		assert fileData != null && fileData.length >= 8 : "Invalid SWF file data passed to function";
 
+		final ByteArrayOutputStream output = new ByteArrayOutputStream();
+
 		final ByteArrayInputStream inputStream = new ByteArrayInputStream(fileData, 8, fileData.length - 8);
 		final InflaterInputStream decompressor = new InflaterInputStream(inputStream);
-		final byte[] decompressed = new byte[inputStream.available()];
 
-		final int read = decompressor.read(decompressed, 0, decompressed.length);
+		final int available = inputStream.available();
 
-		return decompressed;
+		if (available > 0) {
+
+			final byte[] buffer = new byte[Math.min(available, 4096)];
+			int read = 0;
+
+			while ((read = decompressor.read(buffer, 0, buffer.length)) != -1) {
+				output.write(buffer, 0, read);
+			}
+
+		}
+
+		return output.toByteArray();
 	}
 
 	/**

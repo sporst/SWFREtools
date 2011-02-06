@@ -41,6 +41,11 @@ public final class StyleChangeRecordParser {
 		final UBits fillStyle0 = parseUBitsIf(parser, fillBits == null ? 0 : fillBits.value(), 0x00006, stateFillStyle0, fieldName + "::FillStyle0");
 		final UBits fillStyle1 = parseUBitsIf(parser, fillBits == null ? 0 : fillBits.value(), 0x00006, stateFillStyle1, fieldName + "::FillStyle1");
 		final UBits lineStyle = parseUBitsIf(parser, lineBits == null ? 0 : lineBits.value(), 0x00006, stateLineStyle, fieldName + "::LineStyle");
+
+		if (stateNewStyles.value()) {
+			parser.align();
+		}
+
 		final FillStyleArray fillStyles = FillStyleArrayParser.parseIf(parser, stateNewStyles, fieldName + "::FillStyles");
 		final LineStyleArray lineStyles = LineStyleArrayParser.parseIf(parser, stateNewStyles, fieldName + "LineStyles");
 		final UBits numFillBits = parseUBitsIf(parser, 4, 0x00006, stateNewStyles, fieldName + "::NumFillBits");

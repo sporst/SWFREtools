@@ -49,6 +49,11 @@ public final class DefineText2Tag extends Tag {
 	private final List<TextRecord2> textRecords;
 
 	/**
+	 * End marker of the record.
+	 */
+	private final UINT8 end;
+
+	/**
 	 * Creates a new DefineText2 tag object.
 	 * 
 	 * @param header Tag header.
@@ -58,10 +63,11 @@ public final class DefineText2Tag extends Tag {
 	 * @param glyphBits Bits in each glyph index.
 	 * @param advanceBits Bits in each advance value.
 	 * @param textRecords Text records.
+	 * @param end End marker of the record.
 	 */
 	public DefineText2Tag(final RecordHeader header, final UINT16 characterId,
 			final Rect textBounds, final Matrix textMatrix, final UINT8 glyphBits, final UINT8 advanceBits,
-			final List<TextRecord2> textRecords) {
+			final List<TextRecord2> textRecords, final UINT8 end) {
 		super(header);
 
 		this.characterId = characterId;
@@ -70,6 +76,7 @@ public final class DefineText2Tag extends Tag {
 		this.glyphBits = glyphBits;
 		this.advanceBits = advanceBits;
 		this.textRecords = new ArrayList<TextRecord2>(textRecords);
+		this.end = end;
 	}
 
 	/**
@@ -88,6 +95,15 @@ public final class DefineText2Tag extends Tag {
 	 */
 	public UINT16 getCharacterId() {
 		return characterId;
+	}
+
+	/**
+	 * Returns the end marker of the record.
+	 *
+	 * @return The end marker of the record.
+	 */
+	public UINT8 getEnd() {
+		return end;
 	}
 
 	/**

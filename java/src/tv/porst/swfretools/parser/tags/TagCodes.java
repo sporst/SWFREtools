@@ -201,6 +201,11 @@ public final class TagCodes {
 	public static final int EnableDebugger = 58;
 
 	/**
+	 * Tag identifier for the DoInitAction tag.
+	 */
+	public static final int DoInitAction = 59;
+
+	/**
 	 * Tag identifier for the DefineVideoStream tag.
 	 */
 	public static final int DefineVideoStream = 60;

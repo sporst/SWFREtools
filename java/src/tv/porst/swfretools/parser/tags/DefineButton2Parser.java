@@ -59,16 +59,19 @@ public final class DefineButton2Parser {
 
 		final List<ButtonCondAction> actions = new ArrayList<ButtonCondAction>();
 
-		do {
-			final ButtonCondAction action = ButtonCondActionParser.parse(parser, header, String.format("DefineButton2::ButtonCondAction[%d]", actions.size()));
+		if (actionOffset.value() != 0) {
 
-			actions.add(action);
+			do {
+				final ButtonCondAction action = ButtonCondActionParser.parse(parser, header, String.format("DefineButton2::ButtonCondAction[%d]", actions.size()));
 
-			if (action.getCondActionSize().value() == 0) {
-				break;
-			}
+				actions.add(action);
 
-		} while (true);
+				if (action.getCondActionSize().value() == 0) {
+					break;
+				}
+
+			} while (true);
+		}
 
 		return new DefineButton2Tag(header, buttonId, reservedFlags, trackAsMenu, actionOffset, characters, characterEndFlag, actions);
 	}

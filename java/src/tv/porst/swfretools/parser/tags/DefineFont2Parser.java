@@ -77,6 +77,7 @@ public final class DefineFont2Parser {
 		final List<Shape> glyphShapeTable = new ArrayList<Shape>();
 
 		for (int i=0;i<numGlyphs.value();i++) {
+			System.out.println(i + " " + parser.getLength());
 			glyphShapeTable.add(ShapeParser.parse(parser, String.format("GlyphShapeTable[%d]", i)));
 		}
 
