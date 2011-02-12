@@ -36,6 +36,7 @@ public final class RectParser {
 		// in the SWF file format reference.
 
 		if (nBits.value() == 0) {
+			parser.align();
 			return new Rect(nBits, null, null, null, null);
 		}
 

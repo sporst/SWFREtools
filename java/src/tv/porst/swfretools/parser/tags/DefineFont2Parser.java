@@ -105,6 +105,7 @@ public final class DefineFont2Parser {
 			}
 
 			for (int i=0;i<numGlyphs.value();i++) {
+				System.out.printf("XXX: %d - %X\n", i, parser.getBytePosition());
 				fontBoundsTable.add(RectParser.parse(parser, String.format("DefineFont2::FontBoundsTable[%d]", i)));
 			}
 		}

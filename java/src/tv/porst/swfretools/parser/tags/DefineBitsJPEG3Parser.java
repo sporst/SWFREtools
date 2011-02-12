@@ -32,7 +32,7 @@ public final class DefineBitsJPEG3Parser {
 		final UINT16 characterId = parseUINT16(parser, 0x00006, "DefineBitsJPEG3::CharacterId");
 		final UINT32 alphaDataOffset = parseUINT32(parser, 0x00006, "DefineBitsJPEG3::AlphaDataOffset");
 		final ByteArray imageData = parseByteArray(parser, alphaDataOffset.value(), 0x00006, "DefineBitsJPEG3::ImageData");
-		final ByteArray bitmapAlphaData = parseByteArray(parser, header.getNormalizedLength() - alphaDataOffset.value(), 0x00006, "DefineBitsJPEG3::BitmapAlphaData");
+		final ByteArray bitmapAlphaData = parseByteArray(parser, header.getNormalizedLength() - alphaDataOffset.value() - 4 - 2, 0x00006, "DefineBitsJPEG3::BitmapAlphaData");
 
 		return new DefineBitsJPEG3Tag(header, characterId, alphaDataOffset, imageData, bitmapAlphaData);
 	}

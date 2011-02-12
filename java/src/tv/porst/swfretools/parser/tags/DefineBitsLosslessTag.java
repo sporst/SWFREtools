@@ -2,9 +2,7 @@ package tv.porst.swfretools.parser.tags;
 
 import tv.porst.splib.binaryparser.UINT16;
 import tv.porst.splib.binaryparser.UINT8;
-import tv.porst.swfretools.parser.structures.BitmapData15;
-import tv.porst.swfretools.parser.structures.BitmapData24;
-import tv.porst.swfretools.parser.structures.ColormapData;
+import tv.porst.swfretools.parser.structures.ByteArray;
 import tv.porst.swfretools.parser.structures.RecordHeader;
 
 /**
@@ -41,19 +39,9 @@ public final class DefineBitsLosslessTag extends Tag {
 	private final UINT8 bitmapColorTableSize;
 
 	/**
-	 * ZLIB compressed bitmap data.
+	 * ZLIB compressed image data.
 	 */
-	private final ColormapData zlibColormapData;
-
-	/**
-	 * ZLIB compressed bitmap data.
-	 */
-	private final BitmapData15 zlibBitmapData15;
-
-	/**
-	 * ZLIB compressed bitmap data.
-	 */
-	private final BitmapData24 zlibBitmapData24;
+	private final ByteArray zlibBitmapData;
 
 	/**
 	 * Creates a new DefineBitsLossless tag object.
@@ -64,14 +52,11 @@ public final class DefineBitsLosslessTag extends Tag {
 	 * @param bitmapWidth Bitmap width.
 	 * @param bitmapHeight Bitmap height.
 	 * @param bitmapColorTableSize Size of the color table.
-	 * @param zlibColormapData ZLIB compressed bitmap data.
-	 * @param zlibBitmapData15 ZLIB compressed bitmap data.
-	 * @param zlibBitmapData24 ZLIB compressed bitmap data.
+	 * @param zlibBitmapData ZLIB compressed image data.
 	 */
 	public DefineBitsLosslessTag(final RecordHeader header, final UINT16 characterId,
 			final UINT8 bitmapFormat, final UINT16 bitmapWidth, final UINT16 bitmapHeight,
-			final UINT8 bitmapColorTableSize, final ColormapData zlibColormapData,
-			final BitmapData15 zlibBitmapData15, final BitmapData24 zlibBitmapData24) {
+			final UINT8 bitmapColorTableSize, final ByteArray zlibBitmapData) {
 
 		super(header);
 
@@ -80,9 +65,7 @@ public final class DefineBitsLosslessTag extends Tag {
 		this.bitmapWidth = bitmapWidth;
 		this.bitmapHeight = bitmapHeight;
 		this.bitmapColorTableSize = bitmapColorTableSize;
-		this.zlibColormapData = zlibColormapData;
-		this.zlibBitmapData15 = zlibBitmapData15;
-		this.zlibBitmapData24 = zlibBitmapData24;
+		this.zlibBitmapData = zlibBitmapData;
 	}
 
 	/**
@@ -131,29 +114,11 @@ public final class DefineBitsLosslessTag extends Tag {
 	}
 
 	/**
-	 * Returns the ZLIB compressed bitmap data.
+	 * Returns the ZLIB compressed image data.
 	 * 
-	 * @return The ZLIB compressed bitmap data.
+	 * @return The ZLIB compressed image data.
 	 */
-	public BitmapData15 getZlibBitmapData15() {
-		return zlibBitmapData15;
-	}
-
-	/**
-	 * Returns the ZLIB compressed bitmap data.
-	 * 
-	 * @return The ZLIB compressed bitmap data.
-	 */
-	public BitmapData24 getZlibBitmapData24() {
-		return zlibBitmapData24;
-	}
-
-	/**
-	 * Returns the ZLIB compressed bitmap data.
-	 * 
-	 * @return The ZLIB compressed bitmap data.
-	 */
-	public ColormapData getZlibColormapData() {
-		return zlibColormapData;
+	public ByteArray getZlibBitmapData() {
+		return zlibBitmapData;
 	}
 }

@@ -1,5 +1,6 @@
 package tv.porst.swfretools.parser.tags;
 
+import static tv.porst.swfretools.parser.SWFParserHelpers.parseByteArray;
 import static tv.porst.swfretools.parser.SWFParserHelpers.parseUINT16;
 import static tv.porst.swfretools.parser.SWFParserHelpers.parseUINT8;
 import static tv.porst.swfretools.parser.SWFParserHelpers.parseUINT8If;
@@ -7,10 +8,7 @@ import tv.porst.splib.binaryparser.UINT16;
 import tv.porst.splib.binaryparser.UINT8;
 import tv.porst.swfretools.parser.SWFBinaryParser;
 import tv.porst.swfretools.parser.SWFParserException;
-import tv.porst.swfretools.parser.structures.AlphaBitmapData;
-import tv.porst.swfretools.parser.structures.AlphaBitmapDataParser;
-import tv.porst.swfretools.parser.structures.AlphaColormapData;
-import tv.porst.swfretools.parser.structures.AlphaColormapDataParser;
+import tv.porst.swfretools.parser.structures.ByteArray;
 import tv.porst.swfretools.parser.structures.RecordHeader;
 
 /**
@@ -59,9 +57,10 @@ public final class DefineBitsLossless2Parser {
 		final int bitmapFormatValue = bitmapFormat.value();
 
 		final UINT8 bitmapColorTableSize = parseUINT8If(parser, 0x00006, bitmapFormatValue == 3, "DefineBitsLossless2::BitmapColorTableSize");
-		final AlphaColormapData zlibColormapData = AlphaColormapDataParser.parseIf(parser, bitmapFormatValue == 3, bitmapColorTableSize == null ? 0 : bitmapColorTableSize.value(), getImageSize(header, bitmapColorTableSize), "DefineBitsLossless2::ZlibColorMapData");
-		final AlphaBitmapData zlibBitmapData = AlphaBitmapDataParser.parseIf(parser, bitmapFormatValue == 4 || bitmapFormatValue == 5, (header.getNormalizedLength() - 7) / 4, "DefineBitsLossless2::ZlibBitmapData");
 
-		return new DefineBitsLossless2Tag(header, characterId, bitmapFormat, bitmapWidth, bitmapHeight, bitmapColorTableSize, zlibColormapData, zlibBitmapData);
+		final int numberOfBytes = header.getNormalizedLength() - 2 - 1 - 2 - 2 - (bitmapColorTableSize == null ? 0 : 1);
+		final ByteArray zlibBitmapData = parseByteArray(parser, numberOfBytes, 0x00006, "DefineBitsLossless::ZlibBitmapData");
+
+		return new DefineBitsLossless2Tag(header, characterId, bitmapFormat, bitmapWidth, bitmapHeight, bitmapColorTableSize, zlibBitmapData);
 	}
 }

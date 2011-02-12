@@ -50,7 +50,7 @@ public final class DefineFontAlignZonesParser {
 
 		final List<ZoneRecord> zoneTable = new ArrayList<ZoneRecord>();
 
-		int toParse = header.getNormalizedLength() - 1 - 1;
+		int toParse = header.getNormalizedLength() - 2 - 1;
 
 		while (toParse > 0) {
 			final ZoneRecord zoneRecord = ZoneRecordParser.parse(parser, String.format("DefineFontAlignZones::ZoneTable[%d]", zoneTable.size()));

@@ -2,8 +2,7 @@ package tv.porst.swfretools.parser.tags;
 
 import tv.porst.splib.binaryparser.UINT16;
 import tv.porst.splib.binaryparser.UINT8;
-import tv.porst.swfretools.parser.structures.AlphaBitmapData;
-import tv.porst.swfretools.parser.structures.AlphaColormapData;
+import tv.porst.swfretools.parser.structures.ByteArray;
 import tv.porst.swfretools.parser.structures.RecordHeader;
 
 /**
@@ -40,14 +39,9 @@ public final class DefineBitsLossless2Tag extends Tag {
 	private final UINT8 bitmapColorTableSize;
 
 	/**
-	 * ZLIB compressed bitmap data.
+	 * ZLIB compressed image data.
 	 */
-	private final AlphaColormapData zlibColormapData;
-
-	/**
-	 * ZLIB compressed bitmap data.
-	 */
-	private final AlphaBitmapData zlibBitmapData;
+	private final ByteArray zlibBitmapData;
 
 	/**
 	 * Creates a new DefineBitsLossless2 tag object.
@@ -58,13 +52,11 @@ public final class DefineBitsLossless2Tag extends Tag {
 	 * @param bitmapWidth Bitmap width.
 	 * @param bitmapHeight Bitmap height.
 	 * @param bitmapColorTableSize Size of the color table.
-	 * @param zlibColormapData ZLIB compressed bitmap data.
-	 * @param zlibBitmapData ZLIB compressed bitmap data.
+	 * @param zlibBitmapData ZLIB compressed image data.
 	 */
 	public DefineBitsLossless2Tag(final RecordHeader header, final UINT16 characterId,
 			final UINT8 bitmapFormat, final UINT16 bitmapWidth, final UINT16 bitmapHeight,
-			final UINT8 bitmapColorTableSize, final AlphaColormapData zlibColormapData,
-			final AlphaBitmapData zlibBitmapData) {
+			final UINT8 bitmapColorTableSize, final ByteArray zlibBitmapData) {
 
 		super(header);
 
@@ -73,7 +65,6 @@ public final class DefineBitsLossless2Tag extends Tag {
 		this.bitmapWidth = bitmapWidth;
 		this.bitmapHeight = bitmapHeight;
 		this.bitmapColorTableSize = bitmapColorTableSize;
-		this.zlibColormapData = zlibColormapData;
 		this.zlibBitmapData = zlibBitmapData;
 	}
 
@@ -123,20 +114,11 @@ public final class DefineBitsLossless2Tag extends Tag {
 	}
 
 	/**
-	 * Returns the ZLIB compressed bitmap data.
-	 * 
-	 * @return The ZLIB compressed bitmap data.
+	 * Returns the ZLIB compressed image data.
+	 *
+	 * @return The ZLIB compressed image data.
 	 */
-	public AlphaBitmapData getZlibBitmapData() {
+	public ByteArray getZlibBitmapData() {
 		return zlibBitmapData;
-	}
-
-	/**
-	 * Returns the ZLIB compressed bitmap data.
-	 * 
-	 * @return The ZLIB compressed bitmap data.
-	 */
-	public AlphaColormapData getZlibColormapData() {
-		return zlibColormapData;
 	}
 }
