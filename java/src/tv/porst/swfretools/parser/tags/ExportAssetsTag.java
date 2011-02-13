@@ -1,11 +1,8 @@
 package tv.porst.swfretools.parser.tags;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import tv.porst.splib.binaryparser.UINT16;
 import tv.porst.swfretools.parser.structures.RecordHeader;
-import tv.porst.swfretools.parser.structures.Symbol;
+import tv.porst.swfretools.parser.structures.SymbolList;
 
 /**
  * Represents an ExportAssets tag.
@@ -23,7 +20,7 @@ public final class ExportAssetsTag extends Tag {
 	/**
 	 * List of assets to export.
 	 */
-	private final List<Symbol> assets;
+	private final SymbolList assets;
 
 	/**
 	 * Creates a new ExportAssets tag object.
@@ -32,11 +29,11 @@ public final class ExportAssetsTag extends Tag {
 	 * @param count Number of assets to export.
 	 * @param assets List of assets to export.
 	 */
-	public ExportAssetsTag(final RecordHeader header, final UINT16 count, final List<Symbol> assets) {
+	public ExportAssetsTag(final RecordHeader header, final UINT16 count, final SymbolList assets) {
 		super(header);
 
 		this.count = count;
-		this.assets = new ArrayList<Symbol>(assets);
+		this.assets = assets;
 	}
 
 	/**
@@ -44,7 +41,7 @@ public final class ExportAssetsTag extends Tag {
 	 * 
 	 * @return The list of assets to export.
 	 */
-	public List<Symbol> getAssets() {
+	public SymbolList getAssets() {
 		return assets;
 	}
 

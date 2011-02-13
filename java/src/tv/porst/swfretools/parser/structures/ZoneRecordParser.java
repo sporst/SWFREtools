@@ -1,14 +1,14 @@
 package tv.porst.swfretools.parser.structures;
 
-import static tv.porst.swfretools.parser.SWFParserHelpers.parseUBits;
 import static tv.porst.swfretools.parser.SWFParserHelpers.parseFlag;
+import static tv.porst.swfretools.parser.SWFParserHelpers.parseUBits;
 import static tv.porst.swfretools.parser.SWFParserHelpers.parseUINT8;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import tv.porst.splib.binaryparser.UBits;
 import tv.porst.splib.binaryparser.Flag;
+import tv.porst.splib.binaryparser.UBits;
 import tv.porst.splib.binaryparser.UINT8;
 import tv.porst.swfretools.parser.SWFBinaryParser;
 import tv.porst.swfretools.parser.SWFParserException;
@@ -45,6 +45,6 @@ public final class ZoneRecordParser {
 		final Flag zoneMaskY = parseFlag(parser, 0x00006, fieldName + "::ZoneMaskY");
 		final Flag zoneMaskX = parseFlag(parser, 0x00006, fieldName + "::ZoneMaskX");
 
-		return new ZoneRecord(numZoneData, zoneData, reserved, zoneMaskY, zoneMaskX);
+		return new ZoneRecord(numZoneData, new ZoneDataList(zoneData), reserved, zoneMaskY, zoneMaskX);
 	}
 }

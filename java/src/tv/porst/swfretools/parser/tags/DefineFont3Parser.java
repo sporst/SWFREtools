@@ -20,12 +20,17 @@ import tv.porst.splib.binaryparser.UINT16;
 import tv.porst.splib.binaryparser.UINT8;
 import tv.porst.swfretools.parser.SWFBinaryParser;
 import tv.porst.swfretools.parser.SWFParserException;
+import tv.porst.swfretools.parser.structures.INT16List;
 import tv.porst.swfretools.parser.structures.KerningRecord;
+import tv.porst.swfretools.parser.structures.KerningRecordList;
 import tv.porst.swfretools.parser.structures.KerningRecordParser;
+import tv.porst.swfretools.parser.structures.ParsedINTElementList;
 import tv.porst.swfretools.parser.structures.RecordHeader;
 import tv.porst.swfretools.parser.structures.Rect;
+import tv.porst.swfretools.parser.structures.RectList;
 import tv.porst.swfretools.parser.structures.RectParser;
 import tv.porst.swfretools.parser.structures.Shape3;
+import tv.porst.swfretools.parser.structures.Shape3List;
 import tv.porst.swfretools.parser.structures.Shape3Parser;
 
 /**
@@ -121,8 +126,9 @@ public final class DefineFont3Parser {
 		return new DefineFont3Tag(header, fontId, fontFlagsHasLayout, fontFlagsShiftJIS,
 				fontFlagsSmallText, fontFlagsANSI, fontFlagsWideOffsets, fontFlagsWideCodes,
 				fontFlagsItalic, fontFlagsBold, languageCode, fontNameLen, fontName,
-				numGlyphs, offsetTable, codeTableOffset, glyphShapeTable, codeTable, fontAscent,
-				fontDescent, fontLeading, fontAdvanceTable, fontBoundsTable, kerningCount,
-				fontKerningTable);
+				numGlyphs, new ParsedINTElementList(offsetTable), codeTableOffset, new Shape3List(glyphShapeTable),
+				new ParsedINTElementList(codeTable), fontAscent,
+				fontDescent, fontLeading, new INT16List(fontAdvanceTable), new RectList(fontBoundsTable), kerningCount,
+				new KerningRecordList(fontKerningTable));
 	}
 }

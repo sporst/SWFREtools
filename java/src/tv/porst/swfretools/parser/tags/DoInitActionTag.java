@@ -12,6 +12,11 @@ import tv.porst.swfretools.parser.structures.RecordHeader;
 public final class DoInitActionTag extends Tag {
 
 	/**
+	 * Sprite to which these actions apply.
+	 */
+	private final UINT16 spriteId;
+
+	/**
 	 * Creates a new DoInitAction tag object.
 	 * 
 	 * @param header Tag header.
@@ -21,5 +26,15 @@ public final class DoInitActionTag extends Tag {
 
 		super(header);
 
+		this.spriteId = spriteId;
+	}
+
+	/**
+	 * Returns the sprite to which these actions apply.
+	 *
+	 * @return The sprite to which these actions apply.
+	 */
+	public UINT16 getSpriteId() {
+		return spriteId;
 	}
 }

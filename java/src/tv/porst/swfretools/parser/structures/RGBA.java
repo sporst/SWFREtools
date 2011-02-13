@@ -8,7 +8,7 @@ import tv.porst.splib.binaryparser.UINT8;
  * @author sp
  *
  */
-public final class RGBA {
+public final class RGBA implements IFileElement {
 
 	/**
 	 * Red color value.
@@ -63,6 +63,11 @@ public final class RGBA {
 	 */
 	public UINT8 getBlue() {
 		return blue;
+	}
+
+	@Override
+	public int getBytePosition() {
+		return red.getBytePosition();
 	}
 
 	/**

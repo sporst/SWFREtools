@@ -9,7 +9,7 @@ import tv.porst.splib.binaryparser.IParsedINTElement;
  * @author sp
  *
  */
-public final class KerningRecord {
+public final class KerningRecord implements IFileElement {
 
 	/**
 	 * Character code of the left character.
@@ -39,6 +39,11 @@ public final class KerningRecord {
 		this.fontKerningCode1 = fontKerningCode1;
 		this.fontKerningCode2 = fontKerningCode2;
 		this.fontKerningAdjustment = fontKerningAdjustment;
+	}
+
+	@Override
+	public int getBytePosition() {
+		return fontKerningCode1.getBytePosition();
 	}
 
 	/**

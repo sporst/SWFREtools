@@ -8,7 +8,7 @@ import tv.porst.splib.binaryparser.UBits;
  * @author sp
  *
  */
-public final class Shape3 {
+public final class Shape3 implements IFileElement {
 
 	/**
 	 * Number of fill index bits.
@@ -38,6 +38,11 @@ public final class Shape3 {
 		this.numLineBits = numLineBits;
 		this.shapeRecord = shapeRecord;
 
+	}
+
+	@Override
+	public int getBytePosition() {
+		return numFillBits.getBytePosition();
 	}
 
 	/**

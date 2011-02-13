@@ -12,6 +12,7 @@ import tv.porst.swfretools.parser.SWFBinaryParser;
 import tv.porst.swfretools.parser.SWFParserException;
 import tv.porst.swfretools.parser.structures.RecordHeader;
 import tv.porst.swfretools.parser.structures.ZoneRecord;
+import tv.porst.swfretools.parser.structures.ZoneRecordList;
 import tv.porst.swfretools.parser.structures.ZoneRecordParser;
 
 /**
@@ -59,6 +60,6 @@ public final class DefineFontAlignZonesParser {
 			toParse -= calculateLength(zoneRecord);
 		}
 
-		return new DefineFontAlignZonesTag(header, fontId, csmTableHint, reserved, zoneTable);
+		return new DefineFontAlignZonesTag(header, fontId, csmTableHint, reserved, new ZoneRecordList(zoneTable));
 	}
 }

@@ -9,7 +9,7 @@ import tv.porst.splib.binaryparser.UINT16;
  * @author sp
  *
  */
-public final class Symbol {
+public final class Symbol implements IFileElement {
 
 	/**
 	 * Character ID.
@@ -32,6 +32,11 @@ public final class Symbol {
 		this.tag = tag;
 		this.name = name;
 
+	}
+
+	@Override
+	public int getBytePosition() {
+		return tag.getBytePosition();
 	}
 
 	/**

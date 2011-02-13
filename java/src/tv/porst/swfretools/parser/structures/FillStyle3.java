@@ -9,7 +9,7 @@ import tv.porst.splib.binaryparser.UINT8;
  * @author sp
  *
  */
-public final class FillStyle3 {
+public final class FillStyle3 implements IFileElement {
 
 	/**
 	 * Type of fill style.
@@ -78,6 +78,11 @@ public final class FillStyle3 {
 	 */
 	public Matrix getBitmapMatrix() {
 		return bitmapMatrix;
+	}
+
+	@Override
+	public int getBytePosition() {
+		return fillStyleType.getBytePosition();
 	}
 
 	/**

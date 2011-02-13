@@ -1,12 +1,8 @@
 package tv.porst.swfretools.parser.structures;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import tv.porst.splib.binaryparser.UINT16;
 import tv.porst.splib.binaryparser.UINT32;
 import tv.porst.splib.binaryparser.UINT8;
-import tv.porst.swfretools.parser.tags.Tag;
 
 /**
  * Represents a SWF file.
@@ -59,7 +55,7 @@ public final class SWFFile {
 	/**
 	 * List of tags in file.
 	 */
-	private final List<Tag> tags;
+	private final TagList tags;
 
 	/**
 	 * Creates a new SWF file object.
@@ -76,7 +72,7 @@ public final class SWFFile {
 	 */
 	public SWFFile(final UINT8 signature1, final UINT8 signature2, final UINT8 signature3,
 			final UINT8 version, final UINT32 fileLength, final Rect frameSize, final UINT16 frameRate,
-			final UINT16 frameCount, final List<Tag> tags) {
+			final UINT16 frameCount, final TagList tags) {
 
 		this.signature1 = signature1;
 		this.signature2 = signature2;
@@ -86,7 +82,7 @@ public final class SWFFile {
 		this.frameSize = frameSize;
 		this.frameRate = frameRate;
 		this.frameCount = frameCount;
-		this.tags = new ArrayList<Tag>(tags);
+		this.tags = tags;
 
 	}
 
@@ -158,8 +154,8 @@ public final class SWFFile {
 	 *
 	 * @return The list of tags in file.
 	 */
-	public List<Tag> getTags() {
-		return new ArrayList<Tag>(tags);
+	public TagList getTags() {
+		return tags;
 	}
 
 	/**

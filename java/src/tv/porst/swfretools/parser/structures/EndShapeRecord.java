@@ -1,7 +1,7 @@
 package tv.porst.swfretools.parser.structures;
 
-import tv.porst.splib.binaryparser.UBits;
 import tv.porst.splib.binaryparser.Flag;
+import tv.porst.splib.binaryparser.UBits;
 
 /**
  * Represents an EndShape structure.
@@ -9,7 +9,7 @@ import tv.porst.splib.binaryparser.Flag;
  * @author sp
  *
  */
-public final class EndShapeRecord implements ShapeRecord, Shape3Record {
+public final class EndShapeRecord implements ShapeRecord, Shape3Record, IFileElement {
 
 	/**
 	 * Type flag.
@@ -31,6 +31,11 @@ public final class EndShapeRecord implements ShapeRecord, Shape3Record {
 
 		this.typeFlag = typeFlag;
 		this.endOfShape = endOfShape;
+	}
+
+	@Override
+	public int getBytePosition() {
+		return typeFlag.getBytePosition();
 	}
 
 	/**

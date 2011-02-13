@@ -38,6 +38,6 @@ public final class GradientParser {
 			gradientRecords.add(GradRecordParser.parse(parser, String.format(fieldName + "::GradientRecord[%d]", i)));
 		}
 
-		return new Gradient(spreadMode, interpolationMode, numGradients, gradientRecords);
+		return new Gradient(spreadMode, interpolationMode, numGradients, new GradRecordList(gradientRecords));
 	}
 }

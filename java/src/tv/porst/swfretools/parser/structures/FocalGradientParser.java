@@ -41,6 +41,6 @@ public final class FocalGradientParser {
 
 		final Fixed8 focalPoint = Fixed8Parser.parse(parser, fieldName + "::FocalPoint");
 
-		return new FocalGradient(spreadMode, interpolationMode, numGradients, gradientRecords, focalPoint);
+		return new FocalGradient(spreadMode, interpolationMode, numGradients, new GradRecordList(gradientRecords), focalPoint);
 	}
 }

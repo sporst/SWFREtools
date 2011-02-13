@@ -11,6 +11,7 @@ import tv.porst.swfretools.parser.SWFBinaryParser;
 import tv.porst.swfretools.parser.SWFParserException;
 import tv.porst.swfretools.parser.SWFParserHelpers;
 import tv.porst.swfretools.parser.structures.RecordHeader;
+import tv.porst.swfretools.parser.structures.TagList;
 
 /**
  * Class for parsing individual SWF tags.
@@ -72,7 +73,7 @@ public final class TagParser {
 			}
 		}
 
-		return new TagParserResult(tags, errors);
+		return new TagParserResult(new TagList(tags), errors);
 	}
 
 	/**
@@ -126,7 +127,7 @@ public final class TagParser {
 			}
 		}
 
-		return new TagParserResult(tags, errors);
+		return new TagParserResult(new TagList(tags), errors);
 	}
 
 	/**

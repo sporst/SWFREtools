@@ -37,6 +37,6 @@ public final class ClipActionRecordParser {
 		final UINT8 keyCode = parseUINT8If(parser, 0x00006, eventFlags.getClipEventKeyPress(), fieldName + "::ClipActionsEndFlag");
 		final List<Action> actions = ActionRecordParser.parse(parser, actionRecordSize.value());
 
-		return new ClipActionRecord(eventFlags, actionRecordSize, keyCode, actions);
+		return new ClipActionRecord(eventFlags, actionRecordSize, keyCode, new ActionList(actions));
 	}
 }

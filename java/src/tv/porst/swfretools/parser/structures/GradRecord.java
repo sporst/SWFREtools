@@ -8,7 +8,7 @@ import tv.porst.splib.binaryparser.UINT8;
  * @author sp
  *
  */
-public final class GradRecord {
+public final class GradRecord implements IFileElement {
 
 	/**
 	 * Ratio value.
@@ -30,6 +30,11 @@ public final class GradRecord {
 
 		this.ratio = ratio;
 		this.color = color;
+	}
+
+	@Override
+	public int getBytePosition() {
+		return ratio.getBytePosition();
 	}
 
 	/**

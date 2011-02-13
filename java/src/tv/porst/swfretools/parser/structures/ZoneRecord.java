@@ -1,10 +1,7 @@
 package tv.porst.swfretools.parser.structures;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import tv.porst.splib.binaryparser.UBits;
 import tv.porst.splib.binaryparser.Flag;
+import tv.porst.splib.binaryparser.UBits;
 import tv.porst.splib.binaryparser.UINT8;
 
 /**
@@ -13,7 +10,7 @@ import tv.porst.splib.binaryparser.UINT8;
  * @author sp
  *
  */
-public final class ZoneRecord {
+public final class ZoneRecord implements IFileElement {
 
 	/**
 	 * Number of ZoneData entries.
@@ -23,7 +20,7 @@ public final class ZoneRecord {
 	/**
 	 * Compressed alignment zone information.
 	 */
-	private final ArrayList<ZoneData> zoneData;
+	private final ZoneDataList zoneData;
 
 	/**
 	 * Reserved bits.
@@ -49,14 +46,19 @@ public final class ZoneRecord {
 	 * @param zoneMaskY Set if there are Y alignment zones.
 	 * @param zoneMaskX Set if there are X alignment zones.
 	 */
-	public ZoneRecord(final UINT8 numZoneData, final List<ZoneData> zoneData, final UBits reserved,
+	public ZoneRecord(final UINT8 numZoneData, final ZoneDataList zoneData, final UBits reserved,
 			final Flag zoneMaskY, final Flag zoneMaskX) {
 
 		this.numZoneData = numZoneData;
-		this.zoneData = new ArrayList<ZoneData>(zoneData);
+		this.zoneData = zoneData;
 		this.reserved = reserved;
 		this.zoneMaskY = zoneMaskY;
 		this.zoneMaskX = zoneMaskX;
+	}
+
+	@Override
+	public int getBytePosition() {
+		return numZoneData.getBytePosition();
 	}
 
 	/**
@@ -82,8 +84,8 @@ public final class ZoneRecord {
 	 * 
 	 * @return The compressed alignment zone information.
 	 */
-	public List<ZoneData> getZoneData() {
-		return new ArrayList<ZoneData>(zoneData);
+	public ZoneDataList getZoneData() {
+		return zoneData;
 	}
 
 	/**

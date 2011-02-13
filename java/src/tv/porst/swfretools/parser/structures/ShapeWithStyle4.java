@@ -8,7 +8,7 @@ import tv.porst.splib.binaryparser.UBits;
  * @author sp
  *
  */
-public final class ShapeWithStyle4 {
+public final class ShapeWithStyle4 implements IFileElement {
 
 	/**
 	 * Array of fill styles.
@@ -53,6 +53,11 @@ public final class ShapeWithStyle4 {
 		this.numLineBits = numLineBits;
 		this.shapeRecord = shapeRecord;
 
+	}
+
+	@Override
+	public int getBytePosition() {
+		return fillStyles.getBytePosition();
 	}
 
 	/**

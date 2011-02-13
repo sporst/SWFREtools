@@ -1,7 +1,7 @@
 package tv.porst.swfretools.parser.structures;
 
-import tv.porst.splib.binaryparser.UBits;
 import tv.porst.splib.binaryparser.Flag;
+import tv.porst.splib.binaryparser.UBits;
 import tv.porst.splib.binaryparser.UINT16;
 
 /**
@@ -10,7 +10,7 @@ import tv.porst.splib.binaryparser.UINT16;
  * @author sp
  *
  */
-public class LineStyle4 {
+public class LineStyle4 implements IFileElement {
 
 	/**
 	 * Width of line in twips.
@@ -114,6 +114,11 @@ public class LineStyle4 {
 		this.color = color;
 		this.fillType = fillType;
 
+	}
+
+	@Override
+	public int getBytePosition() {
+		return width.getBytePosition();
 	}
 
 	/**

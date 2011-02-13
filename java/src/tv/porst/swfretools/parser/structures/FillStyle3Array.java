@@ -1,8 +1,5 @@
 package tv.porst.swfretools.parser.structures;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import tv.porst.splib.binaryparser.UINT16;
 import tv.porst.splib.binaryparser.UINT8;
 
@@ -12,7 +9,7 @@ import tv.porst.splib.binaryparser.UINT8;
  * @author sp
  *
  */
-public final class FillStyle3Array {
+public final class FillStyle3Array implements IFileElement {
 
 	/**
 	 * Count of fill styles.
@@ -27,7 +24,7 @@ public final class FillStyle3Array {
 	/**
 	 * Array of fill styles.
 	 */
-	private final List<FillStyle3> fillStyles;
+	private final FillStyle3List fillStyles;
 
 	/**
 	 * Creates a new FillStyle3Array object.
@@ -37,11 +34,16 @@ public final class FillStyle3Array {
 	 * @param fillStyles Array of fill styles.
 	 */
 	public FillStyle3Array(final UINT8 fillStyleCount, final UINT16 fillStyleCountExtended,
-			final List<FillStyle3> fillStyles) {
+			final FillStyle3List fillStyles) {
 
 		this.fillStyleCount = fillStyleCount;
 		this.fillStyleCountExtended = fillStyleCountExtended;
-		this.fillStyles = new ArrayList<FillStyle3>(fillStyles);
+		this.fillStyles = fillStyles;
+	}
+
+	@Override
+	public int getBytePosition() {
+		return fillStyleCount.getBytePosition();
 	}
 
 	/**
@@ -67,7 +69,7 @@ public final class FillStyle3Array {
 	 *
 	 * @return The array of fill styles.
 	 */
-	public List<FillStyle3> getFillStyle3s() {
-		return new ArrayList<FillStyle3>(fillStyles);
+	public FillStyle3List getFillStyles3() {
+		return fillStyles;
 	}
 }

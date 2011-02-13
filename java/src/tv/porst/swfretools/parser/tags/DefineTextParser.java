@@ -16,6 +16,7 @@ import tv.porst.swfretools.parser.structures.RecordHeader;
 import tv.porst.swfretools.parser.structures.Rect;
 import tv.porst.swfretools.parser.structures.RectParser;
 import tv.porst.swfretools.parser.structures.TextRecord;
+import tv.porst.swfretools.parser.structures.TextRecordList;
 import tv.porst.swfretools.parser.structures.TextRecordParser;
 
 /**
@@ -56,6 +57,6 @@ public final class DefineTextParser {
 
 		final UINT8 end = parseUINT8(parser, 0x00006, "DefineTextParser::EndOfRecordsFlag");
 
-		return new DefineTextTag(header, characterId, textBounds, textMatrix, glyphBits, advanceBits, textRecords, end);
+		return new DefineTextTag(header, characterId, textBounds, textMatrix, glyphBits, advanceBits, new TextRecordList(textRecords), end);
 	}
 }

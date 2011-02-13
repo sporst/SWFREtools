@@ -1,14 +1,11 @@
 package tv.porst.swfretools.parser.tags;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import tv.porst.splib.binaryparser.UINT16;
 import tv.porst.splib.binaryparser.UINT8;
 import tv.porst.swfretools.parser.structures.Matrix;
 import tv.porst.swfretools.parser.structures.RecordHeader;
 import tv.porst.swfretools.parser.structures.Rect;
-import tv.porst.swfretools.parser.structures.TextRecord;
+import tv.porst.swfretools.parser.structures.TextRecordList;
 
 /**
  * Represents a DefineText tag.
@@ -46,7 +43,7 @@ public final class DefineTextTag extends Tag {
 	/**
 	 * Text records.
 	 */
-	private final List<TextRecord> textRecords;
+	private final TextRecordList textRecords;
 
 	/**
 	 * End marker of the record.
@@ -67,7 +64,7 @@ public final class DefineTextTag extends Tag {
 	 */
 	public DefineTextTag(final RecordHeader header, final UINT16 characterId, final Rect textBounds,
 			final Matrix textMatrix, final UINT8 glyphBits, final UINT8 advanceBits,
-			final List<TextRecord> textRecords, final UINT8 end) {
+			final TextRecordList textRecords, final UINT8 end) {
 		super(header);
 
 		this.characterId = characterId;
@@ -75,7 +72,7 @@ public final class DefineTextTag extends Tag {
 		this.textMatrix = textMatrix;
 		this.glyphBits = glyphBits;
 		this.advanceBits = advanceBits;
-		this.textRecords = new ArrayList<TextRecord>(textRecords);
+		this.textRecords = textRecords;
 		this.end = end;
 	}
 
@@ -138,7 +135,7 @@ public final class DefineTextTag extends Tag {
 	 * 
 	 * @return The text records.
 	 */
-	public List<TextRecord> getTextRecords() {
-		return new ArrayList<TextRecord>(textRecords);
+	public TextRecordList getTextRecords() {
+		return textRecords;
 	}
 }

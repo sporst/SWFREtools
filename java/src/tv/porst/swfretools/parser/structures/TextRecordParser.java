@@ -61,6 +61,6 @@ public final class TextRecordParser {
 
 		return new TextRecord(textRecordType, styleFlagsReserved, styleFlagsHasFont,
 				styleFlagsHasColor, styleFlagsHasYOffset, styleFlagsHasXOffset,
-				fontID, textColor, xOffset, yOffset, textHeight, glyphCount, glyphEntries);
+				fontID, textColor, xOffset, yOffset, textHeight, glyphCount, new GlyphEntryList(glyphEntries));
 	}
 }

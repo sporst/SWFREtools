@@ -42,7 +42,7 @@ public final class FillStyle3ArrayParser {
 			fillStyles.add(FillStyle3Parser.parse(parser, String.format(fieldName + "::FillStyles[%d]", fillStyles.size())));
 		}
 
-		return new FillStyle3Array(fillStyleCount, fillStyleCountExtended, fillStyles);
+		return new FillStyle3Array(fillStyleCount, fillStyleCountExtended, new FillStyle3List(fillStyles));
 	}
 
 	/**

@@ -1,8 +1,5 @@
 package tv.porst.swfretools.parser.structures;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import tv.porst.splib.binaryparser.IParsedINTElement;
 import tv.porst.splib.binaryparser.UINT16;
 
@@ -12,7 +9,7 @@ import tv.porst.splib.binaryparser.UINT16;
  * @author sp
  *
  */
-public final class ClipActions {
+public final class ClipActions implements IFileElement {
 
 	/**
 	 * Reserved bits.
@@ -27,7 +24,7 @@ public final class ClipActions {
 	/**
 	 * Individual event handlers.
 	 */
-	private final List<ClipActionRecord> clipActionRecords;
+	private final ClipActionRecordList clipActionRecords;
 
 	/**
 	 * Flag that ends the action record.
@@ -43,11 +40,11 @@ public final class ClipActions {
 	 * @param clipActionEndFlag Flag that ends the action record.
 	 */
 	public ClipActions(final UINT16 reserved, final ClipEventFlags allEventFlags,
-			final List<ClipActionRecord> clipActionRecords, final IParsedINTElement clipActionEndFlag) {
+			final ClipActionRecordList clipActionRecords, final IParsedINTElement clipActionEndFlag) {
 
 		this.reserved = reserved;
 		this.allEventFlags = allEventFlags;
-		this.clipActionRecords = new ArrayList<ClipActionRecord>(clipActionRecords);
+		this.clipActionRecords = clipActionRecords;
 		this.clipActionEndFlag = clipActionEndFlag;
 	}
 
@@ -58,6 +55,11 @@ public final class ClipActions {
 	 */
 	public ClipEventFlags getAllEventFlags() {
 		return allEventFlags;
+	}
+
+	@Override
+	public int getBytePosition() {
+		return reserved.getBytePosition();
 	}
 
 	/**
@@ -74,8 +76,8 @@ public final class ClipActions {
 	 *
 	 * @return The individual event handlers.
 	 */
-	public List<ClipActionRecord> getClipActionRecords() {
-		return new ArrayList<ClipActionRecord>(clipActionRecords);
+	public ClipActionRecordList getClipActionRecords() {
+		return clipActionRecords;
 	}
 
 	/**

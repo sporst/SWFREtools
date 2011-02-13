@@ -1,8 +1,5 @@
 package tv.porst.swfretools.parser.structures;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import tv.porst.splib.binaryparser.Flag;
 import tv.porst.splib.binaryparser.INT16;
 import tv.porst.splib.binaryparser.UBits;
@@ -15,7 +12,7 @@ import tv.porst.splib.binaryparser.UINT8;
  * @author sp
  *
  */
-public final class TextRecord {
+public final class TextRecord implements IFileElement {
 
 	/**
 	 * Type of the text record.
@@ -80,7 +77,7 @@ public final class TextRecord {
 	/**
 	 * List of glyph entries.
 	 */
-	private final List<GlyphEntry> glyphEntries;
+	private final GlyphEntryList glyphEntries;
 
 	/**
 	 * Creates a new TextRecord object.
@@ -103,7 +100,7 @@ public final class TextRecord {
 			final Flag styleFlagsHasFont, final Flag styleFlagsHasColor,
 			final Flag styleFlagsHasYOffset, final Flag styleFlagsHasXOffset,
 			final UINT16 fontId, final RGB textColor, final INT16 xOffset, final INT16 yOffset,
-			final UINT16 textHeight, final UINT8 glyphCount, final List<GlyphEntry> glyphEntries) {
+			final UINT16 textHeight, final UINT8 glyphCount, final GlyphEntryList glyphEntries) {
 
 		this.textRecordType = textRecordType;
 		this.styleFlagsReserved = styleFlagsReserved;
@@ -117,7 +114,12 @@ public final class TextRecord {
 		this.yOffset = yOffset;
 		this.textHeight = textHeight;
 		this.glyphCount = glyphCount;
-		this.glyphEntries = new ArrayList<GlyphEntry>(glyphEntries);
+		this.glyphEntries = glyphEntries;
+	}
+
+	@Override
+	public int getBytePosition() {
+		return textRecordType.getBytePosition();
 	}
 
 	/**
@@ -143,7 +145,7 @@ public final class TextRecord {
 	 *
 	 * @return The list of glyph entries.
 	 */
-	public List<GlyphEntry> getGlyphEntries() {
+	public GlyphEntryList getGlyphEntries() {
 		return glyphEntries;
 	}
 

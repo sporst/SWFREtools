@@ -1,8 +1,8 @@
 package tv.porst.swfretools.parser.structures;
 
-import tv.porst.splib.binaryparser.UBits;
-import tv.porst.splib.binaryparser.Flag;
 import tv.porst.splib.binaryparser.Bits;
+import tv.porst.splib.binaryparser.Flag;
+import tv.porst.splib.binaryparser.UBits;
 
 /**
  * Represents a CurvedEdgeRecord structure.
@@ -10,7 +10,7 @@ import tv.porst.splib.binaryparser.Bits;
  * @author sp
  *
  */
-public final class CurvedEdgeRecord implements ShapeRecord, Shape3Record {
+public final class CurvedEdgeRecord implements ShapeRecord, Shape3Record, IFileElement {
 
 	/**
 	 * Type flag.
@@ -87,6 +87,11 @@ public final class CurvedEdgeRecord implements ShapeRecord, Shape3Record {
 	 */
 	public Bits getAnchorDeltaY() {
 		return anchorDeltaY;
+	}
+
+	@Override
+	public int getBytePosition() {
+		return typeFlag.getBytePosition();
 	}
 
 	/**

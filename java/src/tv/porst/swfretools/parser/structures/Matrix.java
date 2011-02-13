@@ -1,7 +1,7 @@
 package tv.porst.swfretools.parser.structures;
 
-import tv.porst.splib.binaryparser.UBits;
 import tv.porst.splib.binaryparser.Flag;
+import tv.porst.splib.binaryparser.UBits;
 
 /**
  * Represents a Matrix structure.
@@ -9,7 +9,7 @@ import tv.porst.splib.binaryparser.Flag;
  * @author sp
  *
  */
-public final class Matrix {
+public final class Matrix implements IFileElement {
 
 	/**
 	 * Has scale values if set.
@@ -96,6 +96,11 @@ public final class Matrix {
 		this.nTranslateBits = nTranslateBits;
 		this.translateX = translateX;
 		this.translateY = translateY;
+	}
+
+	@Override
+	public int getBytePosition() {
+		return hasScale.getBytePosition();
 	}
 
 	/**

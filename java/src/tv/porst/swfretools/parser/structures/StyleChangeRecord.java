@@ -1,7 +1,7 @@
 package tv.porst.swfretools.parser.structures;
 
-import tv.porst.splib.binaryparser.UBits;
 import tv.porst.splib.binaryparser.Flag;
+import tv.porst.splib.binaryparser.UBits;
 
 /**
  * Represents a StyleChangeRecord3 structure.
@@ -9,7 +9,7 @@ import tv.porst.splib.binaryparser.Flag;
  * @author sp
  *
  */
-public final class StyleChangeRecord implements ShapeRecord {
+public final class StyleChangeRecord implements ShapeRecord, IFileElement {
 
 	/**
 	 * Record type flag.
@@ -134,6 +134,11 @@ public final class StyleChangeRecord implements ShapeRecord {
 		this.lineStyles = lineStyles;
 		this.numFillBits = numFillBits;
 		this.numLineBits = numLineBits;
+	}
+
+	@Override
+	public int getBytePosition() {
+		return typeFlag.getBytePosition();
 	}
 
 	/**

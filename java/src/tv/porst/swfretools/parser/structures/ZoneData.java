@@ -8,7 +8,7 @@ import tv.porst.splib.binaryparser.Float16;
  * @author sp
  *
  */
-public final class ZoneData {
+public final class ZoneData implements IFileElement {
 
 	/**
 	 * X or Y coordinate of the alignment zone.
@@ -40,6 +40,11 @@ public final class ZoneData {
 	 */
 	public Float16 getAlignmentCoordinate() {
 		return alignmentCoordinate;
+	}
+
+	@Override
+	public int getBytePosition() {
+		return alignmentCoordinate.getBytePosition();
 	}
 
 	/**

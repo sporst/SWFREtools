@@ -8,9 +8,10 @@ import java.util.List;
 import tv.porst.splib.binaryparser.UINT16;
 import tv.porst.swfretools.parser.SWFBinaryParser;
 import tv.porst.swfretools.parser.SWFParserException;
-import tv.porst.swfretools.parser.structures.SymbolParser;
-import tv.porst.swfretools.parser.structures.Symbol;
 import tv.porst.swfretools.parser.structures.RecordHeader;
+import tv.porst.swfretools.parser.structures.Symbol;
+import tv.porst.swfretools.parser.structures.SymbolList;
+import tv.porst.swfretools.parser.structures.SymbolParser;
 
 /**
  * Class for parsing ExportAssets tags.
@@ -39,6 +40,6 @@ public final class ExportAssetsParser {
 			tags.add(SymbolParser.parse(parser, String.format("ExportAssets::Tags[%d]", i)));
 		}
 
-		return new ExportAssetsTag(header, count, tags);
+		return new ExportAssetsTag(header, count, new SymbolList(tags));
 	}
 }

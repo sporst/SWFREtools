@@ -1,8 +1,5 @@
 package tv.porst.swfretools.parser.structures;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import tv.porst.splib.binaryparser.UINT16;
 import tv.porst.splib.binaryparser.UINT8;
 
@@ -27,7 +24,7 @@ public final class FillStyleArray {
 	/**
 	 * Array of fill styles.
 	 */
-	private final List<FillStyle> fillStyles;
+	private final FillStyleList fillStyles;
 
 	/**
 	 * Creates a new FillStyleArray object.
@@ -37,11 +34,15 @@ public final class FillStyleArray {
 	 * @param fillStyles Array of fill styles.
 	 */
 	public FillStyleArray(final UINT8 fillStyleCount, final UINT16 fillStyleCountExtended,
-			final List<FillStyle> fillStyles) {
+			final FillStyleList fillStyles) {
 
 		this.fillStyleCount = fillStyleCount;
 		this.fillStyleCountExtended = fillStyleCountExtended;
-		this.fillStyles = new ArrayList<FillStyle>(fillStyles);
+		this.fillStyles = fillStyles;
+	}
+
+	public int getBytePosition() {
+		return fillStyleCount.getBytePosition();
 	}
 
 	/**
@@ -67,7 +68,7 @@ public final class FillStyleArray {
 	 *
 	 * @return The array of fill styles.
 	 */
-	public List<FillStyle> getFillStyles() {
-		return new ArrayList<FillStyle>(fillStyles);
+	public FillStyleList getFillStyles() {
+		return fillStyles;
 	}
 }

@@ -1,12 +1,9 @@
 package tv.porst.swfretools.parser.tags;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import tv.porst.splib.binaryparser.UBits;
 import tv.porst.splib.binaryparser.UINT16;
 import tv.porst.swfretools.parser.structures.RecordHeader;
-import tv.porst.swfretools.parser.structures.ZoneRecord;
+import tv.porst.swfretools.parser.structures.ZoneRecordList;
 
 /**
  * Represents a DefineFontAlignZones tag.
@@ -34,7 +31,7 @@ public final class DefineFontAlignZonesTag extends Tag {
 	/**
 	 * Alignment zone information for each glyph.
 	 */
-	private final List<ZoneRecord> zoneTable;
+	private final ZoneRecordList zoneTable;
 
 	/**
 	 * Creates a new DefineFontAlignZones tag object.
@@ -46,14 +43,14 @@ public final class DefineFontAlignZonesTag extends Tag {
 	 * @param zoneTable Alignment zone information for each glyph.
 	 */
 	public DefineFontAlignZonesTag(final RecordHeader header, final UINT16 fontId,
-			final UBits csmTableHint, final UBits reserved, final List<ZoneRecord> zoneTable) {
+			final UBits csmTableHint, final UBits reserved, final ZoneRecordList zoneTable) {
 
 		super(header);
 
 		this.fontId = fontId;
 		this.csmTableHint = csmTableHint;
 		this.reserved = reserved;
-		this.zoneTable = new ArrayList<ZoneRecord>(zoneTable);
+		this.zoneTable = zoneTable;
 	}
 
 	/**
@@ -88,7 +85,7 @@ public final class DefineFontAlignZonesTag extends Tag {
 	 * 
 	 * @return The alignment zone information for each glyph.
 	 */
-	public List<ZoneRecord> getZoneTable() {
-		return new ArrayList<ZoneRecord>(zoneTable);
+	public ZoneRecordList getZoneTable() {
+		return zoneTable;
 	}
 }

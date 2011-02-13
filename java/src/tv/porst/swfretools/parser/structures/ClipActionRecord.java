@@ -1,11 +1,7 @@
 package tv.porst.swfretools.parser.structures;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import tv.porst.splib.binaryparser.UINT32;
 import tv.porst.splib.binaryparser.UINT8;
-import tv.porst.swfretools.parser.actions.Action;
 
 /**
  * Represents a ClipActionRecord structure.
@@ -13,7 +9,7 @@ import tv.porst.swfretools.parser.actions.Action;
  * @author sp
  *
  */
-public final class ClipActionRecord {
+public final class ClipActionRecord implements IFileElement {
 
 	/**
 	 * Events to which this handler applies.
@@ -33,7 +29,7 @@ public final class ClipActionRecord {
 	/**
 	 * Actions to perform.
 	 */
-	private final List<Action> actions;
+	private final ActionList actions;
 
 	/**
 	 * Creates a new ClipActionRecord object.
@@ -44,12 +40,12 @@ public final class ClipActionRecord {
 	 * @param actions Actions to perform.
 	 */
 	public ClipActionRecord(final ClipEventFlags eventFlags, final UINT32 actionRecordSize,
-			final UINT8 keyCode, final List<Action> actions) {
+			final UINT8 keyCode, final ActionList actions) {
 
 		this.eventFlags = eventFlags;
 		this.actionRecordSize = actionRecordSize;
 		this.keyCode = keyCode;
-		this.actions = new ArrayList<Action>(actions);
+		this.actions = actions;
 	}
 
 	/**
@@ -66,8 +62,13 @@ public final class ClipActionRecord {
 	 *
 	 * @return The actions to perform.
 	 */
-	public List<Action> getActions() {
-		return new ArrayList<Action>(actions);
+	public ActionList getActions() {
+		return actions;
+	}
+
+	@Override
+	public int getBytePosition() {
+		return eventFlags.getBytePosition();
 	}
 
 	/**

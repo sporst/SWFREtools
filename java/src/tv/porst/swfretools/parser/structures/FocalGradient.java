@@ -1,8 +1,5 @@
 package tv.porst.swfretools.parser.structures;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import tv.porst.splib.binaryparser.UBits;
 
 /**
@@ -11,7 +8,7 @@ import tv.porst.splib.binaryparser.UBits;
  * @author sp
  *
  */
-public final class FocalGradient implements IGradient {
+public final class FocalGradient implements IGradient, IFileElement {
 
 	/**
 	 * Spread mode.
@@ -31,7 +28,7 @@ public final class FocalGradient implements IGradient {
 	/**
 	 * Gradient records.
 	 */
-	private final List<GradRecord> gradientRecords;
+	private final GradRecordList gradientRecords;
 
 	/**
 	 * Focal point location.
@@ -48,15 +45,20 @@ public final class FocalGradient implements IGradient {
 	 * @param focalPoint Focal point location.
 	 */
 	public FocalGradient(final UBits spreadMode, final UBits interpolationMode,
-			final UBits numGradients, final List<GradRecord> gradientRecords,
+			final UBits numGradients, final GradRecordList gradientRecords,
 			final Fixed8 focalPoint) {
 
 		this.spreadMode = spreadMode;
 		this.interpolationMode = interpolationMode;
 		this.numGradients = numGradients;
-		this.gradientRecords = new ArrayList<GradRecord>(gradientRecords);
+		this.gradientRecords = gradientRecords;
 		this.focalPoint = focalPoint;
 
+	}
+
+	@Override
+	public int getBytePosition() {
+		return spreadMode.getBytePosition();
 	}
 
 	/**
@@ -73,8 +75,8 @@ public final class FocalGradient implements IGradient {
 	 *
 	 * @return The gradient records.
 	 */
-	public List<GradRecord> getGradientRecords() {
-		return new ArrayList<GradRecord>(gradientRecords);
+	public GradRecordList getGradientRecords() {
+		return gradientRecords;
 	}
 
 	/**

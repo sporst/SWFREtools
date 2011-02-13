@@ -32,6 +32,10 @@ public final class Fixed8 {
 		this.decimal = decimal;
 	}
 
+	public int getBytePosition() {
+		return integer.getBytePosition();
+	}
+
 	/**
 	 * Returns the decimal part of the FIXED8 structure.
 	 *
@@ -48,5 +52,9 @@ public final class Fixed8 {
 	 */
 	public UINT8 getInteger() {
 		return integer;
+	}
+
+	public int value() {
+		return 0;
 	}
 }

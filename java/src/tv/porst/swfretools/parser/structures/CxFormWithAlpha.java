@@ -1,8 +1,8 @@
 package tv.porst.swfretools.parser.structures;
 
-import tv.porst.splib.binaryparser.UBits;
-import tv.porst.splib.binaryparser.Flag;
 import tv.porst.splib.binaryparser.Bits;
+import tv.porst.splib.binaryparser.Flag;
+import tv.porst.splib.binaryparser.UBits;
 
 /**
  * Represents a CxFormWithAlpha structure.
@@ -10,7 +10,7 @@ import tv.porst.splib.binaryparser.Bits;
  * @author sp
  *
  */
-public final class CxFormWithAlpha {
+public final class CxFormWithAlpha implements IFileElement {
 
 	/**
 	 * Has color addition values flag.
@@ -134,6 +134,11 @@ public final class CxFormWithAlpha {
 	 */
 	public Bits getBlueMultTerm() {
 		return blueMultTerm;
+	}
+
+	@Override
+	public int getBytePosition() {
+		return hasAddTerms.getBytePosition();
 	}
 
 	/**

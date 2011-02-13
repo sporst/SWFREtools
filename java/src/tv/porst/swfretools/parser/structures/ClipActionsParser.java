@@ -49,7 +49,7 @@ public final class ClipActionsParser {
 
 		final IParsedINTElement clipActionEndFlag = version <= 5 ? parseUINT16(parser, 0x00006, fieldName + "::ClipActionsEndFlag") : parseUINT32(parser, 0x00006, fieldName + "::ClipActionsEndFlag");
 
-		return new ClipActions(reserved, allEventFlags, clipActionRecords, clipActionEndFlag);
+		return new ClipActions(reserved, allEventFlags, new ClipActionRecordList(clipActionRecords), clipActionEndFlag);
 	}
 
 	/**

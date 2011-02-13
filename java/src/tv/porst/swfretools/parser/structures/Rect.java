@@ -1,7 +1,7 @@
 package tv.porst.swfretools.parser.structures;
 
-import tv.porst.splib.binaryparser.UBits;
 import tv.porst.splib.binaryparser.Bits;
+import tv.porst.splib.binaryparser.UBits;
 
 /**
  * Represents a Rectangle structure.
@@ -9,7 +9,7 @@ import tv.porst.splib.binaryparser.Bits;
  * @author sp
  *
  */
-public final class Rect {
+public final class Rect implements IFileElement {
 
 	/**
 	 * Bits used for each subsequent field.
@@ -53,6 +53,11 @@ public final class Rect {
 		this.yMin = yMin;
 		this.yMax = yMax;
 
+	}
+
+	@Override
+	public int getBytePosition() {
+		return nBits.getBytePosition();
 	}
 
 	/**

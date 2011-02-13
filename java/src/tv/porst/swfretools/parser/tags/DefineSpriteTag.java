@@ -1,10 +1,8 @@
 package tv.porst.swfretools.parser.tags;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import tv.porst.splib.binaryparser.UINT16;
 import tv.porst.swfretools.parser.structures.RecordHeader;
+import tv.porst.swfretools.parser.structures.TagList;
 
 /**
  * Represents a DefineSprite tag.
@@ -27,7 +25,7 @@ public final class DefineSpriteTag extends Tag {
 	/**
 	 * A series of tags.
 	 */
-	private final List<Tag> controlTags;
+	private final TagList controlTags;
 
 	/**
 	 * Creates a new DefineSprite tag object.
@@ -37,12 +35,12 @@ public final class DefineSpriteTag extends Tag {
 	 * @param frameCount Number of frames in sprite.
 	 * @param controlTags A series of tags.
 	 */
-	public DefineSpriteTag(final RecordHeader header, final UINT16 spriteId, final UINT16 frameCount, final List<Tag> controlTags) {
+	public DefineSpriteTag(final RecordHeader header, final UINT16 spriteId, final UINT16 frameCount, final TagList controlTags) {
 		super(header);
 
 		this.spriteId = spriteId;
 		this.frameCount = frameCount;
-		this.controlTags = new ArrayList<Tag>(controlTags);
+		this.controlTags = controlTags;
 	}
 
 	/**
@@ -50,7 +48,7 @@ public final class DefineSpriteTag extends Tag {
 	 * 
 	 * @return The control tags of the sprite.
 	 */
-	public List<Tag> getControlTags() {
+	public TagList getControlTags() {
 		return controlTags;
 	}
 

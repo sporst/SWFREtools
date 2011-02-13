@@ -44,7 +44,7 @@ public final class LineStyleArrayParser {
 			lineStyles.add(LineStyleParser.parse(parser, String.format("LineStyles[%d]", i)));
 		}
 
-		return new LineStyleArray(lineStyleCount, lineStyleCountExtended, lineStyles);
+		return new LineStyleArray(lineStyleCount, lineStyleCountExtended, new LineStyleList(lineStyles));
 	}
 
 	/**

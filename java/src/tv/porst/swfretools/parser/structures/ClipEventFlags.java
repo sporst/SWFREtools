@@ -1,7 +1,7 @@
 package tv.porst.swfretools.parser.structures;
 
-import tv.porst.splib.binaryparser.UBits;
 import tv.porst.splib.binaryparser.Flag;
+import tv.porst.splib.binaryparser.UBits;
 
 /**
  * Represents a ClipEventFlags structure.
@@ -9,7 +9,7 @@ import tv.porst.splib.binaryparser.Flag;
  * @author sp
  *
  */
-public final class ClipEventFlags {
+public final class ClipEventFlags implements IFileElement {
 
 	/**
 	 * Key up event flag.
@@ -172,6 +172,11 @@ public final class ClipEventFlags {
 		this.clipEventKeyPress = clipEventKeyPress;
 		this.clipEventDragOut = clipEventDragOut;
 		this.reserved2 = reserved2;
+	}
+
+	@Override
+	public int getBytePosition() {
+		return clipEventKeyUp.getBytePosition();
 	}
 
 	/**

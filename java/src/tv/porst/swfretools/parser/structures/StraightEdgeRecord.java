@@ -1,8 +1,8 @@
 package tv.porst.swfretools.parser.structures;
 
-import tv.porst.splib.binaryparser.UBits;
-import tv.porst.splib.binaryparser.Flag;
 import tv.porst.splib.binaryparser.Bits;
+import tv.porst.splib.binaryparser.Flag;
+import tv.porst.splib.binaryparser.UBits;
 
 /**
  * Represents a StraightEdgeRecord structure.
@@ -10,7 +10,7 @@ import tv.porst.splib.binaryparser.Bits;
  * @author sp
  *
  */
-public final class StraightEdgeRecord implements ShapeRecord, Shape3Record {
+public final class StraightEdgeRecord implements ShapeRecord, Shape3Record, IFileElement {
 
 	/**
 	 * Type flag.
@@ -69,6 +69,11 @@ public final class StraightEdgeRecord implements ShapeRecord, Shape3Record {
 		this.vertLineFlag = vertLineFlag;
 		this.deltaX = deltaX;
 		this.deltaY = deltaY;
+	}
+
+	@Override
+	public int getBytePosition() {
+		return typeFlag.getBytePosition();
 	}
 
 	/**
