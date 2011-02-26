@@ -8,7 +8,7 @@ import tv.porst.splib.binaryparser.Float32;
  * @author sp
  *
  */
-public final class ColorMatrixFilter {
+public final class ColorMatrixFilter implements IFileElement {
 
 	/**
 	 * Color matrix values.
@@ -23,6 +23,11 @@ public final class ColorMatrixFilter {
 	public ColorMatrixFilter(final Float32[] matrix) {
 
 		this.matrix = matrix == null ? matrix : matrix.clone();
+	}
+
+	@Override
+	public int getBytePosition() {
+		return matrix[0].getBytePosition();
 	}
 
 	/**

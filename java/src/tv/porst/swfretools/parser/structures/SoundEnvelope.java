@@ -9,7 +9,7 @@ import tv.porst.splib.binaryparser.UINT32;
  * @author sp
  *
  */
-public final class SoundEnvelope {
+public final class SoundEnvelope implements IFileElement {
 
 	/**
 	 * Position of envelope point as a number of 44 kHz samples.
@@ -39,6 +39,11 @@ public final class SoundEnvelope {
 		this.leftLevel = leftLevel;
 		this.rightLevel = rightLevel;
 
+	}
+
+	@Override
+	public int getBytePosition() {
+		return pos44.getBytePosition();
 	}
 
 	/**

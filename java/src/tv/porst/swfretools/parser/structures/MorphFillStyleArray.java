@@ -1,8 +1,5 @@
 package tv.porst.swfretools.parser.structures;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import tv.porst.splib.binaryparser.UINT16;
 import tv.porst.splib.binaryparser.UINT8;
 
@@ -12,7 +9,7 @@ import tv.porst.splib.binaryparser.UINT8;
  * @author sp
  *
  */
-public final class MorphFillStyleArray {
+public final class MorphFillStyleArray implements IFileElement {
 
 	/**
 	 * Count of fill styles.
@@ -27,7 +24,7 @@ public final class MorphFillStyleArray {
 	/**
 	 * Array of fill styles.
 	 */
-	private final List<MorphFillStyle> fillStyles;
+	private final MorphFillStyleList fillStyles;
 
 	/**
 	 * Creates a new MorphFillStyleArray object.
@@ -37,11 +34,16 @@ public final class MorphFillStyleArray {
 	 * @param fillStyles Array of fill styles.
 	 */
 	public MorphFillStyleArray(final UINT8 fillStyleCount, final UINT16 fillStyleCountExtended,
-			final List<MorphFillStyle> fillStyles) {
+			final MorphFillStyleList fillStyles) {
 
 		this.fillStyleCount = fillStyleCount;
 		this.fillStyleCountExtended = fillStyleCountExtended;
-		this.fillStyles = new ArrayList<MorphFillStyle>(fillStyles);
+		this.fillStyles = fillStyles;
+	}
+
+	@Override
+	public int getBytePosition() {
+		return fillStyleCount.getBytePosition();
 	}
 
 	/**
@@ -67,7 +69,7 @@ public final class MorphFillStyleArray {
 	 *
 	 * @return The array of fill styles.
 	 */
-	public List<MorphFillStyle> getFillStyles() {
+	public MorphFillStyleList getFillStyles() {
 		return fillStyles;
 	}
 }

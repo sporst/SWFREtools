@@ -1,10 +1,10 @@
 package tv.porst.swfretools.parser.tags;
 
-import static tv.porst.swfretools.parser.SWFParserHelpers.parseUBits;
 import static tv.porst.swfretools.parser.SWFParserHelpers.parseFlag;
+import static tv.porst.swfretools.parser.SWFParserHelpers.parseUBits;
 import static tv.porst.swfretools.parser.SWFParserHelpers.parseUINT16;
-import tv.porst.splib.binaryparser.UBits;
 import tv.porst.splib.binaryparser.Flag;
+import tv.porst.splib.binaryparser.UBits;
 import tv.porst.splib.binaryparser.UINT16;
 import tv.porst.swfretools.parser.SWFBinaryParser;
 import tv.porst.swfretools.parser.SWFParserException;
@@ -34,6 +34,11 @@ public final class DefineShape4Parser {
 	public static DefineShape4Tag parse(final RecordHeader header, final SWFBinaryParser parser) throws SWFParserException {
 
 		final UINT16 shapeId = parseUINT16(parser, 0x00006, "DefineShape4::ShapeID");
+
+		if (shapeId.value() == 16) {
+			System.out.println("foo");
+		}
+
 		final Rect shapeBounds = RectParser.parse(parser, "DefineShape4::ShapeBounds");
 		final Rect edgeBounds = RectParser.parse(parser, "DefineShape4::EdgeBounds");
 		final UBits reserved = parseUBits(parser, 5, 0x00006, "DefineShape4::Reserved");

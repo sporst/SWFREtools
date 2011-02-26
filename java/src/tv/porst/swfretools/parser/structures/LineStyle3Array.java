@@ -1,8 +1,5 @@
 package tv.porst.swfretools.parser.structures;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import tv.porst.splib.binaryparser.UINT16;
 import tv.porst.splib.binaryparser.UINT8;
 
@@ -12,7 +9,7 @@ import tv.porst.splib.binaryparser.UINT8;
  * @author sp
  *
  */
-public class LineStyle3Array {
+public class LineStyle3Array implements IFileElement {
 
 	/**
 	 * Count of line styles.
@@ -27,7 +24,7 @@ public class LineStyle3Array {
 	/**
 	 * Array of line styles.
 	 */
-	private final List<LineStyle3> lineStyles;
+	private final LineStyle3List lineStyles;
 
 	/**
 	 * Creates a new LineStyle3Array object.
@@ -37,11 +34,16 @@ public class LineStyle3Array {
 	 * @param lineStyles Array of line styles.
 	 */
 	public LineStyle3Array(final UINT8 lineStyleCount, final UINT16 lineStyleCountExtended,
-			final List<LineStyle3> lineStyles) {
+			final LineStyle3List lineStyles) {
 
 		this.lineStyleCount = lineStyleCount;
 		this.lineStyleCountExtended = lineStyleCountExtended;
-		this.lineStyles = new ArrayList<LineStyle3>(lineStyles);
+		this.lineStyles = lineStyles;
+	}
+
+	@Override
+	public int getBytePosition() {
+		return lineStyleCount.getBytePosition();
 	}
 
 	/**
@@ -49,7 +51,7 @@ public class LineStyle3Array {
 	 *
 	 * @return The count of line styles.
 	 */
-	public UINT8 getlineStyleCount() {
+	public UINT8 getLineStyleCount() {
 		return lineStyleCount;
 	}
 
@@ -58,7 +60,7 @@ public class LineStyle3Array {
 	 *
 	 * @return The extended count of line styles.
 	 */
-	public UINT16 getlineStyleCountExtended() {
+	public UINT16 getLineStyleCountExtended() {
 		return lineStyleCountExtended;
 	}
 
@@ -67,7 +69,7 @@ public class LineStyle3Array {
 	 *
 	 * @return The array of line styles.
 	 */
-	public List<LineStyle3> getlineStyles() {
-		return new ArrayList<LineStyle3>(lineStyles);
+	public LineStyle3List getLineStyles() {
+		return lineStyles;
 	}
 }

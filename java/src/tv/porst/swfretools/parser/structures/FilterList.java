@@ -1,8 +1,5 @@
 package tv.porst.swfretools.parser.structures;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import tv.porst.splib.binaryparser.UINT8;
 
 /**
@@ -11,7 +8,7 @@ import tv.porst.splib.binaryparser.UINT8;
  * @author sp
  *
  */
-public final class FilterList {
+public final class FilterList implements IFileElement {
 
 	/**
 	 * Number of filters.
@@ -21,7 +18,7 @@ public final class FilterList {
 	/**
 	 * List of filters.
 	 */
-	private final List<Filter> filters;
+	private final SingleFilterList filters;
 
 	/**
 	 * Creates a new FilterList object.
@@ -29,11 +26,15 @@ public final class FilterList {
 	 * @param numberOfFilters Number of filters.
 	 * @param filters List of filters.
 	 */
-	public FilterList(final UINT8 numberOfFilters, final List<Filter> filters) {
+	public FilterList(final UINT8 numberOfFilters, final SingleFilterList filters) {
 
 		this.numberOfFilters = numberOfFilters;
-		this.filters = new ArrayList<Filter>(filters);
+		this.filters = filters;
+	}
 
+	@Override
+	public int getBytePosition() {
+		return numberOfFilters.getBytePosition();
 	}
 
 	/**
@@ -41,8 +42,8 @@ public final class FilterList {
 	 *
 	 * @return The list of filters.
 	 */
-	public List<Filter> getFilters() {
-		return new ArrayList<Filter>(filters);
+	public SingleFilterList getFilters() {
+		return filters;
 	}
 
 	/**

@@ -1,7 +1,7 @@
 package tv.porst.swfretools.parser.structures;
 
-import static tv.porst.swfretools.parser.SWFParserHelpers.parseUBits;
 import static tv.porst.swfretools.parser.SWFParserHelpers.parseFlag;
+import static tv.porst.swfretools.parser.SWFParserHelpers.parseUBits;
 import static tv.porst.swfretools.parser.SWFParserHelpers.parseUINT16If;
 import static tv.porst.swfretools.parser.SWFParserHelpers.parseUINT32If;
 import static tv.porst.swfretools.parser.SWFParserHelpers.parseUINT8If;
@@ -9,8 +9,8 @@ import static tv.porst.swfretools.parser.SWFParserHelpers.parseUINT8If;
 import java.util.ArrayList;
 import java.util.List;
 
-import tv.porst.splib.binaryparser.UBits;
 import tv.porst.splib.binaryparser.Flag;
+import tv.porst.splib.binaryparser.UBits;
 import tv.porst.splib.binaryparser.UINT16;
 import tv.porst.splib.binaryparser.UINT32;
 import tv.porst.splib.binaryparser.UINT8;
@@ -60,7 +60,7 @@ public final class SoundInfoParser {
 
 		return new SoundInfo(reserved, syncStop, syncNoMultiple, hasEnvelope, hasLoops,
 				hasOutPoint, hasInPoint, inPoint, outPoint, loopCount, envPoints,
-				envelopeRecords);
+				new SoundEnvelopeList(envelopeRecords));
 	}
 
 	/**

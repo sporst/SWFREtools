@@ -9,7 +9,7 @@ import tv.porst.splib.binaryparser.UINT8;
  * @author sp
  *
  */
-public final class MorphFillStyle {
+public final class MorphFillStyle implements IFileElement {
 
 	/**
 	 * Type of fill style.
@@ -92,6 +92,11 @@ public final class MorphFillStyle {
 	 */
 	public UINT16 getBitmapId() {
 		return bitmapId;
+	}
+
+	@Override
+	public int getBytePosition() {
+		return fillStyleType.getBytePosition();
 	}
 
 	/**

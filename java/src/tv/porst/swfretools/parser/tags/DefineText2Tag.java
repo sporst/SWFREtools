@@ -1,14 +1,11 @@
 package tv.porst.swfretools.parser.tags;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import tv.porst.splib.binaryparser.UINT16;
 import tv.porst.splib.binaryparser.UINT8;
 import tv.porst.swfretools.parser.structures.Matrix;
 import tv.porst.swfretools.parser.structures.RecordHeader;
 import tv.porst.swfretools.parser.structures.Rect;
-import tv.porst.swfretools.parser.structures.TextRecord2;
+import tv.porst.swfretools.parser.structures.TextRecord2List;
 
 /**
  * Represents a DefineText2 tag.
@@ -46,7 +43,7 @@ public final class DefineText2Tag extends Tag {
 	/**
 	 * Text records.
 	 */
-	private final List<TextRecord2> textRecords;
+	private final TextRecord2List textRecords;
 
 	/**
 	 * End marker of the record.
@@ -67,7 +64,7 @@ public final class DefineText2Tag extends Tag {
 	 */
 	public DefineText2Tag(final RecordHeader header, final UINT16 characterId,
 			final Rect textBounds, final Matrix textMatrix, final UINT8 glyphBits, final UINT8 advanceBits,
-			final List<TextRecord2> textRecords, final UINT8 end) {
+			final TextRecord2List textRecords, final UINT8 end) {
 		super(header);
 
 		this.characterId = characterId;
@@ -75,7 +72,7 @@ public final class DefineText2Tag extends Tag {
 		this.textMatrix = textMatrix;
 		this.glyphBits = glyphBits;
 		this.advanceBits = advanceBits;
-		this.textRecords = new ArrayList<TextRecord2>(textRecords);
+		this.textRecords = textRecords;
 		this.end = end;
 	}
 
@@ -138,7 +135,7 @@ public final class DefineText2Tag extends Tag {
 	 * 
 	 * @return The text records.
 	 */
-	public List<TextRecord2> getTextRecords() {
-		return new ArrayList<TextRecord2>(textRecords);
+	public TextRecord2List getTextRecords() {
+		return textRecords;
 	}
 }

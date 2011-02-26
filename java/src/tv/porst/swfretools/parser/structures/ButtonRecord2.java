@@ -1,7 +1,7 @@
 package tv.porst.swfretools.parser.structures;
 
-import tv.porst.splib.binaryparser.UBits;
 import tv.porst.splib.binaryparser.Flag;
+import tv.porst.splib.binaryparser.UBits;
 import tv.porst.splib.binaryparser.UINT16;
 import tv.porst.splib.binaryparser.UINT8;
 
@@ -11,7 +11,7 @@ import tv.porst.splib.binaryparser.UINT8;
  * @author sp
  *
  */
-public final class ButtonRecord2 {
+public final class ButtonRecord2 implements IFileElement {
 
 	/**
 	 * Reserved bits.
@@ -187,6 +187,11 @@ public final class ButtonRecord2 {
 	 */
 	public Flag getButtonStateUp() {
 		return buttonStateUp;
+	}
+
+	@Override
+	public int getBytePosition() {
+		return buttonReserved.getBytePosition();
 	}
 
 	/**

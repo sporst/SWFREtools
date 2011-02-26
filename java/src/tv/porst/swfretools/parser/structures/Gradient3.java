@@ -1,8 +1,5 @@
 package tv.porst.swfretools.parser.structures;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import tv.porst.splib.binaryparser.UBits;
 
 /**
@@ -11,7 +8,7 @@ import tv.porst.splib.binaryparser.UBits;
  * @author sp
  *
  */
-public final class Gradient3 implements IGradient {
+public final class Gradient3 implements IGradient, IFileElement {
 
 	/**
 	 * Spread mode.
@@ -31,7 +28,7 @@ public final class Gradient3 implements IGradient {
 	/**
 	 * Gradient records.
 	 */
-	private final List<GradRecord3> gradientRecords;
+	private final GradRecord3List gradientRecords;
 
 	/**
 	 * Creates a new Gradient3 object.
@@ -42,13 +39,18 @@ public final class Gradient3 implements IGradient {
 	 * @param gradientRecords Gradient records.
 	 */
 	public Gradient3(final UBits spreadMode, final UBits interpolationMode, final UBits numGradients,
-			final List<GradRecord3> gradientRecords) {
+			final GradRecord3List gradientRecords) {
 
 		this.spreadMode = spreadMode;
 		this.interpolationMode = interpolationMode;
 		this.numGradients = numGradients;
-		this.gradientRecords = new ArrayList<GradRecord3>(gradientRecords);
+		this.gradientRecords = gradientRecords;
 
+	}
+
+	@Override
+	public int getBytePosition() {
+		return spreadMode.getBytePosition();
 	}
 
 	/**
@@ -56,7 +58,7 @@ public final class Gradient3 implements IGradient {
 	 *
 	 * @return The gradient records.
 	 */
-	public List<GradRecord3> getGradientRecords() {
+	public GradRecord3List getGradientRecords() {
 		return gradientRecords;
 	}
 

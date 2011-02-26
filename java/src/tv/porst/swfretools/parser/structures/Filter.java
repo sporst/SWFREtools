@@ -8,7 +8,7 @@ import tv.porst.splib.binaryparser.UINT8;
  * @author sp
  *
  */
-public final class Filter {
+public final class Filter implements IFileElement {
 
 	/**
 	 * Filter ID.
@@ -102,6 +102,11 @@ public final class Filter {
 	 */
 	public BlurFilter getBlurFilter() {
 		return blurFilter;
+	}
+
+	@Override
+	public int getBytePosition() {
+		return filterId.getBytePosition();
 	}
 
 	/**

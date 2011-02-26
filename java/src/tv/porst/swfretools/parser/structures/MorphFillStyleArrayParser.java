@@ -41,6 +41,6 @@ public final class MorphFillStyleArrayParser {
 			fillStyles.add(MorphFillStyleParser.parse(parser, String.format(fieldName + "::FillStyles[%d]", i)));
 		}
 
-		return new MorphFillStyleArray(fillStyleCount, fillStyleCountExtended, fillStyles);
+		return new MorphFillStyleArray(fillStyleCount, fillStyleCountExtended, new MorphFillStyleList(fillStyles));
 	}
 }

@@ -281,6 +281,11 @@ public final class TagCodes {
 	public static final int DefineScalingGrid = 78;
 
 	/**
+	 * Tag identifier for the DoABC tag.
+	 */
+	public static final int DoABC = 82;
+
+	/**
 	 * Tag identifier for the DefineShape4 tag.
 	 */
 	public static final int DefineShape4 = 83;

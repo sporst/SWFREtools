@@ -1,10 +1,7 @@
 package tv.porst.swfretools.parser.structures;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import tv.porst.splib.binaryparser.UBits;
 import tv.porst.splib.binaryparser.Flag;
+import tv.porst.splib.binaryparser.UBits;
 import tv.porst.splib.binaryparser.UINT16;
 import tv.porst.splib.binaryparser.UINT32;
 import tv.porst.splib.binaryparser.UINT8;
@@ -15,7 +12,7 @@ import tv.porst.splib.binaryparser.UINT8;
  * @author sp
  *
  */
-public final class SoundInfo {
+public final class SoundInfo implements IFileElement {
 
 	/**
 	 * Reserved bits.
@@ -75,7 +72,7 @@ public final class SoundInfo {
 	/**
 	 * Sound Envelope records.
 	 */
-	private final List<SoundEnvelope> envelopeRecords;
+	private final SoundEnvelopeList envelopeRecords;
 
 	/**
 	 * Creates a new SoundInfo object.
@@ -96,20 +93,25 @@ public final class SoundInfo {
 	public SoundInfo(final UBits reserved, final Flag syncStop, final Flag syncNoMultiple,
 			final Flag hasEnvelope, final Flag hasLoops, final Flag hasOutPoint,
 			final Flag hasInPoint, final UINT32 inPoint, final UINT32 outPoint, final UINT16 loopCount,
-			final UINT8 envPoints, final List<SoundEnvelope> envelopeRecords) {
+			final UINT8 envPoints, final SoundEnvelopeList envelopeRecords) {
 
 		this.reserved = reserved;
 		this.syncStop = syncStop;
 		this.syncNoMultiple = syncNoMultiple;
 		this.hasEnvelope = hasEnvelope;
 		this.hasLoops = hasLoops;
-		this.hasOutPoint = hasOutPoint;
 		this.hasInPoint = hasInPoint;
+		this.hasOutPoint = hasOutPoint;
 		this.outPoint = outPoint;
 		this.inPoint = inPoint;
 		this.loopCount = loopCount;
 		this.envPoints = envPoints;
-		this.envelopeRecords = new ArrayList<SoundEnvelope>(envelopeRecords);
+		this.envelopeRecords = envelopeRecords;
+	}
+
+	@Override
+	public int getBytePosition() {
+		return reserved.getBytePosition();
 	}
 
 	/**
@@ -117,8 +119,8 @@ public final class SoundInfo {
 	 *
 	 * @return The sound Envelope records.
 	 */
-	public List<SoundEnvelope> getEnvelopeRecords() {
-		return new ArrayList<SoundEnvelope>(envelopeRecords);
+	public SoundEnvelopeList getEnvelopeRecords() {
+		return envelopeRecords;
 	}
 
 	/**

@@ -67,6 +67,9 @@ public final class TagParser {
 				if (parser.getBytePosition() != before + parsedTag.getHeader().getNormalizedLength() + (parsedTag.getHeader().getHeaderLength()))
 				{
 					System.out.println(String.format("No: Wanted %X but was %X", before + parsedTag.getHeader().getNormalizedLength() + (parsedTag.getHeader().getHeaderLength()), parser.getBytePosition()));
+					if (parsedTag.getHeader().getTagCode() != 26 && parsedTag.getHeader().getTagCode() != 75 && parsedTag.getHeader().getTagCode() != 83) {
+						System.exit(0);
+					}
 
 					parser.setPosition(before + parsedTag.getHeader().getNormalizedLength() + (parsedTag.getHeader().getHeaderLength()), 0);
 				}
@@ -122,6 +125,9 @@ public final class TagParser {
 			if (parser.getBytePosition() != before + parsedTag.getHeader().getNormalizedLength() + (parsedTag.getHeader().getHeaderLength()))
 			{
 				System.out.println(String.format("No: Wanted %X but was %X", before + parsedTag.getHeader().getNormalizedLength() + (parsedTag.getHeader().getHeaderLength()), parser.getBytePosition()));
+				if (parsedTag.getHeader().getTagCode() != 26 && parsedTag.getHeader().getTagCode() != 75 && parsedTag.getHeader().getTagCode() != 83) {
+					System.exit(0);
+				}
 
 				parser.setPosition(before + parsedTag.getHeader().getNormalizedLength() + (parsedTag.getHeader().getHeaderLength()), 0);
 			}
@@ -242,7 +248,6 @@ public final class TagParser {
 			case TagCodes.DefineFont2: return DefineFont2Parser.parse(header, parser);
 			case TagCodes.DefineFont3: return DefineFont3Parser.parse(header, parser);
 			case TagCodes.DefineFontAlignZones: return DefineFontAlignZonesParser.parse(header, parser);
-			case TagCodes.DefineFontName: return DefineFontNameParser.parse(header, parser);
 			case TagCodes.DefineText: return DefineTextParser.parse(header, parser);
 			case TagCodes.DefineText2: return DefineText2Parser.parse(header, parser);
 			case TagCodes.DefineEditText: return DefineEditTextParser.parse(header, parser);
@@ -262,6 +267,7 @@ public final class TagParser {
 			case TagCodes.DefineVideoStream: return DefineVideoStreamParser.parse(header, parser);
 			case TagCodes.VideoFrame: return VideoFrameParser.parse(header, parser);
 			case TagCodes.DefineBinaryData: return DefineBinaryDataParser.parse(header, parser);
+			case TagCodes.DoABC: return DoABCParser.parse(header, parser);
 			}
 
 			errors.add(new ParserError(header.getTagAndLength().getBytePosition(), String.format("Tried to parse tag with unknown tag code 0x%02X", header.getTagCode())));

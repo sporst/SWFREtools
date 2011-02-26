@@ -1,8 +1,5 @@
 package tv.porst.swfretools.parser.structures;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import tv.porst.splib.binaryparser.UINT16;
 import tv.porst.splib.binaryparser.UINT8;
 
@@ -12,7 +9,7 @@ import tv.porst.splib.binaryparser.UINT8;
  * @author sp
  *
  */
-public final class MorphLineStyleArray {
+public final class MorphLineStyleArray implements IFileElement {
 
 	/**
 	 * Count of line styles.
@@ -27,7 +24,7 @@ public final class MorphLineStyleArray {
 	/**
 	 * Array of line styles.
 	 */
-	private final List<MorphLineStyle> lineStyles;
+	private final MorphLineStyleList lineStyles;
 
 	/**
 	 * Creates a new MorphLineStyleArray object.
@@ -37,11 +34,16 @@ public final class MorphLineStyleArray {
 	 * @param lineStyles Array of line styles.
 	 */
 	public MorphLineStyleArray(final UINT8 lineStyleCount, final UINT16 lineStyleCountExtended,
-			final List<MorphLineStyle> lineStyles) {
+			final MorphLineStyleList lineStyles) {
 
 		this.lineStyleCount = lineStyleCount;
 		this.lineStyleCountExtended = lineStyleCountExtended;
-		this.lineStyles = new ArrayList<MorphLineStyle>(lineStyles);
+		this.lineStyles = lineStyles;
+	}
+
+	@Override
+	public int getBytePosition() {
+		return lineStyleCount.getBytePosition();
 	}
 
 	/**
@@ -67,7 +69,7 @@ public final class MorphLineStyleArray {
 	 *
 	 * @return The array of line styles.
 	 */
-	public List<MorphLineStyle> getLineStyles() {
-		return new ArrayList<MorphLineStyle>(lineStyles);
+	public MorphLineStyleList getLineStyles() {
+		return lineStyles;
 	}
 }

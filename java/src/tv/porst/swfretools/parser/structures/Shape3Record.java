@@ -6,5 +6,5 @@ package tv.porst.swfretools.parser.structures;
  * @author sp
  *
  */
-public interface Shape3Record {
+public interface Shape3Record extends IFileElement {
 }

@@ -8,7 +8,7 @@ import tv.porst.splib.binaryparser.UBits;
  * @author sp
  *
  */
-public final class BlurFilter {
+public final class BlurFilter implements IFileElement {
 
 	/**
 	 * Horizontal blur amount.
@@ -62,6 +62,11 @@ public final class BlurFilter {
 	 */
 	public Fixed getBlurY() {
 		return blurY;
+	}
+
+	@Override
+	public int getBytePosition() {
+		return blurX.getBytePosition();
 	}
 
 	/**

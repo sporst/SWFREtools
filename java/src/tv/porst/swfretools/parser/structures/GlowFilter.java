@@ -1,7 +1,7 @@
 package tv.porst.swfretools.parser.structures;
 
-import tv.porst.splib.binaryparser.UBits;
 import tv.porst.splib.binaryparser.Flag;
+import tv.porst.splib.binaryparser.UBits;
 
 /**
  * Represents a GlowFilter structure.
@@ -9,7 +9,7 @@ import tv.porst.splib.binaryparser.Flag;
  * @author sp
  *
  */
-public final class GlowFilter {
+public final class GlowFilter implements IFileElement {
 
 	/**
 	 * Color of the shadow.
@@ -94,6 +94,11 @@ public final class GlowFilter {
 	 */
 	public Fixed getBlurY() {
 		return blurY;
+	}
+
+	@Override
+	public int getBytePosition() {
+		return glowColor.getBytePosition();
 	}
 
 	/**

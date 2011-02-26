@@ -1,8 +1,5 @@
 package tv.porst.swfretools.parser.structures;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import tv.porst.splib.binaryparser.UINT8;
 
 /**
@@ -11,7 +8,7 @@ import tv.porst.splib.binaryparser.UINT8;
  * @author sp
  *
  */
-public final class MorphGradient {
+public final class MorphGradient implements IFileElement {
 
 	/**
 	 * Number of gradients.
@@ -21,7 +18,7 @@ public final class MorphGradient {
 	/**
 	 * Gradient records.
 	 */
-	private final List<MorphGradientRecord> gradientRecords;
+	private final MorphGradientRecordList gradientRecords;
 
 	/**
 	 * Creates a new MorphGradient object.
@@ -29,11 +26,16 @@ public final class MorphGradient {
 	 * @param numGradients Number of gradients.
 	 * @param gradientRecords Gradient records.
 	 */
-	public MorphGradient(final UINT8 numGradients, final List<MorphGradientRecord> gradientRecords) {
+	public MorphGradient(final UINT8 numGradients, final MorphGradientRecordList gradientRecords) {
 
 		this.numGradients = numGradients;
-		this.gradientRecords = new ArrayList<MorphGradientRecord>(gradientRecords);
+		this.gradientRecords = gradientRecords;
 
+	}
+
+	@Override
+	public int getBytePosition() {
+		return numGradients.getBytePosition();
 	}
 
 	/**
@@ -41,8 +43,8 @@ public final class MorphGradient {
 	 *
 	 * @return The gradient records.
 	 */
-	public List<MorphGradientRecord> getGradientRecords() {
-		return new ArrayList<MorphGradientRecord>(gradientRecords);
+	public MorphGradientRecordList getGradientRecords() {
+		return gradientRecords;
 	}
 
 	/**

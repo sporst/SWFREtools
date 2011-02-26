@@ -36,7 +36,7 @@ public final class FilterListParser {
 			filters.add(FilterParser.parse(parser, String.format(fieldName + "::Filters[%d]", i)));
 		}
 
-		return new FilterList(numberOfFilters, filters);
+		return new FilterList(numberOfFilters, new SingleFilterList(filters));
 	}
 
 	/**

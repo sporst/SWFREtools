@@ -8,7 +8,7 @@ import tv.porst.splib.binaryparser.UINT16;
  * @author sp
  *
  */
-public final class MorphLineStyle {
+public final class MorphLineStyle implements IFileElement {
 
 	/**
 	 * Width of line in start shape in twips.
@@ -45,6 +45,11 @@ public final class MorphLineStyle {
 		this.startColor = startColor;
 		this.endColor = endColor;
 
+	}
+
+	@Override
+	public int getBytePosition() {
+		return startColor.getBytePosition();
 	}
 
 	/**

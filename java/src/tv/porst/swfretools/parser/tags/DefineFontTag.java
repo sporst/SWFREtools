@@ -1,11 +1,9 @@
 package tv.porst.swfretools.parser.tags;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import tv.porst.splib.binaryparser.UINT16;
 import tv.porst.swfretools.parser.structures.RecordHeader;
-import tv.porst.swfretools.parser.structures.Shape;
+import tv.porst.swfretools.parser.structures.ShapeList;
+import tv.porst.swfretools.parser.structures.UINT16List;
 
 /**
  * Represents a DefineFont tag.
@@ -23,12 +21,12 @@ public final class DefineFontTag extends Tag {
 	/**
 	 * Array of shape offsets.
 	 */
-	private final List<UINT16> offsetTable;
+	private final UINT16List offsetTable;
 
 	/**
 	 * Array of shapes.
 	 */
-	private final List<Shape> glyphShapeTable;
+	private final ShapeList glyphShapeTable;
 
 	/**
 	 * Creates a new DefineFont tag object.
@@ -38,12 +36,12 @@ public final class DefineFontTag extends Tag {
 	 * @param offsetTable Array of shape offsets.
 	 * @param glyphShapeTable Array of shapes.
 	 */
-	public DefineFontTag(final RecordHeader header, final UINT16 fontId, final List<UINT16> offsetTable, final List<Shape> glyphShapeTable) {
+	public DefineFontTag(final RecordHeader header, final UINT16 fontId, final UINT16List offsetTable, final ShapeList glyphShapeTable) {
 		super(header);
 
 		this.fontId = fontId;
-		this.offsetTable = new ArrayList<UINT16>(offsetTable);
-		this.glyphShapeTable = new ArrayList<Shape>(glyphShapeTable);
+		this.offsetTable = offsetTable;
+		this.glyphShapeTable = glyphShapeTable;
 	}
 
 	/**
@@ -60,8 +58,8 @@ public final class DefineFontTag extends Tag {
 	 * 
 	 * @return The array of shapes.
 	 */
-	public List<Shape> getGlyphShapeTable() {
-		return new ArrayList<Shape>(glyphShapeTable);
+	public ShapeList getGlyphShapeTable() {
+		return glyphShapeTable;
 	}
 
 	/**
@@ -69,7 +67,7 @@ public final class DefineFontTag extends Tag {
 	 * 
 	 * @return The array of shape offsets.
 	 */
-	public List<UINT16> getOffsetTable() {
-		return new ArrayList<UINT16>(offsetTable);
+	public UINT16List getOffsetTable() {
+		return offsetTable;
 	}
 }

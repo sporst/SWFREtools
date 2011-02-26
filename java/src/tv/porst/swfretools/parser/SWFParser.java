@@ -4,7 +4,6 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
-import java.util.zip.InflaterInputStream;
 
 import tv.porst.splib.binaryparser.UINT16;
 import tv.porst.splib.binaryparser.UINT32;
@@ -15,6 +14,8 @@ import tv.porst.swfretools.parser.structures.RectParser;
 import tv.porst.swfretools.parser.structures.SWFFile;
 import tv.porst.swfretools.parser.tags.TagParser;
 import tv.porst.swfretools.parser.tags.TagParserResult;
+
+import com.jcraft.jzlib.ZInputStream;
 
 /**
  * Class for parsing Flash SWF files.
@@ -59,23 +60,24 @@ public final class SWFParser {
 
 		assert fileData != null && fileData.length >= 8 : "Invalid SWF file data passed to function";
 
-		final ByteArrayOutputStream output = new ByteArrayOutputStream();
-
 		final ByteArrayInputStream inputStream = new ByteArrayInputStream(fileData, 8, fileData.length - 8);
-		final InflaterInputStream decompressor = new InflaterInputStream(inputStream);
+		final ByteArrayOutputStream output = new ByteArrayOutputStream();
+		final ZInputStream decompressor = new ZInputStream(inputStream);
 
 		final int available = inputStream.available();
 
 		if (available > 0) {
 
-			final byte[] buffer = new byte[Math.min(available, 4096)];
+			byte[] buffer = new byte[Math.min(available, 4096)];
 			int read = 0;
 
 			while ((read = decompressor.read(buffer, 0, buffer.length)) != -1) {
 				output.write(buffer, 0, read);
+				buffer = new byte[Math.min(available, 4096)];
 			}
-
 		}
+
+		decompressor.close();
 
 		return output.toByteArray();
 	}
@@ -155,6 +157,10 @@ public final class SWFParser {
 		}
 
 		final byte[] parserInputData = isCompressed(fileData) ? decompressData(fileData) : fileData;
+
+		if (fileData != parserInputData) {
+			FileHelpers.writeFile(new File(file.getAbsolutePath() + ".decompressed"), parserInputData);
+		}
 
 		final SWFBinaryParser parser = new SWFBinaryParser(parserInputData);
 

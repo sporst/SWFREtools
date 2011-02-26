@@ -85,6 +85,11 @@ public final class PlaceObject3Tag extends Tag {
 	private final Flag placeFlagHasBlendMode;
 
 	/**
+	 * Has filter list mode.
+	 */
+	private final Flag placeFlagHasFilterList;
+
+	/**
 	 * Depth of character.
 	 */
 	private final UINT16 depth;
@@ -202,6 +207,7 @@ public final class PlaceObject3Tag extends Tag {
 		this.placeFlagHasClassName = placeFlagHasClassName;
 		this.placeFlagHasCacheAsBitmap = placeFlagHasCacheAsBitmap;
 		this.placeFlagHasBlendMode = placeFlagHasBlendMode;
+		this.placeFlagHasFilterList = placeFlagHasFilterList;
 		this.depth = depth;
 		this.className = className;
 		this.characterId = characterId;
@@ -367,6 +373,15 @@ public final class PlaceObject3Tag extends Tag {
 	 */
 	public Flag getPlaceFlagHasColorTransform() {
 		return placeFlagHasColorTransform;
+	}
+
+	/**
+	 * Returns the has filter list mode.
+	 *
+	 * @return The has filter list mode.
+	 */
+	public Flag getPlaceFlagHasFilterList() {
+		return placeFlagHasFilterList;
 	}
 
 	/**

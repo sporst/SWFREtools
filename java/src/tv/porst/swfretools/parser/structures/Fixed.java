@@ -32,6 +32,10 @@ public final class Fixed {
 		this.decimal = decimal;
 	}
 
+	public int getBytePosition() {
+		return integer.getBytePosition();
+	}
+
 	/**
 	 * Returns the decimal part of the FIXED structure.
 	 *
@@ -48,5 +52,9 @@ public final class Fixed {
 	 */
 	public UINT16 getInteger() {
 		return integer;
+	}
+
+	public int value() {
+		return 0;
 	}
 }

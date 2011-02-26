@@ -6,5 +6,5 @@ package tv.porst.swfretools.parser.structures;
  * @author sp
  *
  */
-public interface ShapeRecord {
+public interface ShapeRecord extends IFileElement {
 }

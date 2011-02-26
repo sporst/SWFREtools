@@ -1,7 +1,7 @@
 package tv.porst.swfretools.parser.structures;
 
-import tv.porst.splib.binaryparser.UBits;
 import tv.porst.splib.binaryparser.Flag;
+import tv.porst.splib.binaryparser.UBits;
 
 /**
  * Represents a BevelFilter structure.
@@ -9,7 +9,7 @@ import tv.porst.splib.binaryparser.Flag;
  * @author sp
  *
  */
-public final class BevelFilter {
+public final class BevelFilter implements IFileElement {
 
 	/**
 	 * Color of the shadow.
@@ -131,6 +131,11 @@ public final class BevelFilter {
 	 */
 	public Fixed getBlurY() {
 		return blurY;
+	}
+
+	@Override
+	public int getBytePosition() {
+		return shadowColor.getBytePosition();
 	}
 
 	/**

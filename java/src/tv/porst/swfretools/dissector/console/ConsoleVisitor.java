@@ -18,60 +18,7 @@ import tv.porst.splib.binaryparser.UINT8;
 import tv.porst.splib.strings.StringHelpers;
 import tv.porst.swfretools.Constants;
 import tv.porst.swfretools.parser.actions.Action;
-import tv.porst.swfretools.parser.structures.ActionList;
-import tv.porst.swfretools.parser.structures.ClipActionRecord;
-import tv.porst.swfretools.parser.structures.ClipActionRecordList;
-import tv.porst.swfretools.parser.structures.ClipActions;
-import tv.porst.swfretools.parser.structures.ClipEventFlags;
-import tv.porst.swfretools.parser.structures.CurvedEdgeRecord;
-import tv.porst.swfretools.parser.structures.CxFormWithAlpha;
-import tv.porst.swfretools.parser.structures.ElementList;
-import tv.porst.swfretools.parser.structures.EndShapeRecord;
-import tv.porst.swfretools.parser.structures.FillStyle;
-import tv.porst.swfretools.parser.structures.FillStyle3;
-import tv.porst.swfretools.parser.structures.FillStyle3Array;
-import tv.porst.swfretools.parser.structures.FillStyle3List;
-import tv.porst.swfretools.parser.structures.FillStyleArray;
-import tv.porst.swfretools.parser.structures.FillStyleList;
-import tv.porst.swfretools.parser.structures.Fixed8;
-import tv.porst.swfretools.parser.structures.FocalGradient;
-import tv.porst.swfretools.parser.structures.GlyphEntry;
-import tv.porst.swfretools.parser.structures.GlyphEntryList;
-import tv.porst.swfretools.parser.structures.GradRecord;
-import tv.porst.swfretools.parser.structures.GradRecordList;
-import tv.porst.swfretools.parser.structures.Gradient;
-import tv.porst.swfretools.parser.structures.IFileElement;
-import tv.porst.swfretools.parser.structures.INT16List;
-import tv.porst.swfretools.parser.structures.KerningRecord;
-import tv.porst.swfretools.parser.structures.KerningRecordList;
-import tv.porst.swfretools.parser.structures.LineStyle;
-import tv.porst.swfretools.parser.structures.LineStyle4;
-import tv.porst.swfretools.parser.structures.LineStyle4Array;
-import tv.porst.swfretools.parser.structures.LineStyle4List;
-import tv.porst.swfretools.parser.structures.LineStyleArray;
-import tv.porst.swfretools.parser.structures.LineStyleList;
-import tv.porst.swfretools.parser.structures.Matrix;
-import tv.porst.swfretools.parser.structures.ParsedINTElementList;
-import tv.porst.swfretools.parser.structures.RGB;
-import tv.porst.swfretools.parser.structures.RGBA;
-import tv.porst.swfretools.parser.structures.Rect;
-import tv.porst.swfretools.parser.structures.RectList;
-import tv.porst.swfretools.parser.structures.SWFFile;
-import tv.porst.swfretools.parser.structures.Shape3;
-import tv.porst.swfretools.parser.structures.Shape3List;
-import tv.porst.swfretools.parser.structures.ShapeWithStyle;
-import tv.porst.swfretools.parser.structures.ShapeWithStyle4;
-import tv.porst.swfretools.parser.structures.StraightEdgeRecord;
-import tv.porst.swfretools.parser.structures.StyleChangeRecord;
-import tv.porst.swfretools.parser.structures.StyleChangeRecord3;
-import tv.porst.swfretools.parser.structures.SymbolList;
-import tv.porst.swfretools.parser.structures.TagList;
-import tv.porst.swfretools.parser.structures.TextRecord;
-import tv.porst.swfretools.parser.structures.TextRecordList;
-import tv.porst.swfretools.parser.structures.ZoneData;
-import tv.porst.swfretools.parser.structures.ZoneDataList;
-import tv.porst.swfretools.parser.structures.ZoneRecord;
-import tv.porst.swfretools.parser.structures.ZoneRecordList;
+import tv.porst.swfretools.parser.structures.*;
 import tv.porst.swfretools.parser.tags.Tag;
 import tv.porst.swfretools.utils.ISWFVisitor;
 import tv.porst.swfretools.utils.TagNames;
@@ -138,6 +85,36 @@ public class ConsoleVisitor implements ISWFVisitor {
 	}
 
 	@Override
+	public void visit(final Object parent, final String name, final BevelFilter value) {
+		handleStructure(parent, name, value);
+	}
+
+	@Override
+	public void visit(final Object parent, final String name, final BlurFilter value) {
+		handleStructure(parent, name, value);
+	}
+
+	@Override
+	public void visit(final Object parent, final String name, final ButtonCondAction value) {
+		handleStructure(parent, name, value);
+	}
+
+	@Override
+	public void visit(final Object parent, final String name, final ButtonCondActionList value) {
+		handleList(parent, name, value);
+	}
+
+	@Override
+	public void visit(final Object parent, final String name, final ButtonRecord2 value) {
+		handleStructure(parent, name, value);
+	}
+
+	@Override
+	public void visit(final Object parent, final String name, final ButtonRecord2List value) {
+		handleList(parent, name, value);
+	}
+
+	@Override
 	public void visit(final Object parent, final String name, final ClipActionRecord value) {
 		handleStructure(parent, name, value);
 	}
@@ -158,12 +135,27 @@ public class ConsoleVisitor implements ISWFVisitor {
 	}
 
 	@Override
+	public void visit(final Object parent, final String name, final ColorMatrixFilter value) {
+		handleStructure(parent, name, value);
+	}
+
+	@Override
+	public void visit(final Object parent, final String name, final ConvolutionFilter value) {
+		handleStructure(parent, name, value);
+	}
+
+	@Override
 	public void visit(final Object parent, final String name, final CurvedEdgeRecord value) {
 		handleStructure(parent, name, value);
 	}
 
 	@Override
 	public void visit(final Object parent, final String name, final CxFormWithAlpha value) {
+		handleStructure(parent, name, value);
+	}
+
+	@Override
+	public void visit(final Object parent, final String name, final DropShadowFilter value) {
 		handleStructure(parent, name, value);
 	}
 
@@ -194,11 +186,7 @@ public class ConsoleVisitor implements ISWFVisitor {
 
 	@Override
 	public void visit(final Object parent, final String name, final FillStyleArray value) {
-		updateStack(parent);
-
-		output.printf(getPadding() + "[%08X:%d]: %s\n", value.getBytePosition(), 0, name);
-
-		stack.push(value);
+		handleStructure(parent, name, value);
 	}
 
 	@Override
@@ -207,7 +195,22 @@ public class ConsoleVisitor implements ISWFVisitor {
 	}
 
 	@Override
+	public void visit(final Object parent, final String name, final Filter value) {
+		handleStructure(parent, name, value);
+	}
+
+	@Override
+	public void visit(final Object parent, final String name, final FilterList value) {
+		handleStructure(parent, name, value);
+	}
+
+	@Override
 	public void visit(final Object parent, final String name, final FocalGradient value) {
+		handleStructure(parent, name, value);
+	}
+
+	@Override
+	public void visit(final Object parent, final String name, final GlowFilter value) {
 		handleStructure(parent, name, value);
 	}
 
@@ -227,8 +230,33 @@ public class ConsoleVisitor implements ISWFVisitor {
 	}
 
 	@Override
+	public void visit(final Object parent, final String name, final Gradient3 value) {
+		handleStructure(parent, name, value);
+	}
+
+	@Override
+	public void visit(final Object parent, final String name, final GradientBevelFilter value) {
+		handleStructure(parent, name, value);
+	}
+
+	@Override
+	public void visit(final Object parent, final String name, final GradientGlowFilter value) {
+		handleStructure(parent, name, value);
+	}
+
+	@Override
 	public void visit(final Object parent, final String name, final GradRecord value) {
 		handleStructure(parent, name, value);
+	}
+
+	@Override
+	public void visit(final Object parent, final String name, final GradRecord3 value) {
+		handleStructure(parent, name, value);
+	}
+
+	@Override
+	public void visit(final Object parent, final String name, final GradRecord3List value) {
+		handleList(parent, name, value);
 	}
 
 	@Override
@@ -264,6 +292,21 @@ public class ConsoleVisitor implements ISWFVisitor {
 	}
 
 	@Override
+	public void visit(final Object parent, final String name, final LineStyle3 value) {
+		handleStructure(parent, name, value);
+	}
+
+	@Override
+	public void visit(final Object parent, final String name, final LineStyle3Array value) {
+		handleStructure(parent, name, value);
+	}
+
+	@Override
+	public void visit(final Object parent, final String name, final LineStyle3List value) {
+		handleList(parent, name, value);
+	}
+
+	@Override
 	public void visit(final Object parent, final String name, final LineStyle4 value) {
 		handleStructure(parent, name, value);
 	}
@@ -280,11 +323,7 @@ public class ConsoleVisitor implements ISWFVisitor {
 
 	@Override
 	public void visit(final Object parent, final String name, final LineStyleArray value) {
-		updateStack(parent);
-
-		output.printf(getPadding() + "[%08X:%d]: %s\n", value.getBytePosition(), 0, name);
-
-		stack.push(value);
+		handleStructure(parent, name, value);
 	}
 
 	@Override
@@ -295,6 +334,51 @@ public class ConsoleVisitor implements ISWFVisitor {
 	@Override
 	public void visit(final Object parent, final String name, final Matrix value) {
 		handleStructure(parent, name, value);
+	}
+
+	@Override
+	public void visit(final Object parent, final String name, final MorphFillStyle value) {
+		handleStructure(parent, name, value);
+	}
+
+	@Override
+	public void visit(final Object parent, final String name, final MorphFillStyleArray value) {
+		handleStructure(parent, name, value);
+	}
+
+	@Override
+	public void visit(final Object parent, final String name, final MorphFillStyleList value) {
+		handleList(parent, name, value);
+	}
+
+	@Override
+	public void visit(final Object parent, final String name, final MorphGradient value) {
+		handleStructure(parent, name, value);
+	}
+
+	@Override
+	public void visit(final Object parent, final String name, final MorphGradientRecord value) {
+		handleStructure(parent, name, value);
+	}
+
+	@Override
+	public void visit(final Object parent, final String name, final MorphGradientRecordList value) {
+		handleList(parent, name, value);
+	}
+
+	@Override
+	public void visit(final Object parent, final String name, final MorphLineStyle value) {
+		handleStructure(parent, name, value);
+	}
+
+	@Override
+	public void visit(final Object parent, final String name, final MorphLineStyleArray value) {
+		handleStructure(parent, name, value);
+	}
+
+	@Override
+	public void visit(final Object parent, final String name, final MorphLineStyleList value) {
+		handleList(parent, name, value);
 	}
 
 	@Override
@@ -342,6 +426,11 @@ public class ConsoleVisitor implements ISWFVisitor {
 	}
 
 	@Override
+	public void visit(final Object parent, final String name, final Shape value) {
+		handleStructure(parent, name, value);
+	}
+
+	@Override
 	public void visit(final Object parent, final String name, final Shape3 value) {
 		handleStructure(parent, name, value);
 	}
@@ -352,12 +441,62 @@ public class ConsoleVisitor implements ISWFVisitor {
 	}
 
 	@Override
+	public void visit(final Object parent, final String name, final Shape3Record value) {
+		handleStructure(parent, name, value);
+	}
+
+	@Override
+	public void visit(final Object parent, final String name, final Shape3RecordList value) {
+		handleList(parent, name, value);
+	}
+
+	@Override
+	public void visit(final Object parent, final String name, final ShapeList value) {
+		handleList(parent, name, value);
+	}
+
+	@Override
+	public void visit(final Object parent, final String name, final ShapeRecord value) {
+		handleStructure(parent, name, value);
+	}
+
+	@Override
+	public void visit(final Object parent, final String name, final ShapeRecordList value) {
+		handleList(parent, name, value);
+	}
+
+	@Override
 	public void visit(final Object parent, final String name, final ShapeWithStyle value) {
 		handleStructure(parent, name, value);
 	}
 
 	@Override
+	public void visit(final Object parent, final String name, final ShapeWithStyle3 value) {
+		handleStructure(parent, name, value);
+	}
+
+	@Override
 	public void visit(final Object parent, final String name, final ShapeWithStyle4 value) {
+		handleStructure(parent, name, value);
+	}
+
+	@Override
+	public void visit(final Object parent, final String name, final SingleFilterList value) {
+		handleList(parent, name, value);
+	}
+
+	@Override
+	public void visit(final Object parent, final String name, final SoundEnvelope value) {
+		handleStructure(parent, name, value);
+	}
+
+	@Override
+	public void visit(final Object parent, final String name, final SoundEnvelopeList value) {
+		handleList(parent, name, value);
+	}
+
+	@Override
+	public void visit(final Object parent, final String name, final SoundInfo value) {
 		handleStructure(parent, name, value);
 	}
 
@@ -400,8 +539,30 @@ public class ConsoleVisitor implements ISWFVisitor {
 	}
 
 	@Override
+	public void visit(final Object parent, final String name, final TextRecord2 value) {
+		handleStructure(parent, name, value);
+	}
+
+	@Override
+	public void visit(final Object parent, final String name, final TextRecord2List value) {
+		handleList(parent, name, value);
+	}
+
+	@Override
 	public void visit(final Object parent, final String name, final TextRecordList value) {
 		handleList(parent, name, value);
+	}
+
+	@Override
+	public void visit(final Object parent, final String name, final UINT16List value) {
+		if (value.size() != 0) {
+
+			updateStack(parent);
+
+			output.printf(getPadding() + "[%08X:%d]: %s (%d elements)\n", value.getBytePosition(), 0, name, value.size());
+
+			stack.push(value);
+		}
 	}
 
 	@Override
@@ -449,13 +610,29 @@ public class ConsoleVisitor implements ISWFVisitor {
 	}
 
 	@Override
+	public void visit(final String name, final ByteArray value) {
+		if (value != null) {
+			output.printf(getPadding() + "[%08X:%d]: %s : %s\n", value.getBytePosition(), 0, name, "ARRAY");
+		}
+	}
+
+	@Override
+	public void visit(final String name, final Fixed value) {
+		if (value != null) {
+			output.printf(getPadding() + "[%08X:%d]: %s : %d\n", value.getBytePosition(), 0, name, value.value());
+		}
+	}
+
+	@Override
 	public void visit(final String name, final Fixed8 value) {
 		output.printf(getPadding() + "[%08X:%d]: %s : %b\n", value.getBytePosition(), 0, name, value.value());
 	}
 
 	@Override
 	public void visit(final String name, final Flag value) {
-		output.printf(getPadding() + "[%08X:%d]: %s : %b\n", value.getBytePosition(), value.getBitPosition(), name, value.value());
+		if (value != null) {
+			output.printf(getPadding() + "[%08X:%d]: %s : %b\n", value.getBytePosition(), value.getBitPosition(), name, value.value());
+		}
 	}
 
 	@Override

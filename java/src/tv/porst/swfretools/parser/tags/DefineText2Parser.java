@@ -16,6 +16,7 @@ import tv.porst.swfretools.parser.structures.RecordHeader;
 import tv.porst.swfretools.parser.structures.Rect;
 import tv.porst.swfretools.parser.structures.RectParser;
 import tv.porst.swfretools.parser.structures.TextRecord2;
+import tv.porst.swfretools.parser.structures.TextRecord2List;
 import tv.porst.swfretools.parser.structures.TextRecord2Parser;
 
 /**
@@ -56,6 +57,6 @@ public final class DefineText2Parser {
 
 		final UINT8 end = parseUINT8(parser, 0x00006, "DefineText2Parser::EndOfRecordsFlag");
 
-		return new DefineText2Tag(header, characterId, textBounds, textMatrix, glyphBits, advanceBits, textRecords, end);
+		return new DefineText2Tag(header, characterId, textBounds, textMatrix, glyphBits, advanceBits, new TextRecord2List(textRecords), end);
 	}
 }

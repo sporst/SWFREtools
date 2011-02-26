@@ -10,7 +10,9 @@ import tv.porst.swfretools.parser.SWFBinaryParser;
 import tv.porst.swfretools.parser.SWFParserException;
 import tv.porst.swfretools.parser.structures.RecordHeader;
 import tv.porst.swfretools.parser.structures.Shape;
+import tv.porst.swfretools.parser.structures.ShapeList;
 import tv.porst.swfretools.parser.structures.ShapeParser;
+import tv.porst.swfretools.parser.structures.UINT16List;
 
 /**
  * Class for parsing DefineFont tags.
@@ -47,6 +49,6 @@ public final class DefineFontParser {
 			glyphShapeTable.add(ShapeParser.parse(parser, String.format("DefineFont::GlyphShapeTable[%d]", i)));
 		}
 
-		return new DefineFontTag(header, fontId, offsetTable, glyphShapeTable);
+		return new DefineFontTag(header, fontId, new UINT16List(offsetTable), new ShapeList(glyphShapeTable));
 	}
 }

@@ -53,6 +53,6 @@ public final class Shape3Parser {
 
 		parser.align();
 
-		return new Shape3(numFillBits, numLineBits, shapeRecord);
+		return new Shape3(numFillBits, numLineBits, new Shape3RecordList(shapeRecords));
 	}
 }

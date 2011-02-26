@@ -42,7 +42,7 @@ public final class LineStyle3ArrayParser {
 			lineStyles.add(LineStyle3Parser.parse(parser, String.format(fieldName + "::LineStyles[%d]", i)));
 		}
 
-		return new LineStyle3Array(lineStyleCount, lineStyleCountExtended, lineStyles);
+		return new LineStyle3Array(lineStyleCount, lineStyleCountExtended, new LineStyle3List(lineStyles));
 	}
 
 	/**

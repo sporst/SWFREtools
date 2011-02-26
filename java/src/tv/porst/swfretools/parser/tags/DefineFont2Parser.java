@@ -20,12 +20,17 @@ import tv.porst.splib.binaryparser.UINT16;
 import tv.porst.splib.binaryparser.UINT8;
 import tv.porst.swfretools.parser.SWFBinaryParser;
 import tv.porst.swfretools.parser.SWFParserException;
+import tv.porst.swfretools.parser.structures.INT16List;
 import tv.porst.swfretools.parser.structures.KerningRecord;
+import tv.porst.swfretools.parser.structures.KerningRecordList;
 import tv.porst.swfretools.parser.structures.KerningRecordParser;
+import tv.porst.swfretools.parser.structures.ParsedINTElementList;
 import tv.porst.swfretools.parser.structures.RecordHeader;
 import tv.porst.swfretools.parser.structures.Rect;
+import tv.porst.swfretools.parser.structures.RectList;
 import tv.porst.swfretools.parser.structures.RectParser;
 import tv.porst.swfretools.parser.structures.Shape;
+import tv.porst.swfretools.parser.structures.ShapeList;
 import tv.porst.swfretools.parser.structures.ShapeParser;
 
 /**
@@ -77,7 +82,6 @@ public final class DefineFont2Parser {
 		final List<Shape> glyphShapeTable = new ArrayList<Shape>();
 
 		for (int i=0;i<numGlyphs.value();i++) {
-			System.out.println(i + " " + parser.getLength());
 			glyphShapeTable.add(ShapeParser.parse(parser, String.format("GlyphShapeTable[%d]", i)));
 		}
 
@@ -105,7 +109,6 @@ public final class DefineFont2Parser {
 			}
 
 			for (int i=0;i<numGlyphs.value();i++) {
-				System.out.printf("XXX: %d - %X\n", i, parser.getBytePosition());
 				fontBoundsTable.add(RectParser.parse(parser, String.format("DefineFont2::FontBoundsTable[%d]", i)));
 			}
 		}
@@ -123,8 +126,8 @@ public final class DefineFont2Parser {
 		return new DefineFont2Tag(header, fontId, fontFlagsHasLayout, fontFlagsShiftJIS,
 				fontFlagsSmallText, fontFlagsANSI, fontFlagsWideOffsets, fontFlagsWideCodes,
 				fontFlagsItalic, fontFlagsBold, languageCode, fontNameLen, fontName,
-				numGlyphs, offsetTable, codeTableOffset, glyphShapeTable, codeTable, fontAscent,
-				fontDescent, fontLeading, fontAdvanceTable, fontBoundsTable, kerningCount,
-				fontKerningTable);
+				numGlyphs, new ParsedINTElementList(offsetTable), codeTableOffset, new ShapeList(glyphShapeTable), new ParsedINTElementList(codeTable), fontAscent,
+				fontDescent, fontLeading, new INT16List(fontAdvanceTable), new RectList(fontBoundsTable), kerningCount,
+				new KerningRecordList(fontKerningTable));
 	}
 }

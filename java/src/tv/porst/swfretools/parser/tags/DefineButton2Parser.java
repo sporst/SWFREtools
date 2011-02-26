@@ -15,8 +15,10 @@ import tv.porst.splib.binaryparser.UINT8;
 import tv.porst.swfretools.parser.SWFBinaryParser;
 import tv.porst.swfretools.parser.SWFParserException;
 import tv.porst.swfretools.parser.structures.ButtonCondAction;
+import tv.porst.swfretools.parser.structures.ButtonCondActionList;
 import tv.porst.swfretools.parser.structures.ButtonCondActionParser;
 import tv.porst.swfretools.parser.structures.ButtonRecord2;
+import tv.porst.swfretools.parser.structures.ButtonRecord2List;
 import tv.porst.swfretools.parser.structures.ButtonRecord2Parser;
 import tv.porst.swfretools.parser.structures.RecordHeader;
 
@@ -73,6 +75,6 @@ public final class DefineButton2Parser {
 			} while (true);
 		}
 
-		return new DefineButton2Tag(header, buttonId, reservedFlags, trackAsMenu, actionOffset, characters, characterEndFlag, actions);
+		return new DefineButton2Tag(header, buttonId, reservedFlags, trackAsMenu, actionOffset, new ButtonRecord2List(characters), characterEndFlag, new ButtonCondActionList(actions));
 	}
 }

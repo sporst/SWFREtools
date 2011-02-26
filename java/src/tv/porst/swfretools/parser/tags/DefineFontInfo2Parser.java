@@ -1,8 +1,8 @@
 package tv.porst.swfretools.parser.tags;
 
-import static tv.porst.swfretools.parser.SWFParserHelpers.parseUBits;
 import static tv.porst.swfretools.parser.SWFParserHelpers.parseFlag;
 import static tv.porst.swfretools.parser.SWFParserHelpers.parseString;
+import static tv.porst.swfretools.parser.SWFParserHelpers.parseUBits;
 import static tv.porst.swfretools.parser.SWFParserHelpers.parseUINT16;
 import static tv.porst.swfretools.parser.SWFParserHelpers.parseUINT8;
 
@@ -10,13 +10,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 import tv.porst.splib.binaryparser.AsciiString;
-import tv.porst.splib.binaryparser.UBits;
 import tv.porst.splib.binaryparser.Flag;
 import tv.porst.splib.binaryparser.IParsedINTElement;
+import tv.porst.splib.binaryparser.UBits;
 import tv.porst.splib.binaryparser.UINT16;
 import tv.porst.splib.binaryparser.UINT8;
 import tv.porst.swfretools.parser.SWFBinaryParser;
 import tv.porst.swfretools.parser.SWFParserException;
+import tv.porst.swfretools.parser.structures.ParsedINTElementList;
 import tv.porst.swfretools.parser.structures.RecordHeader;
 
 /**
@@ -67,6 +68,6 @@ public final class DefineFontInfo2Parser {
 
 		return new DefineFontInfo2Tag(header, fontId, fontNameLen, fontName,
 				fontFlagsReserved, fontFlagsSmallText, fontFlagsShiftJIS,
-				fontFlagsANSI, fontFlagsItalic, fontFlagsBold, fontFlagsWideCodes, languageCode, codeTable);
+				fontFlagsANSI, fontFlagsItalic, fontFlagsBold, fontFlagsWideCodes, languageCode, new ParsedINTElementList(codeTable));
 	}
 }

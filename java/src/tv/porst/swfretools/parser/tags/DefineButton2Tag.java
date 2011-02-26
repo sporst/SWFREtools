@@ -1,14 +1,11 @@
 package tv.porst.swfretools.parser.tags;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import tv.porst.splib.binaryparser.Flag;
 import tv.porst.splib.binaryparser.UBits;
 import tv.porst.splib.binaryparser.UINT16;
 import tv.porst.splib.binaryparser.UINT8;
-import tv.porst.swfretools.parser.structures.ButtonCondAction;
-import tv.porst.swfretools.parser.structures.ButtonRecord2;
+import tv.porst.swfretools.parser.structures.ButtonCondActionList;
+import tv.porst.swfretools.parser.structures.ButtonRecord2List;
 import tv.porst.swfretools.parser.structures.RecordHeader;
 
 /**
@@ -42,7 +39,7 @@ public final class DefineButton2Tag extends Tag {
 	/**
 	 * Characters that make up the button.
 	 */
-	private final List<ButtonRecord2> characters;
+	private final ButtonRecord2List characters;
 
 	/**
 	 * Character end flag.
@@ -52,7 +49,7 @@ public final class DefineButton2Tag extends Tag {
 	/**
 	 * Actions to perform.
 	 */
-	private final List<ButtonCondAction> actions;
+	private final ButtonCondActionList actions;
 
 	/**
 	 * Creates a new DefineButton tag object.
@@ -68,7 +65,7 @@ public final class DefineButton2Tag extends Tag {
 	 */
 	public DefineButton2Tag(final RecordHeader header, final UINT16 buttonId,
 			final UBits reservedFlags, final Flag trackAsMenu, final UINT16 actionOffset,
-			final List<ButtonRecord2> characters, final UINT8 characterEndFlag, final List<ButtonCondAction> actions) {
+			final ButtonRecord2List characters, final UINT8 characterEndFlag, final ButtonCondActionList actions) {
 
 		super(header);
 
@@ -76,9 +73,9 @@ public final class DefineButton2Tag extends Tag {
 		this.reservedFlags = reservedFlags;
 		this.trackAsMenu = trackAsMenu;
 		this.actionOffset = actionOffset;
-		this.characters = new ArrayList<ButtonRecord2>(characters);
+		this.characters = characters;
 		this.characterEndFlag = characterEndFlag;
-		this.actions = new ArrayList<ButtonCondAction>(actions);
+		this.actions = actions;
 	}
 
 	/**
@@ -95,8 +92,8 @@ public final class DefineButton2Tag extends Tag {
 	 * 
 	 * @return The actions to perform.
 	 */
-	public List<ButtonCondAction> getActions() {
-		return new ArrayList<ButtonCondAction>(actions);
+	public ButtonCondActionList getActions() {
+		return actions;
 	}
 
 	/**
@@ -122,8 +119,8 @@ public final class DefineButton2Tag extends Tag {
 	 * 
 	 * @return The characters that make up the button.
 	 */
-	public List<ButtonRecord2> getCharacters() {
-		return new ArrayList<ButtonRecord2>(characters);
+	public ButtonRecord2List getCharacters() {
+		return characters;
 	}
 
 	/**

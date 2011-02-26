@@ -1,13 +1,9 @@
 package tv.porst.swfretools.parser.structures;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import tv.porst.splib.binaryparser.Flag;
 import tv.porst.splib.binaryparser.UBits;
 import tv.porst.splib.binaryparser.UINT16;
 import tv.porst.splib.binaryparser.UINT8;
-import tv.porst.swfretools.parser.actions.Action;
 
 /**
  * Represents a ButtonCondAction structure.
@@ -15,7 +11,7 @@ import tv.porst.swfretools.parser.actions.Action;
  * @author sp
  *
  */
-public final class ButtonCondAction {
+public final class ButtonCondAction implements IFileElement {
 
 	/**
 	 * Offset in bytes from start of this field to next ButtonCondAction.
@@ -75,7 +71,7 @@ public final class ButtonCondAction {
 	/**
 	 * Actions to perform.
 	 */
-	private final List<Action> actions;
+	private final ActionList actions;
 
 	/**
 	 * Action end flag.
@@ -104,7 +100,7 @@ public final class ButtonCondAction {
 			final Flag condOverDownToOutDown, final Flag condOverDownToOverUp,
 			final Flag condOverUpToOverDown, final Flag condOverUpToIdle,
 			final Flag condIdleToOverUp, final UBits condKeyPress, final Flag condOverDownToIdle,
-			final List<Action> actions, final UINT8 actionEndFlag) {
+			final ActionList actions, final UINT8 actionEndFlag) {
 
 		this.condActionSize = condActionSize;
 		this.condIdleToOverDown = condIdleToOverDown;
@@ -117,7 +113,7 @@ public final class ButtonCondAction {
 		this.condIdleToOverUp = condIdleToOverUp;
 		this.condKeyPress = condKeyPress;
 		this.condOverDownToIdle = condOverDownToIdle;
-		this.actions = new ArrayList<Action>(actions);
+		this.actions = actions;
 		this.actionEndFlag = actionEndFlag;
 	}
 
@@ -135,8 +131,13 @@ public final class ButtonCondAction {
 	 *
 	 * @return The actions to perform.
 	 */
-	public List<Action> getActions() {
-		return new ArrayList<Action>(actions);
+	public ActionList getActions() {
+		return actions;
+	}
+
+	@Override
+	public int getBytePosition() {
+		return condActionSize.getBytePosition();
 	}
 
 	/**

@@ -8,7 +8,7 @@ import tv.porst.splib.binaryparser.UINT8;
  * @author sp
  *
  */
-public final class MorphGradientRecord {
+public final class MorphGradientRecord implements IFileElement {
 
 	/**
 	 * Ratio value for start shape.
@@ -45,6 +45,11 @@ public final class MorphGradientRecord {
 		this.startColor = startColor;
 		this.endRatio = endRatio;
 		this.endColor = endColor;
+	}
+
+	@Override
+	public int getBytePosition() {
+		return startRatio.getBytePosition();
 	}
 
 	/**

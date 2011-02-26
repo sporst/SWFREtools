@@ -9,7 +9,7 @@ import tv.porst.splib.binaryparser.UINT8;
  * @author sp
  *
  */
-public final class FillStyleArray {
+public final class FillStyleArray implements IFileElement {
 
 	/**
 	 * Count of fill styles.
@@ -41,6 +41,7 @@ public final class FillStyleArray {
 		this.fillStyles = fillStyles;
 	}
 
+	@Override
 	public int getBytePosition() {
 		return fillStyleCount.getBytePosition();
 	}

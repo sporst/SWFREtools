@@ -57,6 +57,6 @@ public final class ButtonCondActionParser {
 
 		return new ButtonCondAction(condActionSize, condIdleToOverDown, condOutDownToIdle, condOutDownToOverDown,
 				condOverDownToOutDown, condOverDownToOverUp, condOverUpToOverDown, condOverUpToIdle,
-				condIdleToOverUp, condKeyPress, condOverDownToIdle, actions, actionEndFlag);
+				condIdleToOverUp, condKeyPress, condOverDownToIdle, new ActionList(actions), actionEndFlag);
 	}
 }

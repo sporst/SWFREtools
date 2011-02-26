@@ -23,20 +23,20 @@ public final class Shape3 implements IFileElement {
 	/**
 	 * Shape records.
 	 */
-	private final Shape3Record shapeRecord;
+	private final Shape3RecordList shapeRecords;
 
 	/**
 	 * Creates a new Shape3 object.
 	 * 
 	 * @param numFillBits Number of fill index bits.
 	 * @param numLineBits Number of line index bits.
-	 * @param shapeRecord Shape records.
+	 * @param shapeRecords Shape records.
 	 */
-	public Shape3(final UBits numFillBits, final UBits numLineBits, final Shape3Record shapeRecord) {
+	public Shape3(final UBits numFillBits, final UBits numLineBits, final Shape3RecordList shapeRecords) {
 
 		this.numFillBits = numFillBits;
 		this.numLineBits = numLineBits;
-		this.shapeRecord = shapeRecord;
+		this.shapeRecords = shapeRecords;
 
 	}
 
@@ -68,7 +68,7 @@ public final class Shape3 implements IFileElement {
 	 *
 	 * @return The shape records.
 	 */
-	public Shape3Record getShapeRecord() {
-		return shapeRecord;
+	public Shape3RecordList getShapeRecord() {
+		return shapeRecords;
 	}
 }

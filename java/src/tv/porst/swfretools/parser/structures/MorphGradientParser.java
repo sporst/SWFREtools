@@ -36,7 +36,7 @@ public final class MorphGradientParser {
 			gradientRecords.add(MorphGradientRecordParser.parse(parser, String.format(fieldName + "::GradientRecords[%d]", i)));
 		}
 
-		return new MorphGradient(numGradients, gradientRecords);
+		return new MorphGradient(numGradients, new MorphGradientRecordList(gradientRecords));
 	}
 
 	/**

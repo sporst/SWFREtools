@@ -1,8 +1,5 @@
 package tv.porst.swfretools.parser.structures;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import tv.porst.splib.binaryparser.UBits;
 
 /**
@@ -11,7 +8,7 @@ import tv.porst.splib.binaryparser.UBits;
  * @author sp
  *
  */
-public final class Shape {
+public final class Shape implements IFileElement {
 
 	/**
 	 * Number of fill index bits.
@@ -26,7 +23,7 @@ public final class Shape {
 	/**
 	 * Shape records.
 	 */
-	private final ArrayList<ShapeRecord> shapeRecords;
+	private final ShapeRecordList shapeRecords;
 
 	/**
 	 * Creates a new Shape object.
@@ -35,12 +32,17 @@ public final class Shape {
 	 * @param numLineBits Number of line index bits.
 	 * @param shapeRecords Shape records.
 	 */
-	public Shape(final UBits numFillBits, final UBits numLineBits, final List<ShapeRecord> shapeRecords) {
+	public Shape(final UBits numFillBits, final UBits numLineBits, final ShapeRecordList shapeRecords) {
 
 		this.numFillBits = numFillBits;
 		this.numLineBits = numLineBits;
-		this.shapeRecords = new ArrayList<ShapeRecord>(shapeRecords);
+		this.shapeRecords = shapeRecords;
 
+	}
+
+	@Override
+	public int getBytePosition() {
+		return numFillBits.getBytePosition();
 	}
 
 	/**
@@ -66,7 +68,7 @@ public final class Shape {
 	 *
 	 * @return The shape records.
 	 */
-	public ArrayList<ShapeRecord> getShapeRecord() {
-		return new ArrayList<ShapeRecord>(shapeRecords);
+	public ShapeRecordList getShapeRecord() {
+		return shapeRecords;
 	}
 }

@@ -60,6 +60,6 @@ public final class ShapeParser {
 
 		parser.align();
 
-		return new Shape(numFillBits, numLineBits, shapeRecords);
+		return new Shape(numFillBits, numLineBits, new ShapeRecordList(shapeRecords));
 	}
 }

@@ -1,14 +1,11 @@
 package tv.porst.swfretools.parser.tags;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import tv.porst.splib.binaryparser.AsciiString;
-import tv.porst.splib.binaryparser.UBits;
 import tv.porst.splib.binaryparser.Flag;
-import tv.porst.splib.binaryparser.IParsedINTElement;
+import tv.porst.splib.binaryparser.UBits;
 import tv.porst.splib.binaryparser.UINT16;
 import tv.porst.splib.binaryparser.UINT8;
+import tv.porst.swfretools.parser.structures.ParsedINTElementList;
 import tv.porst.swfretools.parser.structures.RecordHeader;
 
 /**
@@ -72,7 +69,7 @@ public final class DefineFontInfoTag extends Tag {
 	/**
 	 * Glyph to code table.
 	 */
-	private final List<IParsedINTElement> codeTable;
+	private final ParsedINTElementList codeTable;
 
 	/**
 	 * Creates a new DefineFontInfo tag object.
@@ -94,7 +91,7 @@ public final class DefineFontInfoTag extends Tag {
 			final AsciiString fontName, final UBits fontFlagsReserved, final Flag fontFlagsSmallText,
 			final Flag fontFlagsShiftJIS, final Flag fontFlagsANSI,
 			final Flag fontFlagsItalic, final Flag fontFlagsBold,
-			final Flag fontFlagsWideCodes, final List<IParsedINTElement> codeTable) {
+			final Flag fontFlagsWideCodes, final ParsedINTElementList codeTable) {
 
 		super(header);
 
@@ -108,7 +105,7 @@ public final class DefineFontInfoTag extends Tag {
 		this.fontFlagsItalic = fontFlagsItalic;
 		this.fontFlagsBold = fontFlagsBold;
 		this.fontFlagsWideCodes = fontFlagsWideCodes;
-		this.codeTable = new ArrayList<IParsedINTElement>(codeTable);
+		this.codeTable = codeTable;
 	}
 
 	/**
@@ -116,9 +113,8 @@ public final class DefineFontInfoTag extends Tag {
 	 * 
 	 * @return The glyph to code table.
 	 */
-	public List<IParsedINTElement> getCodeTable() {
-		return new ArrayList<IParsedINTElement>(codeTable
-		);
+	public ParsedINTElementList getCodeTable() {
+		return codeTable;
 	}
 
 	/**

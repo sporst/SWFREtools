@@ -1,7 +1,7 @@
 package tv.porst.swfretools.parser.structures;
 
-import tv.porst.splib.binaryparser.UBits;
 import tv.porst.splib.binaryparser.Flag;
+import tv.porst.splib.binaryparser.UBits;
 import tv.porst.splib.binaryparser.UINT8;
 
 /**
@@ -10,7 +10,7 @@ import tv.porst.splib.binaryparser.UINT8;
  * @author sp
  *
  */
-public final class GradientGlowFilter {
+public final class GradientGlowFilter implements IFileElement {
 
 	/**
 	 * Number of colors in the gradient.
@@ -140,6 +140,11 @@ public final class GradientGlowFilter {
 	 */
 	public Fixed getBlurY() {
 		return blurY;
+	}
+
+	@Override
+	public int getBytePosition() {
+		return numColors.getBytePosition();
 	}
 
 	/**

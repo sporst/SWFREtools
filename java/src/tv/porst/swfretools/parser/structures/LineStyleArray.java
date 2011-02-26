@@ -9,7 +9,7 @@ import tv.porst.splib.binaryparser.UINT8;
  * @author sp
  *
  */
-public final class LineStyleArray {
+public final class LineStyleArray implements IFileElement {
 
 	/**
 	 * Count of line styles.
@@ -41,6 +41,7 @@ public final class LineStyleArray {
 		this.lineStyles = lineStyles;
 	}
 
+	@Override
 	public int getBytePosition() {
 		return lineStyleCount.getBytePosition();
 	}

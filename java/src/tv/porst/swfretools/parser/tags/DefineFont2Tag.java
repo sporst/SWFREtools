@@ -1,18 +1,17 @@
 package tv.porst.swfretools.parser.tags;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import tv.porst.splib.binaryparser.AsciiString;
 import tv.porst.splib.binaryparser.Flag;
 import tv.porst.splib.binaryparser.INT16;
 import tv.porst.splib.binaryparser.IParsedINTElement;
 import tv.porst.splib.binaryparser.UINT16;
 import tv.porst.splib.binaryparser.UINT8;
-import tv.porst.swfretools.parser.structures.KerningRecord;
+import tv.porst.swfretools.parser.structures.INT16List;
+import tv.porst.swfretools.parser.structures.KerningRecordList;
+import tv.porst.swfretools.parser.structures.ParsedINTElementList;
 import tv.porst.swfretools.parser.structures.RecordHeader;
-import tv.porst.swfretools.parser.structures.Rect;
-import tv.porst.swfretools.parser.structures.Shape;
+import tv.porst.swfretools.parser.structures.RectList;
+import tv.porst.swfretools.parser.structures.ShapeList;
 
 /**
  * Represents a DefineFont2 tag.
@@ -30,12 +29,12 @@ public final class DefineFont2Tag extends Tag {
 	/**
 	 * Array of shape offsets.
 	 */
-	private final List<IParsedINTElement> offsetTable;
+	private final ParsedINTElementList offsetTable;
 
 	/**
 	 * Array of shapes.
 	 */
-	private final List<Shape> glyphShapeTable;
+	private final ShapeList glyphShapeTable;
 
 	/**
 	 * Length of font name.
@@ -48,9 +47,19 @@ public final class DefineFont2Tag extends Tag {
 	private final AsciiString fontName;
 
 	/**
+	 * Count of glyphs in font.
+	 */
+	private final UINT16 numGlyphs;
+
+	/**
 	 * Font is small flag.
 	 */
 	private final Flag fontFlagsSmallText;
+
+	/**
+	 * Byte count from start of offset table to start of code table.
+	 */
+	private final IParsedINTElement codeTableOffset;
 
 	/**
 	 * ShiftJIS character codes flag.
@@ -90,7 +99,7 @@ public final class DefineFont2Tag extends Tag {
 	/**
 	 * Glyph to code table.
 	 */
-	private final List<IParsedINTElement> codeTable;
+	private final ParsedINTElementList codeTable;
 
 	/**
 	 * Wide offsets flag.
@@ -115,12 +124,12 @@ public final class DefineFont2Tag extends Tag {
 	/**
 	 * Advance value to be used for each glyph in dynamic glyph text.
 	 */
-	private final List<INT16> fontAdvanceTable;
+	private final INT16List fontAdvanceTable;
 
 	/**
 	 * Font bounds table.
 	 */
-	private final List<Rect> fontBoundsTable;
+	private final RectList fontBoundsTable;
 
 	/**
 	 * Kerning count.
@@ -130,7 +139,7 @@ public final class DefineFont2Tag extends Tag {
 	/**
 	 * Font kerning table.
 	 */
-	private final List<KerningRecord> fontKerningTable;
+	private final KerningRecordList fontKerningTable;
 
 	/**
 	 * Creates a new DefineFont2 tag object.
@@ -167,11 +176,11 @@ public final class DefineFont2Tag extends Tag {
 			final Flag fontFlagsWideOffsets, final Flag fontFlagsWideCodes,
 			final Flag fontFlagsItalic, final Flag fontFlagsBold, final UINT8 languageCode,
 			final UINT8 fontNameLen, final AsciiString fontName, final UINT16 numGlyphs,
-			final List<IParsedINTElement> offsetTable, final IParsedINTElement codeTableOffset,
-			final List<Shape> glyphShapeTable, final List<IParsedINTElement> codeTable,
+			final ParsedINTElementList offsetTable, final IParsedINTElement codeTableOffset,
+			final ShapeList glyphShapeTable, final ParsedINTElementList codeTable,
 			final INT16 fontAscent, final INT16 fontDescent, final INT16 fontLeading,
-			final List<INT16> fontAdvanceTable, final List<Rect> fontBoundsTable,
-			final UINT16 kerningCount, final List<KerningRecord> fontKerningTable) {
+			final INT16List fontAdvanceTable, final RectList fontBoundsTable,
+			final UINT16 kerningCount, final KerningRecordList fontKerningTable) {
 		super(header);
 
 		this.fontId = fontId;
@@ -186,16 +195,18 @@ public final class DefineFont2Tag extends Tag {
 		this.languageCode = languageCode;
 		this.fontNameLen = fontNameLen;
 		this.fontName = fontName;
-		this.offsetTable = new ArrayList<IParsedINTElement>(offsetTable);
-		this.glyphShapeTable = new ArrayList<Shape>(glyphShapeTable);
-		this.codeTable = new ArrayList<IParsedINTElement>(codeTable);
+		this.numGlyphs = numGlyphs;
+		this.offsetTable = offsetTable;
+		this.codeTableOffset = codeTableOffset;
+		this.glyphShapeTable = glyphShapeTable;
+		this.codeTable = codeTable;
 		this.fontAscent = fontAscent;
 		this.fontDescent = fontDescent;
 		this.fontLeading = fontLeading;
-		this.fontAdvanceTable = new ArrayList<INT16>(fontAdvanceTable);
-		this.fontBoundsTable = new ArrayList<Rect>(fontBoundsTable);
+		this.fontAdvanceTable = fontAdvanceTable;
+		this.fontBoundsTable = fontBoundsTable;
 		this.kerningCount = kerningCount;
-		this.fontKerningTable = new ArrayList<KerningRecord>(fontKerningTable);
+		this.fontKerningTable = fontKerningTable;
 	}
 
 	/**
@@ -203,9 +214,17 @@ public final class DefineFont2Tag extends Tag {
 	 * 
 	 * @return The glyph to code table.
 	 */
-	public List<IParsedINTElement> getCodeTable() {
-		return new ArrayList<IParsedINTElement>(codeTable
-		);
+	public ParsedINTElementList getCodeTable() {
+		return codeTable;
+	}
+
+	/**
+	 * Returns the byte count from start of offset table to start of code table.
+	 * 
+	 * @return The byte count from start of offset table to start of code table.
+	 */
+	public IParsedINTElement getCodeTableOffset() {
+		return codeTableOffset;
 	}
 
 	/**
@@ -213,8 +232,8 @@ public final class DefineFont2Tag extends Tag {
 	 * 
 	 * @return The advance values to be used for each glyph in dynamic glyph text.
 	 */
-	public List<INT16> getFontAdvanceTable() {
-		return new ArrayList<INT16>(fontAdvanceTable);
+	public INT16List getFontAdvanceTable() {
+		return fontAdvanceTable;
 	}
 
 	/**
@@ -231,8 +250,8 @@ public final class DefineFont2Tag extends Tag {
 	 * 
 	 * @return The font bounds table.
 	 */
-	public List<Rect> getFontBoundsTable() {
-		return new ArrayList<Rect>(fontBoundsTable);
+	public RectList getFontBoundsTable() {
+		return fontBoundsTable;
 	}
 
 	/**
@@ -330,8 +349,8 @@ public final class DefineFont2Tag extends Tag {
 	 * 
 	 * @return The font kerning table.
 	 */
-	public List<KerningRecord> getFontKerningTable() {
-		return new ArrayList<KerningRecord>(fontKerningTable);
+	public KerningRecordList getFontKerningTable() {
+		return fontKerningTable;
 	}
 
 	/**
@@ -366,8 +385,8 @@ public final class DefineFont2Tag extends Tag {
 	 * 
 	 * @return The glyph shape table.
 	 */
-	public List<Shape> getGlyphShapeTable() {
-		return new ArrayList<Shape>(glyphShapeTable);
+	public ShapeList getGlyphShapeTable() {
+		return glyphShapeTable;
 	}
 
 	/**
@@ -389,11 +408,20 @@ public final class DefineFont2Tag extends Tag {
 	}
 
 	/**
+	 * Returns the count of glyphs in font.
+	 *
+	 * @return The count of glyphs in font.
+	 */
+	public UINT16 getNumGlyphs() {
+		return numGlyphs;
+	}
+
+	/**
 	 * Returns the array of shape offsets.
 	 * 
 	 * @return The array of shape offsets.
 	 */
-	public List<IParsedINTElement> getOffsetTable() {
-		return new ArrayList<IParsedINTElement>(offsetTable);
+	public ParsedINTElementList getOffsetTable() {
+		return offsetTable;
 	}
 }

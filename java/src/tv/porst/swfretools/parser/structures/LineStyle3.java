@@ -8,7 +8,7 @@ import tv.porst.splib.binaryparser.UINT16;
  * @author sp
  *
  */
-public final class LineStyle3 {
+public final class LineStyle3 implements IFileElement {
 
 	/**
 	 * Width of line in twips.
@@ -30,6 +30,11 @@ public final class LineStyle3 {
 
 		this.width = width;
 		this.color = color;
+	}
+
+	@Override
+	public int getBytePosition() {
+		return width.getBytePosition();
 	}
 
 	/**

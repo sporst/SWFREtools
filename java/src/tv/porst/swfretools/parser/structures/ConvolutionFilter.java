@@ -1,8 +1,8 @@
 package tv.porst.swfretools.parser.structures;
 
-import tv.porst.splib.binaryparser.UBits;
 import tv.porst.splib.binaryparser.Flag;
 import tv.porst.splib.binaryparser.Float32;
+import tv.porst.splib.binaryparser.UBits;
 import tv.porst.splib.binaryparser.UINT8;
 
 /**
@@ -11,7 +11,7 @@ import tv.porst.splib.binaryparser.UINT8;
  * @author sp
  *
  */
-public final class ConvolutionFilter {
+public final class ConvolutionFilter implements IFileElement {
 
 	/**
 	 * Horizontal matrix size.
@@ -93,6 +93,11 @@ public final class ConvolutionFilter {
 	 */
 	public Float32 getBias() {
 		return bias;
+	}
+
+	@Override
+	public int getBytePosition() {
+		return matrixX.getBytePosition();
 	}
 
 	/**
