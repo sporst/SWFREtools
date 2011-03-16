@@ -10,6 +10,7 @@ import tv.porst.swfretools.parser.SWFBinaryParser;
 import tv.porst.swfretools.parser.SWFParserException;
 import tv.porst.swfretools.parser.structures.RecordHeader;
 import tv.porst.swfretools.parser.structures.Symbol;
+import tv.porst.swfretools.parser.structures.SymbolList;
 import tv.porst.swfretools.parser.structures.SymbolParser;
 
 /**
@@ -33,12 +34,12 @@ public final class SymbolClassParser {
 
 		final UINT16 numSymbols = parseUINT16(parser, 0x00006, "SymbolClass::NumSymbols");
 
-		final List<Symbol> tags = new ArrayList<Symbol>();
+		final List<Symbol> symbols = new ArrayList<Symbol>();
 
 		for (int i=0;i<numSymbols.value();i++) {
-			tags.add(SymbolParser.parse(parser, String.format("SymbolClass::Tags[%d]", i)));
+			symbols.add(SymbolParser.parse(parser, String.format("SymbolClass::Symbols[%d]", i)));
 		}
 
-		return new SymbolClassTag(header, numSymbols, tags);
+		return new SymbolClassTag(header, numSymbols, new SymbolList(symbols));
 	}
 }

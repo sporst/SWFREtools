@@ -13,6 +13,11 @@ import tv.porst.splib.binaryparser.UINT8;
 public final class SWFFile {
 
 	/**
+	 * Decompressed SWF data.
+	 */
+	private final byte[] decompressedData;
+
+	/**
 	 * First signature byte.
 	 */
 	private final UINT8 signature1;
@@ -60,6 +65,7 @@ public final class SWFFile {
 	/**
 	 * Creates a new SWF file object.
 	 * 
+	 * @param decompressedData Decompressed SWF data.
 	 * @param signature1 First signature byte.
 	 * @param signature2 Second signature byte.
 	 * @param signature3 Third signature byte.
@@ -70,10 +76,11 @@ public final class SWFFile {
 	 * @param frameCount Total number of frames in file.
 	 * @param tags List of tags in file.
 	 */
-	public SWFFile(final UINT8 signature1, final UINT8 signature2, final UINT8 signature3,
+	public SWFFile(final byte[] decompressedData, final UINT8 signature1, final UINT8 signature2, final UINT8 signature3,
 			final UINT8 version, final UINT32 fileLength, final Rect frameSize, final UINT16 frameRate,
 			final UINT16 frameCount, final TagList tags) {
 
+		this.decompressedData = decompressedData;
 		this.signature1 = signature1;
 		this.signature2 = signature2;
 		this.signature3 = signature3;
@@ -84,6 +91,15 @@ public final class SWFFile {
 		this.frameCount = frameCount;
 		this.tags = tags;
 
+	}
+
+	/**
+	 * Returns the decompressed data.
+	 * 
+	 * @return The decompressed data.
+	 */
+	public byte[] getDecompressedData() {
+		return decompressedData.clone();
 	}
 
 	/**

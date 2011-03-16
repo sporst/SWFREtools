@@ -805,11 +805,11 @@ public class SWFIterator {
 
 		if (fillStyles != null) {
 
-			visitor.visit("FillStyleCount", fillStyles.getFillStyle3Count());
-			visitor.visit("FillStyleCountExtended", fillStyles.getFillStyle3CountExtended());
-			visitor.visit(fillStyles, "FillStyles", fillStyles.getFillStyles3());
+			visitor.visit("FillStyleCount", fillStyles.getFillStyleCount());
+			visitor.visit("FillStyleCountExtended", fillStyles.getFillStyleCountExtended());
+			visitor.visit(fillStyles, "FillStyles", fillStyles.getFillStyles());
 
-			visit(fillStyles.getFillStyles3(), visitor);
+			visit(fillStyles.getFillStyles(), visitor);
 		}
 	}
 

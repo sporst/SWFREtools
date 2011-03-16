@@ -1,11 +1,8 @@
 package tv.porst.swfretools.parser.tags;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import tv.porst.splib.binaryparser.UINT16;
 import tv.porst.swfretools.parser.structures.RecordHeader;
-import tv.porst.swfretools.parser.structures.Symbol;
+import tv.porst.swfretools.parser.structures.SymbolList;
 
 /**
  * Represents a SymbolClass tag.
@@ -23,7 +20,7 @@ public final class SymbolClassTag extends Tag {
 	/**
 	 * List of symbols associated by this tag.
 	 */
-	private final List<Symbol> symbols;
+	private final SymbolList symbols;
 
 	/**
 	 * Creates a new SymbolClass tag object.
@@ -33,12 +30,12 @@ public final class SymbolClassTag extends Tag {
 	 * @param symbols List of symbols associated by this tag.
 	 */
 	public SymbolClassTag(final RecordHeader header, final UINT16 numSymbols,
-			final List<Symbol> symbols) {
+			final SymbolList symbols) {
 
 		super(header);
 
 		this.numSymbols = numSymbols;
-		this.symbols = new ArrayList<Symbol>(symbols);
+		this.symbols = symbols;
 	}
 
 	/**
@@ -55,7 +52,7 @@ public final class SymbolClassTag extends Tag {
 	 * 
 	 * @return The list of symbols associated by this tag.
 	 */
-	public List<Symbol> getSymbols() {
+	public SymbolList getSymbols() {
 		return symbols;
 	}
 }

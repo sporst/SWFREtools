@@ -12,7 +12,7 @@ public class ParamInfoParser {
 
 		final List<EncodedU30> paramNames = new ArrayList<EncodedU30>();
 
-		for (int i=0;i<paramCount.value() - 1;i++) {
+		for (int i=0;i<paramCount.value();i++) {
 			paramNames.add(EncodedU30Parser.parse(parser, String.format(fieldName + "::param_name[%d]", i)));
 		}
 

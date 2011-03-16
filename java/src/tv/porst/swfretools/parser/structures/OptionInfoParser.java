@@ -14,7 +14,7 @@ public class OptionInfoParser {
 
 		final List<OptionDetail> options = new ArrayList<OptionDetail>();
 
-		for (int i=0;i<optionCount.value() - 1;i++) {
+		for (int i=0;i<optionCount.value();i++) {
 			options.add(OptionDetailParser.parse(parser, String.format(fieldName + "::option[%d]", i)));
 		}
 

@@ -16,12 +16,12 @@ public final class DefineShape2Tag extends Tag {
 	/**
 	 * ID for this character.
 	 */
-	private final Rect shapeBounds;
+	private final UINT16 shapeId;
 
 	/**
 	 * Bounds of the shape.
 	 */
-	private final UINT16 shapeId;
+	private final Rect shapeBounds;
 
 	/**
 	 * Shape information.

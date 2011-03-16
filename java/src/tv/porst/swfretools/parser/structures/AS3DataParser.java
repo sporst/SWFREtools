@@ -9,9 +9,9 @@ import tv.porst.splib.binaryparser.UINT16;
 import tv.porst.swfretools.parser.SWFBinaryParser;
 import tv.porst.swfretools.parser.SWFParserException;
 
-public class AS2DataParser {
+public class AS3DataParser {
 
-	public static AS2Data parse(final SWFBinaryParser parser, final String fieldName) throws SWFParserException {
+	public static AS3Data parse(final SWFBinaryParser parser, final String fieldName) throws SWFParserException {
 
 		final UINT16 minorVersion = parseUINT16(parser, 0x00006, fieldName + "::minor_version");
 		final UINT16 majorVersion = parseUINT16(parser, 0x00006, fieldName + "::major_version");
@@ -57,13 +57,16 @@ public class AS2DataParser {
 
 		final EncodedU30 methodBodyCount = EncodedU30Parser.parse(parser, fieldName + "::method_body_count");
 
+		System.out.println(methodBodyCount.value());
+		System.exit(0);
+
 		final List<MethodBody> methodBodies = new ArrayList<MethodBody>();
 
 		for (int i=0;i<methodBodyCount.value();i++) {
 			methodBodies.add(MethodBodyParser.parse(parser, String.format(fieldName + "::script[%d]", i)));
 		}
 
-		return new AS2Data(minorVersion, majorVersion, constantPool);
+		return new AS3Data(minorVersion, majorVersion, constantPool);
 	}
 
 }

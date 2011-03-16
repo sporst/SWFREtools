@@ -14,14 +14,14 @@ import tv.porst.swfretools.parser.structures.ShapeWithStyle;
 public final class DefineShapeTag extends Tag {
 
 	/**
-	 * ID for this character.
-	 */
-	private final Rect shapeBounds;
-
-	/**
 	 * Bounds of the shape.
 	 */
 	private final UINT16 shapeId;
+
+	/**
+	 * ID for this character.
+	 */
+	private final Rect shapeBounds;
 
 	/**
 	 * Shape information.

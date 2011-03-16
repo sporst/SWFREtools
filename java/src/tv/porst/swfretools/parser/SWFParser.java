@@ -179,6 +179,6 @@ public final class SWFParser {
 
 		final TagParserResult tags = TagParser.parse(parser, version.value());
 
-		return new SWFFile(signature1, signature2, signature3, version, fileLength, frameSize, frameRate, frameCount, tags.getTags());
+		return new SWFFile(parserInputData, signature1, signature2, signature3, version, fileLength, frameSize, frameRate, frameCount, tags.getTags());
 	}
 }

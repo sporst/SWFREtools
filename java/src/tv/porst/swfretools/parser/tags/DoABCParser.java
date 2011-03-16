@@ -6,8 +6,8 @@ import tv.porst.splib.binaryparser.AsciiString;
 import tv.porst.splib.binaryparser.UINT32;
 import tv.porst.swfretools.parser.SWFBinaryParser;
 import tv.porst.swfretools.parser.SWFParserException;
-import tv.porst.swfretools.parser.structures.AS2Data;
-import tv.porst.swfretools.parser.structures.AS2DataParser;
+import tv.porst.swfretools.parser.structures.AS3Data;
+import tv.porst.swfretools.parser.structures.AS3DataParser;
 import tv.porst.swfretools.parser.structures.RecordHeader;
 
 /**
@@ -32,9 +32,9 @@ public final class DoABCParser {
 		final UINT32 flags = parseUINT32(parser, 0x00006, "DoABC::Flags");
 		final AsciiString name = parseString(parser, 0x00006, "DoABC::Name");
 
-		final AS2Data abcData = AS2DataParser.parse(parser, "DoABC::ABCData");
+		final AS3Data abcData = AS3DataParser.parse(parser, "DoABC::ABCData");
 
-		return new DoABCTag(header, flags, name);
+		return new DoABCTag(header, flags, name, abcData);
 	}
 
 }

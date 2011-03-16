@@ -41,6 +41,6 @@ public final class MorphLineStyleArray2Parser {
 			lineStyles.add(MorphLineStyle2Parser.parse(parser, String.format(fieldName + "::LineStyles[%d]", lineStyles.size())));
 		}
 
-		return new MorphLineStyleArray2(lineStyleCount, lineStyleCountExtended, lineStyles);
+		return new MorphLineStyleArray2(lineStyleCount, lineStyleCountExtended, new MorphLineStyle2List(lineStyles));
 	}
 }

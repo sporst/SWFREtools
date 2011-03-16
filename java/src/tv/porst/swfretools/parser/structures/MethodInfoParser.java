@@ -18,7 +18,7 @@ public class MethodInfoParser {
 
 		final List<EncodedU30> paramTypes = new ArrayList<EncodedU30>();
 
-		for (int i=0;i<paramCount.value() - 1;i++) {
+		for (int i=0;i<paramCount.value();i++) {
 			paramTypes.add(EncodedU30Parser.parse(parser, String.format(fieldName + "::param_type[%d]", i)));
 		}
 

@@ -1,13 +1,10 @@
 package tv.porst.swfretools.parser.tags;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import tv.porst.splib.binaryparser.AsciiString;
 import tv.porst.splib.binaryparser.UINT16;
 import tv.porst.splib.binaryparser.UINT8;
 import tv.porst.swfretools.parser.structures.RecordHeader;
-import tv.porst.swfretools.parser.structures.Symbol;
+import tv.porst.swfretools.parser.structures.SymbolList;
 
 /**
  * Represents an ImportAssets2 tag.
@@ -23,16 +20,6 @@ public final class ImportAssets2Tag extends Tag {
 	private final AsciiString url;
 
 	/**
-	 * Number of assets to import.
-	 */
-	private final UINT16 count;
-
-	/**
-	 * List of imported assets.
-	 */
-	private final List<Symbol> tags;
-
-	/**
 	 * First reserved byte.
 	 */
 	private final UINT8 reserved;
@@ -43,6 +30,16 @@ public final class ImportAssets2Tag extends Tag {
 	private final UINT8 reserved2;
 
 	/**
+	 * Number of assets to import.
+	 */
+	private final UINT16 count;
+
+	/**
+	 * List of imported assets.
+	 */
+	private final SymbolList symbols;
+
+	/**
 	 * Creates a new ImportAssets tag object.
 	 * 
 	 * @param header Tag header.
@@ -50,9 +47,9 @@ public final class ImportAssets2Tag extends Tag {
 	 * @param reserved First reserved byte.
 	 * @param reserved2 Second reserved byte.
 	 * @param count Number of assets to import.
-	 * @param tags List of imported assets.
+	 * @param symbols List of imported assets.
 	 */
-	public ImportAssets2Tag(final RecordHeader header, final AsciiString url, final UINT8 reserved, final UINT8 reserved2, final UINT16 count, final List<Symbol> tags) {
+	public ImportAssets2Tag(final RecordHeader header, final AsciiString url, final UINT8 reserved, final UINT8 reserved2, final UINT16 count, final SymbolList symbols) {
 
 		super(header);
 
@@ -60,7 +57,7 @@ public final class ImportAssets2Tag extends Tag {
 		this.reserved = reserved;
 		this.reserved2 = reserved2;
 		this.count = count;
-		this.tags = new ArrayList<Symbol>(tags);
+		this.symbols = symbols;
 	}
 
 	/**
@@ -95,8 +92,8 @@ public final class ImportAssets2Tag extends Tag {
 	 * 
 	 * @return The list of imported assets.
 	 */
-	public List<Symbol> getTags() {
-		return tags;
+	public SymbolList getSymbols() {
+		return symbols;
 	}
 
 	/**

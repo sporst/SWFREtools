@@ -9,7 +9,8 @@ import tv.porst.swfretools.parser.SWFParserException;
 public class ScriptInfoParser {
 
 	public static ScriptInfo parse(final SWFBinaryParser parser, final String fieldName) throws SWFParserException {
-		final EncodedU30 init = EncodedU30Parser.parse(parser, fieldName + "::iinit");
+
+		final EncodedU30 init = EncodedU30Parser.parse(parser, fieldName + "::init");
 		final EncodedU30 traitCount = EncodedU30Parser.parse(parser, fieldName + "::trait_count");
 
 		final List<TraitsInfo> traits = new ArrayList<TraitsInfo>();

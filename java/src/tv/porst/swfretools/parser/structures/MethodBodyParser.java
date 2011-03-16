@@ -3,9 +3,9 @@ package tv.porst.swfretools.parser.structures;
 import java.util.ArrayList;
 import java.util.List;
 
-import tv.porst.splib.binaryparser.BinaryParserHelpers;
 import tv.porst.swfretools.parser.SWFBinaryParser;
 import tv.porst.swfretools.parser.SWFParserException;
+import tv.porst.swfretools.parser.actions.as3.AS3CodeParser;
 
 public class MethodBodyParser {
 
@@ -17,7 +17,7 @@ public class MethodBodyParser {
 		final EncodedU30 maxScopeDepth = EncodedU30Parser.parse(parser, fieldName + "::max_scope_depth");
 		final EncodedU30 codeLength = EncodedU30Parser.parse(parser, fieldName + "::code_length");
 
-		final AS2Code code = AS2CodeParser.parse(BinaryParserHelpers.readByteArray(parser, (int) codeLength.value()), fieldName + "::code");
+		final AS3Code code = AS3CodeParser.parse(parser, (int) codeLength.value(), fieldName + "::code");
 
 		final EncodedU30 exceptionCount = EncodedU30Parser.parse(parser, fieldName + "::exception_count");
 

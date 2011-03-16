@@ -1,7 +1,7 @@
 package tv.porst.swfretools.parser.structures;
 
-import tv.porst.splib.binaryparser.UBits;
 import tv.porst.splib.binaryparser.Flag;
+import tv.porst.splib.binaryparser.UBits;
 import tv.porst.splib.binaryparser.UINT16;
 
 /**
@@ -10,7 +10,7 @@ import tv.porst.splib.binaryparser.UINT16;
  * @author sp
  *
  */
-public final class MorphLineStyle2 {
+public final class MorphLineStyle2 implements IFileElement {
 
 	/**
 	 * Width of line in start shape in twips.
@@ -128,6 +128,11 @@ public final class MorphLineStyle2 {
 		this.endColor = endColor;
 		this.fillType = fillType;
 
+	}
+
+	@Override
+	public int getBytePosition() {
+		return startWidth.getBytePosition();
 	}
 
 	/**

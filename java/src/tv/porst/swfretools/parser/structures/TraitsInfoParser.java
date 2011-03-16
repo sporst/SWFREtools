@@ -21,8 +21,11 @@ public class TraitsInfoParser {
 
 		final List<EncodedU30> metaData = new ArrayList<EncodedU30>();
 
+		System.out.println("XXX " + kind.value());
+
 		for (int i=0;i<metaDataCount.value();i++) {
 			metaData.add(EncodedU30Parser.parse(parser, String.format(fieldName + "::meta_data[%d]", i)));
+			System.out.printf("%d\n", metaData.get(i).value());
 		}
 
 		return new TraitsInfo(name, kind, data, metaDataCount, metaData);

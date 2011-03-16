@@ -51,7 +51,7 @@ public final class FillStyle3Array implements IFileElement {
 	 *
 	 * @return The count of fill styles.
 	 */
-	public UINT8 getFillStyle3Count() {
+	public UINT8 getFillStyleCount() {
 		return fillStyleCount;
 	}
 
@@ -60,7 +60,7 @@ public final class FillStyle3Array implements IFileElement {
 	 *
 	 * @return The extended count of fill styles.
 	 */
-	public UINT16 getFillStyle3CountExtended() {
+	public UINT16 getFillStyleCountExtended() {
 		return fillStyleCountExtended;
 	}
 
@@ -69,7 +69,7 @@ public final class FillStyle3Array implements IFileElement {
 	 *
 	 * @return The array of fill styles.
 	 */
-	public FillStyle3List getFillStyles3() {
+	public FillStyle3List getFillStyles() {
 		return fillStyles;
 	}
 }
