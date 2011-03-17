@@ -81,20 +81,62 @@ public class FlashTagNode extends FlashTreeNode<Tag> {
 
 	private void createChildren() {
 
+		addNode("Header", tag.getHeader());
+
 		if (tag instanceof CSMTextSettingsTag) {
+			final CSMTextSettingsTag ctag = (CSMTextSettingsTag) tag;
+
+			addNode("TextID", ctag.getTextId());
+			addNode("UseFlashType", ctag.getUseFlashType());
+			addNode("GridFit", ctag.getGridFit());
+			addNode("Reserved", ctag.getReserved());
+			addNode("Thickness", ctag.getThickness());
+			addNode("Sharpness", ctag.getSharpness());
+			addNode("Reserved", ctag.getReserved2());
 		}
 		else if (tag instanceof DefineBinaryDataTag) {
+			final DefineBinaryDataTag ctag = (DefineBinaryDataTag) tag;
+
+			addNode("Tag", ctag.getTag());
+			addNode("Reserved", ctag.getReserved());
+			addNode("Data", ctag.getData());
 		}
 		else if (tag instanceof DefineBitsJPEG2Tag) {
+			final DefineBitsJPEG2Tag ctag = (DefineBitsJPEG2Tag) tag;
+
+			addNode("CharacterID", ctag.getCharacterId());
+			addNode("ImageData", ctag.getImageData());
 		}
 		else if (tag instanceof DefineBitsJPEG3Tag) {
+			final DefineBitsJPEG3Tag ctag = (DefineBitsJPEG3Tag) tag;
+
+			addNode("CharacterID", ctag.getCharacterId());
+			addNode("AlphaDataOffset", ctag.getAlphaDataOffset());
+			addNode("JPEGData", ctag.getJpegData());
+			addNode("BitmapAlphaData", ctag.getBitmapAlphaData());
 		}
 		else if (tag instanceof DefineBitsJPEG4Tag) {
+			final DefineBitsJPEG4Tag ctag = (DefineBitsJPEG4Tag) tag;
+
+			addNode("CharacterID", ctag.getCharacterId());
+			addNode("AlphaDataOffset", ctag.getAlphaDataOffset());
+			addNode("DeblockParam", ctag.getDeblockParam());
+			addNode("ImageData", ctag.getImageData());
+			addNode("BitmapAlphaData", ctag.getBitmapAlphaData());
 		}
 		else if (tag instanceof DefineBitsLossless2Tag) {
+			final DefineBitsLossless2Tag ctag = (DefineBitsLossless2Tag) tag;
+
+			addNode("CharacterID", ctag.getCharacterId());
+			addNode("BitmapFormat", ctag.getBitmapFormat());
+			addNode("BitmapWidth", ctag.getBitmapWidth());
+			addNode("BitmapHeight", ctag.getBitmapHeight());
+			addNode("BitmapColorTableSize", ctag.getBitmapColorTableSize());
+			addNode("ZLibBitmapData", ctag.getZlibBitmapData());
 		}
 		else if (tag instanceof DefineBitsLosslessTag) {
 			final DefineBitsLosslessTag ctag = (DefineBitsLosslessTag) tag;
+
 			addNode("CharacterID", ctag.getCharacterId());
 			addNode("BitmapFormat", ctag.getBitmapFormat());
 			addNode("BitmapWidth", ctag.getBitmapWidth());
@@ -103,9 +145,14 @@ public class FlashTagNode extends FlashTreeNode<Tag> {
 			addNode("ZLibBitmapData", ctag.getZlibBitmapData());
 		}
 		else if (tag instanceof DefineBitsTag) {
+			final DefineBitsTag ctag = (DefineBitsTag) tag;
+
+			addNode("CharacterID", ctag.getCharacterId());
+			addNode("JPEGData", ctag.getJpegData());
 		}
 		else if (tag instanceof DefineButton2Tag) {
 			final DefineButton2Tag ctag = (DefineButton2Tag) tag;
+
 			addNode("ButtonID", ctag.getButtonId());
 			addNode("ReservedFlags", ctag.getReservedFlags());
 			addNode("TrackAsMenu", ctag.getTrackAsMenu());
@@ -115,18 +162,131 @@ public class FlashTagNode extends FlashTreeNode<Tag> {
 			addNode("Actions", ctag.getActions());
 		}
 		else if (tag instanceof DefineButtonCxformTag) {
+			final DefineButtonCxformTag ctag = (DefineButtonCxformTag) tag;
+
+			addNode("ButtonID", ctag.getButtonId());
+			addNode("ButtonColorTransform", ctag.getButtonColorTransform());
 		}
 		else if (tag instanceof DefineButtonSoundTag) {
+			final DefineButtonSoundTag ctag = (DefineButtonSoundTag) tag;
+
+			addNode("ButtonID", ctag.getButtonId());
+			addNode("ButtonSoundChar0", ctag.getButtonSoundChar0());
+			addNode("ButtonSoundInfo0", ctag.getButtonSoundInfo0());
+			addNode("ButtonSoundChar1", ctag.getButtonSoundChar1());
+			addNode("ButtonSoundInfo1", ctag.getButtonSoundInfo1());
+			addNode("ButtonSoundChar2", ctag.getButtonSoundChar2());
+			addNode("ButtonSoundInfo2", ctag.getButtonSoundInfo2());
+			addNode("ButtonSoundChar3", ctag.getButtonSoundChar3());
+			addNode("ButtonSoundInfo3", ctag.getButtonSoundInfo3());
 		}
 		else if (tag instanceof DefineButtonTag) {
+			final DefineButtonTag ctag = (DefineButtonTag) tag;
+
+			addNode("ButtonID", ctag.getButtonId());
+			addNode("Characters", ctag.getCharacters());
+			addNode("CharacterEndFlag", ctag.getCharacterEndFlag());
+			addNode("Actions", ctag.getActions());
+			addNode("ActionEndFlag", ctag.getActionEndFlag());
 		}
 		else if (tag instanceof DefineEditTextTag) {
+			final DefineEditTextTag ctag = (DefineEditTextTag) tag;
+
+			addNode("CharacterID", ctag.getCharacterId());
+			addNode("Bounds", ctag.getBounds());
+			addNode("HasText", ctag.getHasText());
+			addNode("WordWrap", ctag.getWordWrap());
+			addNode("Multiline", ctag.getMultiline());
+			addNode("Password", ctag.getPassword());
+			addNode("ReadOnly", ctag.getReadOnly());
+			addNode("HasTextColor", ctag.getHasTextColor());
+			addNode("HasMaxLength", ctag.getHasMaxLength());
+			addNode("HasFont", ctag.getHasFont());
+			addNode("HasFontClass", ctag.getHasFontClass());
+			addNode("AutoSize", ctag.getAutoSize());
+			addNode("HasLayout", ctag.getHasLayout());
+			addNode("NoSelect", ctag.getNoSelect());
+			addNode("Border", ctag.getBorder());
+			addNode("WasStatic", ctag.getWasStatic());
+			addNode("Html", ctag.getHtml());
+			addNode("UseOutlines", ctag.getUseOutlines());
+			addNode("FontID", ctag.getFontId());
+			addNode("FontClass", ctag.getFontClass());
+			addNode("FontHeight", ctag.getFontHeight());
+			addNode("TextColor", ctag.getTextColor());
+			addNode("MaxLength", ctag.getMaxLength());
+			addNode("Align", ctag.getAlign());
+			addNode("LeftMargin", ctag.getLeftMargin());
+			addNode("RightMargin", ctag.getRightMargin());
+			addNode("Indent", ctag.getIndent());
+			addNode("Leading", ctag.getLeading());
+			addNode("VariableName", ctag.getVariableName());
+			addNode("InitialText", ctag.getInitialText());
 		}
 		else if (tag instanceof DefineFont2Tag) {
+			final DefineFont2Tag ctag = (DefineFont2Tag) tag;
+
+			addNode("FontID", ctag.getFontId());
+			addNode("FontFlagsHasLayout", ctag.getFontFlagsHasLayout());
+			addNode("FontFlagsShiftJIS", ctag.getFontFlagsShiftJIS());
+			addNode("FontFlagsSmallText", ctag.getFontFlagsSmallText());
+			addNode("FontFlagsANSI", ctag.getFontFlagsANSI());
+			addNode("FontFlagsWideCodes", ctag.getFontFlagsWideCodes());
+			addNode("FontFlagsWideOffsets", ctag.getFontFlagsWideOffsets());
+			addNode("FontFlagsItalic", ctag.getFontFlagsItalic());
+			addNode("FontFlagsBold", ctag.getFontFlagsBold());
+			addNode("LanguageCode", ctag.getLanguageCode());
+			addNode("FontNameLen", ctag.getFontNameLen());
+			addNode("FontName", ctag.getFontName());
+			addNode("NumGlyps", ctag.getNumGlyphs());
+			addNode("CodeTable", ctag.getCodeTable());
+			addNode("CodeTableOffset", ctag.getCodeTableOffset());
+			addNode("GlyphShapeTable", ctag.getGlyphShapeTable());
+			addNode("FontAscent", ctag.getFontAscent());
+			addNode("FontDescent", ctag.getFontDescent());
+			addNode("FontLeading", ctag.getFontLeading());
+			addNode("FontAdvanceTable", ctag.getFontAdvanceTable());
+			addNode("FontBoundsTable", ctag.getFontBoundsTable());
+			addNode("KerningCount", ctag.getKerningCount());
+			addNode("FontKerningTable", ctag.getFontKerningTable());
 		}
 		else if (tag instanceof DefineFont3Tag) {
+			final DefineFont3Tag ctag = (DefineFont3Tag) tag;
+
+			addNode("FontID", ctag.getFontId());
+			addNode("FontFlagsHasLayout", ctag.getFontFlagsHasLayout());
+			addNode("FontFlagsShiftJIS", ctag.getFontFlagsShiftJIS());
+			addNode("FontFlagsSmallText", ctag.getFontFlagsSmallText());
+			addNode("FontFlagsANSI", ctag.getFontFlagsANSI());
+			addNode("FontFlagsWideCodes", ctag.getFontFlagsWideCodes());
+			addNode("FontFlagsWideOffsets", ctag.getFontFlagsWideOffsets());
+			addNode("FontFlagsItalic", ctag.getFontFlagsItalic());
+			addNode("FontFlagsBold", ctag.getFontFlagsBold());
+			addNode("LanguageCode", ctag.getLanguageCode());
+			addNode("FontNameLen", ctag.getFontNameLen());
+			addNode("FontName", ctag.getFontName());
+			addNode("NumGlyps", ctag.getNumGlyphs());
+			addNode("CodeTable", ctag.getCodeTable());
+			addNode("CodeTableOffset", ctag.getCodeTableOffset());
+			addNode("GlyphShapeTable", ctag.getGlyphShapeTable());
+			addNode("FontAscent", ctag.getFontAscent());
+			addNode("FontDescent", ctag.getFontDescent());
+			addNode("FontLeading", ctag.getFontLeading());
+			addNode("FontAdvanceTable", ctag.getFontAdvanceTable());
+			addNode("FontBoundsTable", ctag.getFontBoundsTable());
+			addNode("KerningCount", ctag.getKerningCount());
+			addNode("FontKerningTable", ctag.getFontKerningTable());
 		}
 		else if (tag instanceof DefineFont4Tag) {
+			final DefineFont4Tag ctag = (DefineFont4Tag) tag;
+
+			addNode("FontID", ctag.getFontId());
+			addNode("FontFlagsReserved", ctag.getFontFlagsReserved());
+			addNode("FontFlagsHasFontData", ctag.getFontFlagsHasFontData());
+			addNode("FontFlagsItalic", ctag.getFontFlagsItalic());
+			addNode("FontFlagsBold", ctag.getFontFlagsBold());
+			addNode("FontName", ctag.getFontName());
+			addNode("FontData", ctag.getFontData());
 		}
 		else if (tag instanceof DefineFontAlignZonesTag) {
 			final DefineFontAlignZonesTag ctag = (DefineFontAlignZonesTag) tag;
@@ -211,6 +371,12 @@ public class FlashTagNode extends FlashTreeNode<Tag> {
 			addNode("Splitter", ctag.getSplitter());
 		}
 		else if (tag instanceof DefineSceneAndFrameLabelDataTag) {
+			final DefineSceneAndFrameLabelDataTag ctag = (DefineSceneAndFrameLabelDataTag) tag;
+
+			addNode("SceneCount", ctag.getSceneCount());
+			addNode("SceneNames", ctag.getSceneNames());
+			addNode("FrameLabelCount", ctag.getFrameLabelCount());
+			addNode("FrameLabels", ctag.getFrameLabels());
 		}
 		else if (tag instanceof DefineShape2Tag) {
 			final DefineShape2Tag ctag = (DefineShape2Tag) tag;

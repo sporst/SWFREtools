@@ -1,9 +1,11 @@
 package tv.porst.swfretools.parser.structures;
 
 import tv.porst.splib.binaryparser.Flag;
+import tv.porst.splib.binaryparser.IFileElement;
 import tv.porst.splib.binaryparser.UBits;
 import tv.porst.splib.binaryparser.UINT16;
 import tv.porst.splib.binaryparser.UINT8;
+import tv.porst.swfretools.parser.SWFParserHelpers;
 
 /**
  * Represents a ButtonCondAction structure.
@@ -136,8 +138,15 @@ public final class ButtonCondAction implements IFileElement {
 	}
 
 	@Override
-	public int getBytePosition() {
-		return condActionSize.getBytePosition();
+	public int getBitLength() {
+		return SWFParserHelpers.addBitLengths(condActionSize, condIdleToOverDown, condOutDownToOverDown,
+				condOverDownToOutDown, condOverDownToOverUp, condOverUpToOverDown, condOverUpToIdle,
+				condIdleToOverUp, condKeyPress, condOverDownToIdle, actions, actionEndFlag);
+	}
+
+	@Override
+	public int getBitPosition() {
+		return condActionSize.getBitPosition();
 	}
 
 	/**

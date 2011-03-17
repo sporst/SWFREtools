@@ -1,6 +1,8 @@
 package tv.porst.swfretools.parser.structures;
 
 import tv.porst.splib.binaryparser.AsciiString;
+import tv.porst.splib.binaryparser.IFileElement;
+import tv.porst.swfretools.parser.SWFParserHelpers;
 
 /**
  * Represents a FrameLabel structure.
@@ -8,7 +10,7 @@ import tv.porst.splib.binaryparser.AsciiString;
  * @author sp
  *
  */
-public final class FrameLabel {
+public final class FrameLabel implements IFileElement {
 
 	/**
 	 * Offset for scene.
@@ -31,6 +33,16 @@ public final class FrameLabel {
 		this.offset = offset;
 		this.name = name;
 
+	}
+
+	@Override
+	public int getBitLength() {
+		return SWFParserHelpers.addBitLengths(offset, name);
+	}
+
+	@Override
+	public int getBitPosition() {
+		return offset.getBitPosition();
 	}
 
 	/**

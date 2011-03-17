@@ -1,7 +1,9 @@
 package tv.porst.swfretools.parser.structures;
 
 import tv.porst.splib.binaryparser.Flag;
+import tv.porst.splib.binaryparser.IFileElement;
 import tv.porst.splib.binaryparser.UBits;
+import tv.porst.swfretools.parser.SWFParserHelpers;
 
 /**
  * Represents a DropShadowFilter structure.
@@ -100,6 +102,17 @@ public final class DropShadowFilter implements IFileElement {
 		return angle;
 	}
 
+	@Override
+	public int getBitLength() {
+		return SWFParserHelpers.addBitLengths(dropShadowColor, blurX, blurY, angle, distance, strength,
+				innerShadow, knockout, compositeSource, passes);
+	}
+
+	@Override
+	public int getBitPosition() {
+		return dropShadowColor.getBitPosition();
+	}
+
 	/**
 	 * Returns the horizontal blur amount.
 	 *
@@ -116,11 +129,6 @@ public final class DropShadowFilter implements IFileElement {
 	 */
 	public Fixed getBlurY() {
 		return blurY;
-	}
-
-	@Override
-	public int getBytePosition() {
-		return dropShadowColor.getBytePosition();
 	}
 
 	/**

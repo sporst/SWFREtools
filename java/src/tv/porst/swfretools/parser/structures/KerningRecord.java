@@ -1,7 +1,9 @@
 package tv.porst.swfretools.parser.structures;
 
+import tv.porst.splib.binaryparser.IFileElement;
 import tv.porst.splib.binaryparser.INT16;
 import tv.porst.splib.binaryparser.IParsedINTElement;
+import tv.porst.swfretools.parser.SWFParserHelpers;
 
 /**
  * Represents a KerningRecord structure.
@@ -42,8 +44,13 @@ public final class KerningRecord implements IFileElement {
 	}
 
 	@Override
-	public int getBytePosition() {
-		return fontKerningCode1.getBytePosition();
+	public int getBitLength() {
+		return SWFParserHelpers.addBitLengths(fontKerningCode1, fontKerningCode2, fontKerningAdjustment);
+	}
+
+	@Override
+	public int getBitPosition() {
+		return fontKerningCode1.getBitPosition();
 	}
 
 	/**

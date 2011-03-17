@@ -1,6 +1,8 @@
 package tv.porst.swfretools.parser.structures;
 
+import tv.porst.splib.binaryparser.IFileElement;
 import tv.porst.splib.binaryparser.UINT8;
+import tv.porst.swfretools.parser.SWFParserHelpers;
 
 /**
  * Represents a FilterList structure.
@@ -33,8 +35,13 @@ public final class FilterList implements IFileElement {
 	}
 
 	@Override
-	public int getBytePosition() {
-		return numberOfFilters.getBytePosition();
+	public int getBitLength() {
+		return SWFParserHelpers.addBitLengths(numberOfFilters, filters);
+	}
+
+	@Override
+	public int getBitPosition() {
+		return numberOfFilters.getBitPosition();
 	}
 
 	/**

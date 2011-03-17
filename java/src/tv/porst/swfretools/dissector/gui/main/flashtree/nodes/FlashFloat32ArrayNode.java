@@ -2,10 +2,11 @@ package tv.porst.swfretools.dissector.gui.main.flashtree.nodes;
 
 import tv.porst.splib.binaryparser.Float32;
 import tv.porst.swfretools.dissector.gui.main.flashtree.FlashTreeNode;
+import tv.porst.swfretools.parser.structures.Float32List;
 
-public class FlashFloat32ArrayNode extends FlashTreeNode<Float32[]> {
+public class FlashFloat32ArrayNode extends FlashTreeNode<Float32List> {
 
-	public FlashFloat32ArrayNode(final String name, final Float32[] floats) {
+	public FlashFloat32ArrayNode(final String name, final Float32List floats) {
 		super(name, floats);
 
 		createChildren();

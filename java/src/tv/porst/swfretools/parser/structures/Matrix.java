@@ -1,7 +1,9 @@
 package tv.porst.swfretools.parser.structures;
 
 import tv.porst.splib.binaryparser.Flag;
+import tv.porst.splib.binaryparser.IFileElement;
 import tv.porst.splib.binaryparser.UBits;
+import tv.porst.swfretools.parser.SWFParserHelpers;
 
 /**
  * Represents a Matrix structure.
@@ -99,8 +101,14 @@ public final class Matrix implements IFileElement {
 	}
 
 	@Override
-	public int getBytePosition() {
-		return hasScale.getBytePosition();
+	public int getBitLength() {
+		return SWFParserHelpers.addBitLengths(hasScale, nScaleBits, scaleX, scaleY, hasRotate, nRotateBits,
+				rotateSkew0, rotateSkew1, nTranslateBits, translateX, translateY);
+	}
+
+	@Override
+	public int getBitPosition() {
+		return hasScale.getBitPosition();
 	}
 
 	/**

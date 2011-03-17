@@ -1,7 +1,9 @@
 package tv.porst.swfretools.parser.structures;
 
 import tv.porst.splib.binaryparser.Bits;
+import tv.porst.splib.binaryparser.IFileElement;
 import tv.porst.splib.binaryparser.UBits;
+import tv.porst.swfretools.parser.SWFParserHelpers;
 
 /**
  * Represents a Rectangle structure.
@@ -56,8 +58,13 @@ public final class Rect implements IFileElement {
 	}
 
 	@Override
-	public int getBytePosition() {
-		return nBits.getBytePosition();
+	public int getBitLength() {
+		return SWFParserHelpers.addBitLengths(nBits, xMin, xMax, yMin, yMax);
+	}
+
+	@Override
+	public int getBitPosition() {
+		return nBits.getBitPosition();
 	}
 
 	/**

@@ -9,7 +9,7 @@ public class FlashFileNode extends FlashTreeNode {
 	private final LoadedFile file;
 
 	public FlashFileNode(final LoadedFile file) {
-		super(null, file);
+		super(null, new FlashFileNodeWrapper(file));
 
 		this.file = file;
 

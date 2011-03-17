@@ -2,10 +2,11 @@ package tv.porst.swfretools.dissector.gui.main.flashtree.nodes;
 
 import tv.porst.swfretools.dissector.gui.main.flashtree.FlashTreeNode;
 import tv.porst.swfretools.parser.structures.RGBA;
+import tv.porst.swfretools.parser.structures.RGBAList;
 
-public class FlashRGBAArrayNode extends FlashTreeNode<RGBA[]> {
+public class FlashRGBAArrayNode extends FlashTreeNode<RGBAList> {
 
-	public FlashRGBAArrayNode(final String name, final RGBA[] colors) {
+	public FlashRGBAArrayNode(final String name, final RGBAList colors) {
 		super(name, colors);
 
 		createChildren();

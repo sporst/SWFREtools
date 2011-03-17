@@ -1,7 +1,9 @@
 package tv.porst.swfretools.parser.structures;
 
+import tv.porst.splib.binaryparser.IFileElement;
 import tv.porst.splib.binaryparser.UINT16;
 import tv.porst.splib.binaryparser.UINT8;
+import tv.porst.swfretools.parser.SWFParserHelpers;
 
 /**
  * Represents a MorphFillStyleArray structure.
@@ -42,8 +44,13 @@ public final class MorphFillStyleArray implements IFileElement {
 	}
 
 	@Override
-	public int getBytePosition() {
-		return fillStyleCount.getBytePosition();
+	public int getBitLength() {
+		return SWFParserHelpers.addBitLengths(fillStyleCount, fillStyleCountExtended, fillStyles);
+	}
+
+	@Override
+	public int getBitPosition() {
+		return fillStyleCount.getBitPosition();
 	}
 
 	/**

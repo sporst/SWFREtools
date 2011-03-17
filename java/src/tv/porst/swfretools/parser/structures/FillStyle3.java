@@ -1,7 +1,9 @@
 package tv.porst.swfretools.parser.structures;
 
+import tv.porst.splib.binaryparser.IFileElement;
 import tv.porst.splib.binaryparser.UINT16;
 import tv.porst.splib.binaryparser.UINT8;
+import tv.porst.swfretools.parser.SWFParserHelpers;
 
 /**
  * Represents a FillStyle3 structure.
@@ -62,6 +64,11 @@ public final class FillStyle3 implements IFileElement {
 		this.bitmapMatrix = bitmapMatrix;
 	}
 
+	@Override
+	public int getBitLength() {
+		return SWFParserHelpers.addBitLengths(fillStyleType, color, gradientMatrix, gradient, bitmapId, bitmapMatrix);
+	}
+
 	/**
 	 * Returns the ID of bitmap character for fill.
 	 *
@@ -81,8 +88,8 @@ public final class FillStyle3 implements IFileElement {
 	}
 
 	@Override
-	public int getBytePosition() {
-		return fillStyleType.getBytePosition();
+	public int getBitPosition() {
+		return fillStyleType.getBitPosition();
 	}
 
 	/**

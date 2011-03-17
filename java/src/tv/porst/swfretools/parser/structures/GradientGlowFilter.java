@@ -1,8 +1,10 @@
 package tv.porst.swfretools.parser.structures;
 
 import tv.porst.splib.binaryparser.Flag;
+import tv.porst.splib.binaryparser.IFileElement;
 import tv.porst.splib.binaryparser.UBits;
 import tv.porst.splib.binaryparser.UINT8;
+import tv.porst.swfretools.parser.SWFParserHelpers;
 
 /**
  * Represents a GradientGlowFilter structure.
@@ -20,12 +22,12 @@ public final class GradientGlowFilter implements IFileElement {
 	/**
 	 * Gradient colors.
 	 */
-	private final RGBA[] gradientColors;
+	private final RGBAList gradientColors;
 
 	/**
 	 * Gradient ratios.
 	 */
-	private final UINT8[] gradientRatio;
+	private final UINT8List gradientRatio;
 
 	/**
 	 * Horizontal blur amount.
@@ -94,8 +96,8 @@ public final class GradientGlowFilter implements IFileElement {
 	 * @param onTop On Top mode.
 	 * @param passes Number of blur passes.
 	 */
-	public GradientGlowFilter(final UINT8 numColors, final RGBA[] gradientColors,
-			final UINT8[] gradientRatio, final Fixed blurX, final Fixed blurY, final Fixed angle,
+	public GradientGlowFilter(final UINT8 numColors, final RGBAList gradientColors,
+			final UINT8List gradientRatio, final Fixed blurX, final Fixed blurY, final Fixed angle,
 			final Fixed distance, final Fixed8 strength, final Flag innerShadow,
 			final Flag knockout, final Flag compositeSource, final Flag onTop, final UBits passes) {
 
@@ -124,6 +126,17 @@ public final class GradientGlowFilter implements IFileElement {
 		return angle;
 	}
 
+	@Override
+	public int getBitLength() {
+		return SWFParserHelpers.addBitLengths(numColors, gradientColors, gradientRatio, blurX, blurY,
+				angle, distance, strength, innerShadow, knockout, compositeSource, onTop, passes);
+	}
+
+	@Override
+	public int getBitPosition() {
+		return numColors.getBitPosition();
+	}
+
 	/**
 	 * Returns the horizontal blur amount.
 	 *
@@ -140,11 +153,6 @@ public final class GradientGlowFilter implements IFileElement {
 	 */
 	public Fixed getBlurY() {
 		return blurY;
-	}
-
-	@Override
-	public int getBytePosition() {
-		return numColors.getBytePosition();
 	}
 
 	/**
@@ -170,7 +178,7 @@ public final class GradientGlowFilter implements IFileElement {
 	 *
 	 * @return The gradient colors.
 	 */
-	public RGBA[] getGradientColors() {
+	public RGBAList getGradientColors() {
 		return gradientColors;
 	}
 
@@ -179,7 +187,7 @@ public final class GradientGlowFilter implements IFileElement {
 	 *
 	 * @return The gradient ratios.
 	 */
-	public UINT8[] getGradientRatio() {
+	public UINT8List getGradientRatio() {
 		return gradientRatio;
 	}
 

@@ -1,12 +1,16 @@
 package tv.porst.swfretools.parser.structures;
 
-import static tv.porst.swfretools.parser.SWFParserHelpers.parseUBits;
 import static tv.porst.swfretools.parser.SWFParserHelpers.parseFlag;
 import static tv.porst.swfretools.parser.SWFParserHelpers.parseFloat;
+import static tv.porst.swfretools.parser.SWFParserHelpers.parseUBits;
 import static tv.porst.swfretools.parser.SWFParserHelpers.parseUINT8;
-import tv.porst.splib.binaryparser.UBits;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import tv.porst.splib.binaryparser.Flag;
 import tv.porst.splib.binaryparser.Float32;
+import tv.porst.splib.binaryparser.UBits;
 import tv.porst.splib.binaryparser.UINT8;
 import tv.porst.swfretools.parser.SWFBinaryParser;
 import tv.porst.swfretools.parser.SWFParserException;
@@ -34,10 +38,10 @@ public final class ConvolutionFilterParser {
 		final UINT8 matrixY = parseUINT8(parser, 0x00006, fieldName + "::MatrixY");
 		final Float32 divisor = parseFloat(parser, 0x00006, fieldName + "::Divisor");
 		final Float32 bias = parseFloat(parser, 0x00006, fieldName + "::Bias");
-		final Float32[] matrix = new Float32[matrixX.value() * matrixY.value()];
+		final List<Float32> matrix = new ArrayList<Float32>();
 
-		for (int i=0;i<matrix.length;i++) {
-			matrix[i] = parseFloat(parser, 0x00006, String.format(fieldName + "::Matrix[%d]", i));
+		for (int i=0;i<matrixX.value() * matrixY.value();i++) {
+			matrix.add(parseFloat(parser, 0x00006, String.format(fieldName + "::Matrix[%d]", i)));
 		}
 
 		final RGBA defaultColor = RGBAParser.parse(parser, fieldName + "::DefaultColor");
@@ -46,6 +50,6 @@ public final class ConvolutionFilterParser {
 		final Flag clamp = parseFlag(parser, 0x00006, fieldName + "::Clamp");
 		final Flag preserveAlpha = parseFlag(parser, 0x00006, fieldName + "::PreserveAlpha");
 
-		return new ConvolutionFilter(matrixX, matrixY, divisor, bias, matrix, defaultColor, reserved, clamp, preserveAlpha);
+		return new ConvolutionFilter(matrixX, matrixY, divisor, bias, new Float32List(matrix), defaultColor, reserved, clamp, preserveAlpha);
 	}
 }

@@ -1,10 +1,12 @@
 package tv.porst.swfretools.parser.structures;
 
 import tv.porst.splib.binaryparser.Flag;
+import tv.porst.splib.binaryparser.IFileElement;
 import tv.porst.splib.binaryparser.UBits;
 import tv.porst.splib.binaryparser.UINT16;
 import tv.porst.splib.binaryparser.UINT32;
 import tv.porst.splib.binaryparser.UINT8;
+import tv.porst.swfretools.parser.SWFParserHelpers;
 
 /**
  * Represents a SoundInfo structure.
@@ -110,8 +112,14 @@ public final class SoundInfo implements IFileElement {
 	}
 
 	@Override
-	public int getBytePosition() {
-		return reserved.getBytePosition();
+	public int getBitLength() {
+		return SWFParserHelpers.addBitLengths(reserved, syncStop, syncNoMultiple, hasEnvelope, hasLoops,
+				hasInPoint, hasOutPoint, outPoint, inPoint, loopCount, envPoints, envelopeRecords);
+	}
+
+	@Override
+	public int getBitPosition() {
+		return reserved.getBitPosition();
 	}
 
 	/**

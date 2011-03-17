@@ -1,7 +1,9 @@
 package tv.porst.swfretools.parser.structures;
 
 import tv.porst.splib.binaryparser.Flag;
+import tv.porst.splib.binaryparser.IFileElement;
 import tv.porst.splib.binaryparser.UBits;
+import tv.porst.swfretools.parser.SWFParserHelpers;
 
 /**
  * Represents a ClipEventFlags structure.
@@ -175,8 +177,17 @@ public final class ClipEventFlags implements IFileElement {
 	}
 
 	@Override
-	public int getBytePosition() {
-		return clipEventKeyUp.getBytePosition();
+	public int getBitLength() {
+		return SWFParserHelpers.addBitLengths(clipEventKeyUp, clipEventKeyDown, clipEventMouseUp,
+				clipEventMouseDown, clipEventMouseMove, clipEventUnload, clipEventEnterFrame, clipEventLoad,
+				clipEventDragOver, clipEventRollOut, clipEventRollOver, clipEventReleaseOutside,
+				clipEventRelease, clipEventPress, clipEventInitialize, clipEventData, reserved,
+				clipEventConstruct, clipEventKeyPress, clipEventDragOut, reserved2);
+	}
+
+	@Override
+	public int getBitPosition() {
+		return clipEventKeyUp.getBitPosition();
 	}
 
 	/**

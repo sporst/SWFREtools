@@ -29,7 +29,7 @@ public final class VideoFrameParser {
 
 		final UINT16 streamId = parseUINT16(parser, 0x00006, "VideoFrame::StreamId");
 		final UINT16 frameNum = parseUINT16(parser, 0x00006, "VideoFrame::FrameNum");
-		final ByteArray videoData = parseByteArray(parser, header.getNormalizedLength() - UINT16.LENGTH - UINT16.LENGTH, 0x00006, "VideoFrame::VideoData");
+		final ByteArray videoData = parseByteArray(parser, header.getNormalizedLength() - UINT16.BYTE_LENGTH - UINT16.BYTE_LENGTH, 0x00006, "VideoFrame::VideoData");
 
 		return new VideoFrameTag(header, streamId, frameNum, videoData);
 	}

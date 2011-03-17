@@ -1,8 +1,10 @@
 package tv.porst.swfretools.parser.structures;
 
 import tv.porst.splib.binaryparser.Flag;
+import tv.porst.splib.binaryparser.IFileElement;
 import tv.porst.splib.binaryparser.UBits;
 import tv.porst.splib.binaryparser.UINT8;
+import tv.porst.swfretools.parser.SWFParserHelpers;
 
 /**
  * Represents a ZoneRecord structure.
@@ -57,8 +59,13 @@ public final class ZoneRecord implements IFileElement {
 	}
 
 	@Override
-	public int getBytePosition() {
-		return numZoneData.getBytePosition();
+	public int getBitLength() {
+		return SWFParserHelpers.addBitLengths(numZoneData, zoneData, reserved, zoneMaskX, zoneMaskY);
+	}
+
+	@Override
+	public int getBitPosition() {
+		return numZoneData.getBitPosition();
 	}
 
 	/**

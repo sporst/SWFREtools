@@ -1,9 +1,11 @@
 package tv.porst.swfretools.parser.structures;
 
 import tv.porst.splib.binaryparser.Flag;
+import tv.porst.splib.binaryparser.IFileElement;
 import tv.porst.splib.binaryparser.UBits;
 import tv.porst.splib.binaryparser.UINT16;
 import tv.porst.splib.binaryparser.UINT8;
+import tv.porst.swfretools.parser.SWFParserHelpers;
 
 /**
  * Represents a ButtonRecord2 structure.
@@ -117,6 +119,18 @@ public final class ButtonRecord2 implements IFileElement {
 		this.blendMode = blendMode;
 	}
 
+	@Override
+	public int getBitLength() {
+		return SWFParserHelpers.addBitLengths(buttonReserved, buttonHasBlendMode, buttonHasFilterList,
+				buttonStateHitTest, buttonStateDown, buttonStateOver, buttonStateUp, characterId,
+				placeDepth, placeMatrix, colorTransform, filterList, blendMode);
+	}
+
+	@Override
+	public int getBitPosition() {
+		return buttonReserved.getBitPosition();
+	}
+
 	/**
 	 * Returns the blend mode.
 	 *
@@ -187,11 +201,6 @@ public final class ButtonRecord2 implements IFileElement {
 	 */
 	public Flag getButtonStateUp() {
 		return buttonStateUp;
-	}
-
-	@Override
-	public int getBytePosition() {
-		return buttonReserved.getBytePosition();
 	}
 
 	/**

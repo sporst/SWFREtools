@@ -2,7 +2,9 @@ package tv.porst.swfretools.parser.structures;
 
 import tv.porst.splib.binaryparser.Bits;
 import tv.porst.splib.binaryparser.Flag;
+import tv.porst.splib.binaryparser.IFileElement;
 import tv.porst.splib.binaryparser.UBits;
+import tv.porst.swfretools.parser.SWFParserHelpers;
 
 /**
  * Represents a CxFormWithAlpha structure.
@@ -118,6 +120,17 @@ public final class CxFormWithAlpha implements IFileElement {
 		return alphaMultTerm;
 	}
 
+	@Override
+	public int getBitLength() {
+		return SWFParserHelpers.addBitLengths(hasAddTerms, hasMultTerms, nBits, redMultTerm, greenMultTerm,
+				blueMultTerm, alphaMultTerm, redAddTerm, greenAddTerm, blueAddTerm, alphaAddTerm);
+	}
+
+	@Override
+	public int getBitPosition() {
+		return hasAddTerms.getBitPosition();
+	}
+
 	/**
 	 * Returns the blue addition value.
 	 *
@@ -134,11 +147,6 @@ public final class CxFormWithAlpha implements IFileElement {
 	 */
 	public Bits getBlueMultTerm() {
 		return blueMultTerm;
-	}
-
-	@Override
-	public int getBytePosition() {
-		return hasAddTerms.getBytePosition();
 	}
 
 	/**

@@ -1,6 +1,8 @@
 package tv.porst.swfretools.parser.structures;
 
+import tv.porst.splib.binaryparser.IFileElement;
 import tv.porst.splib.binaryparser.UBits;
+import tv.porst.swfretools.parser.SWFParserHelpers;
 
 /**
  * Represents a BlurFilter structure.
@@ -46,6 +48,16 @@ public final class BlurFilter implements IFileElement {
 		this.reserved = reserved;
 	}
 
+	@Override
+	public int getBitLength() {
+		return SWFParserHelpers.addBitLengths(blurX, blurY, passes, reserved);
+	}
+
+	@Override
+	public int getBitPosition() {
+		return blurX.getBitPosition();
+	}
+
 	/**
 	 * Returns the horizontal blur amount.
 	 *
@@ -62,11 +74,6 @@ public final class BlurFilter implements IFileElement {
 	 */
 	public Fixed getBlurY() {
 		return blurY;
-	}
-
-	@Override
-	public int getBytePosition() {
-		return blurX.getBytePosition();
 	}
 
 	/**

@@ -1,7 +1,9 @@
 package tv.porst.swfretools.parser.structures;
 
+import tv.porst.splib.binaryparser.IFileElement;
 import tv.porst.splib.binaryparser.INT32;
 import tv.porst.splib.binaryparser.UINT16;
+import tv.porst.swfretools.parser.SWFParserHelpers;
 
 /**
  * Represents a RecordHeader structure.
@@ -9,7 +11,7 @@ import tv.porst.splib.binaryparser.UINT16;
  * @author sp
  *
  */
-public final class RecordHeader {
+public final class RecordHeader implements IFileElement {
 
 	/**
 	 * Type and length packed together.
@@ -34,13 +36,23 @@ public final class RecordHeader {
 
 	}
 
+	@Override
+	public int getBitLength() {
+		return SWFParserHelpers.addBitLengths(tagCodeAndLength, length);
+	}
+
+	@Override
+	public int getBitPosition() {
+		return tagCodeAndLength.getBitPosition();
+	}
+
 	/**
 	 * Returns the length of the record header structure in bytes.
 	 * 
 	 * @return The length of the record header structure in bytes.
 	 */
 	public int getHeaderLength() {
-		return length == null ? UINT16.LENGTH : UINT16.LENGTH + INT32.LENGTH;
+		return length == null ? 2 : 2 + 4;
 	}
 
 	/**
@@ -59,15 +71,6 @@ public final class RecordHeader {
 	 */
 	public int getNormalizedLength() {
 		return getLength() == 0x3F ? length.value() : getLength();
-	}
-
-	/**
-	 * Returns the offset of the tag in the file in bytes.
-	 * 
-	 * @return The offset of the tag in the file in bytes.
-	 */
-	public int getPosition() {
-		return tagCodeAndLength.getBytePosition();
 	}
 
 	/**

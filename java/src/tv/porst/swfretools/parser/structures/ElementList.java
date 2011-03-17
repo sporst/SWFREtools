@@ -4,7 +4,10 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-public class ElementList<T extends IFileElement> implements Iterable<T> {
+import tv.porst.splib.binaryparser.IFileElement;
+import tv.porst.swfretools.parser.SWFParserHelpers;
+
+public class ElementList<T extends IFileElement> implements Iterable<T>, IFileElement {
 
 	private final List<T> elements;
 
@@ -12,8 +15,14 @@ public class ElementList<T extends IFileElement> implements Iterable<T> {
 		this.elements = new ArrayList<T>(elements);
 	}
 
-	public int getBytePosition() {
-		return elements.get(0).getBytePosition();
+	@Override
+	public int getBitLength() {
+		return SWFParserHelpers.addBitLengths(elements);
+	}
+
+	@Override
+	public int getBitPosition() {
+		return elements.get(0).getBitPosition();
 	}
 
 	@Override

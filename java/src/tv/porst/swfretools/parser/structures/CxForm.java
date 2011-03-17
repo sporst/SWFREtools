@@ -1,8 +1,10 @@
 package tv.porst.swfretools.parser.structures;
 
-import tv.porst.splib.binaryparser.UBits;
-import tv.porst.splib.binaryparser.Flag;
 import tv.porst.splib.binaryparser.Bits;
+import tv.porst.splib.binaryparser.Flag;
+import tv.porst.splib.binaryparser.IFileElement;
+import tv.porst.splib.binaryparser.UBits;
+import tv.porst.swfretools.parser.SWFParserHelpers;
 
 /**
  * Represents a CxFormWith structure.
@@ -10,7 +12,7 @@ import tv.porst.splib.binaryparser.Bits;
  * @author sp
  *
  */
-public final class CxForm {
+public final class CxForm implements IFileElement {
 
 	/**
 	 * Has color addition values flag.
@@ -83,6 +85,17 @@ public final class CxForm {
 		this.redAddTerm = redAddTerm;
 		this.greenAddTerm = greenAddTerm;
 		this.blueAddTerm = blueAddTerm;
+	}
+
+	@Override
+	public int getBitLength() {
+		return SWFParserHelpers.addBitLengths(hasAddTerms, hasMultTerms, nBits, redMultTerm, greenMultTerm,
+				blueMultTerm, redAddTerm, greenAddTerm, blueAddTerm);
+	}
+
+	@Override
+	public int getBitPosition() {
+		return hasAddTerms.getBitPosition();
 	}
 
 	/**

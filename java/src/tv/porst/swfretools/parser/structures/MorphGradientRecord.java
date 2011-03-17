@@ -1,6 +1,8 @@
 package tv.porst.swfretools.parser.structures;
 
+import tv.porst.splib.binaryparser.IFileElement;
 import tv.porst.splib.binaryparser.UINT8;
+import tv.porst.swfretools.parser.SWFParserHelpers;
 
 /**
  * Represents a MorphGradientRecord structure.
@@ -48,8 +50,13 @@ public final class MorphGradientRecord implements IFileElement {
 	}
 
 	@Override
-	public int getBytePosition() {
-		return startRatio.getBytePosition();
+	public int getBitLength() {
+		return SWFParserHelpers.addBitLengths(startRatio, endRatio, startColor, endColor);
+	}
+
+	@Override
+	public int getBitPosition() {
+		return startRatio.getBitPosition();
 	}
 
 	/**

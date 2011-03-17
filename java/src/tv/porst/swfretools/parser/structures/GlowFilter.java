@@ -1,7 +1,9 @@
 package tv.porst.swfretools.parser.structures;
 
 import tv.porst.splib.binaryparser.Flag;
+import tv.porst.splib.binaryparser.IFileElement;
 import tv.porst.splib.binaryparser.UBits;
+import tv.porst.swfretools.parser.SWFParserHelpers;
 
 /**
  * Represents a GlowFilter structure.
@@ -78,6 +80,17 @@ public final class GlowFilter implements IFileElement {
 
 	}
 
+	@Override
+	public int getBitLength() {
+		return SWFParserHelpers.addBitLengths(glowColor, blurX, blurY, strength, innerShadow, knockout,
+				compositeSource, passes);
+	}
+
+	@Override
+	public int getBitPosition() {
+		return glowColor.getBitPosition();
+	}
+
 	/**
 	 * Returns the horizontal blur amount.
 	 *
@@ -94,11 +107,6 @@ public final class GlowFilter implements IFileElement {
 	 */
 	public Fixed getBlurY() {
 		return blurY;
-	}
-
-	@Override
-	public int getBytePosition() {
-		return glowColor.getBytePosition();
 	}
 
 	/**

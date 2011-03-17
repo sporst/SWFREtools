@@ -49,7 +49,7 @@ public final class ButtonCondActionParser {
 		final UBits condKeyPress = parseUBits(parser, 7, 0x00006, fieldName + "::CondKeyPress");
 		final Flag condOverDownToIdle = parseFlag(parser, 0x00006, fieldName + "::CondOverDownToIdle");
 
-		final int actionRecordSize = condActionSize.value() == 0 ? header.getNormalizedLength() - (parser.getBytePosition() - header.getPosition() + 1 - header.getHeaderLength()) : condActionSize.value() - 4 - 1;
+		final int actionRecordSize = condActionSize.value() == 0 ? header.getNormalizedLength() - (parser.getBytePosition() - header.getBitPosition() / 8 + 1 - header.getHeaderLength()) : condActionSize.value() - 4 - 1;
 
 		final List<Action> actions = ActionRecordParser.parse(parser, actionRecordSize);
 

@@ -1,12 +1,9 @@
 package tv.porst.swfretools.parser.tags;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import tv.porst.splib.binaryparser.UINT16;
 import tv.porst.splib.binaryparser.UINT8;
-import tv.porst.swfretools.parser.actions.Action;
-import tv.porst.swfretools.parser.structures.ButtonRecord;
+import tv.porst.swfretools.parser.structures.ActionList;
+import tv.porst.swfretools.parser.structures.ButtonRecordList;
 import tv.porst.swfretools.parser.structures.RecordHeader;
 
 /**
@@ -25,7 +22,7 @@ public final class DefineButtonTag extends Tag {
 	/**
 	 * Characters that make up the button.
 	 */
-	private final List<ButtonRecord> characters;
+	private final ButtonRecordList characters;
 
 	/**
 	 * Character end flag.
@@ -35,7 +32,7 @@ public final class DefineButtonTag extends Tag {
 	/**
 	 * Actions to perform.
 	 */
-	private final List<Action> actions;
+	private final ActionList actions;
 
 	/**
 	 * Action end flag.
@@ -53,15 +50,15 @@ public final class DefineButtonTag extends Tag {
 	 * @param actionEndFlag Action end flag.
 	 */
 	public DefineButtonTag(final RecordHeader header, final UINT16 buttonId,
-			final List<ButtonRecord> characters, final UINT8 characterEndFlag, final List<Action> actions,
+			final ButtonRecordList characters, final UINT8 characterEndFlag, final ActionList actions,
 			final UINT8 actionEndFlag) {
 
 		super(header);
 
 		this.buttonId = buttonId;
-		this.characters = new ArrayList<ButtonRecord>(characters);
+		this.characters = characters;
 		this.characterEndFlag = characterEndFlag;
-		this.actions = new ArrayList<Action>(actions);
+		this.actions = actions;
 		this.actionEndFlag = actionEndFlag;
 	}
 
@@ -79,8 +76,8 @@ public final class DefineButtonTag extends Tag {
 	 * 
 	 * @return The actions to perform.
 	 */
-	public List<Action> getActions() {
-		return new ArrayList<Action>(actions);
+	public ActionList getActions() {
+		return actions;
 	}
 
 	/**
@@ -106,7 +103,7 @@ public final class DefineButtonTag extends Tag {
 	 * 
 	 * @return The characters that make up the button.
 	 */
-	public List<ButtonRecord> getCharacters() {
-		return new ArrayList<ButtonRecord>(characters);
+	public ButtonRecordList getCharacters() {
+		return characters;
 	}
 }

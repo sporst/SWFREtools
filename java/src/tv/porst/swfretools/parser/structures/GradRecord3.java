@@ -1,6 +1,8 @@
 package tv.porst.swfretools.parser.structures;
 
+import tv.porst.splib.binaryparser.IFileElement;
 import tv.porst.splib.binaryparser.UINT8;
+import tv.porst.swfretools.parser.SWFParserHelpers;
 
 /**
  * Represents a GradRecord3 structure.
@@ -33,8 +35,13 @@ public final class GradRecord3 implements IFileElement {
 	}
 
 	@Override
-	public int getBytePosition() {
-		return ratio.getBytePosition();
+	public int getBitLength() {
+		return SWFParserHelpers.addBitLengths(ratio, color);
+	}
+
+	@Override
+	public int getBitPosition() {
+		return ratio.getBitPosition();
 	}
 
 	/**

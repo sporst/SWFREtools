@@ -2,7 +2,9 @@ package tv.porst.swfretools.parser.structures;
 
 import tv.porst.splib.binaryparser.Bits;
 import tv.porst.splib.binaryparser.Flag;
+import tv.porst.splib.binaryparser.IFileElement;
 import tv.porst.splib.binaryparser.UBits;
+import tv.porst.swfretools.parser.SWFParserHelpers;
 
 /**
  * Represents a CurvedEdgeRecord structure.
@@ -90,8 +92,14 @@ public final class CurvedEdgeRecord implements ShapeRecord, Shape3Record, IFileE
 	}
 
 	@Override
-	public int getBytePosition() {
-		return typeFlag.getBytePosition();
+	public int getBitLength() {
+		return SWFParserHelpers.addBitLengths(typeFlag, straightFlag, numBits, controlDeltaX, controlDeltaY,
+				anchorDeltaX, anchorDeltaY);
+	}
+
+	@Override
+	public int getBitPosition() {
+		return typeFlag.getBitPosition();
 	}
 
 	/**

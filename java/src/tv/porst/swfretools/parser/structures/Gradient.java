@@ -1,6 +1,8 @@
 package tv.porst.swfretools.parser.structures;
 
+import tv.porst.splib.binaryparser.IFileElement;
 import tv.porst.splib.binaryparser.UBits;
+import tv.porst.swfretools.parser.SWFParserHelpers;
 
 /**
  * Represents a Gradient structure.
@@ -49,9 +51,13 @@ public final class Gradient implements IGradient, IFileElement {
 	}
 
 	@Override
-	public int getBytePosition() {
-		// TODO Auto-generated method stub
-		return 0;
+	public int getBitLength() {
+		return SWFParserHelpers.addBitLengths(spreadMode, interpolationMode, numGradients, gradientRecords);
+	}
+
+	@Override
+	public int getBitPosition() {
+		return spreadMode.getBitPosition();
 	}
 
 	/**

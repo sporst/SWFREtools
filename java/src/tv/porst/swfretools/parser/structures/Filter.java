@@ -1,6 +1,8 @@
 package tv.porst.swfretools.parser.structures;
 
+import tv.porst.splib.binaryparser.IFileElement;
 import tv.porst.splib.binaryparser.UINT8;
+import tv.porst.swfretools.parser.SWFParserHelpers;
 
 /**
  * Represents a Filter structure.
@@ -95,6 +97,17 @@ public final class Filter implements IFileElement {
 		return bevelFilter;
 	}
 
+	@Override
+	public int getBitLength() {
+		return SWFParserHelpers.addBitLengths(filterId, dropShadowFilter, blurFilter, glowFilter,
+				bevelFilter, gradientGlowFilter, convolutionFilter, colorMatrixFilter, gradientBevelFilter);
+	}
+
+	@Override
+	public int getBitPosition() {
+		return filterId.getBitPosition();
+	}
+
 	/**
 	 * Returns the blur filter.
 	 *
@@ -102,11 +115,6 @@ public final class Filter implements IFileElement {
 	 */
 	public BlurFilter getBlurFilter() {
 		return blurFilter;
-	}
-
-	@Override
-	public int getBytePosition() {
-		return filterId.getBytePosition();
 	}
 
 	/**

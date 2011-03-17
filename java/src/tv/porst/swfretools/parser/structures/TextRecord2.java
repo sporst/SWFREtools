@@ -1,10 +1,12 @@
 package tv.porst.swfretools.parser.structures;
 
 import tv.porst.splib.binaryparser.Flag;
+import tv.porst.splib.binaryparser.IFileElement;
 import tv.porst.splib.binaryparser.INT16;
 import tv.porst.splib.binaryparser.UBits;
 import tv.porst.splib.binaryparser.UINT16;
 import tv.porst.splib.binaryparser.UINT8;
+import tv.porst.swfretools.parser.SWFParserHelpers;
 
 /**
  * Represents a TextRecord2 structure.
@@ -118,8 +120,15 @@ public final class TextRecord2 implements IFileElement {
 	}
 
 	@Override
-	public int getBytePosition() {
-		return textRecordType.getBytePosition();
+	public int getBitLength() {
+		return SWFParserHelpers.addBitLengths(textRecordType, styleFlagsReserved, styleFlagsHasFont,
+				styleFlagsHasColor, styleFlagsHasYOffset, styleFlagsHasXOffset, fontId, textColor,
+				xOffset, yOffset, textHeight, glyphCount, glyphEntries);
+	}
+
+	@Override
+	public int getBitPosition() {
+		return textRecordType.getBitPosition();
 	}
 
 	/**

@@ -1,5 +1,6 @@
 package tv.porst.swfretools.parser.structures;
 
+import tv.porst.splib.binaryparser.IFileElement;
 import tv.porst.swfretools.parser.SWFParserHelpers;
 
 /**
@@ -8,12 +9,12 @@ import tv.porst.swfretools.parser.SWFParserHelpers;
  * @author sp
  *
  */
-public final class ByteArray {
+public final class ByteArray implements IFileElement {
 
 	/**
-	 * Byte position of the byte array in the input stream.
+	 * Bit position of the byte array in the input stream.
 	 */
-	private final int bytePosition;
+	private final int bitPosition;
 
 	/**
 	 * Byte array value.
@@ -23,19 +24,29 @@ public final class ByteArray {
 	/**
 	 * Creates a new byte array object.
 	 * 
-	 * @param bytePosition Byte position of the byte array in the input stream.
+	 * @param bitPosition Bit position of the byte array in the input stream.
 	 * @param value Byte array value.
 	 */
-	public ByteArray(final int bytePosition, final byte[] value) {
+	public ByteArray(final int bitPosition, final byte[] value) {
 
-		if (bytePosition < 0) {
-			throw new IllegalArgumentException("Byte position must not be negative");
+		if (bitPosition < 0) {
+			throw new IllegalArgumentException("Bit position must not be negative");
 		}
 
 		SWFParserHelpers.checkNull(value, "Value");
 
-		this.bytePosition = bytePosition;
+		this.bitPosition = bitPosition;
 		this.value = value.clone();
+	}
+
+	@Override
+	public int getBitLength() {
+		return value.length * 8;
+	}
+
+	@Override
+	public int getBitPosition() {
+		return bitPosition;
 	}
 
 	/**
@@ -44,7 +55,7 @@ public final class ByteArray {
 	 * @return The byte position of the byte array in the input stream.
 	 */
 	public int getBytePosition() {
-		return bytePosition;
+		return bitPosition;
 	}
 
 	/**

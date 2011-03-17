@@ -1,7 +1,9 @@
 package tv.porst.swfretools.parser.structures;
 
+import tv.porst.splib.binaryparser.IFileElement;
 import tv.porst.splib.binaryparser.UINT32;
 import tv.porst.splib.binaryparser.UINT8;
+import tv.porst.swfretools.parser.SWFParserHelpers;
 
 /**
  * Represents a ClipActionRecord structure.
@@ -67,8 +69,13 @@ public final class ClipActionRecord implements IFileElement {
 	}
 
 	@Override
-	public int getBytePosition() {
-		return eventFlags.getBytePosition();
+	public int getBitLength() {
+		return SWFParserHelpers.addBitLengths(eventFlags, actionRecordSize, keyCode, actions);
+	}
+
+	@Override
+	public int getBitPosition() {
+		return eventFlags.getBitPosition();
 	}
 
 	/**

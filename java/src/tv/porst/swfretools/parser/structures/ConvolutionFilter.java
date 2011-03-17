@@ -2,8 +2,10 @@ package tv.porst.swfretools.parser.structures;
 
 import tv.porst.splib.binaryparser.Flag;
 import tv.porst.splib.binaryparser.Float32;
+import tv.porst.splib.binaryparser.IFileElement;
 import tv.porst.splib.binaryparser.UBits;
 import tv.porst.splib.binaryparser.UINT8;
+import tv.porst.swfretools.parser.SWFParserHelpers;
 
 /**
  * Represents a ConvolutionFilter structure.
@@ -36,7 +38,7 @@ public final class ConvolutionFilter implements IFileElement {
 	/**
 	 * Matrix values.
 	 */
-	private final Float32[] matrix;
+	private final Float32List matrix;
 
 	/**
 	 * Default color for pixels outside the image.
@@ -72,14 +74,14 @@ public final class ConvolutionFilter implements IFileElement {
 	 * @param preserveAlpha Preserve the alpha flag.
 	 */
 	public ConvolutionFilter(final UINT8 matrixX, final UINT8 matrixY, final Float32 divisor,
-			final Float32 bias, final Float32[] matrix, final RGBA defaultColor, final UBits reserved,
+			final Float32 bias, final Float32List matrix, final RGBA defaultColor, final UBits reserved,
 			final Flag clamp, final Flag preserveAlpha) {
 
 		this.matrixX = matrixX;
 		this.matrixY = matrixY;
 		this.divisor = divisor;
 		this.bias = bias;
-		this.matrix = matrix == null ? matrix : matrix.clone();
+		this.matrix = matrix;
 		this.defaultColor = defaultColor;
 		this.reserved = reserved;
 		this.clamp = clamp;
@@ -96,8 +98,13 @@ public final class ConvolutionFilter implements IFileElement {
 	}
 
 	@Override
-	public int getBytePosition() {
-		return matrixX.getBytePosition();
+	public int getBitLength() {
+		return SWFParserHelpers.addBitLengths(matrixX, matrixY, divisor, bias, matrix, defaultColor, reserved, clamp);
+	}
+
+	@Override
+	public int getBitPosition() {
+		return matrixX.getBitPosition();
 	}
 
 	/**
@@ -132,8 +139,8 @@ public final class ConvolutionFilter implements IFileElement {
 	 *
 	 * @return The matrix values.
 	 */
-	public Float32[] getMatrix() {
-		return matrix == null ? matrix : matrix.clone();
+	public Float32List getMatrix() {
+		return matrix;
 	}
 
 	/**

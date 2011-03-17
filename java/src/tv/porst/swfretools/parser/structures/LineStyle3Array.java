@@ -1,7 +1,9 @@
 package tv.porst.swfretools.parser.structures;
 
+import tv.porst.splib.binaryparser.IFileElement;
 import tv.porst.splib.binaryparser.UINT16;
 import tv.porst.splib.binaryparser.UINT8;
+import tv.porst.swfretools.parser.SWFParserHelpers;
 
 /**
  * Represents a LineStyle3Array structure.
@@ -42,8 +44,13 @@ public class LineStyle3Array implements IFileElement {
 	}
 
 	@Override
-	public int getBytePosition() {
-		return lineStyleCount.getBytePosition();
+	public int getBitLength() {
+		return SWFParserHelpers.addBitLengths(lineStyleCount, lineStyleCountExtended, lineStyles);
+	}
+
+	@Override
+	public int getBitPosition() {
+		return lineStyleCount.getBitPosition();
 	}
 
 	/**

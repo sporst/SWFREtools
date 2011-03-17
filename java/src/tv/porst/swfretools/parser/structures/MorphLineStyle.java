@@ -1,6 +1,8 @@
 package tv.porst.swfretools.parser.structures;
 
+import tv.porst.splib.binaryparser.IFileElement;
 import tv.porst.splib.binaryparser.UINT16;
+import tv.porst.swfretools.parser.SWFParserHelpers;
 
 /**
  * Represents a MorphLineStyle structure.
@@ -48,8 +50,13 @@ public final class MorphLineStyle implements IFileElement {
 	}
 
 	@Override
-	public int getBytePosition() {
-		return startColor.getBytePosition();
+	public int getBitLength() {
+		return SWFParserHelpers.addBitLengths(startWidth, endWidth, startColor, endColor);
+	}
+
+	@Override
+	public int getBitPosition() {
+		return startColor.getBitPosition();
 	}
 
 	/**

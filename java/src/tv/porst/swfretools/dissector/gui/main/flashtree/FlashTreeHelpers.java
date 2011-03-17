@@ -1,6 +1,7 @@
 package tv.porst.swfretools.dissector.gui.main.flashtree;
 
 import tv.porst.swfretools.dissector.gui.main.flashtree.nodes.FlashFileNode;
+import tv.porst.swfretools.dissector.gui.main.flashtree.nodes.FlashFileNodeWrapper;
 import tv.porst.swfretools.dissector.gui.main.models.LoadedFile;
 
 public class FlashTreeHelpers {
@@ -9,6 +10,12 @@ public class FlashTreeHelpers {
 
 		if (root.getUserObject() == userObject) {
 			return root;
+		}
+
+		if (root.getUserObject() instanceof FlashFileNodeWrapper && userObject instanceof LoadedFile) {
+			if (((FlashFileNodeWrapper)root.getUserObject()).getLoadedFile() == userObject) {
+				return root;
+			}
 		}
 
 		for (int i = 0; i < root.getChildCount(); i++) {

@@ -1,8 +1,10 @@
 package tv.porst.swfretools.parser.structures;
 
-import tv.porst.splib.binaryparser.UBits;
 import tv.porst.splib.binaryparser.Flag;
+import tv.porst.splib.binaryparser.IFileElement;
+import tv.porst.splib.binaryparser.UBits;
 import tv.porst.splib.binaryparser.UINT16;
+import tv.porst.swfretools.parser.SWFParserHelpers;
 
 /**
  * Represents a ButtonRecord structure.
@@ -10,7 +12,7 @@ import tv.porst.splib.binaryparser.UINT16;
  * @author sp
  *
  */
-public final class ButtonRecord {
+public final class ButtonRecord implements IFileElement {
 
 	/**
 	 * Reserved bits.
@@ -92,6 +94,18 @@ public final class ButtonRecord {
 		this.characterId = characterId;
 		this.placeDepth = placeDepth;
 		this.placeMatrix = placeMatrix;
+	}
+
+	@Override
+	public int getBitLength() {
+		return SWFParserHelpers.addBitLengths(buttonReserved, buttonHasBlendMode, buttonHasFilterList,
+				buttonStateHitTest, buttonStateDown, buttonStateOver, buttonStateUp, characterId,
+				placeDepth, placeMatrix);
+	}
+
+	@Override
+	public int getBitPosition() {
+		return buttonReserved.getBitPosition();
 	}
 
 	/**

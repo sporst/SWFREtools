@@ -12,7 +12,9 @@ import tv.porst.swfretools.parser.SWFBinaryParser;
 import tv.porst.swfretools.parser.SWFParserException;
 import tv.porst.swfretools.parser.actions.Action;
 import tv.porst.swfretools.parser.actions.ActionRecordParser;
+import tv.porst.swfretools.parser.structures.ActionList;
 import tv.porst.swfretools.parser.structures.ButtonRecord;
+import tv.porst.swfretools.parser.structures.ButtonRecordList;
 import tv.porst.swfretools.parser.structures.ButtonRecordParser;
 import tv.porst.swfretools.parser.structures.RecordHeader;
 
@@ -50,12 +52,12 @@ public final class DefineButtonParser {
 
 		final UINT8 characterEndFlag = parseUINT8(parser, 0x00006, "DefineButton::CharacterEndFlag");
 
-		final int actionRecordSize = parser.getBytePosition() - header.getPosition() + header.getNormalizedLength() - 1;
+		final int actionRecordSize = parser.getBytePosition() - header.getBitPosition() / 8 + header.getNormalizedLength() - 1;
 
 		final List<Action> actions = ActionRecordParser.parse(parser, actionRecordSize);
 
 		final UINT8 actionEndFlag = parseUINT8(parser, 0x00006, "DefineButton::ActionEndFlag");
 
-		return new DefineButtonTag(header, buttonId, characters, characterEndFlag, actions, actionEndFlag);
+		return new DefineButtonTag(header, buttonId, new ButtonRecordList(characters), characterEndFlag, new ActionList(actions), actionEndFlag);
 	}
 }

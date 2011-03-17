@@ -1,5 +1,6 @@
 package tv.porst.swfretools.parser.tags;
 
+import tv.porst.splib.binaryparser.IFileElement;
 import tv.porst.swfretools.parser.structures.RecordHeader;
 
 /**
@@ -8,7 +9,7 @@ import tv.porst.swfretools.parser.structures.RecordHeader;
  * @author sp
  *
  */
-public abstract class Tag {
+public abstract class Tag implements IFileElement {
 
 	/**
 	 * The tag header.
@@ -23,6 +24,16 @@ public abstract class Tag {
 	public Tag(final RecordHeader header) {
 
 		this.header = header;
+	}
+
+	@Override
+	public int getBitLength() {
+		return 8 * header.getHeaderLength() + 8 * header.getNormalizedLength();
+	}
+
+	@Override
+	public int getBitPosition() {
+		return header.getBitPosition();
 	}
 
 	/**

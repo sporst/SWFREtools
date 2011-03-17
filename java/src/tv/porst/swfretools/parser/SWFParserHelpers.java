@@ -1,11 +1,14 @@
 package tv.porst.swfretools.parser;
 
+import java.util.List;
+
 import tv.porst.splib.binaryparser.AsciiString;
 import tv.porst.splib.binaryparser.BinaryParserHelpers;
 import tv.porst.splib.binaryparser.Bits;
 import tv.porst.splib.binaryparser.Flag;
 import tv.porst.splib.binaryparser.Float16;
 import tv.porst.splib.binaryparser.Float32;
+import tv.porst.splib.binaryparser.IFileElement;
 import tv.porst.splib.binaryparser.INT16;
 import tv.porst.splib.binaryparser.INT32;
 import tv.porst.splib.binaryparser.UBits;
@@ -21,6 +24,68 @@ import tv.porst.swfretools.parser.structures.ByteArray;
  *
  */
 public final class SWFParserHelpers {
+
+	/**
+	 * Throws an exception if less than a given number of bytes remain unparsed in the input stream.
+	 * 
+	 * @param parser The parser that provides the stream.
+	 * @param numberOfBytes The number of remaining bytes to check for.
+	 * @param errorCode The error code of the exception to be thrown.
+	 * @param fieldName Name of the field to be parsed.
+	 * 
+	 * @throws SWFParserException Thrown if fewer than the given number of bytes are left in the input stream.
+	 */
+	private static void throwIf(final SWFBinaryParser parser, final long numberOfBytes, final int errorCode, final String fieldName) throws SWFParserException {
+		if (!BinaryParserHelpers.hasBytesLeft(parser, numberOfBytes)) {
+			throw new SWFParserException(errorCode, parser.getBytePosition(), String.format("Read beyond file while parsing %s (%08X)", fieldName, parser.getBytePosition()));
+		}
+	}
+
+	/**
+	 * Throws an exception if less than a given number of bits remain unparsed in the input stream.
+	 * 
+	 * @param parser The parser that provides the stream.
+	 * @param numberOfBits The number of remaining bits to check for.
+	 * @param errorCode The error code of the exception to be thrown.
+	 * @param fieldName Name of the field to be parsed.
+	 * 
+	 * @throws SWFParserException Thrown if fewer than the given number of bits are left in the input stream.
+	 */
+	private static void throwIfB(final SWFBinaryParser parser, final int numberOfBits, final int errorCode, final String fieldName) throws SWFParserException {
+		if (!BinaryParserHelpers.hasBitsLeft(parser, numberOfBits)) {
+			throw new SWFParserException(errorCode, parser.getBytePosition(), String.format("Read beyond file while parsing %s (%08X)", fieldName, parser.getBytePosition()));
+		}
+	}
+
+	public static int addBitLengths(final IFileElement ... elements) {
+
+		int length = 0;
+
+		for (final IFileElement element : elements) {
+
+			if (element != null) {
+				length += element.getBitLength();
+			}
+		}
+
+		return length;
+
+	}
+
+	public static int addBitLengths(final List<? extends IFileElement> elements) {
+
+		int length = 0;
+
+		for (final IFileElement element : elements) {
+
+			if (element != null) {
+				length += element.getBitLength();
+			}
+		}
+
+		return length;
+
+	}
 
 	/**
 	 * Throws an exception if an argument is null.
@@ -49,7 +114,7 @@ public final class SWFParserHelpers {
 	public static ByteArray parseByteArray(final SWFBinaryParser parser, final long numberOfBytes, final int errorCode, final String fieldName) throws SWFParserException {
 		throwIf(parser, numberOfBytes, errorCode, fieldName);
 
-		return new ByteArray(parser.getBytePosition(), BinaryParserHelpers.readByteArray(parser, (int) numberOfBytes));
+		return new ByteArray(parser.getBytePosition() * 8 + parser.getBitPosition(), BinaryParserHelpers.readByteArray(parser, (int) numberOfBytes));
 	}
 
 	/**
@@ -168,7 +233,7 @@ public final class SWFParserHelpers {
 	 * @throws SWFParserException Thrown if parsing failed.
 	 */
 	public static INT16 parseINT16(final SWFBinaryParser parser, final int errorCode, final String fieldName) throws SWFParserException {
-		throwIf(parser, UINT16.LENGTH, errorCode, fieldName);
+		throwIf(parser, UINT16.BYTE_LENGTH, errorCode, fieldName);
 		return parser.readInt16();
 	}
 
@@ -216,7 +281,7 @@ public final class SWFParserHelpers {
 	 * @throws SWFParserException Thrown if parsing failed.
 	 */
 	public static INT32 parseINT32(final SWFBinaryParser parser, final int errorCode, final String fieldName) throws SWFParserException {
-		throwIf(parser, INT32.LENGTH, errorCode, fieldName);
+		throwIf(parser, INT32.BYTE_LENGTH, errorCode, fieldName);
 		return parser.readInt32();
 	}
 
@@ -382,7 +447,7 @@ public final class SWFParserHelpers {
 	 * @throws SWFParserException Thrown if parsing failed.
 	 */
 	public static UINT16 parseUINT16(final SWFBinaryParser parser, final int errorCode, final String fieldName) throws SWFParserException {
-		throwIf(parser, UINT16.LENGTH, errorCode, fieldName);
+		throwIf(parser, UINT16.BYTE_LENGTH, errorCode, fieldName);
 		return parser.readUInt16();
 	}
 
@@ -430,7 +495,7 @@ public final class SWFParserHelpers {
 	 * @throws SWFParserException Thrown if parsing failed.
 	 */
 	public static UINT32 parseUINT32(final SWFBinaryParser parser, final int errorCode, final String fieldName) throws SWFParserException {
-		throwIf(parser, UINT32.LENGTH, errorCode, fieldName);
+		throwIf(parser, UINT32.BYTE_LENGTH, errorCode, fieldName);
 		return parser.readUInt32();
 	}
 
@@ -462,7 +527,7 @@ public final class SWFParserHelpers {
 	 * @throws SWFParserException Thrown if parsing failed.
 	 */
 	public static UINT8 parseUINT8(final SWFBinaryParser parser, final int errorCode, final String fieldName) throws SWFParserException {
-		throwIf(parser, UINT8.LENGTH, errorCode, fieldName);
+		throwIf(parser, UINT8.BYTE_LENGTH, errorCode, fieldName);
 		return parser.readUInt8();
 	}
 
@@ -496,37 +561,5 @@ public final class SWFParserHelpers {
 	 */
 	public static UINT8 parseUINT8If(final SWFBinaryParser parser, final int errorCode, final Flag condition, final String fieldName) throws SWFParserException {
 		return condition.value() ? parseUINT8(parser, errorCode, fieldName) : null;
-	}
-
-	/**
-	 * Throws an exception if less than a given number of bytes remain unparsed in the input stream.
-	 * 
-	 * @param parser The parser that provides the stream.
-	 * @param numberOfBytes The number of remaining bytes to check for.
-	 * @param errorCode The error code of the exception to be thrown.
-	 * @param fieldName Name of the field to be parsed.
-	 * 
-	 * @throws SWFParserException Thrown if fewer than the given number of bytes are left in the input stream.
-	 */
-	private static void throwIf(final SWFBinaryParser parser, final long numberOfBytes, final int errorCode, final String fieldName) throws SWFParserException {
-		if (!BinaryParserHelpers.hasBytesLeft(parser, numberOfBytes)) {
-			throw new SWFParserException(errorCode, parser.getBytePosition(), String.format("Read beyond file while parsing %s (%08X)", fieldName, parser.getBytePosition()));
-		}
-	}
-
-	/**
-	 * Throws an exception if less than a given number of bits remain unparsed in the input stream.
-	 * 
-	 * @param parser The parser that provides the stream.
-	 * @param numberOfBits The number of remaining bits to check for.
-	 * @param errorCode The error code of the exception to be thrown.
-	 * @param fieldName Name of the field to be parsed.
-	 * 
-	 * @throws SWFParserException Thrown if fewer than the given number of bits are left in the input stream.
-	 */
-	private static void throwIfB(final SWFBinaryParser parser, final int numberOfBits, final int errorCode, final String fieldName) throws SWFParserException {
-		if (!BinaryParserHelpers.hasBitsLeft(parser, numberOfBits)) {
-			throw new SWFParserException(errorCode, parser.getBytePosition(), String.format("Read beyond file while parsing %s (%08X)", fieldName, parser.getBytePosition()));
-		}
 	}
 }

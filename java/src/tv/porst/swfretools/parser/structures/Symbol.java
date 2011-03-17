@@ -1,7 +1,9 @@
 package tv.porst.swfretools.parser.structures;
 
 import tv.porst.splib.binaryparser.AsciiString;
+import tv.porst.splib.binaryparser.IFileElement;
 import tv.porst.splib.binaryparser.UINT16;
+import tv.porst.swfretools.parser.SWFParserHelpers;
 
 /**
  * Represents a Symbol structure.
@@ -35,8 +37,13 @@ public final class Symbol implements IFileElement {
 	}
 
 	@Override
-	public int getBytePosition() {
-		return tag.getBytePosition();
+	public int getBitLength() {
+		return SWFParserHelpers.addBitLengths(tag, name);
+	}
+
+	@Override
+	public int getBitPosition() {
+		return tag.getBitPosition();
 	}
 
 	/**

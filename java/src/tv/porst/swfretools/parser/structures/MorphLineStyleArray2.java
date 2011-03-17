@@ -1,7 +1,9 @@
 package tv.porst.swfretools.parser.structures;
 
+import tv.porst.splib.binaryparser.IFileElement;
 import tv.porst.splib.binaryparser.UINT16;
 import tv.porst.splib.binaryparser.UINT8;
+import tv.porst.swfretools.parser.SWFParserHelpers;
 
 /**
  * Represents a MorphLineStyleArray2 structure.
@@ -9,7 +11,7 @@ import tv.porst.splib.binaryparser.UINT8;
  * @author sp
  *
  */
-public final class MorphLineStyleArray2 {
+public final class MorphLineStyleArray2 implements IFileElement {
 
 	/**
 	 * Count of line styles.
@@ -39,6 +41,16 @@ public final class MorphLineStyleArray2 {
 		this.lineStyleCount = lineStyleCount;
 		this.lineStyleCountExtended = lineStyleCountExtended;
 		this.lineStyles = lineStyles;
+	}
+
+	@Override
+	public int getBitLength() {
+		return lineStyleCount.getBitPosition();
+	}
+
+	@Override
+	public int getBitPosition() {
+		return SWFParserHelpers.addBitLengths(lineStyleCount, lineStyleCountExtended, lineStyles);
 	}
 
 	/**

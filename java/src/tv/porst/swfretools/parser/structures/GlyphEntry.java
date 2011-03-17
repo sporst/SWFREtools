@@ -1,7 +1,9 @@
 package tv.porst.swfretools.parser.structures;
 
 import tv.porst.splib.binaryparser.Bits;
+import tv.porst.splib.binaryparser.IFileElement;
 import tv.porst.splib.binaryparser.UBits;
+import tv.porst.swfretools.parser.SWFParserHelpers;
 
 /**
  * Represents a GlyphEntry structure.
@@ -43,8 +45,13 @@ public final class GlyphEntry implements IFileElement {
 	}
 
 	@Override
-	public int getBytePosition() {
-		return glyphIndex.getBytePosition();
+	public int getBitLength() {
+		return SWFParserHelpers.addBitLengths(glyphIndex, advanceIndex);
+	}
+
+	@Override
+	public int getBitPosition() {
+		return glyphIndex.getBitPosition();
 	}
 
 	/**

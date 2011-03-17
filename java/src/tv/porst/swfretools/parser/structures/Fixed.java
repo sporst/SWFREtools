@@ -1,6 +1,8 @@
 package tv.porst.swfretools.parser.structures;
 
+import tv.porst.splib.binaryparser.IFileElement;
 import tv.porst.splib.binaryparser.UINT16;
+import tv.porst.swfretools.parser.SWFParserHelpers;
 
 /**
  * Represents a FIXED structure.
@@ -8,7 +10,7 @@ import tv.porst.splib.binaryparser.UINT16;
  * @author sp
  *
  */
-public final class Fixed {
+public final class Fixed implements IFileElement {
 
 	/**
 	 * Integer part of the FIXED structure.
@@ -32,8 +34,14 @@ public final class Fixed {
 		this.decimal = decimal;
 	}
 
-	public int getBytePosition() {
-		return integer.getBytePosition();
+	@Override
+	public int getBitLength() {
+		return SWFParserHelpers.addBitLengths(integer, decimal);
+	}
+
+	@Override
+	public int getBitPosition() {
+		return integer.getBitPosition();
 	}
 
 	/**

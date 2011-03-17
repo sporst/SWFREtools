@@ -1,6 +1,8 @@
 package tv.porst.swfretools.parser.structures;
 
+import tv.porst.splib.binaryparser.IFileElement;
 import tv.porst.splib.binaryparser.UINT8;
+import tv.porst.swfretools.parser.SWFParserHelpers;
 
 /**
  * Represents an RGBA structure.
@@ -56,6 +58,16 @@ public final class RGBA implements IFileElement {
 		return alpha;
 	}
 
+	@Override
+	public int getBitLength() {
+		return SWFParserHelpers.addBitLengths(red, green, blue, alpha);
+	}
+
+	@Override
+	public int getBitPosition() {
+		return red.getBitPosition();
+	}
+
 	/**
 	 * Returns the blue color value.
 	 *
@@ -63,11 +75,6 @@ public final class RGBA implements IFileElement {
 	 */
 	public UINT8 getBlue() {
 		return blue;
-	}
-
-	@Override
-	public int getBytePosition() {
-		return red.getBytePosition();
 	}
 
 	/**

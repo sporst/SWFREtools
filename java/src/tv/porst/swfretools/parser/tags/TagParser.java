@@ -29,111 +29,9 @@ public final class TagParser {
 	 * @param header Header of the tag that could not be parsed.
 	 */
 	private static void jumpToNextTag(final BinaryParser parser, final RecordHeader header) {
-		final int nextTagPosition = header.getPosition() + header.getHeaderLength() + header.getLength();
+		final int nextTagPosition = header.getBitPosition() / 8 + header.getHeaderLength() + header.getLength();
 
 		parser.setPosition(nextTagPosition, 0);
-	}
-
-	/**
-	 * Parses tags until the input data is exhausted.
-	 * 
-	 * @param parser Provides the input data.
-	 * @param version Flash version number which was read from the SWF file header.
-	 * 
-	 * @return A list of parsed tags.
-	 */
-	public static TagParserResult parse(final SWFBinaryParser parser, final int version) {
-
-		if (parser == null) {
-			throw new IllegalArgumentException("Argument parser must not be null");
-		}
-
-		if (version <= 0) {
-			throw new IllegalArgumentException("Invalid Flash version number");
-		}
-
-		final List<ParserError> errors = new ArrayList<ParserError>();
-		final List<Tag> tags = new ArrayList<Tag>();
-
-		while (!parser.isDone())
-		{
-			final int before = parser.getBytePosition();
-
-			final Tag parsedTag = parseTag(parser, version, errors);
-
-			if (parsedTag != null) {
-				tags.add(parsedTag);
-
-				if (parser.getBytePosition() != before + parsedTag.getHeader().getNormalizedLength() + (parsedTag.getHeader().getHeaderLength()))
-				{
-					System.out.println(String.format("No: Wanted %X but was %X", before + parsedTag.getHeader().getNormalizedLength() + (parsedTag.getHeader().getHeaderLength()), parser.getBytePosition()));
-					if (parsedTag.getHeader().getTagCode() != 26 && parsedTag.getHeader().getTagCode() != 75 && parsedTag.getHeader().getTagCode() != 83) {
-						System.exit(0);
-					}
-
-					parser.setPosition(before + parsedTag.getHeader().getNormalizedLength() + (parsedTag.getHeader().getHeaderLength()), 0);
-				}
-			}
-		}
-
-		return new TagParserResult(new TagList(tags), errors);
-	}
-
-	/**
-	 * Parses tags until length bytes have been parsed or the input data is exhausted.
-	 * This method was added because some tags can contain subtags that must be parsed
-	 * separately.
-	 * 
-	 * @param parser Provides the input data.
-	 * @param version Flash version number which was read from the SWF file header.
-	 * @param length Number of bytes to parse.
-	 * 
-	 * @return A list of parsed tags.
-	 */
-	public static TagParserResult parse(final SWFBinaryParser parser, final int version, final int length) {
-
-		if (parser == null) {
-			throw new IllegalArgumentException("Argument parser must not be null");
-		}
-
-		if (version <= 0) {
-			throw new IllegalArgumentException("Invalid Flash version number");
-		}
-
-		if (length < 0) {
-			throw new IllegalArgumentException("Length argument must be positive");
-		}
-
-		final int start = parser.getBytePosition();
-
-		final List<Tag> tags = new ArrayList<Tag>();
-		final List<ParserError> errors = new ArrayList<ParserError>();
-
-		while (parser.getBytePosition() < start + length)
-		{
-			// TODO: I suspect checking parser.isDone here is not needed but I have to test that.
-
-			final int before = parser.getBytePosition();
-
-			final Tag parsedTag = parseTag(parser, version, errors);
-
-			if (parsedTag != null) {
-				tags.add(parsedTag);
-			}
-
-
-			if (parser.getBytePosition() != before + parsedTag.getHeader().getNormalizedLength() + (parsedTag.getHeader().getHeaderLength()))
-			{
-				System.out.println(String.format("No: Wanted %X but was %X", before + parsedTag.getHeader().getNormalizedLength() + (parsedTag.getHeader().getHeaderLength()), parser.getBytePosition()));
-				if (parsedTag.getHeader().getTagCode() != 26 && parsedTag.getHeader().getTagCode() != 75 && parsedTag.getHeader().getTagCode() != 83) {
-					System.exit(0);
-				}
-
-				parser.setPosition(before + parsedTag.getHeader().getNormalizedLength() + (parsedTag.getHeader().getHeaderLength()), 0);
-			}
-		}
-
-		return new TagParserResult(new TagList(tags), errors);
 	}
 
 	/**
@@ -270,7 +168,7 @@ public final class TagParser {
 			case TagCodes.DoABC: return DoABCParser.parse(header, parser);
 			}
 
-			errors.add(new ParserError(header.getTagAndLength().getBytePosition(), String.format("Tried to parse tag with unknown tag code 0x%02X", header.getTagCode())));
+			errors.add(new ParserError(header.getTagAndLength().getBitPosition(), String.format("Tried to parse tag with unknown tag code 0x%02X", header.getTagCode())));
 
 			// We do not know the type of this tag but we can try to continue parsing at the next tag
 			jumpToNextTag(parser, header);
@@ -287,6 +185,108 @@ public final class TagParser {
 
 			return null;
 		}
+	}
+
+	/**
+	 * Parses tags until the input data is exhausted.
+	 * 
+	 * @param parser Provides the input data.
+	 * @param version Flash version number which was read from the SWF file header.
+	 * 
+	 * @return A list of parsed tags.
+	 */
+	public static TagParserResult parse(final SWFBinaryParser parser, final int version) {
+
+		if (parser == null) {
+			throw new IllegalArgumentException("Argument parser must not be null");
+		}
+
+		if (version <= 0) {
+			throw new IllegalArgumentException("Invalid Flash version number");
+		}
+
+		final List<ParserError> errors = new ArrayList<ParserError>();
+		final List<Tag> tags = new ArrayList<Tag>();
+
+		while (!parser.isDone())
+		{
+			final int before = parser.getBytePosition();
+
+			final Tag parsedTag = parseTag(parser, version, errors);
+
+			if (parsedTag != null) {
+				tags.add(parsedTag);
+
+				if (parser.getBytePosition() != before + parsedTag.getHeader().getNormalizedLength() + (parsedTag.getHeader().getHeaderLength()))
+				{
+					System.out.println(String.format("No: Wanted %X but was %X", before + parsedTag.getHeader().getNormalizedLength() + (parsedTag.getHeader().getHeaderLength()), parser.getBytePosition()));
+					if (parsedTag.getHeader().getTagCode() != 26 && parsedTag.getHeader().getTagCode() != 75 && parsedTag.getHeader().getTagCode() != 83) {
+						System.exit(0);
+					}
+
+					parser.setPosition(before + parsedTag.getHeader().getNormalizedLength() + (parsedTag.getHeader().getHeaderLength()), 0);
+				}
+			}
+		}
+
+		return new TagParserResult(new TagList(tags), errors);
+	}
+
+	/**
+	 * Parses tags until length bytes have been parsed or the input data is exhausted.
+	 * This method was added because some tags can contain subtags that must be parsed
+	 * separately.
+	 * 
+	 * @param parser Provides the input data.
+	 * @param version Flash version number which was read from the SWF file header.
+	 * @param length Number of bytes to parse.
+	 * 
+	 * @return A list of parsed tags.
+	 */
+	public static TagParserResult parse(final SWFBinaryParser parser, final int version, final int length) {
+
+		if (parser == null) {
+			throw new IllegalArgumentException("Argument parser must not be null");
+		}
+
+		if (version <= 0) {
+			throw new IllegalArgumentException("Invalid Flash version number");
+		}
+
+		if (length < 0) {
+			throw new IllegalArgumentException("Length argument must be positive");
+		}
+
+		final int start = parser.getBytePosition();
+
+		final List<Tag> tags = new ArrayList<Tag>();
+		final List<ParserError> errors = new ArrayList<ParserError>();
+
+		while (parser.getBytePosition() < start + length)
+		{
+			// TODO: I suspect checking parser.isDone here is not needed but I have to test that.
+
+			final int before = parser.getBytePosition();
+
+			final Tag parsedTag = parseTag(parser, version, errors);
+
+			if (parsedTag != null) {
+				tags.add(parsedTag);
+			}
+
+
+			if (parser.getBytePosition() != before + parsedTag.getHeader().getNormalizedLength() + (parsedTag.getHeader().getHeaderLength()))
+			{
+				System.out.println(String.format("No: Wanted %X but was %X", before + parsedTag.getHeader().getNormalizedLength() + (parsedTag.getHeader().getHeaderLength()), parser.getBytePosition()));
+				if (parsedTag.getHeader().getTagCode() != 26 && parsedTag.getHeader().getTagCode() != 75 && parsedTag.getHeader().getTagCode() != 83) {
+					System.exit(0);
+				}
+
+				parser.setPosition(before + parsedTag.getHeader().getNormalizedLength() + (parsedTag.getHeader().getHeaderLength()), 0);
+			}
+		}
+
+		return new TagParserResult(new TagList(tags), errors);
 	}
 
 }

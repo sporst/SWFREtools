@@ -7,6 +7,7 @@ import tv.porst.splib.binaryparser.Bits;
 import tv.porst.splib.binaryparser.Flag;
 import tv.porst.splib.binaryparser.Float16;
 import tv.porst.splib.binaryparser.Float32;
+import tv.porst.splib.binaryparser.IFileElement;
 import tv.porst.splib.binaryparser.INT16;
 import tv.porst.splib.binaryparser.INT32;
 import tv.porst.splib.binaryparser.INT64;
@@ -17,98 +18,10 @@ import tv.porst.splib.binaryparser.UINT32;
 import tv.porst.splib.binaryparser.UINT8;
 import tv.porst.swfretools.dissector.gui.main.flashtree.nodes.*;
 import tv.porst.swfretools.parser.actions.Action;
-import tv.porst.swfretools.parser.structures.ActionList;
-import tv.porst.swfretools.parser.structures.BevelFilter;
-import tv.porst.swfretools.parser.structures.BlurFilter;
-import tv.porst.swfretools.parser.structures.ButtonCondAction;
-import tv.porst.swfretools.parser.structures.ButtonCondActionList;
-import tv.porst.swfretools.parser.structures.ButtonRecord2;
-import tv.porst.swfretools.parser.structures.ButtonRecord2List;
-import tv.porst.swfretools.parser.structures.ByteArray;
-import tv.porst.swfretools.parser.structures.ClipActionRecord;
-import tv.porst.swfretools.parser.structures.ClipActionRecordList;
-import tv.porst.swfretools.parser.structures.ClipActions;
-import tv.porst.swfretools.parser.structures.ClipEventFlags;
-import tv.porst.swfretools.parser.structures.ColorMatrixFilter;
-import tv.porst.swfretools.parser.structures.ConvolutionFilter;
-import tv.porst.swfretools.parser.structures.CxForm;
-import tv.porst.swfretools.parser.structures.CxFormWithAlpha;
-import tv.porst.swfretools.parser.structures.DropShadowFilter;
-import tv.porst.swfretools.parser.structures.FillStyle;
-import tv.porst.swfretools.parser.structures.FillStyle3;
-import tv.porst.swfretools.parser.structures.FillStyle3Array;
-import tv.porst.swfretools.parser.structures.FillStyle3List;
-import tv.porst.swfretools.parser.structures.FillStyleArray;
-import tv.porst.swfretools.parser.structures.FillStyleList;
-import tv.porst.swfretools.parser.structures.Filter;
-import tv.porst.swfretools.parser.structures.FilterList;
-import tv.porst.swfretools.parser.structures.Fixed;
-import tv.porst.swfretools.parser.structures.Fixed8;
-import tv.porst.swfretools.parser.structures.GlowFilter;
-import tv.porst.swfretools.parser.structures.GlyphEntry;
-import tv.porst.swfretools.parser.structures.GlyphEntryList;
-import tv.porst.swfretools.parser.structures.GradRecord;
-import tv.porst.swfretools.parser.structures.GradRecord3;
-import tv.porst.swfretools.parser.structures.GradRecord3List;
-import tv.porst.swfretools.parser.structures.GradRecordList;
-import tv.porst.swfretools.parser.structures.GradientBevelFilter;
-import tv.porst.swfretools.parser.structures.GradientGlowFilter;
-import tv.porst.swfretools.parser.structures.IGradient;
-import tv.porst.swfretools.parser.structures.LineStyle;
-import tv.porst.swfretools.parser.structures.LineStyle3;
-import tv.porst.swfretools.parser.structures.LineStyle3Array;
-import tv.porst.swfretools.parser.structures.LineStyle3List;
-import tv.porst.swfretools.parser.structures.LineStyle4;
-import tv.porst.swfretools.parser.structures.LineStyle4Array;
-import tv.porst.swfretools.parser.structures.LineStyle4List;
-import tv.porst.swfretools.parser.structures.LineStyleArray;
-import tv.porst.swfretools.parser.structures.LineStyleList;
-import tv.porst.swfretools.parser.structures.Matrix;
-import tv.porst.swfretools.parser.structures.MorphFillStyle;
-import tv.porst.swfretools.parser.structures.MorphFillStyleArray;
-import tv.porst.swfretools.parser.structures.MorphFillStyleList;
-import tv.porst.swfretools.parser.structures.MorphGradient;
-import tv.porst.swfretools.parser.structures.MorphGradientRecord;
-import tv.porst.swfretools.parser.structures.MorphGradientRecordList;
-import tv.porst.swfretools.parser.structures.MorphLineStyle;
-import tv.porst.swfretools.parser.structures.MorphLineStyle2;
-import tv.porst.swfretools.parser.structures.MorphLineStyle2List;
-import tv.porst.swfretools.parser.structures.MorphLineStyleArray;
-import tv.porst.swfretools.parser.structures.MorphLineStyleArray2;
-import tv.porst.swfretools.parser.structures.MorphLineStyleList;
-import tv.porst.swfretools.parser.structures.ParsedINTElementList;
-import tv.porst.swfretools.parser.structures.RGB;
-import tv.porst.swfretools.parser.structures.RGBA;
-import tv.porst.swfretools.parser.structures.RecordHeader;
-import tv.porst.swfretools.parser.structures.Rect;
-import tv.porst.swfretools.parser.structures.Shape;
-import tv.porst.swfretools.parser.structures.Shape3Record;
-import tv.porst.swfretools.parser.structures.Shape3RecordList;
-import tv.porst.swfretools.parser.structures.ShapeList;
-import tv.porst.swfretools.parser.structures.ShapeRecord;
-import tv.porst.swfretools.parser.structures.ShapeRecordList;
-import tv.porst.swfretools.parser.structures.ShapeWithStyle;
-import tv.porst.swfretools.parser.structures.ShapeWithStyle3;
-import tv.porst.swfretools.parser.structures.ShapeWithStyle4;
-import tv.porst.swfretools.parser.structures.SingleFilterList;
-import tv.porst.swfretools.parser.structures.SoundEnvelope;
-import tv.porst.swfretools.parser.structures.SoundEnvelopeList;
-import tv.porst.swfretools.parser.structures.SoundInfo;
-import tv.porst.swfretools.parser.structures.Symbol;
-import tv.porst.swfretools.parser.structures.SymbolList;
-import tv.porst.swfretools.parser.structures.TagList;
-import tv.porst.swfretools.parser.structures.TextRecord;
-import tv.porst.swfretools.parser.structures.TextRecord2;
-import tv.porst.swfretools.parser.structures.TextRecord2List;
-import tv.porst.swfretools.parser.structures.TextRecordList;
-import tv.porst.swfretools.parser.structures.UINT16List;
-import tv.porst.swfretools.parser.structures.ZoneData;
-import tv.porst.swfretools.parser.structures.ZoneDataList;
-import tv.porst.swfretools.parser.structures.ZoneRecord;
-import tv.porst.swfretools.parser.structures.ZoneRecordList;
+import tv.porst.swfretools.parser.structures.*;
 import tv.porst.swfretools.parser.tags.Tag;
 
-public class FlashTreeNode<T> extends DefaultMutableTreeNode {
+public class FlashTreeNode<T extends IFileElement> extends DefaultMutableTreeNode {
 
 	private final String name;
 
@@ -166,6 +79,12 @@ public class FlashTreeNode<T> extends DefaultMutableTreeNode {
 		}
 	}
 
+	protected void addNode(final String name, final ButtonRecord value) {
+		if (value != null) {
+			add(new FlashButtonRecordNode(name, value));
+		}
+	}
+
 	protected void addNode(final String name, final ButtonRecord2 value) {
 		if (value != null) {
 			add(new FlashButtonRecord2Node(name, value));
@@ -175,6 +94,12 @@ public class FlashTreeNode<T> extends DefaultMutableTreeNode {
 	protected void addNode(final String name, final ButtonRecord2List value) {
 		if (value != null) {
 			add(new FlashButtonRecord2ListNode(name, value));
+		}
+	}
+
+	protected void addNode(final String name, final ButtonRecordList value) {
+		if (value != null) {
+			add(new FlashButtonRecordListNode(name, value));
 		}
 	}
 
@@ -235,6 +160,12 @@ public class FlashTreeNode<T> extends DefaultMutableTreeNode {
 	protected void addNode(final String name, final DropShadowFilter value) {
 		if (value != null) {
 			add(new FlashDropShadowFilterNode(name, value));
+		}
+	}
+
+	protected void addNode(final String name, final EncodedU32 value) {
+		if (value != null) {
+			add(new FlashEncodedU32Node(name, value));
 		}
 	}
 
@@ -316,9 +247,21 @@ public class FlashTreeNode<T> extends DefaultMutableTreeNode {
 		}
 	}
 
-	protected void addNode(final String name, final Float32[] value) {
+	protected void addNode(final String name, final Float32List value) {
 		if (value != null) {
 			add(new FlashFloat32ArrayNode(name, value));
+		}
+	}
+
+	protected void addNode(final String name, final FrameLabel value) {
+		if (value != null) {
+			add(new FlashFrameLabelNode(name, value));
+		}
+	}
+
+	protected void addNode(final String name, final FrameLabelList value) {
+		if (value != null) {
+			add(new FlashFrameLabelListNode(name, value));
 		}
 	}
 
@@ -388,6 +331,12 @@ public class FlashTreeNode<T> extends DefaultMutableTreeNode {
 		}
 	}
 
+	protected void addNode(final String name, final INT16List value) {
+		if (value != null) {
+			add(new FlashINT16ListNode(name, value));
+		}
+	}
+
 	protected void addNode(final String name, final INT32 value) {
 		if (value != null) {
 			add(new FlashINT32Node(name, value));
@@ -414,6 +363,18 @@ public class FlashTreeNode<T> extends DefaultMutableTreeNode {
 			else {
 				throw new IllegalStateException("Error: Unknown int element");
 			}
+		}
+	}
+
+	protected void addNode(final String name, final KerningRecord value) {
+		if (value != null) {
+			add(new FlashKerningRecordNode(name, value));
+		}
+	}
+
+	protected void addNode(final String name, final KerningRecordList value) {
+		if (value != null) {
+			add(new FlashKerningRecordListNode(name, value));
 		}
 	}
 
@@ -567,6 +528,12 @@ public class FlashTreeNode<T> extends DefaultMutableTreeNode {
 		}
 	}
 
+	protected void addNode(final String name, final RectList value) {
+		if (value != null) {
+			add(new FlashRectListNode(name, value));
+		}
+	}
+
 	protected void addNode(final String name, final RGB value) {
 		if (value != null) {
 			add(new FlashRGBNode(name, value));
@@ -579,15 +546,39 @@ public class FlashTreeNode<T> extends DefaultMutableTreeNode {
 		}
 	}
 
-	protected void addNode(final String name, final RGBA[] value) {
+	protected void addNode(final String name, final RGBAList value) {
 		if (value != null) {
 			add(new FlashRGBAArrayNode(name, value));
+		}
+	}
+
+	protected void addNode(final String name, final SceneName value) {
+		if (value != null) {
+			add(new FlashSceneNameNode(name, value));
+		}
+	}
+
+	protected void addNode(final String name, final SceneNameList value) {
+		if (value != null) {
+			add(new FlashSceneNameListNode(name, value));
 		}
 	}
 
 	protected void addNode(final String name, final Shape value) {
 		if (value != null) {
 			add(new FlashShapeNode(name, value));
+		}
+	}
+
+	protected void addNode(final String name, final Shape3 value) {
+		if (value != null) {
+			add(new FlashShape3Node(name, value));
+		}
+	}
+
+	protected void addNode(final String name, final Shape3List value) {
+		if (value != null) {
+			add(new FlashShape3ListNode(name, value));
 		}
 	}
 
@@ -741,9 +732,9 @@ public class FlashTreeNode<T> extends DefaultMutableTreeNode {
 		}
 	}
 
-	protected void addNode(final String name, final UINT8[] value) {
+	protected void addNode(final String name, final UINT8List value) {
 		if (value != null) {
-			add(new FlashUINT8ArrayNode(name, value));
+			add(new FlashUINT8ListNode(name, value));
 		}
 	}
 

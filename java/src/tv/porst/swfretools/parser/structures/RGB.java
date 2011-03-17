@@ -1,6 +1,8 @@
 package tv.porst.swfretools.parser.structures;
 
+import tv.porst.splib.binaryparser.IFileElement;
 import tv.porst.splib.binaryparser.UINT8;
+import tv.porst.swfretools.parser.SWFParserHelpers;
 
 /**
  * Represents an RGB structure.
@@ -8,7 +10,7 @@ import tv.porst.splib.binaryparser.UINT8;
  * @author sp
  *
  */
-public final class RGB {
+public final class RGB implements IFileElement {
 
 	/**
 	 * Red color value.
@@ -37,6 +39,16 @@ public final class RGB {
 		this.red = red;
 		this.green = green;
 		this.blue = blue;
+	}
+
+	@Override
+	public int getBitLength() {
+		return SWFParserHelpers.addBitLengths(red, green, blue);
+	}
+
+	@Override
+	public int getBitPosition() {
+		return red.getBitPosition();
 	}
 
 	/**

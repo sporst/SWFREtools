@@ -1,7 +1,9 @@
 package tv.porst.swfretools.parser.structures;
 
+import tv.porst.splib.binaryparser.IFileElement;
 import tv.porst.splib.binaryparser.IParsedINTElement;
 import tv.porst.splib.binaryparser.UINT16;
+import tv.porst.swfretools.parser.SWFParserHelpers;
 
 /**
  * Represents a ClipActions structure.
@@ -58,8 +60,13 @@ public final class ClipActions implements IFileElement {
 	}
 
 	@Override
-	public int getBytePosition() {
-		return reserved.getBytePosition();
+	public int getBitLength() {
+		return SWFParserHelpers.addBitLengths(reserved, allEventFlags, clipActionRecords, clipActionEndFlag);
+	}
+
+	@Override
+	public int getBitPosition() {
+		return reserved.getBitPosition();
 	}
 
 	/**

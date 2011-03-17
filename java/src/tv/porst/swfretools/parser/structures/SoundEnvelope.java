@@ -1,7 +1,9 @@
 package tv.porst.swfretools.parser.structures;
 
+import tv.porst.splib.binaryparser.IFileElement;
 import tv.porst.splib.binaryparser.UINT16;
 import tv.porst.splib.binaryparser.UINT32;
+import tv.porst.swfretools.parser.SWFParserHelpers;
 
 /**
  * Represents a SoundEnvelope structure.
@@ -42,8 +44,13 @@ public final class SoundEnvelope implements IFileElement {
 	}
 
 	@Override
-	public int getBytePosition() {
-		return pos44.getBytePosition();
+	public int getBitLength() {
+		return SWFParserHelpers.addBitLengths(pos44, leftLevel, rightLevel);
+	}
+
+	@Override
+	public int getBitPosition() {
+		return pos44.getBitPosition();
 	}
 
 	/**

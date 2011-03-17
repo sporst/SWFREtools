@@ -1,6 +1,8 @@
 package tv.porst.swfretools.parser.structures;
 
+import tv.porst.splib.binaryparser.IFileElement;
 import tv.porst.splib.binaryparser.UBits;
+import tv.porst.swfretools.parser.SWFParserHelpers;
 
 /**
  * Represents a Shape structure.
@@ -41,8 +43,13 @@ public final class Shape implements IFileElement {
 	}
 
 	@Override
-	public int getBytePosition() {
-		return numFillBits.getBytePosition();
+	public int getBitLength() {
+		return SWFParserHelpers.addBitLengths(numFillBits, numLineBits, shapeRecords);
+	}
+
+	@Override
+	public int getBitPosition() {
+		return numFillBits.getBitPosition();
 	}
 
 	/**

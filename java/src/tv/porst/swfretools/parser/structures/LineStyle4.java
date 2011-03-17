@@ -1,8 +1,10 @@
 package tv.porst.swfretools.parser.structures;
 
 import tv.porst.splib.binaryparser.Flag;
+import tv.porst.splib.binaryparser.IFileElement;
 import tv.porst.splib.binaryparser.UBits;
 import tv.porst.splib.binaryparser.UINT16;
+import tv.porst.swfretools.parser.SWFParserHelpers;
 
 /**
  * Represents a LineStyle4 structure.
@@ -117,8 +119,15 @@ public class LineStyle4 implements IFileElement {
 	}
 
 	@Override
-	public int getBytePosition() {
-		return width.getBytePosition();
+	public int getBitLength() {
+		return SWFParserHelpers.addBitLengths(width, startCapStyle, joinStyle, hasFillFlag, noHScaleFlag,
+				noVScaleFlag, pixelHintingFlag, reserved, noClose, endCapStyle, miterLimitFactor, color,
+				fillType);
+	}
+
+	@Override
+	public int getBitPosition() {
+		return width.getBitPosition();
 	}
 
 	/**

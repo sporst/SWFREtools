@@ -8,9 +8,11 @@ import tv.porst.swfretools.parser.SWFParserException;
 import tv.porst.swfretools.parser.structures.EncodedU32;
 import tv.porst.swfretools.parser.structures.EncodedU32Parser;
 import tv.porst.swfretools.parser.structures.FrameLabel;
+import tv.porst.swfretools.parser.structures.FrameLabelList;
 import tv.porst.swfretools.parser.structures.FrameLabelsParser;
 import tv.porst.swfretools.parser.structures.RecordHeader;
 import tv.porst.swfretools.parser.structures.SceneName;
+import tv.porst.swfretools.parser.structures.SceneNameList;
 import tv.porst.swfretools.parser.structures.SceneNameParser;
 
 /**
@@ -48,6 +50,6 @@ public final class DefineSceneAndFrameLabelDataParser {
 			frameLabels.add(FrameLabelsParser.parse(parser, String.format("DefineSceneAndFrameLabelData::FrameLabels[%d]", i)));
 		}
 
-		return new DefineSceneAndFrameLabelDataTag(header, sceneCount, sceneNames, frameLabelCount, frameLabels);
+		return new DefineSceneAndFrameLabelDataTag(header, sceneCount, new SceneNameList(sceneNames), frameLabelCount, new FrameLabelList(frameLabels));
 	}
 }

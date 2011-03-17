@@ -1,12 +1,9 @@
 package tv.porst.swfretools.parser.tags;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import tv.porst.swfretools.parser.structures.EncodedU32;
-import tv.porst.swfretools.parser.structures.FrameLabel;
+import tv.porst.swfretools.parser.structures.FrameLabelList;
 import tv.porst.swfretools.parser.structures.RecordHeader;
-import tv.porst.swfretools.parser.structures.SceneName;
+import tv.porst.swfretools.parser.structures.SceneNameList;
 
 /**
  * Represents a DefineSceneAndFrameLabelData tag.
@@ -24,7 +21,7 @@ public final class DefineSceneAndFrameLabelDataTag extends Tag {
 	/**
 	 * List of scene names.
 	 */
-	private final List<SceneName> sceneNames;
+	private final SceneNameList sceneNames;
 
 	/**
 	 * Number of frame labels.
@@ -34,7 +31,7 @@ public final class DefineSceneAndFrameLabelDataTag extends Tag {
 	/**
 	 * List of frame labels.
 	 */
-	private final List<FrameLabel> frameLabels;
+	private final FrameLabelList frameLabels;
 
 	/**
 	 * Creates a new StartSound2 tag object.
@@ -46,14 +43,14 @@ public final class DefineSceneAndFrameLabelDataTag extends Tag {
 	 * @param frameLabels List of frame labels.
 	 */
 	public DefineSceneAndFrameLabelDataTag(final RecordHeader header,
-			final EncodedU32 sceneCount, final List<SceneName> sceneNames, final EncodedU32 frameLabelCount,
-			final List<FrameLabel> frameLabels) {
+			final EncodedU32 sceneCount, final SceneNameList sceneNames, final EncodedU32 frameLabelCount,
+			final FrameLabelList frameLabels) {
 		super(header);
 
 		this.sceneCount = sceneCount;
-		this.sceneNames = new ArrayList<SceneName>(sceneNames);
+		this.sceneNames = sceneNames;
 		this.frameLabelCount = frameLabelCount;
-		this.frameLabels = new ArrayList<FrameLabel>(frameLabels);
+		this.frameLabels = frameLabels;
 	}
 
 	/**
@@ -70,7 +67,7 @@ public final class DefineSceneAndFrameLabelDataTag extends Tag {
 	 * 
 	 * @return The list of frame labels.
 	 */
-	public List<FrameLabel> getFrameLabels() {
+	public FrameLabelList getFrameLabels() {
 		return frameLabels;
 	}
 
@@ -88,7 +85,7 @@ public final class DefineSceneAndFrameLabelDataTag extends Tag {
 	 * 
 	 * @return The list of scene names.
 	 */
-	public List<SceneName> getSceneNames() {
+	public SceneNameList getSceneNames() {
 		return sceneNames;
 	}
 }

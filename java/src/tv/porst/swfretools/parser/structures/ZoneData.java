@@ -1,6 +1,8 @@
 package tv.porst.swfretools.parser.structures;
 
 import tv.porst.splib.binaryparser.Float16;
+import tv.porst.splib.binaryparser.IFileElement;
+import tv.porst.swfretools.parser.SWFParserHelpers;
 
 /**
  * Represents a ZoneData structure.
@@ -43,8 +45,13 @@ public final class ZoneData implements IFileElement {
 	}
 
 	@Override
-	public int getBytePosition() {
-		return alignmentCoordinate.getBytePosition();
+	public int getBitLength() {
+		return SWFParserHelpers.addBitLengths(alignmentCoordinate, range);
+	}
+
+	@Override
+	public int getBitPosition() {
+		return alignmentCoordinate.getBitPosition();
 	}
 
 	/**

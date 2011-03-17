@@ -1,10 +1,14 @@
 package tv.porst.swfretools.parser.structures;
 
-import static tv.porst.swfretools.parser.SWFParserHelpers.parseUBits;
 import static tv.porst.swfretools.parser.SWFParserHelpers.parseFlag;
+import static tv.porst.swfretools.parser.SWFParserHelpers.parseUBits;
 import static tv.porst.swfretools.parser.SWFParserHelpers.parseUINT8;
-import tv.porst.splib.binaryparser.UBits;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import tv.porst.splib.binaryparser.Flag;
+import tv.porst.splib.binaryparser.UBits;
 import tv.porst.splib.binaryparser.UINT8;
 import tv.porst.swfretools.parser.SWFBinaryParser;
 import tv.porst.swfretools.parser.SWFParserException;
@@ -30,16 +34,16 @@ public final class GradientBevelFilterParser {
 
 		final UINT8 numColors = parseUINT8(parser, 0x00006, fieldName + "::NumColors");
 
-		final RGBA[] gradientColors = new RGBA[numColors.value()];
+		final List<RGBA> gradientColors = new ArrayList<RGBA>();
 
 		for (int i=0;i<numColors.value();i++) {
-			gradientColors[i] = RGBAParser.parse(parser, String.format(fieldName + "::GradientColors[%d]", i));
+			gradientColors.add(RGBAParser.parse(parser, String.format(fieldName + "::GradientColors[%d]", i)));
 		}
 
-		final UINT8[] gradientRatio = new UINT8[numColors.value()];
+		final List<UINT8> gradientRatio = new ArrayList<UINT8>();
 
 		for (int i=0;i<numColors.value();i++) {
-			gradientRatio[i] = parseUINT8(parser, 0x00006, String.format(fieldName + "::GradientRatio[%d]", i));
+			gradientRatio.add(parseUINT8(parser, 0x00006, String.format(fieldName + "::GradientRatio[%d]", i)));
 		}
 
 		final Fixed blurX = FixedParser.parse(parser, fieldName + "::BlurX");
@@ -53,6 +57,6 @@ public final class GradientBevelFilterParser {
 		final Flag onTop = parseFlag(parser, 0x00006, fieldName + "::OnTop");
 		final UBits passes = parseUBits(parser, 4, 0x00006, fieldName + "::Passes");
 
-		return new GradientBevelFilter(numColors, gradientColors, gradientRatio, blurX, blurY, angle, distance, strength, innerShadow, knockout, compositeSource, onTop, passes);
+		return new GradientBevelFilter(numColors, new RGBAList(gradientColors), new UINT8List(gradientRatio), blurX, blurY, angle, distance, strength, innerShadow, knockout, compositeSource, onTop, passes);
 	}
 }
