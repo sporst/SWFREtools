@@ -9,8 +9,8 @@ import tv.porst.splib.binaryparser.UINT32;
 import tv.porst.splib.binaryparser.UINT8;
 import tv.porst.swfretools.parser.SWFBinaryParser;
 import tv.porst.swfretools.parser.SWFParserException;
-import tv.porst.swfretools.parser.actions.Action;
-import tv.porst.swfretools.parser.actions.ActionRecordParser;
+import tv.porst.swfretools.parser.actions.as2.Action;
+import tv.porst.swfretools.parser.actions.as2.ActionRecordParser;
 
 /**
  * Parses ClipActionRecord structures.
@@ -35,7 +35,7 @@ public final class ClipActionRecordParser {
 		final ClipEventFlags eventFlags = ClipEventFlagsParser.parse(parser, version, fieldName);
 		final UINT32 actionRecordSize = parseUINT32(parser, 0x00006, fieldName + "::ActionRecordSize");
 		final UINT8 keyCode = parseUINT8If(parser, 0x00006, eventFlags.getClipEventKeyPress(), fieldName + "::ClipActionsEndFlag");
-		final List<Action> actions = ActionRecordParser.parse(parser, actionRecordSize.value());
+		final List<Action> actions = ActionRecordParser.parse(parser, actionRecordSize.value(), fieldName + "::Actions");
 
 		return new ClipActionRecord(eventFlags, actionRecordSize, keyCode, new ActionList(actions));
 	}

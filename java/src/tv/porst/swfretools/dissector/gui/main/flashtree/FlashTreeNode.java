@@ -1,7 +1,5 @@
 package tv.porst.swfretools.dissector.gui.main.flashtree;
 
-import javax.swing.tree.DefaultMutableTreeNode;
-
 import tv.porst.splib.binaryparser.AsciiString;
 import tv.porst.splib.binaryparser.Bits;
 import tv.porst.splib.binaryparser.Flag;
@@ -16,12 +14,13 @@ import tv.porst.splib.binaryparser.UBits;
 import tv.porst.splib.binaryparser.UINT16;
 import tv.porst.splib.binaryparser.UINT32;
 import tv.porst.splib.binaryparser.UINT8;
+import tv.porst.splib.gui.tree.IconNode;
 import tv.porst.swfretools.dissector.gui.main.flashtree.nodes.*;
-import tv.porst.swfretools.parser.actions.Action;
+import tv.porst.swfretools.parser.actions.as2.Action;
 import tv.porst.swfretools.parser.structures.*;
 import tv.porst.swfretools.parser.tags.Tag;
 
-public class FlashTreeNode<T extends IFileElement> extends DefaultMutableTreeNode {
+public class FlashTreeNode<T extends IFileElement> extends IconNode {
 
 	private final String name;
 

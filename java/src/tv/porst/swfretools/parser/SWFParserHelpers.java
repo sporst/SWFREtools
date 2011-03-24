@@ -8,6 +8,7 @@ import tv.porst.splib.binaryparser.Bits;
 import tv.porst.splib.binaryparser.Flag;
 import tv.porst.splib.binaryparser.Float16;
 import tv.porst.splib.binaryparser.Float32;
+import tv.porst.splib.binaryparser.Float64;
 import tv.porst.splib.binaryparser.IFileElement;
 import tv.porst.splib.binaryparser.INT16;
 import tv.porst.splib.binaryparser.INT32;
@@ -152,6 +153,12 @@ public final class SWFParserHelpers {
 		checkNull(condition, "Condition");
 
 		return condition.value() ? parseByteArray(parser, numberOfBytes, errorCode, fieldName) : null;
+	}
+
+	public static Float64 parseDouble(final SWFBinaryParser parser, final int errorCode, final String fieldName) throws SWFParserException {
+		throwIfB(parser, 1, errorCode, fieldName);
+
+		return parser.readFloat64();
 	}
 
 	/**

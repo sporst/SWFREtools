@@ -1,8 +1,8 @@
 package tv.porst.swfretools.parser.tags;
 
-import tv.porst.splib.binaryparser.BinaryParserHelpers;
 import tv.porst.swfretools.parser.SWFBinaryParser;
 import tv.porst.swfretools.parser.SWFParserException;
+import tv.porst.swfretools.parser.actions.as2.ActionRecordParser;
 import tv.porst.swfretools.parser.structures.RecordHeader;
 
 
@@ -25,7 +25,7 @@ public final class DoActionParser {
 	 */
 	public static DoActionTag parse(final RecordHeader header, final SWFBinaryParser parser) throws SWFParserException {
 
-		BinaryParserHelpers.readByteArray(parser, header.getNormalizedLength());
+		ActionRecordParser.parse(parser, header.getNormalizedLength(), "DoAction::Actions");
 
 		return new DoActionTag(header);
 	}

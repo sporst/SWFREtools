@@ -10,8 +10,8 @@ import tv.porst.splib.binaryparser.UINT16;
 import tv.porst.splib.binaryparser.UINT8;
 import tv.porst.swfretools.parser.SWFBinaryParser;
 import tv.porst.swfretools.parser.SWFParserException;
-import tv.porst.swfretools.parser.actions.Action;
-import tv.porst.swfretools.parser.actions.ActionRecordParser;
+import tv.porst.swfretools.parser.actions.as2.Action;
+import tv.porst.swfretools.parser.actions.as2.ActionRecordParser;
 import tv.porst.swfretools.parser.structures.ActionList;
 import tv.porst.swfretools.parser.structures.ButtonRecord;
 import tv.porst.swfretools.parser.structures.ButtonRecordList;
@@ -54,7 +54,7 @@ public final class DefineButtonParser {
 
 		final int actionRecordSize = parser.getBytePosition() - header.getBitPosition() / 8 + header.getNormalizedLength() - 1;
 
-		final List<Action> actions = ActionRecordParser.parse(parser, actionRecordSize);
+		final List<Action> actions = ActionRecordParser.parse(parser, actionRecordSize, "DefineButton::Actions");
 
 		final UINT8 actionEndFlag = parseUINT8(parser, 0x00006, "DefineButton::ActionEndFlag");
 

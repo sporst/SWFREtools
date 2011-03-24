@@ -1,10 +1,10 @@
 package tv.porst.swfretools.parser.tags;
 
 import static tv.porst.swfretools.parser.SWFParserHelpers.parseUINT16;
-import tv.porst.splib.binaryparser.BinaryParserHelpers;
 import tv.porst.splib.binaryparser.UINT16;
 import tv.porst.swfretools.parser.SWFBinaryParser;
 import tv.porst.swfretools.parser.SWFParserException;
+import tv.porst.swfretools.parser.actions.as2.ActionRecordParser;
 import tv.porst.swfretools.parser.structures.RecordHeader;
 
 
@@ -29,7 +29,7 @@ public final class DoInitActionParser {
 
 		final UINT16 spriteId = parseUINT16(parser, 0x00006, "DoInitAction::SpriteId");
 
-		BinaryParserHelpers.readByteArray(parser, header.getNormalizedLength() - 2);
+		ActionRecordParser.parse(parser, header.getNormalizedLength() - 2, "DoInitAction::Actions");
 
 		return new DoInitActionTag(header, spriteId);
 	}

@@ -13,8 +13,8 @@ import tv.porst.splib.binaryparser.UINT16;
 import tv.porst.splib.binaryparser.UINT8;
 import tv.porst.swfretools.parser.SWFBinaryParser;
 import tv.porst.swfretools.parser.SWFParserException;
-import tv.porst.swfretools.parser.actions.Action;
-import tv.porst.swfretools.parser.actions.ActionRecordParser;
+import tv.porst.swfretools.parser.actions.as2.Action;
+import tv.porst.swfretools.parser.actions.as2.ActionRecordParser;
 
 /**
  * Parses ButtonCondAction structures.
@@ -51,7 +51,7 @@ public final class ButtonCondActionParser {
 
 		final int actionRecordSize = condActionSize.value() == 0 ? header.getNormalizedLength() - (parser.getBytePosition() - header.getBitPosition() / 8 + 1 - header.getHeaderLength()) : condActionSize.value() - 4 - 1;
 
-		final List<Action> actions = ActionRecordParser.parse(parser, actionRecordSize);
+		final List<Action> actions = ActionRecordParser.parse(parser, actionRecordSize, fieldName + "::Actions");
 
 		final UINT8 actionEndFlag = parseUINT8(parser, 0x00006, "DefineButton::ActionEndFlag");
 
