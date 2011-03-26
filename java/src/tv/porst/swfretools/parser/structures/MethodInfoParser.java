@@ -29,7 +29,7 @@ public class MethodInfoParser {
 		final OptionInfo optionInfo = (flags.value() & 0x8) == 0 ? null : OptionInfoParser.parse(parser, fieldName + "::options");
 		final ParamInfo paramInfo = (flags.value() & 0x80) == 0 ? null : ParamInfoParser.parse(parser, paramCount, fieldName + "::param_names");
 
-		return new MethodInfo(paramCount, returnType, paramTypes, name, flags, optionInfo, paramInfo);
+		return new MethodInfo(paramCount, returnType, new EncodedU30List(paramTypes), name, flags, optionInfo, paramInfo);
 	}
 
 }

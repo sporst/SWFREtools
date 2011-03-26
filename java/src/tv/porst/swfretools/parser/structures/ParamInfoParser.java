@@ -16,7 +16,7 @@ public class ParamInfoParser {
 			paramNames.add(EncodedU30Parser.parse(parser, String.format(fieldName + "::param_name[%d]", i)));
 		}
 
-		return new ParamInfo(paramNames);
+		return new ParamInfo(new EncodedU30List(paramNames));
 	}
 
 }

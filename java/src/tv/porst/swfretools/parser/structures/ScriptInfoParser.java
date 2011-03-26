@@ -19,7 +19,7 @@ public class ScriptInfoParser {
 			traits.add(TraitsInfoParser.parse(parser, String.format(fieldName + "::traits[%d]", i)));
 		}
 
-		return new ScriptInfo(init, traitCount, traits);
+		return new ScriptInfo(init, traitCount, new TraitsInfoList(traits));
 	}
 
 }

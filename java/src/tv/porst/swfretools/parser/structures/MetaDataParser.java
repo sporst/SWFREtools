@@ -18,7 +18,7 @@ public class MetaDataParser {
 			items.add(ItemInfoParser.parse(parser, String.format(fieldName + "::items[%d]", i)));
 		}
 
-		return new MetaData(name, itemCount, items);
+		return new MetaData(name, itemCount, new ItemInfoList(items));
 	}
 
 }

@@ -18,7 +18,7 @@ public class NamespaceSetInfoParser {
 			namespaces.add(EncodedU30Parser.parse(parser, String.format(fieldName + "::ns[%d]", i)));
 		}
 
-		return new NamespaceSetInfo(count, namespaces);
+		return new NamespaceSetInfo(count, new EncodedU30List(namespaces));
 	}
 
 }

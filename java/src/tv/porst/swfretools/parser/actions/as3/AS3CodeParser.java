@@ -169,6 +169,6 @@ public class AS3CodeParser {
 			instructions.add(decodeInstruction(parser, fieldName));
 		}
 
-		return new AS3Code();
+		return new AS3Code(new AS3InstructionList(instructions));
 	}
 }

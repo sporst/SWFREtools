@@ -683,6 +683,13 @@ public class FlashTagNode extends FlashTreeNode<Tag> {
 			addNode("FrameNum", ctag.getFrameNum());
 			addNode("VideoData", ctag.getVideoData());
 		}
+		else if (tag instanceof DoABCTag) {
+			final DoABCTag ctag = (DoABCTag) tag;
+
+			addNode("Name", ctag.getName());
+			addNode("Flags", ctag.getFlags());
+			addNode("ABCData", ctag.getAbcData());
+		}
 	}
 
 	@Override

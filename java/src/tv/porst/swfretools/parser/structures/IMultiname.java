@@ -1,5 +1,7 @@
 package tv.porst.swfretools.parser.structures;
 
-public interface IMultiname {
+import tv.porst.splib.binaryparser.IFileElement;
+
+public interface IMultiname extends IFileElement {
 
 }

@@ -18,7 +18,7 @@ public class ClassInfoParser {
 			traits.add(TraitsInfoParser.parse(parser, String.format(fieldName + "::traits[%d]", i)));
 		}
 
-		return new ClassInfo(cInit, traitCount, traits);
+		return new ClassInfo(cInit, traitCount, new TraitsInfoList(traits));
 	}
 
 }

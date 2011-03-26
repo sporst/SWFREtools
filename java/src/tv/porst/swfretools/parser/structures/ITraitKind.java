@@ -1,5 +1,7 @@
 package tv.porst.swfretools.parser.structures;
 
-public interface ITraitKind {
+import tv.porst.splib.binaryparser.IFileElement;
+
+public interface ITraitKind extends IFileElement {
 
 }

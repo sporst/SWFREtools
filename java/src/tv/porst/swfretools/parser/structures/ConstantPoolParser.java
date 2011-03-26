@@ -68,7 +68,7 @@ public class ConstantPoolParser {
 			multinames.add(MultinameInfoParser.parse(parser, String.format(fieldName + "::multiname[%d]", i)));
 		}
 
-		return new ConstantPool(intCount, integers, uintCount, uintegers, doubleCount, doubles, stringCount, strings, namespaceCount, namespaces, namespaceSetCount, namespaceSets, multinameCount, multinames);
+		return new ConstantPool(intCount, new EncodedS32List(integers), uintCount, new EncodedU32List(uintegers), doubleCount, new Float64List(doubles), stringCount, new StringInfoList(strings), namespaceCount, new NamespaceInfoList(namespaces), namespaceSetCount, new NamespaceSetInfoList(namespaceSets), multinameCount, new MultinameInfoList(multinames));
 	}
 
 }

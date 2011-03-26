@@ -1,11 +1,24 @@
 package tv.porst.swfretools.parser.structures;
 
-import java.util.List;
+import tv.porst.splib.binaryparser.IFileElement;
 
-public class ParamInfo {
 
-	public ParamInfo(final List<EncodedU30> paramNames) {
-		// TODO Auto-generated constructor stub
+public class ParamInfo implements IFileElement {
+
+	private final EncodedU30List paramNames;
+
+	public ParamInfo(final EncodedU30List paramNames) {
+		this.paramNames = paramNames;
+	}
+
+	@Override
+	public int getBitLength() {
+		return paramNames.getBitLength();
+	}
+
+	@Override
+	public int getBitPosition() {
+		return paramNames.getBitPosition();
 	}
 
 }

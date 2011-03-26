@@ -18,6 +18,6 @@ public class OptionInfoParser {
 			options.add(OptionDetailParser.parse(parser, String.format(fieldName + "::option[%d]", i)));
 		}
 
-		return new OptionInfo(optionCount, options);
+		return new OptionInfo(optionCount, new OptionDetailList(options));
 	}
 }

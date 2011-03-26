@@ -35,7 +35,7 @@ public class InstanceInfoParser {
 			traits.add(TraitsInfoParser.parse(parser, String.format(fieldName + "::trait[%d]", i)));
 		}
 
-		return new InstanceInfo(name, superName, flags, protectedNs, interfaceCount, interfaces, iinit, traitCount, traits);
+		return new InstanceInfo(name, superName, flags, protectedNs, interfaceCount, new EncodedU30List(interfaces), iinit, traitCount, new TraitsInfoList(traits));
 	}
 
 }

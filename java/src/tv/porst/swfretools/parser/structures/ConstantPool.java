@@ -1,19 +1,59 @@
 package tv.porst.swfretools.parser.structures;
 
-import java.util.List;
+import tv.porst.splib.binaryparser.IFileElement;
+import tv.porst.swfretools.parser.SWFParserHelpers;
 
-import tv.porst.splib.binaryparser.Float64;
+public class ConstantPool implements IFileElement {
 
-public class ConstantPool {
+	private final EncodedU30 intCount;
+	private final EncodedS32List integers;
+	private final EncodedU30 uintCount;
+	private final EncodedU32List uintegers;
+	private final EncodedU30 doubleCount;
+	private final Float64List doubles;
+	private final EncodedU30 stringCount;
+	private final StringInfoList strings;
+	private final EncodedU30 namespaceCount;
+	private final NamespaceInfoList namespaces;
+	private final EncodedU30 namespaceSetCount;
+	private final NamespaceSetInfoList namespaceSets;
+	private final EncodedU30 multinameCount;
+	private final MultinameInfoList multinames;
 
-	public ConstantPool(final EncodedU30 intCount, final List<EncodedS32> integers,
-			final EncodedU30 uintCount, final List<EncodedU32> uintegers,
-			final EncodedU30 doubleCount, final List<Float64> doubles,
-			final EncodedU30 stringCount, final List<StringInfo> strings,
-			final EncodedU30 namespaceCount, final List<NamespaceInfo> namespaces,
-			final EncodedU30 namespaceSetCount, final List<NamespaceSetInfo> namespaceSets,
-			final EncodedU30 multinameCount, final List<MultinameInfo> multinames) {
-		// TODO Auto-generated constructor stub
+	public ConstantPool(final EncodedU30 intCount, final EncodedS32List integers,
+			final EncodedU30 uintCount, final EncodedU32List uintegers,
+			final EncodedU30 doubleCount, final Float64List doubles,
+			final EncodedU30 stringCount, final StringInfoList strings,
+			final EncodedU30 namespaceCount, final NamespaceInfoList namespaces,
+			final EncodedU30 namespaceSetCount, final NamespaceSetInfoList namespaceSets,
+			final EncodedU30 multinameCount, final MultinameInfoList multinames) {
+
+		this.intCount = intCount;
+		this.integers = integers;
+		this.uintCount = uintCount;
+		this.uintegers = uintegers;
+		this.doubleCount = doubleCount;
+		this.doubles = doubles;
+		this.stringCount = stringCount;
+		this.strings = strings;
+		this.namespaceCount = namespaceCount;
+		this.namespaces = namespaces;
+		this.namespaceSetCount = namespaceSetCount;
+		this.namespaceSets = namespaceSets;
+		this.multinameCount = multinameCount;
+		this.multinames = multinames;
+	}
+
+	@Override
+	public int getBitLength() {
+		return SWFParserHelpers.addBitLengths(intCount, integers, uintCount, uintegers, doubleCount,
+				doubles, stringCount, strings, namespaceCount, namespaces, namespaceSetCount,
+				namespaceSets, multinameCount, multinames);
+	}
+
+	@Override
+	public int getBitPosition() {
+		return intCount.getBitPosition();
 	}
 
 }

@@ -35,7 +35,7 @@ public class MethodBodyParser {
 			traits.add(TraitsInfoParser.parse(parser, String.format(fieldName + "::trait[%d]", i)));
 		}
 
-		return new MethodBody(method, maxStack, localCount, initScopeDepth, maxScopeDepth, codeLength, code, exceptionCount, exceptions, traitCount, traits);
+		return new MethodBody(method, maxStack, localCount, initScopeDepth, maxScopeDepth, codeLength, code, exceptionCount, new ExceptionInfoList(exceptions), traitCount, new TraitsInfoList(traits));
 	}
 
 }

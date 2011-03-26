@@ -63,7 +63,9 @@ public class AS3DataParser {
 			methodBodies.add(MethodBodyParser.parse(parser, String.format(fieldName + "::script[%d]", i)));
 		}
 
-		return new AS3Data(minorVersion, majorVersion, constantPool);
+		return new AS3Data(minorVersion, majorVersion, constantPool, methodCount, new MethodInfoList(methodInfos),
+				metaDataCount, new MetaDataList(metaData), classCount, new InstanceInfoList(instances),
+				new ClassInfoList(classes), scriptCount, new ScriptInfoList(scripts), methodCount, new MethodBodyList(methodBodies));
 	}
 
 }

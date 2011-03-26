@@ -1,12 +1,17 @@
 package tv.porst.swfretools.parser.structures;
 
+import tv.porst.splib.binaryparser.IFileElement;
+
 /**
  * Represents an encoded unsigned 30 bit integer value.
  * 
  * @author sp
  *
  */
-public final class EncodedU30 {
+public final class EncodedU30 implements IFileElement {
+
+	private final int bitPosition;
+	private final int bitLength;
 
 	/**
 	 * The decoded integer value.
@@ -18,9 +23,21 @@ public final class EncodedU30 {
 	 * 
 	 * @param value The decoded integer value.
 	 */
-	public EncodedU30(final long value) {
+	public EncodedU30(final int bitPosition, final int bitLength, final long value) {
 
+		this.bitPosition = bitPosition;
+		this.bitLength = bitLength;
 		this.value = value;
+	}
+
+	@Override
+	public int getBitLength() {
+		return bitLength;
+	}
+
+	@Override
+	public int getBitPosition() {
+		return bitPosition;
 	}
 
 	/**

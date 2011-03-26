@@ -48,6 +48,6 @@ public final class EncodedS24Parser {
 
 		result = (result & 0x001fffff) | parseUINT8(parser, 0x00006, fieldName).value() << 21;
 
-		return new EncodedS24(bitPosition, 24, result);
+		return new EncodedS24(bitPosition, 32, result);
 	}
 }

@@ -43,7 +43,7 @@ public class TraitsInfoParser {
 			}
 		}
 
-		return new TraitsInfo(name, kind, data, metaDataCount, metaData);
+		return new TraitsInfo(name, kind, data, metaDataCount, new EncodedU30List(metaData));
 	}
 
 }
