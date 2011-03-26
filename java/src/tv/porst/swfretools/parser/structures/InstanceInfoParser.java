@@ -16,7 +16,8 @@ public class InstanceInfoParser {
 		final EncodedU30 name = EncodedU30Parser.parse(parser, fieldName + "::name");
 		final EncodedU30 superName = EncodedU30Parser.parse(parser, fieldName + "::super_name");
 		final UINT8 flags = parseUINT8(parser, 0x00006, fieldName + "::flags");
-		final EncodedU30 protectedNs = EncodedU30Parser.parse(parser, fieldName + "::protectedNs");
+
+		final EncodedU30 protectedNs = ((flags.value() & 0x08) == 0) ? null : EncodedU30Parser.parse(parser, fieldName + "::protectedNs");
 		final EncodedU30 interfaceCount = EncodedU30Parser.parse(parser, fieldName + "::intrf_count");
 
 		final List<EncodedU30> interfaces = new ArrayList<EncodedU30>();
@@ -27,7 +28,6 @@ public class InstanceInfoParser {
 
 		final EncodedU30 iinit = EncodedU30Parser.parse(parser, fieldName + "::iinit");
 		final EncodedU30 traitCount = EncodedU30Parser.parse(parser, fieldName + "::trait_count");
-
 
 		final List<TraitsInfo> traits = new ArrayList<TraitsInfo>();
 

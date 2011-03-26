@@ -57,9 +57,6 @@ public class AS3DataParser {
 
 		final EncodedU30 methodBodyCount = EncodedU30Parser.parse(parser, fieldName + "::method_body_count");
 
-		System.out.println(methodBodyCount.value());
-		System.exit(0);
-
 		final List<MethodBody> methodBodies = new ArrayList<MethodBody>();
 
 		for (int i=0;i<methodBodyCount.value();i++) {

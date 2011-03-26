@@ -22,7 +22,8 @@ public class FileActions {
 
 		if (true) {
 			try {
-				final LoadedFile loadedFile = model.openFile(new File("C:\\@@\\flash\\oldgems.swf"));
+				//				final LoadedFile loadedFile = model.openFile(new File("C:\\@@\\flash\\oldgems.swf"));
+				final LoadedFile loadedFile = model.openFile(new File("C:\\@@\\preloader.swf"));
 
 				final FlashTreeNode node = FlashTreeHelpers.findNode((FlashTreeNode) tree.getModel().getRoot(), loadedFile);
 

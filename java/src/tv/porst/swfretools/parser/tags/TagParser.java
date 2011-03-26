@@ -74,7 +74,7 @@ public final class TagParser {
 
 			final RecordHeader header = parseRecordHeader(parser);
 
-			System.out.printf("Parsing at %X [%d]\n", parser.getBytePosition() - header.getHeaderLength(), header.getTagCode());
+			System.out.printf("Parsing at %d [%d]\n", parser.getBytePosition() - header.getHeaderLength() - 8, header.getTagCode());
 
 			return parseTag(parser, header, version, errors);
 
@@ -166,6 +166,7 @@ public final class TagParser {
 			case TagCodes.VideoFrame: return VideoFrameParser.parse(header, parser);
 			case TagCodes.DefineBinaryData: return DefineBinaryDataParser.parse(header, parser);
 			case TagCodes.DoABC: return DoABCParser.parse(header, parser);
+			case TagCodes.DefineFontName: return DefineFontNameParser.parse(header, parser);
 			}
 
 			errors.add(new ParserError(header.getTagAndLength().getBitPosition(), String.format("Tried to parse tag with unknown tag code 0x%02X", header.getTagCode())));

@@ -4,8 +4,10 @@ import java.util.List;
 
 public class NamespaceSetInfo {
 
+	private final EncodedU30 count;
+
 	public NamespaceSetInfo(final EncodedU30 count, final List<EncodedU30> namespaces) {
-		// TODO Auto-generated constructor stub
+		this.count = count;
 	}
 
 }

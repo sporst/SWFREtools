@@ -6,6 +6,7 @@ import java.util.List;
 import tv.porst.splib.binaryparser.Float64;
 import tv.porst.swfretools.parser.SWFBinaryParser;
 import tv.porst.swfretools.parser.SWFParserException;
+import tv.porst.swfretools.parser.SWFParserHelpers;
 
 public class ConstantPoolParser {
 
@@ -32,7 +33,7 @@ public class ConstantPoolParser {
 		final List<Float64> doubles = new ArrayList<Float64>();
 
 		for (int i=0;i<doubleCount.value() - 1;i++) {
-			uintegers.add(EncodedU32Parser.parse(parser, String.format(fieldName + "::double[%d]", i)));
+			doubles.add(SWFParserHelpers.parseDouble(parser, 0x00006, String.format(fieldName + "::double[%d]", i)));
 		}
 
 		final EncodedU30 stringCount = EncodedU30Parser.parse(parser, fieldName + "::string_count");
