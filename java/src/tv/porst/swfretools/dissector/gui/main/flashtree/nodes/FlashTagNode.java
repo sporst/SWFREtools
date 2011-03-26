@@ -463,8 +463,6 @@ public class FlashTagNode extends FlashTreeNode<Tag> {
 			addNode("VideoFlagsSmoothing", ctag.getVideoFlagsSmoothing());
 			addNode("CodecID", ctag.getCodecId());
 		}
-		else if (tag instanceof DoABCTag) {
-		}
 		else if (tag instanceof DoActionTag) {
 		}
 		else if (tag instanceof DoInitActionTag) {

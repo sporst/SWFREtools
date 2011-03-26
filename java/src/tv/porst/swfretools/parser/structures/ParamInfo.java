@@ -21,4 +21,13 @@ public class ParamInfo implements IFileElement {
 		return paramNames.getBitPosition();
 	}
 
+	/**
+	 * Returns the
+	 *
+	 * @return The
+	 */
+	public EncodedU30List getParamNames() {
+		return paramNames;
+	}
+
 }

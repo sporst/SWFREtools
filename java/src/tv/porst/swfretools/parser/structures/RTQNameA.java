@@ -18,4 +18,13 @@ public class RTQNameA implements IMultiname {
 		return name.getBitPosition();
 	}
 
+	/**
+	 * Returns the
+	 *
+	 * @return The
+	 */
+	public EncodedU30 getName() {
+		return name;
+	}
+
 }

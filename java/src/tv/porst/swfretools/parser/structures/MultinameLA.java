@@ -18,4 +18,13 @@ public class MultinameLA implements IMultiname {
 		return nsSet.getBitPosition();
 	}
 
+	/**
+	 * Returns the
+	 *
+	 * @return The
+	 */
+	public EncodedU30 getNsSet() {
+		return nsSet;
+	}
+
 }

@@ -70,6 +70,7 @@ public class TagNames {
 		case TagCodes.StartSound2: return "StartSound2";
 		case TagCodes.DefineBitsJPEG4: return "DefineBitsJPEG4";
 		case TagCodes.DefineFont4: return "DefineFont4";
+		case TagCodes.DoABC: return "DoABC";
 		default: return "Unknown Tag";
 		}
 	}

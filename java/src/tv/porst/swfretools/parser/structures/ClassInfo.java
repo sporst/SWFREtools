@@ -6,7 +6,9 @@ import tv.porst.swfretools.parser.SWFParserHelpers;
 public class ClassInfo implements IFileElement {
 
 	private final EncodedU30 cInit;
+
 	private final EncodedU30 traitCount;
+
 	private final TraitsInfoList traits;
 
 	public ClassInfo(final EncodedU30 cInit, final EncodedU30 traitCount,
@@ -16,15 +18,40 @@ public class ClassInfo implements IFileElement {
 		this.traitCount = traitCount;
 		this.traits = traits;
 	}
-
 	@Override
 	public int getBitLength() {
 		return SWFParserHelpers.addBitLengths(cInit, traitCount, traits);
 	}
-
 	@Override
 	public int getBitPosition() {
 		return cInit.getBitPosition();
+	}
+
+	/**
+	 * Returns the
+	 *
+	 * @return The
+	 */
+	public EncodedU30 getcInit() {
+		return cInit;
+	}
+
+	/**
+	 * Returns the
+	 *
+	 * @return The
+	 */
+	public EncodedU30 getTraitCount() {
+		return traitCount;
+	}
+
+	/**
+	 * Returns the
+	 *
+	 * @return The
+	 */
+	public TraitsInfoList getTraits() {
+		return traits;
 	}
 
 }

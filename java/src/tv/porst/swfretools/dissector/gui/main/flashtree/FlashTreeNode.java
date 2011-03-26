@@ -5,6 +5,7 @@ import tv.porst.splib.binaryparser.Bits;
 import tv.porst.splib.binaryparser.Flag;
 import tv.porst.splib.binaryparser.Float16;
 import tv.porst.splib.binaryparser.Float32;
+import tv.porst.splib.binaryparser.Float64;
 import tv.porst.splib.binaryparser.IFileElement;
 import tv.porst.splib.binaryparser.INT16;
 import tv.porst.splib.binaryparser.INT32;
@@ -114,6 +115,18 @@ public class FlashTreeNode<T extends IFileElement> extends IconNode {
 		}
 	}
 
+	protected void addNode(final String name, final ClassInfo value) {
+		if (value != null) {
+			add(new FlashClassInfoNode(name, value));
+		}
+	}
+
+	protected void addNode(final String name, final ClassInfoList value) {
+		if (value != null) {
+			add(new FlashClassInfoListNode(name, value));
+		}
+	}
+
 	protected void addNode(final String name, final ClipActionRecord value) {
 		if (value != null) {
 			add(new FlashClipActionRecordNode(name, value));
@@ -144,6 +157,12 @@ public class FlashTreeNode<T extends IFileElement> extends IconNode {
 		}
 	}
 
+	protected void addNode(final String name, final ConstantPool value) {
+		if (value != null) {
+			add(new FlashConstantPoolNode(name, value));
+		}
+	}
+
 	protected void addNode(final String name, final ConvolutionFilter value) {
 		if (value != null) {
 			add(new FlashConvolutionFilterNode(name, value));
@@ -168,9 +187,51 @@ public class FlashTreeNode<T extends IFileElement> extends IconNode {
 		}
 	}
 
+	protected void addNode(final String name, final EncodedS32 value) {
+		if (value != null) {
+			add(new FlashEncodedS32Node(name, value));
+		}
+	}
+
+	protected void addNode(final String name, final EncodedS32List value) {
+		if (value != null) {
+			add(new FlashEncodedS32ListNode(name, value));
+		}
+	}
+
+	protected void addNode(final String name, final EncodedU30 value) {
+		if (value != null) {
+			add(new FlashEncodedU30Node(name, value));
+		}
+	}
+
+	protected void addNode(final String name, final EncodedU30List value) {
+		if (value != null) {
+			add(new FlashEncodedU30ListNode(name, value));
+		}
+	}
+
 	protected void addNode(final String name, final EncodedU32 value) {
 		if (value != null) {
 			add(new FlashEncodedU32Node(name, value));
+		}
+	}
+
+	protected void addNode(final String name, final EncodedU32List value) {
+		if (value != null) {
+			add(new FlashEncodedU32ListNode(name, value));
+		}
+	}
+
+	protected void addNode(final String name, final ExceptionInfo value) {
+		if (value != null) {
+			add(new FlashExceptionInfoNode(name, value));
+		}
+	}
+
+	protected void addNode(final String name, final ExceptionInfoList value) {
+		if (value != null) {
+			add(new FlashExceptionInfoListNode(name, value));
 		}
 	}
 
@@ -258,6 +319,18 @@ public class FlashTreeNode<T extends IFileElement> extends IconNode {
 		}
 	}
 
+	protected void addNode(final String name, final Float64 value) {
+		if (value != null) {
+			add(new FlashFloat64Node(name, value));
+		}
+	}
+
+	protected void addNode(final String name, final Float64List value) {
+		if (value != null) {
+			add(new FlashFloat64ListNode(name, value));
+		}
+	}
+
 	protected void addNode(final String name, final FrameLabel value) {
 		if (value != null) {
 			add(new FlashFrameLabelNode(name, value));
@@ -330,6 +403,24 @@ public class FlashTreeNode<T extends IFileElement> extends IconNode {
 		}
 	}
 
+	protected void addNode(final String name, final IMultiname value) {
+		if (value != null) {
+			add(new FlashMultinameNode(name, value));
+		}
+	}
+
+	protected void addNode(final String name, final InstanceInfo value) {
+		if (value != null) {
+			add(new FlashInstanceInfoNode(name, value));
+		}
+	}
+
+	protected void addNode(final String name, final InstanceInfoList value) {
+		if (value != null) {
+			add(new FlashInstanceInfoListNode(name, value));
+		}
+	}
+
 	protected void addNode(final String name, final INT16 value) {
 		if (value != null) {
 			add(new FlashINT16Node(name, value));
@@ -368,6 +459,24 @@ public class FlashTreeNode<T extends IFileElement> extends IconNode {
 			else {
 				throw new IllegalStateException("Error: Unknown int element");
 			}
+		}
+	}
+
+	protected void addNode(final String name, final ItemInfo value) {
+		if (value != null) {
+			add(new FlashItemInfoNode(name, value));
+		}
+	}
+
+	protected void addNode(final String name, final ItemInfoList value) {
+		if (value != null) {
+			add(new FlashItemInfoListNode(name, value));
+		}
+	}
+
+	protected void addNode(final String name, final ITraitKind value) {
+		if (value != null) {
+			add(new FlashTraitKindNode(name, value));
 		}
 	}
 
@@ -443,6 +552,42 @@ public class FlashTreeNode<T extends IFileElement> extends IconNode {
 		}
 	}
 
+	protected void addNode(final String name, final MetaData value) {
+		if (value != null) {
+			add(new FlashMetaDataNode(name, value));
+		}
+	}
+
+	protected void addNode(final String name, final MetaDataList value) {
+		if (value != null) {
+			add(new FlashMetaDataListNode(name, value));
+		}
+	}
+
+	protected void addNode(final String name, final MethodBody value) {
+		if (value != null) {
+			add(new FlashMethodBodyNode(name, value));
+		}
+	}
+
+	protected void addNode(final String name, final MethodBodyList value) {
+		if (value != null) {
+			add(new FlashMethodBodyListNode(name, value));
+		}
+	}
+
+	protected void addNode(final String name, final MethodInfo value) {
+		if (value != null) {
+			add(new FlashMethodInfoNode(name, value));
+		}
+	}
+
+	protected void addNode(final String name, final MethodInfoList value) {
+		if (value != null) {
+			add(new FlashMethodInfoListNode(name, value));
+		}
+	}
+
 	protected void addNode(final String name, final MorphFillStyle value) {
 		if (value != null) {
 			add(new FlashMorphFillStyleNode(name, value));
@@ -515,6 +660,66 @@ public class FlashTreeNode<T extends IFileElement> extends IconNode {
 		}
 	}
 
+	protected void addNode(final String name, final MultinameInfo value) {
+		if (value != null) {
+			add(new FlashMultinameInfoNode(name, value));
+		}
+	}
+
+	protected void addNode(final String name, final MultinameInfoList value) {
+		if (value != null) {
+			add(new FlashMultinameInfoListNode(name, value));
+		}
+	}
+
+	protected void addNode(final String name, final NamespaceInfo value) {
+		if (value != null) {
+			add(new FlashNamespaceInfoNode(name, value));
+		}
+	}
+
+	protected void addNode(final String name, final NamespaceInfoList value) {
+		if (value != null) {
+			add(new FlashNamespaceInfoListNode(name, value));
+		}
+	}
+
+	protected void addNode(final String name, final NamespaceSetInfo value) {
+		if (value != null) {
+			add(new FlashNamespaceSetInfoNode(name, value));
+		}
+	}
+
+	protected void addNode(final String name, final NamespaceSetInfoList value) {
+		if (value != null) {
+			add(new FlashNamespaceSetInfoListNode(name, value));
+		}
+	}
+
+	protected void addNode(final String name, final OptionDetail value) {
+		if (value != null) {
+			add(new FlashOptionDetailNode(name, value));
+		}
+	}
+
+	protected void addNode(final String name, final OptionDetailList value) {
+		if (value != null) {
+			add(new FlashOptionDetailListNode(name, value));
+		}
+	}
+
+	protected void addNode(final String name, final OptionInfo value) {
+		if (value != null) {
+			add(new FlashOptionInfoNode(name, value));
+		}
+	}
+
+	protected void addNode(final String name, final ParamInfo value) {
+		if (value != null) {
+			add(new FlashParamInfoNode(name, value));
+		}
+	}
+
 	protected void addNode(final String name, final ParsedINTElementList value) {
 		if (value != null) {
 			add(new FlashParsedINTElementListNode(name, value));
@@ -566,6 +771,18 @@ public class FlashTreeNode<T extends IFileElement> extends IconNode {
 	protected void addNode(final String name, final SceneNameList value) {
 		if (value != null) {
 			add(new FlashSceneNameListNode(name, value));
+		}
+	}
+
+	protected void addNode(final String name, final ScriptInfo value) {
+		if (value != null) {
+			add(new FlashScriptInfoNode(name, value));
+		}
+	}
+
+	protected void addNode(final String name, final ScriptInfoList value) {
+		if (value != null) {
+			add(new FlashScriptInfoListNode(name, value));
 		}
 	}
 
@@ -659,6 +876,18 @@ public class FlashTreeNode<T extends IFileElement> extends IconNode {
 		}
 	}
 
+	protected void addNode(final String name, final StringInfo value) {
+		if (value != null) {
+			add(new FlashStringInfoNode(name, value));
+		}
+	}
+
+	protected void addNode(final String name, final StringInfoList value) {
+		if (value != null) {
+			add(new FlashStringInfoListNode(name, value));
+		}
+	}
+
 	protected void addNode(final String name, final Symbol value) {
 		if (value != null) {
 			add(new FlashSymbolNode(name, value));
@@ -704,6 +933,18 @@ public class FlashTreeNode<T extends IFileElement> extends IconNode {
 	protected void addNode(final String name, final TextRecordList value) {
 		if (value != null) {
 			add(new FlashTextRecordListNode(name, value));
+		}
+	}
+
+	protected void addNode(final String name, final TraitsInfo value) {
+		if (value != null) {
+			add(new FlashTraitsInfoNode(name, value));
+		}
+	}
+
+	protected void addNode(final String name, final TraitsInfoList value) {
+		if (value != null) {
+			add(new FlashTraitsInfoListNode(name, value));
 		}
 	}
 

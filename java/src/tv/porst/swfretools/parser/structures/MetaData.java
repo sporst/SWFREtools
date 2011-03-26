@@ -6,7 +6,9 @@ import tv.porst.swfretools.parser.SWFParserHelpers;
 public class MetaData implements IFileElement {
 
 	private final EncodedU30 name;
+
 	private final EncodedU30 itemCount;
+
 	private final ItemInfoList items;
 
 	public MetaData(final EncodedU30 name, final EncodedU30 itemCount, final ItemInfoList items) {
@@ -14,15 +16,40 @@ public class MetaData implements IFileElement {
 		this.itemCount = itemCount;
 		this.items = items;
 	}
-
 	@Override
 	public int getBitLength() {
 		return SWFParserHelpers.addBitLengths(name, itemCount, items);
 	}
-
 	@Override
 	public int getBitPosition() {
 		return name.getBitPosition();
+	}
+
+	/**
+	 * Returns the
+	 *
+	 * @return The
+	 */
+	public EncodedU30 getItemCount() {
+		return itemCount;
+	}
+
+	/**
+	 * Returns the
+	 *
+	 * @return The
+	 */
+	public ItemInfoList getItems() {
+		return items;
+	}
+
+	/**
+	 * Returns the
+	 *
+	 * @return The
+	 */
+	public EncodedU30 getName() {
+		return name;
 	}
 
 }

@@ -38,4 +38,67 @@ public class MethodInfo implements IFileElement {
 		return paramCount.getBitPosition();
 	}
 
+	/**
+	 * Returns the
+	 *
+	 * @return The
+	 */
+	public UINT8 getFlags() {
+		return flags;
+	}
+
+	/**
+	 * Returns the
+	 *
+	 * @return The
+	 */
+	public EncodedU30 getName() {
+		return name;
+	}
+
+	/**
+	 * Returns the
+	 *
+	 * @return The
+	 */
+	public OptionInfo getOptionInfo() {
+		return optionInfo;
+	}
+
+	/**
+	 * Returns the
+	 *
+	 * @return The
+	 */
+	public EncodedU30 getParamCount() {
+		return paramCount;
+	}
+
+	/**
+	 * Returns the
+	 *
+	 * @return The
+	 */
+	public ParamInfo getParamInfo() {
+		return paramInfo;
+	}
+
+	/**
+	 * Returns the
+	 *
+	 * @return The
+	 */
+	public EncodedU30List getParamTypes() {
+		return paramTypes;
+	}
+
+	/**
+	 * Returns the
+	 *
+	 * @return The
+	 */
+	public EncodedU30 getReturnType() {
+		return returnType;
+	}
+
 }

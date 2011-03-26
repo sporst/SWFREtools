@@ -24,4 +24,22 @@ public class NamespaceInfo implements IFileElement {
 		return kind.getBitPosition();
 	}
 
+	/**
+	 * Returns the
+	 *
+	 * @return The
+	 */
+	public UINT8 getKind() {
+		return kind;
+	}
+
+	/**
+	 * Returns the
+	 *
+	 * @return The
+	 */
+	public EncodedU30 getName() {
+		return name;
+	}
+
 }
