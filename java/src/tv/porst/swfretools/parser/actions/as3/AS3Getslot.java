@@ -19,4 +19,13 @@ public class AS3Getslot extends AS3Instruction {
 		return SWFParserHelpers.addBitLengths(getOpcode(), slotIndex);
 	}
 
+	/**
+	 * Returns the
+	 *
+	 * @return The
+	 */
+	public EncodedU30 getSlotIndex() {
+		return slotIndex;
+	}
+
 }

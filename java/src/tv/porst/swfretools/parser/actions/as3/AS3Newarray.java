@@ -14,6 +14,15 @@ public class AS3Newarray extends AS3Instruction {
 		this.argCount = argCount;
 	}
 
+	/**
+	 * Returns the
+	 *
+	 * @return The
+	 */
+	public EncodedU30 getArgCount() {
+		return argCount;
+	}
+
 	@Override
 	public int getBitLength() {
 		return SWFParserHelpers.addBitLengths(getOpcode(), argCount);

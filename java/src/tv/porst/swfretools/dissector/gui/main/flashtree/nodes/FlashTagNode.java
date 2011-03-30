@@ -1,6 +1,9 @@
 package tv.porst.swfretools.dissector.gui.main.flashtree.nodes;
 
+import javax.swing.JPanel;
+
 import tv.porst.swfretools.dissector.gui.main.flashtree.FlashTreeNode;
+import tv.porst.swfretools.dissector.gui.main.panels.AS3CodePanel;
 import tv.porst.swfretools.parser.tags.CSMTextSettingsTag;
 import tv.porst.swfretools.parser.tags.DefineBinaryDataTag;
 import tv.porst.swfretools.parser.tags.DefineBitsJPEG2Tag;
@@ -70,6 +73,7 @@ import tv.porst.swfretools.utils.TagNames;
 public class FlashTagNode extends FlashTreeNode<Tag> {
 
 	private final Tag tag;
+	private AS3CodePanel panel;
 
 	public FlashTagNode(final Tag tag) {
 		super(TagNames.getTagName(tag.getHeader().getTagCode()), tag);
@@ -688,6 +692,14 @@ public class FlashTagNode extends FlashTreeNode<Tag> {
 			addNode("Flags", ctag.getFlags());
 			addNode("ABCData", ctag.getAbcData());
 		}
+	}
+
+	public JPanel getExtraPanel() {
+		if (panel == null) {
+			panel = new AS3CodePanel((DoABCTag) getUserObject());
+		}
+
+		return panel;
 	}
 
 	@Override

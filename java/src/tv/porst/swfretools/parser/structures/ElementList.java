@@ -15,6 +15,10 @@ public class ElementList<T extends IFileElement> implements Iterable<T>, IFileEl
 		this.elements = new ArrayList<T>(elements);
 	}
 
+	public T get(final int index) {
+		return elements.get(index);
+	}
+
 	@Override
 	public int getBitLength() {
 		return SWFParserHelpers.addBitLengths(elements);

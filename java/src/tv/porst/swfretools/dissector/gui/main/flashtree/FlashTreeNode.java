@@ -43,6 +43,12 @@ public class FlashTreeNode<T extends IFileElement> extends IconNode {
 		}
 	}
 
+	protected void addNode(final String name, final AS3Code value) {
+		if (value != null) {
+			add(new FlashAS3CodeNode(name, value));
+		}
+	}
+
 	protected void addNode(final String name, final AS3Data value) {
 		if (value != null) {
 			add(new FlashAS3DataNode(name, value));

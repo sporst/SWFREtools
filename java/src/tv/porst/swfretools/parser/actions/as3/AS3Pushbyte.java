@@ -18,4 +18,13 @@ public class AS3Pushbyte extends AS3Instruction {
 		return SWFParserHelpers.addBitLengths(getOpcode(), byteValue);
 	}
 
+	/**
+	 * Returns the
+	 *
+	 * @return The
+	 */
+	public UINT8 getByteValue() {
+		return byteValue;
+	}
+
 }

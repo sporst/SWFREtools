@@ -19,4 +19,13 @@ public class AS3Debugline extends AS3Instruction {
 		return SWFParserHelpers.addBitLengths(getOpcode(), lineNum);
 	}
 
+	/**
+	 * Returns the
+	 *
+	 * @return The
+	 */
+	public EncodedU30 getLineNum() {
+		return lineNum;
+	}
+
 }

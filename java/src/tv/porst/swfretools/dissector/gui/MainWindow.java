@@ -8,19 +8,19 @@ import javax.swing.JMenuBar;
 import javax.swing.event.TreeSelectionEvent;
 import javax.swing.event.TreeSelectionListener;
 
+import tv.porst.swfretools.dissector.gui.main.DetailPanel;
 import tv.porst.swfretools.dissector.gui.main.TreePanel;
 import tv.porst.swfretools.dissector.gui.main.actions.OpenAction;
 import tv.porst.swfretools.dissector.gui.main.flashtree.FlashTree;
 import tv.porst.swfretools.dissector.gui.main.flashtree.FlashTreeNode;
 import tv.porst.swfretools.dissector.gui.main.flashtree.FlashTreeNodeSelectionHandler;
-import tv.porst.swfretools.dissector.gui.main.hexview.FlashHexView;
 import tv.porst.swfretools.dissector.gui.main.models.FileModel;
 
 public class MainWindow extends JFrame {
 
 	private final TreeSelectionListener internalTreeSelectionListener = new InternalTreeSelectionListener();
-	private final FlashHexView hexView;
 	private final TreePanel panel;
+	private final DetailPanel detailPanel = new DetailPanel();
 
 	public static void main(final String[] args) {
 		final MainWindow window = new MainWindow();
@@ -35,9 +35,7 @@ public class MainWindow extends JFrame {
 
 		setLayout(new BorderLayout());
 
-		hexView = new FlashHexView();
-
-		add(hexView, BorderLayout.CENTER);
+		add(detailPanel);
 
 		final FileModel fileModel = new FileModel();
 
@@ -69,7 +67,7 @@ public class MainWindow extends JFrame {
 
 			final FlashTreeNode node = (FlashTreeNode) panel.getTree().getLastSelectedPathComponent();
 
-			FlashTreeNodeSelectionHandler.handleSelection(node, hexView);
+			FlashTreeNodeSelectionHandler.handleSelection(node, detailPanel);
 		}
 	}
 }

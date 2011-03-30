@@ -19,4 +19,13 @@ public class AS3Inlocal extends AS3Instruction {
 		return SWFParserHelpers.addBitLengths(getOpcode(), index);
 	}
 
+	/**
+	 * Returns the
+	 *
+	 * @return The
+	 */
+	public EncodedU30 getIndex() {
+		return index;
+	}
+
 }

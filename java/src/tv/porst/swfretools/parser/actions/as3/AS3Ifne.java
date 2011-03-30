@@ -19,4 +19,13 @@ public class AS3Ifne extends AS3Instruction {
 		return SWFParserHelpers.addBitLengths(getOpcode(), offset);
 	}
 
+	/**
+	 * Returns the
+	 *
+	 * @return The
+	 */
+	public EncodedS24 getOffset() {
+		return offset;
+	}
+
 }

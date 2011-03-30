@@ -21,4 +21,13 @@ public class AS3Code implements IFileElement {
 		return instructions.getBitPosition();
 	}
 
+	/**
+	 * Returns the
+	 *
+	 * @return The
+	 */
+	public AS3InstructionList getInstructions() {
+		return instructions;
+	}
+
 }

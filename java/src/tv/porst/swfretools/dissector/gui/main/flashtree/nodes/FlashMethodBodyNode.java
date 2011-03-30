@@ -18,7 +18,7 @@ public class FlashMethodBodyNode extends FlashTreeNode<MethodBody> {
 		addNode("init_scope_depth", getUserObject().getInitScopeDepth());
 		addNode("max_scope_depth", getUserObject().getMaxScopeDepth());
 		addNode("code_length", getUserObject().getCodeLength());
-		//		addNode("RedAddTerm", getUserObject().getCode());
+		addNode("code", getUserObject().getCode());
 		addNode("exception_count", getUserObject().getExceptionCount());
 		addNode("exceptions", getUserObject().getExceptions());
 		addNode("trait_count", getUserObject().getTraitCount());
