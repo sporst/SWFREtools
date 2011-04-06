@@ -19,8 +19,8 @@ public class ActionTry extends Action {
 	private final UINT16 trySize;
 	private final UINT16 catchSize;
 	private final UINT16 finallySize;
-	private final AsciiString functionName;
-	private final UINT8 registerCount;
+	private final AsciiString catchName;
+	private final UINT8 catchRegister;
 	private final ActionList tryBody;
 	private final ActionList catchBody;
 	private final ActionList finallyBody;
@@ -28,7 +28,7 @@ public class ActionTry extends Action {
 	public ActionTry(final UINT8 actionCode, final UINT16 length, final UBits reserved,
 			final Flag catchInRegisterFlag, final Flag finallyBlockFlag,
 			final Flag catchBlockFlag, final UINT16 trySize, final UINT16 catchSize,
-			final UINT16 finallySize, final AsciiString functionName, final UINT8 registerCount,
+			final UINT16 finallySize, final AsciiString catchName, final UINT8 catchRegister,
 			final ActionList tryBody, final ActionList catchBody,
 			final ActionList finallyBody) {
 		super(actionCode);
@@ -41,8 +41,8 @@ public class ActionTry extends Action {
 		this.trySize = trySize;
 		this.catchSize = catchSize;
 		this.finallySize = finallySize;
-		this.functionName = functionName;
-		this.registerCount = registerCount;
+		this.catchName = catchName;
+		this.catchRegister = catchRegister;
 		this.tryBody = tryBody;
 		this.catchBody = catchBody;
 		this.finallyBody = finallyBody;
@@ -51,8 +51,8 @@ public class ActionTry extends Action {
 	@Override
 	public int getBitLength() {
 		return SWFParserHelpers.addBitLengths(getActionCode(), getLength(), length, reserved, catchInRegisterFlag,
-				finallyBlockFlag, catchBlockFlag, trySize, catchSize, finallySize, functionName,
-				registerCount, tryBody, catchBody, finallyBody);
+				finallyBlockFlag, catchBlockFlag, trySize, catchSize, finallySize, catchName,
+				catchRegister, tryBody, catchBody, finallyBody);
 	}
 
 	/**
@@ -80,6 +80,24 @@ public class ActionTry extends Action {
 	 */
 	public Flag getCatchInRegisterFlag() {
 		return catchInRegisterFlag;
+	}
+
+	/**
+	 * Returns the
+	 *
+	 * @return The
+	 */
+	public AsciiString getCatchName() {
+		return catchName;
+	}
+
+	/**
+	 * Returns the
+	 *
+	 * @return The
+	 */
+	public UINT8 getCatchRegister() {
+		return catchRegister;
 	}
 
 	/**
@@ -123,26 +141,8 @@ public class ActionTry extends Action {
 	 *
 	 * @return The
 	 */
-	public AsciiString getFunctionName() {
-		return functionName;
-	}
-
-	/**
-	 * Returns the
-	 *
-	 * @return The
-	 */
 	public UINT16 getLength() {
 		return length;
-	}
-
-	/**
-	 * Returns the
-	 *
-	 * @return The
-	 */
-	public UINT8 getRegisterCount() {
-		return registerCount;
 	}
 
 	/**

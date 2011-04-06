@@ -3,6 +3,7 @@ package tv.porst.swfretools.dissector.gui.main.flashtree.nodes;
 import javax.swing.JPanel;
 
 import tv.porst.swfretools.dissector.gui.main.flashtree.FlashTreeNode;
+import tv.porst.swfretools.dissector.gui.main.panels.AS2CodePanel;
 import tv.porst.swfretools.dissector.gui.main.panels.AS3CodePanel;
 import tv.porst.swfretools.parser.tags.CSMTextSettingsTag;
 import tv.porst.swfretools.parser.tags.DefineBinaryDataTag;
@@ -73,7 +74,7 @@ import tv.porst.swfretools.utils.TagNames;
 public class FlashTagNode extends FlashTreeNode<Tag> {
 
 	private final Tag tag;
-	private AS3CodePanel panel;
+	private JPanel panel;
 
 	public FlashTagNode(final Tag tag) {
 		super(TagNames.getTagName(tag.getHeader().getTagCode()), tag);
@@ -696,7 +697,15 @@ public class FlashTagNode extends FlashTreeNode<Tag> {
 
 	public JPanel getExtraPanel() {
 		if (panel == null) {
-			panel = new AS3CodePanel((DoABCTag) getUserObject());
+			if (getUserObject() instanceof DoABCTag) {
+				panel = new AS3CodePanel((DoABCTag) getUserObject());
+			}
+			else if (getUserObject() instanceof DoActionTag) {
+				panel = new AS2CodePanel(((DoActionTag) getUserObject()).getActions());
+			}
+			else if (getUserObject() instanceof DoInitActionTag) {
+				panel = new AS2CodePanel(((DoInitActionTag) getUserObject()).getActions());
+			}
 		}
 
 		return panel;

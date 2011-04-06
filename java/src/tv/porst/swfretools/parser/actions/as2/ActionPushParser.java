@@ -22,6 +22,8 @@ public class ActionPushParser {
 		switch (type.value()) {
 		case 0: return new PushedString(type, SWFParserHelpers.parseString(parser, 0x00006, fieldName + "::String"));
 		case 1: return new PushedFloat(type, SWFParserHelpers.parseFloat(parser, 0x00006, fieldName + "::Float"));
+		case 2: return new PushedNull(type);
+		case 3: return new PushedUndefined(type);
 		case 4: return new PushedRegisterNumber(type, parseUINT8(parser, 0x00006, fieldName + "::RegisterNumber"));
 		case 5: return new PushedBoolean(type, parseUINT8(parser, 0x00006, fieldName + "::Boolean"));
 		case 6: return new PushedDouble(type, SWFParserHelpers.parseDouble(parser, 0x00006, fieldName + "::Double"));

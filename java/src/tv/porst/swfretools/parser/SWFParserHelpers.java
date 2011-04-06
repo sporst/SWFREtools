@@ -11,6 +11,7 @@ import tv.porst.splib.binaryparser.Float32;
 import tv.porst.splib.binaryparser.Float64;
 import tv.porst.splib.binaryparser.IFileElement;
 import tv.porst.splib.binaryparser.INT16;
+import tv.porst.splib.binaryparser.INT24;
 import tv.porst.splib.binaryparser.INT32;
 import tv.porst.splib.binaryparser.UBits;
 import tv.porst.splib.binaryparser.UINT16;
@@ -274,6 +275,11 @@ public final class SWFParserHelpers {
 	 */
 	public static INT16 parseINT16If(final SWFBinaryParser parser, final int errorCode, final Flag condition, final String fieldName) throws SWFParserException {
 		return condition.value() ? parseINT16(parser, errorCode, fieldName) : null;
+	}
+
+	public static INT24 parseINT24(final SWFBinaryParser parser, final int errorCode, final String fieldName) throws SWFParserException {
+		throwIf(parser, 3, errorCode, fieldName);
+		return parser.readInt24();
 	}
 
 	/**

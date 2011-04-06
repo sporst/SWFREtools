@@ -2,6 +2,7 @@ package tv.porst.swfretools.parser.actions.as2;
 
 public class ActionCodes {
 
+	public static final int ActionEnd = 0x00;
 	public static final int ActionNextFrame = 0x04;
 	public static final int ActionPreviousFrame = 0x05;
 	public static final int ActionPlay = 0x06;

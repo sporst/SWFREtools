@@ -822,6 +822,12 @@ public class FlashTreeNode<T extends IFileElement> extends IconNode {
 		}
 	}
 
+	protected void addNode(final String name, final Shape4Record value) {
+		if (value != null) {
+			add(new FlashShapeRecord4Node(name, value));
+		}
+	}
+
 	protected void addNode(final String name, final ShapeList value) {
 		if (value != null) {
 			add(new FlashShapeListNode(name, value));

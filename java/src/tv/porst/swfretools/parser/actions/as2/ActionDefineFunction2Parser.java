@@ -39,7 +39,7 @@ public class ActionDefineFunction2Parser {
 
 		final List<RegisterParam> registerParams = new ArrayList<RegisterParam>();
 
-		for (int i=0;i<registerCount.value();i++) {
+		for (int i=0;i<numParams.value();i++) {
 			registerParams.add(RegisterParamParser.parse(parser, fieldName + String.format("::RegisterParams[%d]", i)));
 		}
 

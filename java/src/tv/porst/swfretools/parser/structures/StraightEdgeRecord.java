@@ -11,7 +11,7 @@ import tv.porst.swfretools.parser.SWFParserHelpers;
  * @author sp
  *
  */
-public final class StraightEdgeRecord implements ShapeRecord, Shape3Record {
+public final class StraightEdgeRecord implements ShapeRecord, Shape3Record, Shape4Record {
 
 	/**
 	 * Type flag.

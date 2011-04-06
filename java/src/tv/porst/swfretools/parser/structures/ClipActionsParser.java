@@ -39,7 +39,11 @@ public final class ClipActionsParser {
 
 		do {
 
-			if (parser.peekUInt16().value() == 0) {
+			if (version <= 5 && parser.peekUInt16().value() == 0) {
+				break;
+			}
+
+			if (version > 5 && parser.peekUInt32().value() == 0) {
 				break;
 			}
 

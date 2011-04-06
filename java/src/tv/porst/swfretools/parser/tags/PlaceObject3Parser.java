@@ -70,6 +70,8 @@ public final class PlaceObject3Parser {
 		final UINT8 bitmapCache = parseUINT8If(parser, 0x00006, placeFlagHasCacheAsBitmap, "PlaceObject3::BitmapCache");
 		final ClipActions clipActions = parseIf(parser, version, placeFlagHasClipActions, "PlaceObject3::ClipActions");
 
+		parser.align();
+
 		return new PlaceObject3Tag(header, placeFlagHasClipActions, placeFlagHasClipDepth, placeFlagHasName,
 				placeFlagHasRatio, placeFlagHasColorTransform, placeFlagHasMatrix,
 				placeFlagHasCharacter, placeFlagHasMove, reserved, placeFlagHasImage, placeFlagHasClassName,

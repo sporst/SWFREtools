@@ -98,6 +98,7 @@ import tv.porst.swfretools.parser.structures.SoundInfo;
 import tv.porst.swfretools.parser.structures.StraightEdgeRecord;
 import tv.porst.swfretools.parser.structures.StyleChangeRecord;
 import tv.porst.swfretools.parser.structures.StyleChangeRecord3;
+import tv.porst.swfretools.parser.structures.StyleChangeRecord4;
 import tv.porst.swfretools.parser.structures.SymbolList;
 import tv.porst.swfretools.parser.structures.TagList;
 import tv.porst.swfretools.parser.structures.TextRecord;
@@ -278,6 +279,8 @@ public interface ISWFVisitor {
 	void visit(Object parent, String name, StyleChangeRecord value);
 
 	void visit(Object parent, String name, StyleChangeRecord3 value);
+
+	void visit(Object parent, String name, StyleChangeRecord4 value);
 
 	void visit(Object parent, String name, SymbolList assets);
 

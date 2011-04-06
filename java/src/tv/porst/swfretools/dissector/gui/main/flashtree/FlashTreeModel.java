@@ -30,8 +30,6 @@ public class FlashTreeModel extends DefaultTreeModel {
 			final DefaultMutableTreeNode root = (DefaultMutableTreeNode) getRoot();
 
 			insertNodeInto(new FlashFileNode(file), root, 0);
-
-			System.out.println("Foo");
 		}
 	}
 }

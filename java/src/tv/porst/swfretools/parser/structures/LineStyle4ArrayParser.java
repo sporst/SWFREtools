@@ -6,6 +6,7 @@ import static tv.porst.swfretools.parser.SWFParserHelpers.parseUINT8;
 import java.util.ArrayList;
 import java.util.List;
 
+import tv.porst.splib.binaryparser.Flag;
 import tv.porst.splib.binaryparser.UINT16;
 import tv.porst.splib.binaryparser.UINT8;
 import tv.porst.swfretools.parser.SWFBinaryParser;
@@ -42,5 +43,20 @@ public final class LineStyle4ArrayParser {
 		}
 
 		return new LineStyle4Array(lineStyleCount, lineStyleCountExtended, new LineStyle4List(lineStyles));
+	}
+
+	/**
+	 * Parses a LineStyle4Array structure.
+	 * 
+	 * @param parser The parser that parses the structure.
+	 * @param condition The condition to be true for this structure to be parsed.
+	 * @param fieldName Name of the structure in the parent structure.
+	 * 
+	 * @return The parsed structure or null if the condition was false.
+	 * 
+	 * @throws SWFParserException Thrown if the structure could not be parsed.
+	 */
+	public static LineStyle4Array parseIf(final SWFBinaryParser parser, final Flag condition, final String fieldName) throws SWFParserException {
+		return condition.value() ? parse(parser, fieldName) : null;
 	}
 }

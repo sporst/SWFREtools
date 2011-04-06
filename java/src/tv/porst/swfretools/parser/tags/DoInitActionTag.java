@@ -1,6 +1,7 @@
 package tv.porst.swfretools.parser.tags;
 
 import tv.porst.splib.binaryparser.UINT16;
+import tv.porst.swfretools.parser.structures.ActionList;
 import tv.porst.swfretools.parser.structures.RecordHeader;
 
 /**
@@ -16,17 +17,30 @@ public final class DoInitActionTag extends Tag {
 	 */
 	private final UINT16 spriteId;
 
+	private final ActionList actions;
+
 	/**
 	 * Creates a new DoInitAction tag object.
 	 * 
 	 * @param header Tag header.
 	 * @param spriteId Sprite to which these actions apply.
+	 * @param actionList
 	 */
-	public DoInitActionTag(final RecordHeader header, final UINT16 spriteId) {
+	public DoInitActionTag(final RecordHeader header, final UINT16 spriteId, final ActionList actions) {
 
 		super(header);
 
 		this.spriteId = spriteId;
+		this.actions = actions;
+	}
+
+	/**
+	 * Returns the
+	 *
+	 * @return The
+	 */
+	public ActionList getActions() {
+		return actions;
 	}
 
 	/**

@@ -5,6 +5,8 @@ import tv.porst.swfretools.dissector.gui.main.flashtree.nodes.FlashAS3CodeNode;
 import tv.porst.swfretools.dissector.gui.main.flashtree.nodes.FlashTagNode;
 import tv.porst.swfretools.dissector.gui.main.hexview.FlashHexView;
 import tv.porst.swfretools.parser.tags.DoABCTag;
+import tv.porst.swfretools.parser.tags.DoActionTag;
+import tv.porst.swfretools.parser.tags.DoInitActionTag;
 
 
 public class FlashTreeNodeSelectionHandler {
@@ -24,6 +26,12 @@ public class FlashTreeNodeSelectionHandler {
 			detailPanel.addPanel("Code", ((FlashAS3CodeNode) node).getExtraPanel());
 		}
 		else if (node.getUserObject() instanceof DoABCTag) {
+			detailPanel.addPanel("Code", ((FlashTagNode) node).getExtraPanel());
+		}
+		else if (node.getUserObject() instanceof DoActionTag) {
+			detailPanel.addPanel("Code", ((FlashTagNode) node).getExtraPanel());
+		}
+		else if (node.getUserObject() instanceof DoInitActionTag) {
 			detailPanel.addPanel("Code", ((FlashTagNode) node).getExtraPanel());
 		}
 	}

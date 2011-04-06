@@ -35,10 +35,6 @@ public final class DefineShape4Parser {
 
 		final UINT16 shapeId = parseUINT16(parser, 0x00006, "DefineShape4::ShapeID");
 
-		if (shapeId.value() == 16) {
-			System.out.println("foo");
-		}
-
 		final Rect shapeBounds = RectParser.parse(parser, "DefineShape4::ShapeBounds");
 		final Rect edgeBounds = RectParser.parse(parser, "DefineShape4::EdgeBounds");
 		final UBits reserved = parseUBits(parser, 5, 0x00006, "DefineShape4::Reserved");

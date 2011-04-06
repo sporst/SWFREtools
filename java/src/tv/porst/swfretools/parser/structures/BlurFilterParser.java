@@ -27,7 +27,7 @@ public final class BlurFilterParser {
 		final Fixed blurX = FixedParser.parse(parser, fieldName + "::BlurX");
 		final Fixed blurY = FixedParser.parse(parser, fieldName + "::BlurY");
 		final UBits passes = parseUBits(parser, 5, 0x00006, fieldName + "::Passes");
-		final UBits reserved = parseUBits(parser, 5, 0x00006, fieldName + "::Reserved");
+		final UBits reserved = parseUBits(parser, 3, 0x00006, fieldName + "::Reserved");
 
 		return new BlurFilter(blurX, blurY, passes, reserved);
 	}

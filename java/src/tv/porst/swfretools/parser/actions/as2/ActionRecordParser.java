@@ -30,18 +30,21 @@ public final class ActionRecordParser {
 	public static List<Action> parse(final SWFBinaryParser parser, final long actionRecordSize, final String fieldName) throws SWFParserException {
 
 		final List<Action> actions = new ArrayList<Action>();
+		final int startOffset = parser.getBytePosition();
 
-		for (int i=0;i<actionRecordSize;i++) {
+		while (parser.getBytePosition() - startOffset < actionRecordSize) {
 
 			final UINT8 actionCode = parseUINT8(parser, 0x00006, fieldName + "::ActionCode");
 
 			switch (actionCode.value()) {
+			case ActionCodes.ActionEnd: actions.add(new ActionEnd(actionCode)); break;
 			case ActionCodes.ActionNextFrame: actions.add(new ActionNextFrame(actionCode)); break;
 			case ActionCodes.ActionPreviousFrame: actions.add(new ActionPreviousFrame(actionCode)); break;
 			case ActionCodes.ActionPlay: actions.add(new ActionPlay(actionCode)); break;
 			case ActionCodes.ActionStop: actions.add(new ActionStop(actionCode)); break;
 			case ActionCodes.ActionToggleQuality: actions.add(new ActionToggleQuality(actionCode)); break;
 			case ActionCodes.ActionStopSounds: actions.add(new ActionStopSounds(actionCode)); break;
+			case ActionCodes.ActionAnd: actions.add(new ActionAnd(actionCode)); break;
 			case ActionCodes.ActionAdd: actions.add(new ActionAdd(actionCode)); break;
 			case ActionCodes.ActionSubtract: actions.add(new ActionSubtract(actionCode)); break;
 			case ActionCodes.ActionMultiply: actions.add(new ActionMultiply(actionCode)); break;
@@ -102,6 +105,7 @@ public final class ActionRecordParser {
 			case ActionCodes.ActionSetMember: actions.add(new ActionSetMember(actionCode)); break;
 			case ActionCodes.ActionIncrement: actions.add(new ActionIncrement(actionCode)); break;
 			case ActionCodes.ActionDecrement: actions.add(new ActionDecrement(actionCode)); break;
+			case ActionCodes.ActionNewMethod: actions.add(new ActionNewMethod(actionCode)); break;
 			case ActionCodes.ActionCallMethod: actions.add(new ActionCallMethod(actionCode)); break;
 			case ActionCodes.ActionInstanceOf: actions.add(new ActionInstanceOf(actionCode)); break;
 			case ActionCodes.ActionEnumerate2: actions.add(new ActionEnumerate2(actionCode)); break;
@@ -140,7 +144,7 @@ public final class ActionRecordParser {
 			}
 		}
 
-		return new ArrayList<Action>();
+		return actions;
 	}
 
 }

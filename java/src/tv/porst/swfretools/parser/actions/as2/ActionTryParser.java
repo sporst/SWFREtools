@@ -30,15 +30,15 @@ public class ActionTryParser {
 		final UINT16 catchSize = parseUINT16(parser, 0x00006, fieldName + "::CatchSize");
 		final UINT16 finallySize = parseUINT16(parser, 0x00006, fieldName + "::FinallySize");
 
-		final AsciiString functionName = parseStringIf(parser, 0x00006, catchInRegisterFlag, "::FunctionName");
-		final UINT8 registerCount = parseUINT8If(parser, 0x00006, catchInRegisterFlag, fieldName + "::RegisterCount");
+		final AsciiString catchName = parseStringIf(parser, 0x00006, !catchInRegisterFlag.value(), "::CatchName");
+		final UINT8 catchRegister = parseUINT8If(parser, 0x00006, catchInRegisterFlag, fieldName + "::CatchRegister");
 
 		final List<Action> tryBody = ActionRecordParser.parse(parser, trySize.value(), fieldName + "::TryBody");
 		final List<Action> catchBody = ActionRecordParser.parse(parser, catchSize.value(), fieldName + "::CatchBody");
 		final List<Action> finallyBody = ActionRecordParser.parse(parser, finallySize.value(), fieldName + "::FinallyBody");
 
 		return new ActionTry(actionCode, length, reserved, catchInRegisterFlag, finallyBlockFlag,
-				catchBlockFlag, trySize, catchSize, finallySize, functionName, registerCount,
+				catchBlockFlag, trySize, catchSize, finallySize, catchName, catchRegister,
 				new ActionList(tryBody), new ActionList(catchBody), new ActionList(finallyBody));
 	}
 }

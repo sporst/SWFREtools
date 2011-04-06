@@ -12,7 +12,7 @@ import tv.porst.swfretools.parser.SWFParserHelpers;
  * @author sp
  *
  */
-public final class CurvedEdgeRecord implements ShapeRecord, Shape3Record, IFileElement {
+public final class CurvedEdgeRecord implements ShapeRecord, Shape3Record, Shape4Record, IFileElement {
 
 	/**
 	 * Type flag.

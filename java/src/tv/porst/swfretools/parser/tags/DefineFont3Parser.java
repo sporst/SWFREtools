@@ -52,6 +52,8 @@ public final class DefineFont3Parser {
 	 */
 	public static DefineFont3Tag parse(final RecordHeader header, final SWFBinaryParser parser) throws SWFParserException {
 
+		final int endPosition = parser.getBytePosition() + header.getNormalizedLength();
+
 		final UINT16 fontId = parseUINT16(parser, 0x00006, "DefineFont3::FontId");
 		final Flag fontFlagsHasLayout = parser.readFlag();
 		final Flag fontFlagsShiftJIS = parseFlag(parser, 0x00006, "DefineFont3::FontFlagsShiftJIS");
@@ -61,7 +63,7 @@ public final class DefineFont3Parser {
 		final Flag fontFlagsWideCodes = parseFlag(parser, 0x00006, "DefineFont3::FontFlagsWideCodes");
 		final Flag fontFlagsItalic = parseFlag(parser, 0x00006, "DefineFont3::FontFlagsItalic");
 		final Flag fontFlagsBold = parseFlag(parser, 0x00006, "DefineFont3::FontFlagsBold");
-		final UINT8 languageCode = parseUINT8(parser, 0x00006, "Define2::LanguageCode");
+		final UINT8 languageCode = parseUINT8(parser, 0x00006, "DefineFont3::LanguageCode");
 		final UINT8 fontNameLen = parseUINT8(parser, 0x00006, "DefineFont3::FontNameLen");
 		final AsciiString fontName = parseString(parser, fontNameLen.value(), 0x00006, "DefineFont3::FontName");
 		final UINT16 numGlyphs = parseUINT16(parser, 0x00006, "DefineFont3::NumGlyphs");
@@ -77,7 +79,11 @@ public final class DefineFont3Parser {
 			}
 		}
 
-		final IParsedINTElement codeTableOffset = fontFlagsWideOffsets.value() ? parseUINT32(parser, 0x00006, "DefineFont3::CodeTableOffset") : parseUINT16(parser, 0x00006, "DefineFont3::CodeTableOffset");
+		// Reading the CodeTableOffset is tricky. I have seen valid tags with NumGlyphs=0 where
+		// the CodeTableOffset was omitted and I have seen some that have it.
+		final boolean parseCodeTableOffset = parser.getBytePosition() < endPosition;
+
+		final IParsedINTElement codeTableOffset = parseCodeTableOffset ? (fontFlagsWideOffsets.value() ? parseUINT32(parser, 0x00006, "DefineFont3::CodeTableOffset") : parseUINT16(parser, 0x00006, "DefineFont3::CodeTableOffset")) : null;
 
 		final List<Shape3> glyphShapeTable = new ArrayList<Shape3>();
 
@@ -96,14 +102,16 @@ public final class DefineFont3Parser {
 			}
 		}
 
-		final INT16 fontAscent = parseINT16If(parser, 0x00006, fontFlagsHasLayout, "DefineFont3::FontAscent");
-		final INT16 fontDescent = parseINT16If(parser, 0x00006, fontFlagsHasLayout, "DefineFont3::FontDescent");
-		final INT16 fontLeading = parseINT16If(parser, 0x00006, fontFlagsHasLayout, "DefineFont3::FontLeading");
+		final boolean parseFont = parser.getBytePosition() < endPosition || (fontFlagsHasLayout != null && fontFlagsHasLayout.value());
+
+		final INT16 fontAscent = parseINT16If(parser, 0x00006, parseFont, "DefineFont3::FontAscent");
+		final INT16 fontDescent = parseINT16If(parser, 0x00006, parseFont, "DefineFont3::FontDescent");
+		final INT16 fontLeading = parseINT16If(parser, 0x00006, parseFont, "DefineFont3::FontLeading");
 
 		final List<INT16> fontAdvanceTable = new ArrayList<INT16>();
 		final List<Rect> fontBoundsTable = new ArrayList<Rect>();
 
-		if (fontFlagsHasLayout.value()) {
+		if (parseFont) {
 			for (int i=0;i<numGlyphs.value();i++) {
 				fontAdvanceTable.add(parseINT16(parser, 0x00006, String.format("DefineFont3::FontAdvanceTable[%d]", i)));
 			}
@@ -113,11 +121,11 @@ public final class DefineFont3Parser {
 			}
 		}
 
-		final UINT16 kerningCount = parseUINT16If(parser, 0x00006, fontFlagsHasLayout, "DefineFont3::KerningCount");
+		final UINT16 kerningCount = parseUINT16If(parser, 0x00006, parseFont, "DefineFont3::KerningCount");
 
 		final List<KerningRecord> fontKerningTable = new ArrayList<KerningRecord>();
 
-		if (fontFlagsHasLayout.value()) {
+		if (parseFont) {
 			for (int i=0;i<kerningCount.value();i++) {
 				fontKerningTable.add(KerningRecordParser.parse(parser, fontFlagsWideCodes.value(), String.format("DefineFont3::FontKerningTable[%d]", i)));
 			}

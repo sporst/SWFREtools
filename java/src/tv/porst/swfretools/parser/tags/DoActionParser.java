@@ -1,8 +1,12 @@
 package tv.porst.swfretools.parser.tags;
 
+import java.util.List;
+
 import tv.porst.swfretools.parser.SWFBinaryParser;
 import tv.porst.swfretools.parser.SWFParserException;
+import tv.porst.swfretools.parser.actions.as2.Action;
 import tv.porst.swfretools.parser.actions.as2.ActionRecordParser;
+import tv.porst.swfretools.parser.structures.ActionList;
 import tv.porst.swfretools.parser.structures.RecordHeader;
 
 
@@ -25,8 +29,8 @@ public final class DoActionParser {
 	 */
 	public static DoActionTag parse(final RecordHeader header, final SWFBinaryParser parser) throws SWFParserException {
 
-		ActionRecordParser.parse(parser, header.getNormalizedLength(), "DoAction::Actions");
+		final List<Action> actions = ActionRecordParser.parse(parser, header.getNormalizedLength(), "DoAction::Actions");
 
-		return new DoActionTag(header);
+		return new DoActionTag(header, new ActionList(actions));
 	}
 }

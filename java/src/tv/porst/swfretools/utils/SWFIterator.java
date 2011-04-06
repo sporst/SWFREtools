@@ -78,6 +78,7 @@ import tv.porst.swfretools.parser.structures.Shape3;
 import tv.porst.swfretools.parser.structures.Shape3List;
 import tv.porst.swfretools.parser.structures.Shape3Record;
 import tv.porst.swfretools.parser.structures.Shape3RecordList;
+import tv.porst.swfretools.parser.structures.Shape4Record;
 import tv.porst.swfretools.parser.structures.ShapeList;
 import tv.porst.swfretools.parser.structures.ShapeRecord;
 import tv.porst.swfretools.parser.structures.ShapeRecordList;
@@ -91,6 +92,7 @@ import tv.porst.swfretools.parser.structures.SoundInfo;
 import tv.porst.swfretools.parser.structures.StraightEdgeRecord;
 import tv.porst.swfretools.parser.structures.StyleChangeRecord;
 import tv.porst.swfretools.parser.structures.StyleChangeRecord3;
+import tv.porst.swfretools.parser.structures.StyleChangeRecord4;
 import tv.porst.swfretools.parser.structures.Symbol;
 import tv.porst.swfretools.parser.structures.TagList;
 import tv.porst.swfretools.parser.structures.TextRecord;
@@ -228,6 +230,336 @@ public class SWFIterator {
 		}
 	}
 
+	private static void visit(final ColorMatrixFilter filter, final ISWFVisitor visitor) {
+		// TODO
+	}
+
+	private static void visit(final ConvolutionFilter filter, final ISWFVisitor visitor) {
+		visitor.visit("MatrixX", filter.getMatrixX());
+		visitor.visit("MatrixY", filter.getMatrixY());
+		visitor.visit("Divisor", filter.getDivisor());
+		visitor.visit("Bias", filter.getBias());
+		// TODO
+		// visitor.visit("Matrix", filter.getMatrix());
+		visitor.visit(filter, "DefaultColor", filter.getDefaultColor());
+		visit(filter.getDefaultColor(), visitor);
+		visitor.visit("Reserved", filter.getReserved());
+		visitor.visit("Clamp", filter.getClamp());
+		visitor.visit("PreserveAlpha", filter.getPreserveAlpha());
+	}
+
+	private static void visit(final DropShadowFilter filter, final ISWFVisitor visitor) {
+		visitor.visit(filter, "DropShadowColor", filter.getDropShadowColor());
+		visit(filter.getDropShadowColor(), visitor);
+		visitor.visit("BlurX", filter.getBlurX());
+		visitor.visit("BlurY", filter.getBlurY());
+		visitor.visit("Angle", filter.getAngle());
+		visitor.visit("Distance", filter.getDistance());
+		visitor.visit("Strength", filter.getStrength());
+		visitor.visit("InnerShadow", filter.getInnerShadow());
+		visitor.visit("Knockout", filter.getKnockout());
+		visitor.visit("CompositeSource", filter.getCompositeSource());
+		visitor.visit("Passes", filter.getPasses());
+	}
+
+	private static void visit(final Filter filter, final ISWFVisitor visitor) {
+		visitor.visit("FilterID", filter.getFilterId());
+		visitor.visit(filter, "DropShadowFilter", filter.getDropShadowFilter());
+		visit(filter.getDropShadowFilter(), visitor);
+		visitor.visit(filter, "BlurFilter", filter.getBlurFilter());
+		visit(filter.getBlurFilter(), visitor);
+		visitor.visit(filter, "GlowFilter", filter.getGlowFilter());
+		visit(filter.getGlowFilter(), visitor);
+		visitor.visit(filter, "BevelFilter", filter.getBevelFilter());
+		visit(filter.getBevelFilter(), visitor);
+		visitor.visit(filter, "GradientGlowFilter", filter.getGradientGlowFilter());
+		visit(filter.getGradientGlowFilter(), visitor);
+		visitor.visit(filter, "ConvolutionFilter", filter.getConvolutionFilter());
+		visit(filter.getConvolutionFilter(), visitor);
+		visitor.visit(filter, "ColorMatrixFilter", filter.getColorMatrixFilter());
+		visit(filter.getColorMatrixFilter(), visitor);
+		visitor.visit(filter, "GradientBevelFilter", filter.getGradientBevelFilter());
+		visit(filter.getGradientBevelFilter(), visitor);
+	}
+
+	private static void visit(final FilterList filterList, final ISWFVisitor visitor) {
+
+		if (filterList != null) {
+			visitor.visit("NumberOfFilters", filterList.getNumberOfFilters());
+			visitor.visit(filterList, "Filters", filterList.getFilters());
+			visit(filterList.getFilters(), visitor);
+		}
+	}
+
+	private static void visit(final GlowFilter filter, final ISWFVisitor visitor) {
+		visitor.visit(filter, "GlowColor", filter.getGlowColor());
+		visit(filter.getGlowColor(), visitor);
+		visitor.visit("BlurX", filter.getBlurX());
+		visitor.visit("BlurY", filter.getBlurY());
+		visitor.visit("Strength", filter.getStrength());
+		visitor.visit("InnerShadow", filter.getInnerShadow());
+		visitor.visit("Knockout", filter.getKnockout());
+		visitor.visit("CompositeSource", filter.getCompositeSource());
+		visitor.visit("Passes", filter.getPasses());
+	}
+
+	private static void visit(final GlyphEntry glyphEntry, final ISWFVisitor visitor) {
+
+		visitor.visit("GlyphIndex", glyphEntry.getGlyphIndex());
+		visitor.visit("AdvanceIndex", glyphEntry.getAdvanceIndex());
+	}
+
+	private static void visit(final GlyphEntryList glyphEntries, final ISWFVisitor visitor) {
+		for (final GlyphEntry glyphEntry : glyphEntries) {
+			visitor.visit(glyphEntries, "GlyphEntry", glyphEntry);
+			visit(glyphEntry, visitor);
+		}
+	}
+
+	private static void visit(final GradientBevelFilter filter, final ISWFVisitor visitor) {
+		visitor.visit("NumColors", filter.getNumColors());
+		// TODO
+		visitor.visit("BlurX", filter.getBlurX());
+		visitor.visit("BlurY", filter.getBlurY());
+		visitor.visit("Angle", filter.getAngle());
+		visitor.visit("Distance", filter.getDistance());
+		visitor.visit("Strength", filter.getStrength());
+		visitor.visit("InnerShadow", filter.getInnerShadow());
+		visitor.visit("Knockout", filter.getKnockout());
+		visitor.visit("CompositeSource", filter.getCompositeSource());
+		visitor.visit("OnTop", filter.getOnTop());
+		visitor.visit("Passes", filter.getPasses());
+	}
+
+	private static void visit(final GradientGlowFilter filter, final ISWFVisitor visitor) {
+		visitor.visit("NumColors", filter.getNumColors());
+		//TODO
+		visitor.visit("BlurX", filter.getBlurX());
+		visitor.visit("BlurY", filter.getBlurY());
+		visitor.visit("Angle", filter.getAngle());
+		visitor.visit("Distance", filter.getDistance());
+		visitor.visit("Strength", filter.getStrength());
+		visitor.visit("InnerShadow", filter.getInnerShadow());
+		visitor.visit("Knockout", filter.getKnockout());
+		visitor.visit("CompositeSource", filter.getCompositeSource());
+		visitor.visit("OnTop", filter.getOnTop());
+		visitor.visit("Passes", filter.getPasses());
+	}
+
+	private static void visit(final INT16List list, final ISWFVisitor visitor) {
+		for (final INT16 element : list) {
+			visitor.visit("Element", element);
+		}
+	}
+
+	private static void visit(final MorphGradient gradient, final ISWFVisitor visitor) {
+
+		if (gradient != null) {
+			visitor.visit("NumGradients", gradient.getNumGradients());
+			visitor.visit(gradient, "GradientRecords", gradient.getGradientRecords());
+			visit(gradient.getGradientRecords(), visitor);
+		}
+	}
+
+	private static void visit(final MorphGradientRecord record, final ISWFVisitor visitor) {
+		visitor.visit("StartRatio", record.getStartRatio());
+		visitor.visit(record, "StartColor", record.getStartColor());
+		visit(record.getStartColor(), visitor);
+		visitor.visit("EndRatio", record.getEndRatio());
+		visitor.visit(record, "EndColor", record.getEndColor());
+		visit(record.getEndColor(), visitor);
+	}
+
+	private static void visit(final MorphGradientRecordList list, final ISWFVisitor visitor) {
+		for (final MorphGradientRecord record : list) {
+			visitor.visit(list, "GradientRecord", record);
+			visit(record, visitor);
+		}
+	}
+
+	private static void visit(final RectList list, final ISWFVisitor visitor) {
+		for (final Rect element : list) {
+			visitor.visit(list, "Element", element);
+			visit(element, visitor);
+		}
+	}
+
+	private static void visit(final Shape shape, final ISWFVisitor visitor) {
+		visitor.visit("NumFillBits", shape.getNumFillBits());
+		visitor.visit("NumLineBits", shape.getNumLineBits());
+		visitor.visit(shape, "ShapeRecord", shape.getShapeRecord());
+		visit(shape.getShapeRecord(), visitor);
+	}
+
+	private static void visit(final Shape3 shape, final ISWFVisitor visitor) {
+		visitor.visit("NumFillBits", shape.getNumFillBits());
+		visitor.visit("NumLineBits", shape.getNumLineBits());
+		visitor.visit(shape, "ShapeRecord", shape.getShapeRecord());
+		visit(shape.getShapeRecord(), visitor);
+	}
+
+	private static void visit(final Shape3RecordList shapeRecordList, final ISWFVisitor visitor) {
+		for (final Shape3Record shapeRecord : shapeRecordList) {
+
+			if (shapeRecord instanceof CurvedEdgeRecord) {
+				visitor.visit(shapeRecordList, "ShapeRecord", (CurvedEdgeRecord) shapeRecord);
+				visit((CurvedEdgeRecord) shapeRecord, visitor);
+			}
+			else if (shapeRecord instanceof EndShapeRecord) {
+				visitor.visit(shapeRecordList, "ShapeRecord", (EndShapeRecord) shapeRecord);
+				visit((EndShapeRecord) shapeRecord, visitor);
+			}
+			else if (shapeRecord instanceof StraightEdgeRecord) {
+				visitor.visit(shapeRecordList, "ShapeRecord", (StraightEdgeRecord) shapeRecord);
+				visit((StraightEdgeRecord) shapeRecord, visitor);
+			}
+			else if (shapeRecord instanceof StyleChangeRecord3) {
+				visitor.visit(shapeRecordList, "ShapeRecord", (StyleChangeRecord3) shapeRecord);
+				visit((StyleChangeRecord3) shapeRecord, visitor);
+			}
+		}
+	}
+
+	private static void visit(final ShapeRecordList shapeRecordList, final ISWFVisitor visitor) {
+		for (final ShapeRecord shapeRecord : shapeRecordList) {
+
+			if (shapeRecord instanceof CurvedEdgeRecord) {
+				visitor.visit(shapeRecordList, "ShapeRecord", (CurvedEdgeRecord) shapeRecord);
+				visit((CurvedEdgeRecord) shapeRecord, visitor);
+			}
+			else if (shapeRecord instanceof EndShapeRecord) {
+				visitor.visit(shapeRecordList, "ShapeRecord", (EndShapeRecord) shapeRecord);
+				visit((EndShapeRecord) shapeRecord, visitor);
+			}
+			else if (shapeRecord instanceof StraightEdgeRecord) {
+				visitor.visit(shapeRecordList, "ShapeRecord", (StraightEdgeRecord) shapeRecord);
+				visit((StraightEdgeRecord) shapeRecord, visitor);
+			}
+			else if (shapeRecord instanceof StyleChangeRecord) {
+				visitor.visit(shapeRecordList, "ShapeRecord", (StyleChangeRecord) shapeRecord);
+				visit((StyleChangeRecord) shapeRecord, visitor);
+			}
+		}
+	}
+
+	private static void visit(final ShapeWithStyle4 shapes, final ISWFVisitor visitor) {
+
+		visitor.visit(shapes, "FillStyles", shapes.getFillStyles());
+		visit(shapes.getFillStyles(), visitor);
+		visitor.visit(shapes, "LineStyles", shapes.getLineStyles());
+		visit(shapes.getLineStyles(), visitor);
+		visitor.visit("NumFillBits", shapes.getNumFillBits());
+		visitor.visit("NumLineBits", shapes.getNumLineBits());
+
+		final Shape4Record shapeRecord = shapes.getShapeRecord();
+
+		if (shapeRecord instanceof CurvedEdgeRecord) {
+			visitor.visit(shapes, "CurvedEdgeRecord", (CurvedEdgeRecord) shapeRecord);
+			visit((CurvedEdgeRecord) shapeRecord, visitor);
+		}
+		else if (shapeRecord instanceof EndShapeRecord) {
+			visitor.visit(shapes, "EndShapeRecord", (EndShapeRecord) shapeRecord);
+			visit((EndShapeRecord) shapeRecord, visitor);
+		}
+		else if (shapeRecord instanceof StraightEdgeRecord) {
+			visitor.visit(shapes, "StraightEdgeRecord", (StraightEdgeRecord) shapeRecord);
+			visit((StraightEdgeRecord) shapeRecord, visitor);
+		}
+		else if (shapeRecord instanceof StyleChangeRecord4) {
+			visitor.visit(shapes, "StyleChangeRecord", (StyleChangeRecord4) shapeRecord);
+			visit((StyleChangeRecord4) shapeRecord, visitor);
+		}
+	}
+
+	private static void visit(final SingleFilterList filters, final ISWFVisitor visitor) {
+		for (final Filter filter : filters) {
+			visitor.visit(filters, "Filter", filter);
+			visit(filter, visitor);
+		}
+	}
+
+	private static void visit(final SoundEnvelope envelope, final ISWFVisitor visitor) {
+
+		visitor.visit("Pos44", envelope.getPos44());
+		visitor.visit("LeftLevel", envelope.getLeftLevel());
+		visitor.visit("RightLevel", envelope.getRightLevel());
+	}
+
+	private static void visit(final SoundEnvelopeList list, final ISWFVisitor visitor) {
+		for (final SoundEnvelope envelope : list) {
+			visitor.visit(list, "SoundEnvelope", envelope);
+			visit(envelope, visitor);
+		}
+	}
+
+	private static void visit(final TextRecord textRecord, final ISWFVisitor visitor) {
+
+		visitor.visit("TextRecordType", textRecord.getTextRecordType());
+		visitor.visit("StyleFlagsReserved", textRecord.getStyleFlagsReserved());
+		visitor.visit("StyleFlagsHasFont", textRecord.getStyleFlagsHasFont());
+		visitor.visit("StyleFlagsHasColor", textRecord.getStyleFlagsHasColor());
+		visitor.visit("StyleFlagsHasYOffset", textRecord.getStyleFlagsHasYOffset());
+		visitor.visit("StyleFlagsHasXOffset", textRecord.getStyleFlagsHasXOffset());
+		visitor.visit("FontID", textRecord.getFontId());
+		visitor.visit(textRecord, "TextColor", textRecord.getTextColor());
+		visit(textRecord.getTextColor(), visitor);
+		visitor.visit("XOffset", textRecord.getxOffset());
+		visitor.visit("YOffset", textRecord.getyOffset());
+		visitor.visit("TextHeight", textRecord.getTextHeight());
+		visitor.visit("GlyphCount", textRecord.getGlyphCount());
+		visitor.visit(textRecord, "GlyphEntries", textRecord.getGlyphEntries());
+		visit(textRecord.getGlyphEntries(), visitor);
+	}
+
+	private static void visit(final TextRecord2 textRecord, final ISWFVisitor visitor) {
+
+		visitor.visit("TextRecordType", textRecord.getTextRecordType());
+		visitor.visit("StyleFlagsReserved", textRecord.getStyleFlagsReserved());
+		visitor.visit("StyleFlagsHasFont", textRecord.getStyleFlagsHasFont());
+		visitor.visit("StyleFlagsHasColor", textRecord.getStyleFlagsHasColor());
+		visitor.visit("StyleFlagsHasYOffset", textRecord.getStyleFlagsHasYOffset());
+		visitor.visit("StyleFlagsHasXOffset", textRecord.getStyleFlagsHasXOffset());
+		visitor.visit("FontID", textRecord.getFontId());
+		visitor.visit(textRecord, "TextColor", textRecord.getTextColor());
+		visit(textRecord.getTextColor(), visitor);
+		visitor.visit("XOffset", textRecord.getxOffset());
+		visitor.visit("YOffset", textRecord.getyOffset());
+		visitor.visit("TextHeight", textRecord.getTextHeight());
+		visitor.visit("GlyphCount", textRecord.getGlyphCount());
+		visitor.visit(textRecord, "GlyphEntries", textRecord.getGlyphEntries());
+		visit(textRecord.getGlyphEntries(), visitor);
+	}
+
+	private static void visit(final TextRecord2List textRecords, final ISWFVisitor visitor) {
+		for (final TextRecord2 textRecord : textRecords) {
+			visitor.visit(textRecords, "TextRecord", textRecord);
+			visit(textRecord, visitor);
+		}
+	}
+
+	private static void visit(final TextRecordList textRecords, final ISWFVisitor visitor) {
+		for (final TextRecord textRecord : textRecords) {
+			visitor.visit(textRecords, "TextRecord", textRecord);
+			visit(textRecord, visitor);
+		}
+	}
+
+	private static void visit(final UINT16List list, final ISWFVisitor visitor) {
+		for (final UINT16 element : list) {
+			visitor.visit("Element", element);
+		}
+	}
+
+	private static void visit(final ZoneRecord zoneRecord, final ISWFVisitor visitor) {
+
+		visitor.visit("NumZoneData", zoneRecord.getNumZoneData());
+		visitor.visit(zoneRecord, "ZoneData", zoneRecord.getZoneData());
+		visit(zoneRecord.getZoneData(), visitor);
+		visitor.visit("Reserved", zoneRecord.getReserved());
+		visitor.visit("ZoneMaskX", zoneRecord.getZoneMaskX());
+		visitor.visit("ZoneMaskY", zoneRecord.getZoneMaskY());
+	}
+
 	public static void visit(final ClipActionRecord clipActionRecord, final ISWFVisitor visitor) {
 
 		visitor.visit(clipActionRecord, "EventFlags", clipActionRecord.getEventFlags());
@@ -290,24 +622,6 @@ public class SWFIterator {
 		visitor.visit("ClipEventKeyPress", allEventFlags.getClipEventKeyPress());
 		visitor.visit("ClipEventDragOut", allEventFlags.getClipEventDragOut());
 		visitor.visit("Reserved2", allEventFlags.getReserved2());
-	}
-
-	private static void visit(final ColorMatrixFilter filter, final ISWFVisitor visitor) {
-		// TODO
-	}
-
-	private static void visit(final ConvolutionFilter filter, final ISWFVisitor visitor) {
-		visitor.visit("MatrixX", filter.getMatrixX());
-		visitor.visit("MatrixY", filter.getMatrixY());
-		visitor.visit("Divisor", filter.getDivisor());
-		visitor.visit("Bias", filter.getBias());
-		// TODO
-		// visitor.visit("Matrix", filter.getMatrix());
-		visitor.visit(filter, "DefaultColor", filter.getDefaultColor());
-		visit(filter.getDefaultColor(), visitor);
-		visitor.visit("Reserved", filter.getReserved());
-		visitor.visit("Clamp", filter.getClamp());
-		visitor.visit("PreserveAlpha", filter.getPreserveAlpha());
 	}
 
 	public static void visit(final CSMTextSettingsTag tag, final ISWFVisitor visitor) {
@@ -709,20 +1023,6 @@ public class SWFIterator {
 		// TODO
 	}
 
-	private static void visit(final DropShadowFilter filter, final ISWFVisitor visitor) {
-		visitor.visit(filter, "DropShadowColor", filter.getDropShadowColor());
-		visit(filter.getDropShadowColor(), visitor);
-		visitor.visit("BlurX", filter.getBlurX());
-		visitor.visit("BlurY", filter.getBlurY());
-		visitor.visit("Angle", filter.getAngle());
-		visitor.visit("Distance", filter.getDistance());
-		visitor.visit("Strength", filter.getStrength());
-		visitor.visit("InnerShadow", filter.getInnerShadow());
-		visitor.visit("Knockout", filter.getKnockout());
-		visitor.visit("CompositeSource", filter.getCompositeSource());
-		visitor.visit("Passes", filter.getPasses());
-	}
-
 	public static void visit(final EndShapeRecord shapeRecord, final ISWFVisitor visitor) {
 
 		visitor.visit("TypeFlag", shapeRecord.getTypeFlag());
@@ -839,35 +1139,6 @@ public class SWFIterator {
 		}
 	}
 
-	private static void visit(final Filter filter, final ISWFVisitor visitor) {
-		visitor.visit("FilterID", filter.getFilterId());
-		visitor.visit(filter, "DropShadowFilter", filter.getDropShadowFilter());
-		visit(filter.getDropShadowFilter(), visitor);
-		visitor.visit(filter, "BlurFilter", filter.getBlurFilter());
-		visit(filter.getBlurFilter(), visitor);
-		visitor.visit(filter, "GlowFilter", filter.getGlowFilter());
-		visit(filter.getGlowFilter(), visitor);
-		visitor.visit(filter, "BevelFilter", filter.getBevelFilter());
-		visit(filter.getBevelFilter(), visitor);
-		visitor.visit(filter, "GradientGlowFilter", filter.getGradientGlowFilter());
-		visit(filter.getGradientGlowFilter(), visitor);
-		visitor.visit(filter, "ConvolutionFilter", filter.getConvolutionFilter());
-		visit(filter.getConvolutionFilter(), visitor);
-		visitor.visit(filter, "ColorMatrixFilter", filter.getColorMatrixFilter());
-		visit(filter.getColorMatrixFilter(), visitor);
-		visitor.visit(filter, "GradientBevelFilter", filter.getGradientBevelFilter());
-		visit(filter.getGradientBevelFilter(), visitor);
-	}
-
-	private static void visit(final FilterList filterList, final ISWFVisitor visitor) {
-
-		if (filterList != null) {
-			visitor.visit("NumberOfFilters", filterList.getNumberOfFilters());
-			visitor.visit(filterList, "Filters", filterList.getFilters());
-			visit(filterList.getFilters(), visitor);
-		}
-	}
-
 	public static void visit(final FocalGradient gradient, final ISWFVisitor visitor) {
 
 		if (gradient != null) {
@@ -887,31 +1158,6 @@ public class SWFIterator {
 		visitor.visit("AnchorFlag", tag.getNamedAnchorFlag());
 	}
 
-	private static void visit(final GlowFilter filter, final ISWFVisitor visitor) {
-		visitor.visit(filter, "GlowColor", filter.getGlowColor());
-		visit(filter.getGlowColor(), visitor);
-		visitor.visit("BlurX", filter.getBlurX());
-		visitor.visit("BlurY", filter.getBlurY());
-		visitor.visit("Strength", filter.getStrength());
-		visitor.visit("InnerShadow", filter.getInnerShadow());
-		visitor.visit("Knockout", filter.getKnockout());
-		visitor.visit("CompositeSource", filter.getCompositeSource());
-		visitor.visit("Passes", filter.getPasses());
-	}
-
-	private static void visit(final GlyphEntry glyphEntry, final ISWFVisitor visitor) {
-
-		visitor.visit("GlyphIndex", glyphEntry.getGlyphIndex());
-		visitor.visit("AdvanceIndex", glyphEntry.getAdvanceIndex());
-	}
-
-	private static void visit(final GlyphEntryList glyphEntries, final ISWFVisitor visitor) {
-		for (final GlyphEntry glyphEntry : glyphEntries) {
-			visitor.visit(glyphEntries, "GlyphEntry", glyphEntry);
-			visit(glyphEntry, visitor);
-		}
-	}
-
 	public static void visit(final Gradient gradient, final ISWFVisitor visitor) {
 
 		visitor.visit("SpreadMode", gradient.getSpreadMode());
@@ -928,36 +1174,6 @@ public class SWFIterator {
 		visitor.visit("NumGradients", gradient.getNumGradients());
 		visitor.visit(gradient, "GradientRecords", gradient.getGradientRecords());
 		visit(gradient.getGradientRecords(), visitor);
-	}
-
-	private static void visit(final GradientBevelFilter filter, final ISWFVisitor visitor) {
-		visitor.visit("NumColors", filter.getNumColors());
-		// TODO
-		visitor.visit("BlurX", filter.getBlurX());
-		visitor.visit("BlurY", filter.getBlurY());
-		visitor.visit("Angle", filter.getAngle());
-		visitor.visit("Distance", filter.getDistance());
-		visitor.visit("Strength", filter.getStrength());
-		visitor.visit("InnerShadow", filter.getInnerShadow());
-		visitor.visit("Knockout", filter.getKnockout());
-		visitor.visit("CompositeSource", filter.getCompositeSource());
-		visitor.visit("OnTop", filter.getOnTop());
-		visitor.visit("Passes", filter.getPasses());
-	}
-
-	private static void visit(final GradientGlowFilter filter, final ISWFVisitor visitor) {
-		visitor.visit("NumColors", filter.getNumColors());
-		//TODO
-		visitor.visit("BlurX", filter.getBlurX());
-		visitor.visit("BlurY", filter.getBlurY());
-		visitor.visit("Angle", filter.getAngle());
-		visitor.visit("Distance", filter.getDistance());
-		visitor.visit("Strength", filter.getStrength());
-		visitor.visit("InnerShadow", filter.getInnerShadow());
-		visitor.visit("Knockout", filter.getKnockout());
-		visitor.visit("CompositeSource", filter.getCompositeSource());
-		visitor.visit("OnTop", filter.getOnTop());
-		visitor.visit("Passes", filter.getPasses());
 	}
 
 	public static void visit(final GradRecord gradRecord, final ISWFVisitor visitor) {
@@ -987,12 +1203,6 @@ public class SWFIterator {
 		for (final GradRecord gradRecord : gradientRecords) {
 			visitor.visit(gradientRecords, "GradRecord", gradRecord);
 			visit(gradRecord, visitor);
-		}
-	}
-
-	private static void visit(final INT16List list, final ISWFVisitor visitor) {
-		for (final INT16 element : list) {
-			visitor.visit("Element", element);
 		}
 	}
 
@@ -1164,31 +1374,6 @@ public class SWFIterator {
 		}
 	}
 
-	private static void visit(final MorphGradient gradient, final ISWFVisitor visitor) {
-
-		if (gradient != null) {
-			visitor.visit("NumGradients", gradient.getNumGradients());
-			visitor.visit(gradient, "GradientRecords", gradient.getGradientRecords());
-			visit(gradient.getGradientRecords(), visitor);
-		}
-	}
-
-	private static void visit(final MorphGradientRecord record, final ISWFVisitor visitor) {
-		visitor.visit("StartRatio", record.getStartRatio());
-		visitor.visit(record, "StartColor", record.getStartColor());
-		visit(record.getStartColor(), visitor);
-		visitor.visit("EndRatio", record.getEndRatio());
-		visitor.visit(record, "EndColor", record.getEndColor());
-		visit(record.getEndColor(), visitor);
-	}
-
-	private static void visit(final MorphGradientRecordList list, final ISWFVisitor visitor) {
-		for (final MorphGradientRecord record : list) {
-			visitor.visit(list, "GradientRecord", record);
-			visit(record, visitor);
-		}
-	}
-
 	public static void visit(final MorphLineStyle lineStyle, final ISWFVisitor visitor) {
 
 		visitor.visit("StartWidth", lineStyle.getStartWidth());
@@ -1307,13 +1492,6 @@ public class SWFIterator {
 		visitor.visit("YMax", rect.getyMax());
 	}
 
-	private static void visit(final RectList list, final ISWFVisitor visitor) {
-		for (final Rect element : list) {
-			visitor.visit(list, "Element", element);
-			visit(element, visitor);
-		}
-	}
-
 	public static void visit(final RemoveObject2Tag tag, final ISWFVisitor visitor) {
 
 		visitor.visit("Dept", tag.getDepth());
@@ -1345,20 +1523,6 @@ public class SWFIterator {
 		visit(tag.getBackgroundColor(), visitor);
 	}
 
-	private static void visit(final Shape shape, final ISWFVisitor visitor) {
-		visitor.visit("NumFillBits", shape.getNumFillBits());
-		visitor.visit("NumLineBits", shape.getNumLineBits());
-		visitor.visit(shape, "ShapeRecord", shape.getShapeRecord());
-		visit(shape.getShapeRecord(), visitor);
-	}
-
-	private static void visit(final Shape3 shape, final ISWFVisitor visitor) {
-		visitor.visit("NumFillBits", shape.getNumFillBits());
-		visitor.visit("NumLineBits", shape.getNumLineBits());
-		visitor.visit(shape, "ShapeRecord", shape.getShapeRecord());
-		visit(shape.getShapeRecord(), visitor);
-	}
-
 	public static void visit(final Shape3List shapeList, final ISWFVisitor visitor) {
 		for (final Shape3 shape3 : shapeList) {
 			visitor.visit(shapeList, "Element", shape3);
@@ -1366,54 +1530,10 @@ public class SWFIterator {
 		}
 	}
 
-	private static void visit(final Shape3RecordList shapeRecordList, final ISWFVisitor visitor) {
-		for (final Shape3Record shapeRecord : shapeRecordList) {
-
-			if (shapeRecord instanceof CurvedEdgeRecord) {
-				visitor.visit(shapeRecordList, "ShapeRecord", (CurvedEdgeRecord) shapeRecord);
-				visit((CurvedEdgeRecord) shapeRecord, visitor);
-			}
-			else if (shapeRecord instanceof EndShapeRecord) {
-				visitor.visit(shapeRecordList, "ShapeRecord", (EndShapeRecord) shapeRecord);
-				visit((EndShapeRecord) shapeRecord, visitor);
-			}
-			else if (shapeRecord instanceof StraightEdgeRecord) {
-				visitor.visit(shapeRecordList, "ShapeRecord", (StraightEdgeRecord) shapeRecord);
-				visit((StraightEdgeRecord) shapeRecord, visitor);
-			}
-			else if (shapeRecord instanceof StyleChangeRecord3) {
-				visitor.visit(shapeRecordList, "ShapeRecord", (StyleChangeRecord3) shapeRecord);
-				visit((StyleChangeRecord3) shapeRecord, visitor);
-			}
-		}
-	}
-
 	public static void visit(final ShapeList shapeList, final ISWFVisitor visitor) {
 		for (final Shape shape : shapeList) {
 			visitor.visit(shapeList, "Element", shape);
 			visit(shape, visitor);
-		}
-	}
-
-	private static void visit(final ShapeRecordList shapeRecordList, final ISWFVisitor visitor) {
-		for (final ShapeRecord shapeRecord : shapeRecordList) {
-
-			if (shapeRecord instanceof CurvedEdgeRecord) {
-				visitor.visit(shapeRecordList, "ShapeRecord", (CurvedEdgeRecord) shapeRecord);
-				visit((CurvedEdgeRecord) shapeRecord, visitor);
-			}
-			else if (shapeRecord instanceof EndShapeRecord) {
-				visitor.visit(shapeRecordList, "ShapeRecord", (EndShapeRecord) shapeRecord);
-				visit((EndShapeRecord) shapeRecord, visitor);
-			}
-			else if (shapeRecord instanceof StraightEdgeRecord) {
-				visitor.visit(shapeRecordList, "ShapeRecord", (StraightEdgeRecord) shapeRecord);
-				visit((StraightEdgeRecord) shapeRecord, visitor);
-			}
-			else if (shapeRecord instanceof StyleChangeRecord) {
-				visitor.visit(shapeRecordList, "ShapeRecord", (StyleChangeRecord) shapeRecord);
-				visit((StyleChangeRecord) shapeRecord, visitor);
-			}
 		}
 	}
 
@@ -1473,58 +1593,8 @@ public class SWFIterator {
 		}
 	}
 
-	private static void visit(final ShapeWithStyle4 shapes, final ISWFVisitor visitor) {
-
-		visitor.visit(shapes, "FillStyles", shapes.getFillStyles());
-		visit(shapes.getFillStyles(), visitor);
-		visitor.visit(shapes, "LineStyles", shapes.getLineStyles());
-		visit(shapes.getLineStyles(), visitor);
-		visitor.visit("NumFillBits", shapes.getNumFillBits());
-		visitor.visit("NumLineBits", shapes.getNumLineBits());
-
-		final ShapeRecord shapeRecord = shapes.getShapeRecord();
-
-		if (shapeRecord instanceof CurvedEdgeRecord) {
-			visitor.visit(shapes, "CurvedEdgeRecord", (CurvedEdgeRecord) shapeRecord);
-			visit((CurvedEdgeRecord) shapeRecord, visitor);
-		}
-		else if (shapeRecord instanceof EndShapeRecord) {
-			visitor.visit(shapes, "EndShapeRecord", (EndShapeRecord) shapeRecord);
-			visit((EndShapeRecord) shapeRecord, visitor);
-		}
-		else if (shapeRecord instanceof StraightEdgeRecord) {
-			visitor.visit(shapes, "StraightEdgeRecord", (StraightEdgeRecord) shapeRecord);
-			visit((StraightEdgeRecord) shapeRecord, visitor);
-		}
-		else if (shapeRecord instanceof StyleChangeRecord) {
-			visitor.visit(shapes, "StyleChangeRecord", (StyleChangeRecord) shapeRecord);
-			visit((StyleChangeRecord) shapeRecord, visitor);
-		}
-	}
-
 	public static void visit(final ShowFrameTag tag, final ISWFVisitor visitor) {
 
-	}
-
-	private static void visit(final SingleFilterList filters, final ISWFVisitor visitor) {
-		for (final Filter filter : filters) {
-			visitor.visit(filters, "Filter", filter);
-			visit(filter, visitor);
-		}
-	}
-
-	private static void visit(final SoundEnvelope envelope, final ISWFVisitor visitor) {
-
-		visitor.visit("Pos44", envelope.getPos44());
-		visitor.visit("LeftLevel", envelope.getLeftLevel());
-		visitor.visit("RightLevel", envelope.getRightLevel());
-	}
-
-	private static void visit(final SoundEnvelopeList list, final ISWFVisitor visitor) {
-		for (final SoundEnvelope envelope : list) {
-			visitor.visit(list, "SoundEnvelope", envelope);
-			visit(envelope, visitor);
-		}
 	}
 
 	public static void visit(final SoundInfo soundInfo, final ISWFVisitor visitor) {
@@ -1616,6 +1686,27 @@ public class SWFIterator {
 	}
 
 	public static void visit(final StyleChangeRecord3 shapeRecord, final ISWFVisitor visitor) {
+		visitor.visit("TypeFlag", shapeRecord.getTypeFlag());
+		visitor.visit("StateNewStyles", shapeRecord.getStateNewStyles());
+		visitor.visit("StateLineStyle", shapeRecord.getStateLineStyle());
+		visitor.visit("StateFillStyle1", shapeRecord.getStateFillStyle1());
+		visitor.visit("StateFillStyle0", shapeRecord.getStateFillStyle0());
+		visitor.visit("StateMoveTo", shapeRecord.getStateMoveTo());
+		visitor.visit("MoveBits", shapeRecord.getMoveBits());
+		visitor.visit("MoveDeltaX", shapeRecord.getMoveDeltaX());
+		visitor.visit("MoveDeltaY", shapeRecord.getMoveDeltaY());
+		visitor.visit("FillStyle0", shapeRecord.getFillStyle0());
+		visitor.visit("FillStyle1", shapeRecord.getFillStyle1());
+		visitor.visit("LineStyle", shapeRecord.getLineStyle());
+		visitor.visit(shapeRecord, "FillStyles", shapeRecord.getFillStyles());
+		visit(shapeRecord.getFillStyles(), visitor);
+		visitor.visit(shapeRecord, "LineStyles", shapeRecord.getLineStyles());
+		visit(shapeRecord.getLineStyles(), visitor);
+		visitor.visit("NumFillBits", shapeRecord.getNumFillBits());
+		visitor.visit("NumLineBits", shapeRecord.getNumLineBits());
+	}
+
+	public static void visit(final StyleChangeRecord4 shapeRecord, final ISWFVisitor visitor) {
 		visitor.visit("TypeFlag", shapeRecord.getTypeFlag());
 		visitor.visit("StateNewStyles", shapeRecord.getStateNewStyles());
 		visitor.visit("StateLineStyle", shapeRecord.getStateLineStyle());
@@ -1797,64 +1888,6 @@ public class SWFIterator {
 		}
 	}
 
-	private static void visit(final TextRecord textRecord, final ISWFVisitor visitor) {
-
-		visitor.visit("TextRecordType", textRecord.getTextRecordType());
-		visitor.visit("StyleFlagsReserved", textRecord.getStyleFlagsReserved());
-		visitor.visit("StyleFlagsHasFont", textRecord.getStyleFlagsHasFont());
-		visitor.visit("StyleFlagsHasColor", textRecord.getStyleFlagsHasColor());
-		visitor.visit("StyleFlagsHasYOffset", textRecord.getStyleFlagsHasYOffset());
-		visitor.visit("StyleFlagsHasXOffset", textRecord.getStyleFlagsHasXOffset());
-		visitor.visit("FontID", textRecord.getFontId());
-		visitor.visit(textRecord, "TextColor", textRecord.getTextColor());
-		visit(textRecord.getTextColor(), visitor);
-		visitor.visit("XOffset", textRecord.getxOffset());
-		visitor.visit("YOffset", textRecord.getyOffset());
-		visitor.visit("TextHeight", textRecord.getTextHeight());
-		visitor.visit("GlyphCount", textRecord.getGlyphCount());
-		visitor.visit(textRecord, "GlyphEntries", textRecord.getGlyphEntries());
-		visit(textRecord.getGlyphEntries(), visitor);
-	}
-
-	private static void visit(final TextRecord2 textRecord, final ISWFVisitor visitor) {
-
-		visitor.visit("TextRecordType", textRecord.getTextRecordType());
-		visitor.visit("StyleFlagsReserved", textRecord.getStyleFlagsReserved());
-		visitor.visit("StyleFlagsHasFont", textRecord.getStyleFlagsHasFont());
-		visitor.visit("StyleFlagsHasColor", textRecord.getStyleFlagsHasColor());
-		visitor.visit("StyleFlagsHasYOffset", textRecord.getStyleFlagsHasYOffset());
-		visitor.visit("StyleFlagsHasXOffset", textRecord.getStyleFlagsHasXOffset());
-		visitor.visit("FontID", textRecord.getFontId());
-		visitor.visit(textRecord, "TextColor", textRecord.getTextColor());
-		visit(textRecord.getTextColor(), visitor);
-		visitor.visit("XOffset", textRecord.getxOffset());
-		visitor.visit("YOffset", textRecord.getyOffset());
-		visitor.visit("TextHeight", textRecord.getTextHeight());
-		visitor.visit("GlyphCount", textRecord.getGlyphCount());
-		visitor.visit(textRecord, "GlyphEntries", textRecord.getGlyphEntries());
-		visit(textRecord.getGlyphEntries(), visitor);
-	}
-
-	private static void visit(final TextRecord2List textRecords, final ISWFVisitor visitor) {
-		for (final TextRecord2 textRecord : textRecords) {
-			visitor.visit(textRecords, "TextRecord", textRecord);
-			visit(textRecord, visitor);
-		}
-	}
-
-	private static void visit(final TextRecordList textRecords, final ISWFVisitor visitor) {
-		for (final TextRecord textRecord : textRecords) {
-			visitor.visit(textRecords, "TextRecord", textRecord);
-			visit(textRecord, visitor);
-		}
-	}
-
-	private static void visit(final UINT16List list, final ISWFVisitor visitor) {
-		for (final UINT16 element : list) {
-			visitor.visit("Element", element);
-		}
-	}
-
 	public static void visit(final ZoneData zoneData, final ISWFVisitor visitor) {
 
 		visitor.visit("AlignmentCoordinate", zoneData.getAlignmentCoordinate());
@@ -1868,16 +1901,6 @@ public class SWFIterator {
 			visitor.visit(zoneDataList, "ZoneData", zoneData);
 			visit(zoneData, visitor);
 		}
-	}
-
-	private static void visit(final ZoneRecord zoneRecord, final ISWFVisitor visitor) {
-
-		visitor.visit("NumZoneData", zoneRecord.getNumZoneData());
-		visitor.visit(zoneRecord, "ZoneData", zoneRecord.getZoneData());
-		visit(zoneRecord.getZoneData(), visitor);
-		visitor.visit("Reserved", zoneRecord.getReserved());
-		visitor.visit("ZoneMaskX", zoneRecord.getZoneMaskX());
-		visitor.visit("ZoneMaskY", zoneRecord.getZoneMaskY());
 	}
 
 	public static void visit(final ZoneRecordList zoneRecordList, final ISWFVisitor visitor) {

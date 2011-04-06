@@ -74,7 +74,7 @@ public final class TagParser {
 
 			final RecordHeader header = parseRecordHeader(parser);
 
-			System.out.printf("Parsing at %d [%d]\n", parser.getBytePosition() - header.getHeaderLength() - 8, header.getTagCode());
+			//			System.out.printf("Parsing at %d [%d:%s]\n", parser.getBytePosition() - header.getHeaderLength() - 8, header.getTagCode(), TagNames.getTagName(header.getTagCode()));
 
 			return parseTag(parser, header, version, errors);
 
@@ -221,9 +221,6 @@ public final class TagParser {
 				if (parser.getBytePosition() != before + parsedTag.getHeader().getNormalizedLength() + (parsedTag.getHeader().getHeaderLength()))
 				{
 					System.out.println(String.format("No: Wanted %X but was %X", before + parsedTag.getHeader().getNormalizedLength() + (parsedTag.getHeader().getHeaderLength()), parser.getBytePosition()));
-					if (parsedTag.getHeader().getTagCode() != 26 && parsedTag.getHeader().getTagCode() != 75 && parsedTag.getHeader().getTagCode() != 83) {
-						System.exit(0);
-					}
 
 					parser.setPosition(before + parsedTag.getHeader().getNormalizedLength() + (parsedTag.getHeader().getHeaderLength()), 0);
 				}
@@ -273,18 +270,16 @@ public final class TagParser {
 
 			if (parsedTag != null) {
 				tags.add(parsedTag);
-			}
 
-
-			if (parser.getBytePosition() != before + parsedTag.getHeader().getNormalizedLength() + (parsedTag.getHeader().getHeaderLength()))
-			{
-				System.out.println(String.format("No: Wanted %X but was %X", before + parsedTag.getHeader().getNormalizedLength() + (parsedTag.getHeader().getHeaderLength()), parser.getBytePosition()));
-				if (parsedTag.getHeader().getTagCode() != 26 && parsedTag.getHeader().getTagCode() != 75 && parsedTag.getHeader().getTagCode() != 83) {
+				if (parser.getBytePosition() != before + parsedTag.getHeader().getNormalizedLength() + (parsedTag.getHeader().getHeaderLength()))
+				{
+					System.out.println(String.format("No: Wanted %X but was %X", before + parsedTag.getHeader().getNormalizedLength() + (parsedTag.getHeader().getHeaderLength()), parser.getBytePosition()));
 					System.exit(0);
-				}
 
-				parser.setPosition(before + parsedTag.getHeader().getNormalizedLength() + (parsedTag.getHeader().getHeaderLength()), 0);
+					parser.setPosition(before + parsedTag.getHeader().getNormalizedLength() + (parsedTag.getHeader().getHeaderLength()), 0);
+				}
 			}
+
 		}
 
 		return new TagParserResult(new TagList(tags), errors);
