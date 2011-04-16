@@ -10,13 +10,20 @@ import tv.porst.splib.arrays.ArrayHelpers;
 import tv.porst.splib.io.FileHelpers;
 import tv.porst.swfretools.parser.SWFParser;
 import tv.porst.swfretools.parser.SWFParserException;
+import tv.porst.swfretools.parser.actions.as3.AS3InstructionList;
+import tv.porst.swfretools.parser.actions.as3.AS3Nop;
+import tv.porst.swfretools.parser.structures.AS3Code;
+import tv.porst.swfretools.parser.structures.MethodBody;
 import tv.porst.swfretools.parser.structures.SWFFile;
+import tv.porst.swfretools.parser.tags.DoABCTag;
 import tv.porst.swfretools.parser.tags.Tag;
 import tv.porst.swfretools.utils.TagNames;
 
 /**
  * This program can be used to minimize crashing SWF files. It does so by removing
- * tags from an input SWF file until the crash disappears.
+ * tags from an input SWF file until the crash disappears and then returning to the
+ * last known crash state. It also NOPs ActionScript code to remove all the code that
+ * is not related to the crash.
  */
 public final class Minimizer {
 
@@ -60,6 +67,256 @@ public final class Minimizer {
 	}
 
 	/**
+	 * Finds all ActionScript 3 code fragments in a SWF file.
+	 * 
+	 * @param file The SWF file to look through.
+	 * 
+	 * @return The list of found code fragments.
+	 */
+	private static List<AS3Code> findAS3Code(final SWFFile file) {
+
+		assert file != null : "File argument must not be null";
+
+		final List<AS3Code> codeFragments = new ArrayList<AS3Code>();
+
+		for (final Tag tag : file.getTags()) {
+
+			if (tag instanceof DoABCTag) {
+				final DoABCTag dtag = (DoABCTag) tag;
+
+				for (final MethodBody methodBody : dtag.getAbcData().getMethodBodies()) {
+					codeFragments.add(methodBody.getCode());
+				}
+			}
+		}
+
+		return codeFragments;
+	}
+
+	/**
+	 * Determines the filename of a minimizer iteration output file.
+	 * 
+	 * @param parentDirectory Parent directory where the file is placed.
+	 * @param filename Name of the original input file.
+	 * @param iterationCounter Number of successful iterations.
+	 * 
+	 * @return The filename of the minimizer iteration output file.
+	 */
+	private static String getIterationFilename(final File parentDirectory, final String filename, final int iterationCounter) {
+
+		assert parentDirectory != null : "Parent directory must not be null";
+		assert parentDirectory.isDirectory() : "Parent directory must be a directory";
+		assert filename != null : "File name must not be null";
+		assert iterationCounter > 0 : "Iteration counter must be positive";
+
+		return parentDirectory.getAbsolutePath() + File.separator + filename + "." + iterationCounter;
+	}
+
+	/**
+	 * Determines whether an ActionScript 3 code fragment is noppable or not. A
+	 * code fragment is noppable if it has at least two instructions (one plus the
+	 * return instruction) and has not been nopped yet.
+	 * 
+	 * @param code The code fragment to check.
+	 * 
+	 * @return True, if the code fragment is noppable. False if it is not.
+	 */
+	private static boolean isNoppable(final AS3Code code) {
+
+		assert code != null : "Code fragment must not be null";
+
+		return code.getInstructions().size() > 1 && !isNopped(code);
+	}
+
+	/**
+	 * Determines whether an ActionScript 3 code fragment is already nopped.
+	 * This is the case if all instructions but the final return instructions
+	 * are AS3 NOP instructions.
+	 * 
+	 * @param code The code fragment to check.
+	 * 
+	 * @return True, if the code fragment is nopped. False, otherwise.
+	 */
+	private static boolean isNopped(final AS3Code code) {
+
+		assert code != null : "Code fragment must not be null";
+
+		final AS3InstructionList instructions = code.getInstructions();
+
+		for (int i=0;i<instructions.size() - 2; i++) {
+			if (!(instructions.get(i) instanceof AS3Nop)) {
+				return false;
+			}
+		}
+
+		return true;
+	}
+
+	/**
+	 * Replaces the code of an ActionScript 3 function with NOP instructions.
+	 * All code is replaced with NOPs except for the final return.
+	 * 
+	 * @param fileData The file data that contains the code.
+	 * @param code The code object to NOP.
+	 * 
+	 * @return A copy of the file data with the nopped code fragment.
+	 */
+	private static byte[] nopCode(final byte[] fileData, final AS3Code code) {
+
+		assert fileData != null : "File data must not be null";
+		assert code != null : "Code must not be null";
+
+		final int SIZE_RETURN_INSTRUCTION = 1; // All return instructions are 1 byte
+
+		final int startOffset = code.getBitPosition() / 8;
+		final int length = (code.getBitLength() - SIZE_RETURN_INSTRUCTION) / 8;
+
+		return ArrayHelpers.replaceData(fileData, startOffset, length, (byte) 0x02);
+	}
+
+	/**
+	 * Overwrites a list of code fragments with NOP instructions.
+	 * 
+	 * @param fileData The file data that contains the code.
+	 * @param codeToRemove The code fragments to NOP.
+	 * 
+	 * @return A copy of the file data with the nopped code fragments.
+	 */
+	private static byte[] nopCode(final byte[] fileData, final List<AS3Code> codeToRemove) {
+
+		assert fileData != null : "File data must not be null";
+		assert codeToRemove != null : "Code to remove list most not be null";
+		assert !codeToRemove.isEmpty() : "Code to remove list must not be empty";
+
+		byte[] newData = fileData;
+
+		for (final AS3Code code : codeToRemove) {
+			newData = nopCode(newData, code);
+		}
+
+		return newData;
+	}
+
+	/**
+	 * Removes ActionScript 3 code from the input file until no more code can be removed.
+	 * 
+	 * @param flashPlayer The Flash Player executable to be used to execute the file.
+	 * @param flashFile The name of the SWF file to execute.
+	 * @param waitPeriod Number of milliseconds to wait for a crash.
+	 * @param lastIteration The number of previously completed minimizer iterations.
+	 * 
+	 * @throws MinimizerException Thrown if removing the tags failed.
+	 */
+	private static void removeAS3Code(final String flashPlayer, final String flashFile, final int waitPeriod, final int lastIteration) throws MinimizerException {
+
+		assert flashPlayer != null : "Flash Player must not be null";
+		assert flashFile != null : "Flash file must not be null";
+		assert waitPeriod >= 0 : "Wait period must not be negative";
+		assert lastIteration >= 0 : "Last iteration must not be negative";
+
+		File inputFile = new File(flashFile);
+		final File parentDirectory = inputFile.getParentFile();
+		final String filename = FileHelpers.extractFilename(inputFile.getAbsolutePath());
+
+		if (lastIteration != 0) {
+			// There exists a modified input file with some tags removed already.
+			inputFile = new File(getIterationFilename(parentDirectory, filename, lastIteration));
+		}
+
+		boolean hasChanged = true;
+		int iterationCounter = lastIteration;
+
+		// Outer loop: Repeat until any change produces a crash
+		while (hasChanged)
+		{
+			SWFFile parsedFile;
+
+			try {
+				parsedFile = SWFParser.parse(inputFile);
+			} catch (final IOException e) {
+				throw new MinimizerException("SWF input file could not be read");
+			} catch (final SWFParserException e) {
+				throw new MinimizerException("SWF input file could not be parsed");
+			}
+
+			// To remove code, we are also loading the raw byte data of the
+			// input file.
+			byte[] fileData;
+
+			try {
+				fileData = FileHelpers.readFile(inputFile);
+			} catch (final IOException e) {
+				throw new MinimizerException("SWF input file could not be read");
+			}
+
+			// For each run of the minimizer loop, this list stores
+			// the functions that can be removed with the input file
+			// crashing.
+			final List<AS3Code> removableCode = new ArrayList<AS3Code>();
+
+			// Inner loop: Remove one function at a time and then check
+			// whether the modified file still crashes.
+			for (final AS3Code code : findAS3Code(parsedFile)) {
+
+				if (!isNoppable(code)) {
+					// This code fragment can not be nopped, so just ignore it.
+					continue;
+				}
+
+				System.out.printf("Trying to remove code at offset %08X\n", code.getBitPosition() / 8);
+
+				final byte[] modifiedData = nopCode(fileData, code);
+
+				// Write modified file to temp file
+				String tempFilename;
+
+				try {
+					tempFilename = writeTempFile(modifiedData);
+				} catch (final IOException e) {
+					throw new MinimizerException("SWF input file could not be written");
+				}
+
+				// Execute modified file
+				final ExecutionResult executionResult = executeFile(flashPlayer, tempFilename, waitPeriod);
+
+				if (executionResult == ExecutionResult.Crashed) {
+					removableCode.add(code);
+				}
+			}
+
+			if (removableCode.isEmpty()) {
+				System.out.println("No more code could be removed.");
+				break;
+			}
+			else {
+				iterationCounter++;
+
+				System.out.printf("Iteration %d complete\n", iterationCounter);
+				System.out.println("The following method bodies will be removed in this iteration:");
+			}
+
+			for (final AS3Code code : removableCode) {
+				System.out.printf("\t%08X\n", code.getBitPosition() / 8);
+			}
+
+			final byte[] iterationData = nopCode(fileData, removableCode);
+
+			// Write the result of the first iteration to the original
+			// directory. This file is the input file for the next iteration.
+			try {
+				final String newFilename = saveIterationResult(iterationData, parentDirectory, filename, iterationCounter);
+				inputFile = new File(newFilename);
+			} catch (final IOException e) {
+				throw new MinimizerException("Iteration result file could not be saved");
+			}
+
+			// TODO: Confirm that this file crashes too.
+
+			hasChanged = !removableCode.isEmpty();
+		}
+	}
+
+	/**
 	 * Removes a list of tags from a SWF file.
 	 * 
 	 * @param fileData The binary data of the whole SWF file.
@@ -92,21 +349,28 @@ public final class Minimizer {
 	}
 
 	/**
+	 * Removes tags from the input file until no more tags can be removed.
 	 * 
 	 * @param flashPlayer The Flash Player executable to be used to execute the file.
 	 * @param flashFile The name of the SWF file to execute.
 	 * @param waitPeriod Number of milliseconds to wait for a crash.
 	 * 
+	 * @return The number of completed iterations.
+	 * 
 	 * @throws MinimizerException Thrown if removing the tags failed.
 	 */
-	private static void removeTags(final String flashPlayer, final String flashFile, final int waitPeriod) throws MinimizerException {
+	private static int removeTags(final String flashPlayer, final String flashFile, final int waitPeriod) throws MinimizerException {
+
+		assert flashPlayer != null : "Flash Player must not be null";
+		assert flashFile != null : "Flash file must not be null";
+		assert waitPeriod >= 0 : "Wait period must not be negative";
 
 		File inputFile = new File(flashFile);
 		final File parentDirectory = inputFile.getParentFile();
 		final String filename = FileHelpers.extractFilename(inputFile.getAbsolutePath());
 
 		boolean hasChanged = true;
-		int iterationCounter = 1;
+		int iterationCounter = 0;
 
 		// Outer loop: Repeat until any change produces a crash
 		while (hasChanged)
@@ -164,17 +428,19 @@ public final class Minimizer {
 				}
 			}
 
-			System.out.printf("Iteration %d complete\n", iterationCounter);
-
 			if (removableTags.isEmpty()) {
 				System.out.println("No more tags could be removed.");
+				break;
 			}
 			else {
+				iterationCounter++;
+
+				System.out.printf("Iteration %d complete\n", iterationCounter);
 				System.out.println("The following tags will be removed in this iteration:");
 			}
 
 			for (final Tag tag : removableTags) {
-				System.out.printf("%08X: %s\n", tag.getBitPosition() / 8, TagNames.getTagName(tag.getHeader().getTagCode()));
+				System.out.printf("\t%08X: %s\n", tag.getBitPosition() / 8, TagNames.getTagName(tag.getHeader().getTagCode()));
 			}
 
 			final byte[] iterationData = removeTags(fileData, removableTags);
@@ -191,8 +457,9 @@ public final class Minimizer {
 			// TODO: Confirm that this file crashes too.
 
 			hasChanged = !removableTags.isEmpty();
-			iterationCounter++;
 		}
+
+		return iterationCounter;
 	}
 
 	/**
@@ -215,7 +482,7 @@ public final class Minimizer {
 		assert filename != null : "File name must not be null";
 		assert iterationCounter > 0 : "Iteration counter must be positive";
 
-		final String newFilename = parentDirectory.getAbsolutePath() + File.separator + filename + "." + iterationCounter;
+		final String newFilename = getIterationFilename(parentDirectory, filename, iterationCounter);
 
 		FileHelpers.writeFile(newFilename, fileData);
 
@@ -268,7 +535,10 @@ public final class Minimizer {
 		System.out.printf("Minimizing SWF file %s with player %s\n", flashPlayer, flashFile);
 
 		try {
-			removeTags(flashPlayer, flashFile, waitPeriod);
+			final int lastIteration = removeTags(flashPlayer, flashFile, waitPeriod);
+			removeAS3Code(flashPlayer, flashFile, waitPeriod, lastIteration);
+
+			// TODO: Remove AS3 code
 
 			System.out.println("Minimization complete");
 		} catch (final MinimizerException e) {
