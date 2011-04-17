@@ -1,5 +1,6 @@
 package tv.porst.swfretools.dissector.gui.main.panels;
 
+import tv.porst.splib.binaryparser.AsciiString;
 import tv.porst.swfretools.parser.actions.as2.AS2Visitor;
 import tv.porst.swfretools.parser.actions.as2.Action;
 import tv.porst.swfretools.parser.actions.as2.ActionAdd;
@@ -94,577 +95,556 @@ import tv.porst.swfretools.parser.actions.as2.ActionWaitForFrame;
 import tv.porst.swfretools.parser.actions.as2.ActionWaitForFrame2;
 import tv.porst.swfretools.parser.actions.as2.ActionWith;
 import tv.porst.swfretools.parser.structures.ActionList;
+import tv.porst.swfretools.parser.structures.StringList;
 
-public class AS2CodePrinter {
+/**
+ * Contains functions that turn ActionScript 2 code into a string that can
+ * be displayed to the user.
+ */
+public final class AS2CodePrinter {
 
+	/**
+	 * Adds a simple one-mnemonic instruction to the output.
+	 * 
+	 * @param sb The string builder the output is appended to.
+	 * @param mnemonic The instruction mnemonic.
+	 */
 	private static void add(final StringBuilder sb, final String mnemonic) {
 		sb.append(mnemonic);
 	}
 
+	/**
+	 * Adds an instruction with one argument to the output.
+	 * 
+	 * @param sb The string builder the output is appended to.
+	 * @param mnemonic The instruction mnemonic.
+	 * @param value The instruction argument value.
+	 */
 	private static void add(final StringBuilder sb, final String mnemonic, final long value) {
 		sb.append(String.format("%s %d", mnemonic, value));
 	}
 
-	private static void add(final StringBuilder sb, final String mnemonic, final long value1, final long value2) {
-		sb.append(String.format("%s %d, %d", mnemonic, value1, value2));
+	/**
+	 * Adds an instruction with one argument to the output.
+	 * 
+	 * @param sb The string builder the output is appended to.
+	 * @param mnemonic The instruction mnemonic.
+	 * @param value The instruction argument value.
+	 */
+	private static void add(final StringBuilder sb, final String mnemonic, final String value) {
+		sb.append(String.format("%s %s", mnemonic, value));
 	}
 
-	private static void add(final StringBuilder sb, final String mnemonic, final long value1, final long value2, final long  value3, final long value4) {
-		sb.append(String.format("%s %d, %d, %d, %d", mnemonic, value1, value2, value3, value4));
+	/**
+	 * Adds an instruction with two arguments to the output.
+	 * 
+	 * @param sb The string builder the output is appended to.
+	 * @param mnemonic The instruction mnemonic.
+	 * @param value1 The first instruction argument value.
+	 * @param value2 The second instruction argument value.
+	 */
+	private static void add(final StringBuilder sb, final String mnemonic, final String value1, final String value2) {
+		sb.append(String.format("%s %s", mnemonic, value1, value2));
 	}
 
+	/**
+	 * Adds an instruction to the output.
+	 * 
+	 * @param sb The string builder the output is appended to.
+	 * @param instruction The instruction to add to the output.
+	 */
 	private static void addInstructionText(final StringBuilder sb, final Action instruction) {
 
 		new AS2Visitor() {
 
 			@Override
 			protected void visit(final ActionAdd instruction) {
-				// TODO Auto-generated method stub
-
+				add(sb, "Add");
 			}
 
 			@Override
 			protected void visit(final ActionAdd2 instruction) {
-				// TODO Auto-generated method stub
-
+				add(sb, "Add2");
 			}
 
 			@Override
 			protected void visit(final ActionAnd instruction) {
-				// TODO Auto-generated method stub
-
+				add(sb, "And");
 			}
 
 			@Override
 			protected void visit(final ActionAsciiToChar instruction) {
-				// TODO Auto-generated method stub
-
+				add(sb, "ASCIIToChar");
 			}
 
 			@Override
 			protected void visit(final ActionBitAnd instruction) {
-				// TODO Auto-generated method stub
-
+				add(sb, "BitAnd");
 			}
 
 			@Override
 			protected void visit(final ActionBitLShift instruction) {
-				// TODO Auto-generated method stub
-
+				add(sb, "BitLShift");
 			}
 
 			@Override
 			protected void visit(final ActionBitOr instruction) {
-				// TODO Auto-generated method stub
-
+				add(sb, "BitOr");
 			}
 
 			@Override
 			protected void visit(final ActionBitRShift instruction) {
-				// TODO Auto-generated method stub
-
+				add(sb, "BitRShift");
 			}
 
 			@Override
 			protected void visit(final ActionBitURShift instruction) {
-				// TODO Auto-generated method stub
-
+				add(sb, "BitURShift");
 			}
 
 			@Override
 			protected void visit(final ActionBitXor instruction) {
-				// TODO Auto-generated method stub
-
+				add(sb, "BitXor");
 			}
 
 			@Override
 			protected void visit(final ActionCall instruction) {
-				// TODO Auto-generated method stub
-
+				add(sb, "Call");
 			}
 
 			@Override
 			protected void visit(final ActionCallFunction instruction) {
-				// TODO Auto-generated method stub
-
+				add(sb, "CallFunction");
 			}
 
 			@Override
 			protected void visit(final ActionCallMethod instruction) {
-				// TODO Auto-generated method stub
-
+				add(sb, "CallMethod");
 			}
 
 			@Override
 			protected void visit(final ActionCastOp instruction) {
-				// TODO Auto-generated method stub
-
+				add(sb, "CastOp");
 			}
 
 			@Override
 			protected void visit(final ActionCharToAscii instruction) {
-				// TODO Auto-generated method stub
-
+				add(sb, "ChartToASCII");
 			}
 
 			@Override
 			protected void visit(final ActionCloneSprite instruction) {
-				// TODO Auto-generated method stub
-
+				add(sb, "CloneSprite");
 			}
 
 			@Override
 			protected void visit(final ActionConstantPool instruction) {
-				// TODO Auto-generated method stub
+				add(sb, "ConstantPool");
 
+				final StringList strings = instruction.getConstantPool();
+
+				for (int i = 0; i < strings.size(); i++) {
+					final AsciiString string = strings.get(i);
+					sb.append(String.format("%03d: %s", i, string.value()));
+				}
 			}
 
 			@Override
 			protected void visit(final ActionDecrement instruction) {
-				// TODO Auto-generated method stub
-
+				add(sb, "Decrement");
 			}
 
 			@Override
 			protected void visit(final ActionDefineFunction instruction) {
-				// TODO Auto-generated method stub
-
+				add(sb, "DefineFunction");
+				add(sb, " ");
+				add(sb, instruction.getFunctionName().value());
+				sb.append('\n');
+				sb.append("{\n");
+				sb.append(getCodeText(instruction.getCode()));
+				sb.append("\n}");
 			}
 
 			@Override
 			protected void visit(final ActionDefineFunction2 instruction) {
-				// TODO Auto-generated method stub
-
+				add(sb, "DefineFunction2");
+				add(sb, " ");
+				add(sb, instruction.getFunctionName().value());
+				sb.append('\n');
+				sb.append("{\n");
+				sb.append(getCodeText(instruction.getActionList()));
+				sb.append("\n}");
 			}
 
 			@Override
 			protected void visit(final ActionDefineLocal instruction) {
-				// TODO Auto-generated method stub
-
+				add(sb, "DefineLocal");
 			}
 
 			@Override
 			protected void visit(final ActionDefineLocal2 instruction) {
-				// TODO Auto-generated method stub
-
+				add(sb, "DefineLocal2");
 			}
 
 			@Override
 			protected void visit(final ActionDelete instruction) {
-				// TODO Auto-generated method stub
-
+				add(sb, "Visit");
 			}
 
 			@Override
 			protected void visit(final ActionDelete2 instruction) {
-				// TODO Auto-generated method stub
-
+				add(sb, "Delete2");
 			}
 
 			@Override
 			protected void visit(final ActionDivide instruction) {
-				// TODO Auto-generated method stub
-
+				add(sb, "Divide");
 			}
 
 			@Override
 			protected void visit(final ActionEndDrag instruction) {
-				// TODO Auto-generated method stub
-
+				add(sb, "EndDrag");
 			}
 
 			@Override
 			protected void visit(final ActionEnumerate instruction) {
-				// TODO Auto-generated method stub
-
+				add(sb, "Enumerate");
 			}
 
 			@Override
 			protected void visit(final ActionEnumerate2 instruction) {
-				// TODO Auto-generated method stub
-
+				add(sb, "Enumerate2");
 			}
 
 			@Override
 			protected void visit(final ActionEquals instruction) {
-				// TODO Auto-generated method stub
-
+				add(sb, "Equals");
 			}
 
 			@Override
 			protected void visit(final ActionEquals2 instruction) {
-				// TODO Auto-generated method stub
-
+				add(sb, "Equals2");
 			}
 
 			@Override
 			protected void visit(final ActionExtends instruction) {
-				// TODO Auto-generated method stub
-
+				add(sb, "Extends");
 			}
 
 			@Override
 			protected void visit(final ActionGetMember instruction) {
-				// TODO Auto-generated method stub
-
+				add(sb, "GetMember");
 			}
 
 			@Override
 			protected void visit(final ActionGetProperty instruction) {
-				// TODO Auto-generated method stub
-
+				add(sb, "GetProperty");
 			}
 
 			@Override
 			protected void visit(final ActionGetTime instruction) {
-				// TODO Auto-generated method stub
-
+				add(sb, "GetTime");
 			}
 
 			@Override
 			protected void visit(final ActionGetURL instruction) {
-				// TODO Auto-generated method stub
-
+				add(sb, "GetURL", instruction.getUrlString().value(), instruction.getTargetString().value());
 			}
 
 			@Override
 			protected void visit(final ActionGetURL2 instruction) {
-				// TODO Auto-generated method stub
-
+				add(sb, "GetURL2");
 			}
 
 			@Override
 			protected void visit(final ActionGetVariable instruction) {
-				// TODO Auto-generated method stub
-
+				add(sb, "GetVariable");
 			}
 
 			@Override
 			protected void visit(final ActionGotoFrame instruction) {
-				// TODO Auto-generated method stub
-
+				add(sb, "GotoFrame", instruction.getFrame().value());
 			}
 
 			@Override
 			protected void visit(final ActionGotoFrame2 instruction) {
-				// TODO Auto-generated method stub
-
+				add(sb, "GotoFrame2");
 			}
 
 			@Override
 			protected void visit(final ActionGotoLabel instruction) {
-				// TODO Auto-generated method stub
-
+				add(sb, "GotoLabel", instruction.getLabel().value());
 			}
 
 			@Override
 			protected void visit(final ActionGreater instruction) {
-				// TODO Auto-generated method stub
-
+				add(sb, "Greater");
 			}
 
 			@Override
 			protected void visit(final ActionIf instruction) {
-				// TODO Auto-generated method stub
-
+				add(sb, "If", instruction.getBranchOffset().value());
 			}
 
 			@Override
 			protected void visit(final ActionImplementsOp instruction) {
-				// TODO Auto-generated method stub
-
+				add(sb, "ImplementsOp");
 			}
 
 			@Override
 			protected void visit(final ActionIncrement instruction) {
-				// TODO Auto-generated method stub
-
+				add(sb, "Increment");
 			}
 
 			@Override
 			protected void visit(final ActionInitArray instruction) {
-				// TODO Auto-generated method stub
-
+				add(sb, "InitArray");
 			}
 
 			@Override
 			protected void visit(final ActionInitObject instruction) {
-				// TODO Auto-generated method stub
-
+				add(sb, "InitObject");
 			}
 
 			@Override
 			protected void visit(final ActionInstanceOf instruction) {
-				// TODO Auto-generated method stub
-
+				add(sb, "InstanceOf");
 			}
 
 			@Override
 			protected void visit(final ActionJump instruction) {
-				// TODO Auto-generated method stub
-
+				add(sb, "Jump", instruction.getBranchOffset().value());
 			}
 
 			@Override
 			protected void visit(final ActionLess instruction) {
-				// TODO Auto-generated method stub
-
+				add(sb, "Less");
 			}
 
 			@Override
 			protected void visit(final ActionLess2 instruction) {
-				// TODO Auto-generated method stub
-
+				add(sb, "Less2");
 			}
 
 			@Override
 			protected void visit(final ActionMBAsciiToChar instruction) {
-				// TODO Auto-generated method stub
-
+				add(sb, "MBASCIIToChar");
 			}
 
 			@Override
 			protected void visit(final ActionMBCharToAscii instruction) {
-				// TODO Auto-generated method stub
-
+				add(sb, "MBCharToASCII");
 			}
 
 			@Override
 			protected void visit(final ActionMBStringExtract instruction) {
-				// TODO Auto-generated method stub
-
+				add(sb, "MBStringExtract");
 			}
 
 			@Override
 			protected void visit(final ActionMBStringLength instruction) {
-				// TODO Auto-generated method stub
-
+				add(sb, "MBStringLength");
 			}
 
 			@Override
 			protected void visit(final ActionModulo instruction) {
-				// TODO Auto-generated method stub
-
+				add(sb, "Modulo");
 			}
 
 			@Override
 			protected void visit(final ActionMultiply instruction) {
-				// TODO Auto-generated method stub
-
+				add(sb, "Multiply");
 			}
 
 			@Override
 			protected void visit(final ActionNewMethod instruction) {
-				// TODO Auto-generated method stub
-
+				add(sb, "NewMethod");
 			}
 
 			@Override
 			protected void visit(final ActionNewObject instruction) {
-				// TODO Auto-generated method stub
-
+				add(sb, "NewObject");
 			}
 
 			@Override
 			protected void visit(final ActionNextFrame instruction) {
-				// TODO Auto-generated method stub
-
+				add(sb, "NextFrame");
 			}
 
 			@Override
 			protected void visit(final ActionNot instruction) {
-				// TODO Auto-generated method stub
-
+				add(sb, "Not");
 			}
 
 			@Override
 			protected void visit(final ActionOr instruction) {
-				// TODO Auto-generated method stub
-
+				add(sb, "Or");
 			}
 
 			@Override
 			protected void visit(final ActionSetMember instruction) {
-				// TODO Auto-generated method stub
-
+				add(sb, "SetMember");
 			}
 
 			@Override
 			protected void visit(final ActionSetProperty instruction) {
-				// TODO Auto-generated method stub
-
+				add(sb, "SetProperty");
 			}
 
 			@Override
 			protected void visit(final ActionSetTarget instruction) {
-				// TODO Auto-generated method stub
-
+				add(sb, "SetTarget", instruction.getTargetName().value());
 			}
 
 			@Override
 			protected void visit(final ActionSetTarget2 instruction) {
-				// TODO Auto-generated method stub
-
+				add(sb, "SetTarget2");
 			}
 
 			@Override
 			protected void visit(final ActionSetVariable instruction) {
-				// TODO Auto-generated method stub
-
+				add(sb, "SetVariable");
 			}
 
 			@Override
 			protected void visit(final ActionStackSwap instruction) {
-				// TODO Auto-generated method stub
-
+				add(sb, "StackSwap");
 			}
 
 			@Override
 			protected void visit(final ActionStartDrag instruction) {
-				// TODO Auto-generated method stub
-
+				add(sb, "StartDrag");
 			}
 
 			@Override
 			protected void visit(final ActionStop instruction) {
-				// TODO Auto-generated method stub
-
+				add(sb, "Stop");
 			}
 
 			@Override
 			protected void visit(final ActionStopSounds instruction) {
-				// TODO Auto-generated method stub
-
+				add(sb, "StopSounds");
 			}
 
 			@Override
 			protected void visit(final ActionStoreRegister instruction) {
-				// TODO Auto-generated method stub
-
+				add(sb, "StoreRegister", instruction.getRegisterNumber().value());
 			}
 
 			@Override
 			protected void visit(final ActionStrictEquals instruction) {
-				// TODO Auto-generated method stub
-
+				add(sb, "StrictEquals");
 			}
 
 			@Override
 			protected void visit(final ActionStringAdd instruction) {
-				// TODO Auto-generated method stub
-
+				add(sb, "StringAdd");
 			}
 
 			@Override
 			protected void visit(final ActionStringEquals instruction) {
-				// TODO Auto-generated method stub
-
+				add(sb, "StringEquals");
 			}
 
 			@Override
 			protected void visit(final ActionStringExtract instruction) {
-				// TODO Auto-generated method stub
-
+				add(sb, "StringExtract");
 			}
 
 			@Override
 			protected void visit(final ActionStringGreater instruction) {
-				// TODO Auto-generated method stub
-
+				add(sb, "StringGreater");
 			}
 
 			@Override
 			protected void visit(final ActionStringLength instruction) {
-				// TODO Auto-generated method stub
-
+				add(sb, "StringLength");
 			}
 
 			@Override
 			protected void visit(final ActionStringLess instruction) {
-				// TODO Auto-generated method stub
-
+				add(sb, "StringLess");
 			}
 
 			@Override
 			protected void visit(final ActionSubtract instruction) {
-				// TODO Auto-generated method stub
-
+				add(sb, "Subtract");
 			}
 
 			@Override
 			protected void visit(final ActionTargetPath instruction) {
-				// TODO Auto-generated method stub
-
+				add(sb, "TargetPath");
 			}
 
 			@Override
 			protected void visit(final ActionThrow instruction) {
-				// TODO Auto-generated method stub
-
+				add(sb, "Throw");
 			}
 
 			@Override
 			protected void visit(final ActionToggleQuality instruction) {
-				// TODO Auto-generated method stub
-
+				add(sb, "ToggleQuality");
 			}
 
 			@Override
 			protected void visit(final ActionToInteger instruction) {
-				// TODO Auto-generated method stub
-
+				add(sb, "ToInteger");
 			}
 
 			@Override
 			protected void visit(final ActionToNumbers instruction) {
-				// TODO Auto-generated method stub
-
+				add(sb, "ToNumbers");
 			}
 
 			@Override
 			protected void visit(final ActionToString instruction) {
-				// TODO Auto-generated method stub
-
+				add(sb, "ToString");
 			}
 
 			@Override
 			protected void visit(final ActionTrace instruction) {
-				// TODO Auto-generated method stub
-
+				add(sb, "Trace");
 			}
 
 			@Override
 			protected void visit(final ActionTry instruction) {
-				// TODO Auto-generated method stub
-
+				add(sb, "Try");
 			}
 
 			@Override
 			protected void visit(final ActionTypeOf instruction) {
-				// TODO Auto-generated method stub
-
+				add(sb, "TypeOf");
 			}
 
 			@Override
 			protected void visit(final ActionWaitForFrame instruction) {
-				// TODO Auto-generated method stub
-
+				add(sb, "WaitForFrame", instruction.getFrame().value());
 			}
 
 			@Override
 			protected void visit(final ActionWaitForFrame2 instruction) {
-				// TODO Auto-generated method stub
-
+				add(sb, "WaitForFrame2", instruction.getSkipCount().value());
 			}
 
 			@Override
 			protected void visit(final ActionWith instruction) {
-				// TODO Auto-generated method stub
-
+				add(sb, "With");
+				sb.append('\n');
+				sb.append("{\n");
+				sb.append(getCodeText(instruction.getActions()));
+				sb.append("\n}");
 			}
 		}.visit(instruction);
 	}
 
+	/**
+	 * Generates a printable string that represents all code in a given
+	 * action list.
+	 * 
+	 * @param code The list that contains the ActionScript 2 code.
+	 * 
+	 * @return The generated ActionScript 2 code string.
+	 */
 	public static String getCodeText(final ActionList code) {
 
 		if (code.size() == 0) {

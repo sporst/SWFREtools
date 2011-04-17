@@ -10,9 +10,13 @@ import tv.porst.swfretools.parser.structures.StringList;
 public class ActionDefineFunction extends ExtendedAction {
 
 	private final AsciiString functionName;
+
 	private final UINT16 numParams;
+
 	private final StringList params;
+
 	private final UINT16 codeSize;
+
 	private final ActionList code;
 
 	public ActionDefineFunction(final UINT8 actionCode, final UINT16 length, final AsciiString functionName, final UINT16 numParams, final StringList params, final UINT16 codeSize, final ActionList code) {
@@ -28,5 +32,47 @@ public class ActionDefineFunction extends ExtendedAction {
 	@Override
 	public int getBitLength() {
 		return SWFParserHelpers.addBitLengths(getActionCode(), getLength(), functionName, numParams, params, codeSize, code);
+	}
+	/**
+	 * Returns the
+	 *
+	 * @return The
+	 */
+	public ActionList getCode() {
+		return code;
+	}
+	/**
+	 * Returns the
+	 *
+	 * @return The
+	 */
+	public UINT16 getCodeSize() {
+		return codeSize;
+	}
+	/**
+	 * Returns the
+	 *
+	 * @return The
+	 */
+	public AsciiString getFunctionName() {
+		return functionName;
+	}
+
+	/**
+	 * Returns the
+	 *
+	 * @return The
+	 */
+	public UINT16 getNumParams() {
+		return numParams;
+	}
+
+	/**
+	 * Returns the
+	 *
+	 * @return The
+	 */
+	public StringList getParams() {
+		return params;
 	}
 }
