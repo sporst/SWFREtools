@@ -19,8 +19,8 @@ public final class SWFDecompressor {
 	 * 
 	 * @return The header from the file data prepended in front of the decompressed data.
 	 */
-	private static byte[] concatPreprocessedData(final byte[] fileData, final byte[] decompressedData) {
 
+	private static byte[] concatPreprocessedData(final byte[] fileData, final byte[] decompressedData) {
 		assert fileData != null && fileData.length >= 8 : "Invalid SWF file data passed to function";
 		assert decompressedData != null && decompressedData.length >= 8 : "Invalid SWF file data passed to function";
 
@@ -28,6 +28,9 @@ public final class SWFDecompressor {
 
 		System.arraycopy(fileData, 0, decompressedFile, 0, 8);
 		System.arraycopy(decompressedData, 0, decompressedFile, 8, decompressedData.length);
+
+		// Mark the data as decompressed
+		decompressedFile[0] = 'F';
 
 		return decompressedFile;
 	}
