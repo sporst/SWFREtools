@@ -26,7 +26,7 @@ public class ElementList<T extends IFileElement> implements Iterable<T>, IFileEl
 
 	@Override
 	public int getBitPosition() {
-		return elements.get(0).getBitPosition();
+		return elements.isEmpty() ? 0 : elements.get(0).getBitPosition();
 	}
 
 	@Override
