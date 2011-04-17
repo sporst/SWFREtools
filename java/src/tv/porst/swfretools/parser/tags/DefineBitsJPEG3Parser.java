@@ -12,8 +12,6 @@ import tv.porst.swfretools.parser.structures.RecordHeader;
 
 /**
  * Class for parsing DefineBitsJPEG3 tags.
- * 
- * @author sp
  */
 public final class DefineBitsJPEG3Parser {
 

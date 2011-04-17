@@ -6,9 +6,6 @@ import tv.porst.swfretools.parser.structures.RecordHeader;
 
 /**
  * Represents a SetBackgroundColor tag.
- * 
- * @author sp
- *
  */
 public final class SetBackgroundColorTag extends Tag {
 

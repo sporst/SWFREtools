@@ -1,7 +1,6 @@
 package tv.porst.swfretools.dissector.gui.main.flashtree.nodes;
 
 import tv.porst.splib.binaryparser.IParsedINTElement;
-import tv.porst.swfretools.dissector.gui.main.flashtree.FlashTreeNode;
 import tv.porst.swfretools.parser.structures.ParsedINTElementList;
 
 public class FlashParsedINTElementListNode extends FlashTreeNode<ParsedINTElementList> {

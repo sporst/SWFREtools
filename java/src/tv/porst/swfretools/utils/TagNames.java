@@ -2,8 +2,32 @@ package tv.porst.swfretools.utils;
 
 import tv.porst.swfretools.parser.tags.TagCodes;
 
-public class TagNames {
+/**
+ * Class that contains functions to map from SWF tag codes to SWF tag names.
+ */
+public final class TagNames {
 
+	/**
+	 * Returns a printable tag name for a given tag code. If the tag code is known,
+	 * the known tag name is returned. If the tag code is not known, a generic
+	 * 'unknown tag' string is returned.
+	 * 
+	 * @param code The tag code.
+	 * 
+	 * @return The printable tag name.
+	 */
+	public static String getPrintableTagName(final int code) {
+		final String tagName = getTagName(code);
+		return tagName == null ? String.format("Unknown tag (%02X%)", code) : tagName;
+	}
+
+	/**
+	 * Returns the name of the tag identified by the given tag code.
+	 * 
+	 * @param code The tag code.
+	 * 
+	 * @return The associated tag name or null if the code is unknown.
+	 */
 	public static String getTagName(final int code) {
 
 		switch(code) {
@@ -71,7 +95,7 @@ public class TagNames {
 		case TagCodes.DefineBitsJPEG4: return "DefineBitsJPEG4";
 		case TagCodes.DefineFont4: return "DefineFont4";
 		case TagCodes.DoABC: return "DoABC";
-		default: return "Unknown Tag";
+		default: return null;
 		}
 	}
 }

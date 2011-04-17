@@ -6,9 +6,6 @@ import tv.porst.swfretools.parser.structures.RecordHeader;
 
 /**
  * Represents a DoInitAction tag.
- * 
- * @author sp
- *
  */
 public final class DoInitActionTag extends Tag {
 
@@ -17,6 +14,9 @@ public final class DoInitActionTag extends Tag {
 	 */
 	private final UINT16 spriteId;
 
+	/**
+	 * Actions that are associated with this tag.
+	 */
 	private final ActionList actions;
 
 	/**
@@ -24,7 +24,7 @@ public final class DoInitActionTag extends Tag {
 	 * 
 	 * @param header Tag header.
 	 * @param spriteId Sprite to which these actions apply.
-	 * @param actionList
+	 * @param actions Actions that are associated with this tag.
 	 */
 	public DoInitActionTag(final RecordHeader header, final UINT16 spriteId, final ActionList actions) {
 
@@ -35,9 +35,9 @@ public final class DoInitActionTag extends Tag {
 	}
 
 	/**
-	 * Returns the
+	 * Returns the actions that are associated with this tag.
 	 *
-	 * @return The
+	 * @return The actions that are associated with this tag.
 	 */
 	public ActionList getActions() {
 		return actions;

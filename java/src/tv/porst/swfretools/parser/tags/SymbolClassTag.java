@@ -6,9 +6,6 @@ import tv.porst.swfretools.parser.structures.SymbolList;
 
 /**
  * Represents a SymbolClass tag.
- * 
- * @author sp
- *
  */
 public final class SymbolClassTag extends Tag {
 

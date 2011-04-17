@@ -8,9 +8,6 @@ import tv.porst.swfretools.parser.structures.RecordHeader;
 
 /**
  * Represents a CSMTextSettings tag.
- * 
- * @author sp
- *
  */
 public final class CSMTextSettingsTag extends Tag {
 

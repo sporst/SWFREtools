@@ -6,9 +6,6 @@ import tv.porst.swfretools.parser.structures.RecordHeader;
 
 /**
  * Represents a DefineBits tag.
- * 
- * @author sp
- *
  */
 public final class DefineBitsTag extends Tag {
 

@@ -1,6 +1,5 @@
 package tv.porst.swfretools.dissector.gui.main.flashtree.nodes;
 
-import tv.porst.swfretools.dissector.gui.main.flashtree.FlashTreeNode;
 import tv.porst.swfretools.parser.structures.ConvolutionFilter;
 
 public class FlashConvolutionFilterNode extends FlashTreeNode<ConvolutionFilter> {

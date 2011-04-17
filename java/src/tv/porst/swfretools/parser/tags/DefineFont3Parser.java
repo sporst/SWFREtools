@@ -35,8 +35,6 @@ import tv.porst.swfretools.parser.structures.Shape3Parser;
 
 /**
  * Class for parsing DefineFont3 tags.
- * 
- * @author sp
  */
 public final class DefineFont3Parser {
 

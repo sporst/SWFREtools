@@ -1,14 +1,11 @@
 package tv.porst.swfretools.parser.tags;
 
-import tv.porst.splib.binaryparser.UBits;
 import tv.porst.splib.binaryparser.Flag;
+import tv.porst.splib.binaryparser.UBits;
 import tv.porst.swfretools.parser.structures.RecordHeader;
 
 /**
  * Represents a FileAttributes tag.
- * 
- * @author sp
- *
  */
 public final class FileAttributesTag extends Tag {
 

@@ -1,15 +1,12 @@
 package tv.porst.swfretools.parser.tags;
 
-import tv.porst.splib.binaryparser.UBits;
 import tv.porst.splib.binaryparser.INT16;
+import tv.porst.splib.binaryparser.UBits;
 import tv.porst.splib.binaryparser.UINT16;
 import tv.porst.swfretools.parser.structures.RecordHeader;
 
 /**
  * Represents a SoundStreamHead tag.
- * 
- * @author sp
- *
  */
 public final class SoundStreamHeadTag extends Tag {
 

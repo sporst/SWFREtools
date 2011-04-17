@@ -5,9 +5,6 @@ import tv.porst.swfretools.parser.structures.RecordHeader;
 
 /**
  * Represents a Metadata tag.
- * 
- * @author sp
- *
  */
 public final class MetadataTag extends Tag {
 

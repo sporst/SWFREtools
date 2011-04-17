@@ -2,7 +2,6 @@ package tv.porst.swfretools.dissector.gui.main.flashtree.nodes;
 
 import javax.swing.JPanel;
 
-import tv.porst.swfretools.dissector.gui.main.flashtree.FlashTreeNode;
 import tv.porst.swfretools.dissector.gui.main.panels.AS2CodePanel;
 import tv.porst.swfretools.dissector.gui.main.panels.AS3CodePanel;
 import tv.porst.swfretools.parser.tags.CSMTextSettingsTag;
@@ -77,7 +76,7 @@ public class FlashTagNode extends FlashTreeNode<Tag> {
 	private JPanel panel;
 
 	public FlashTagNode(final Tag tag) {
-		super(TagNames.getTagName(tag.getHeader().getTagCode()), tag);
+		super(TagNames.getPrintableTagName(tag.getHeader().getTagCode()), tag);
 
 		this.tag = tag;
 

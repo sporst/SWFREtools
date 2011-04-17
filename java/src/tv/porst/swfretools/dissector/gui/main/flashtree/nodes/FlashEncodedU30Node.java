@@ -1,6 +1,5 @@
 package tv.porst.swfretools.dissector.gui.main.flashtree.nodes;
 
-import tv.porst.swfretools.dissector.gui.main.flashtree.FlashTreeNode;
 import tv.porst.swfretools.parser.structures.EncodedU30;
 
 public class FlashEncodedU30Node extends FlashTreeNode<EncodedU30> {

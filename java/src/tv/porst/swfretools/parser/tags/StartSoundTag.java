@@ -6,9 +6,6 @@ import tv.porst.swfretools.parser.structures.SoundInfo;
 
 /**
  * Represents a StartSound tag.
- * 
- * @author sp
- *
  */
 public final class StartSoundTag extends Tag {
 

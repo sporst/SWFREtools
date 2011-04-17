@@ -15,9 +15,6 @@ import tv.porst.swfretools.parser.structures.ShapeList;
 
 /**
  * Represents a DefineFont2 tag.
- * 
- * @author sp
- *
  */
 public final class DefineFont2Tag extends Tag {
 

@@ -8,8 +8,6 @@ import tv.porst.swfretools.parser.structures.RecordHeader;
 
 /**
  * Class for parsing SetBackgroundColor tags.
- * 
- * @author sp
  */
 public final class SetBackgroundColorParser {
 

@@ -59,6 +59,13 @@ public final class SWFParserHelpers {
 		}
 	}
 
+	/**
+	 * Sums the bit lengths of the given file elements.
+	 * 
+	 * @param elements The file elements whose bit lengths are summed.
+	 * 
+	 * @return The summed bit lengths of the file elements.
+	 */
 	public static int addBitLengths(final IFileElement ... elements) {
 
 		int length = 0;
@@ -74,6 +81,13 @@ public final class SWFParserHelpers {
 
 	}
 
+	/**
+	 * Sums the bit lengths of a list of file elements.
+	 * 
+	 * @param elements The file elements whose bit lengths are summed.
+	 * 
+	 * @return The summed bit lengths of the file elements.
+	 */
 	public static int addBitLengths(final List<? extends IFileElement> elements) {
 
 		int length = 0;
@@ -156,8 +170,19 @@ public final class SWFParserHelpers {
 		return condition.value() ? parseByteArray(parser, numberOfBytes, errorCode, fieldName) : null;
 	}
 
+	/**
+	 * Parses a double.
+	 * 
+	 * @param parser The parser that provides the input stream.
+	 * @param errorCode Error code in case parsing fails.
+	 * @param fieldName Name of the field to parse.
+	 * 
+	 * @return The parsed double.
+	 * 
+	 * @throws SWFParserException Thrown if parsing failed.
+	 */
 	public static Float64 parseDouble(final SWFBinaryParser parser, final int errorCode, final String fieldName) throws SWFParserException {
-		throwIfB(parser, 1, errorCode, fieldName);
+		throwIf(parser, 8, errorCode, fieldName);
 
 		return parser.readFloat64();
 	}
@@ -207,7 +232,7 @@ public final class SWFParserHelpers {
 	 * @throws SWFParserException Thrown if parsing failed.
 	 */
 	public static Float32 parseFloat(final SWFBinaryParser parser, final int errorCode, final String fieldName) throws SWFParserException {
-		throwIfB(parser, 1, errorCode, fieldName);
+		throwIf(parser, 4, errorCode, fieldName);
 
 		return parser.readFloat();
 	}
@@ -224,7 +249,7 @@ public final class SWFParserHelpers {
 	 * @throws SWFParserException Thrown if parsing failed.
 	 */
 	public static Float16 parseFloat16(final SWFBinaryParser parser, final int errorCode, final String fieldName) throws SWFParserException {
-		throwIfB(parser, 1, errorCode, fieldName);
+		throwIf(parser, 2, errorCode, fieldName);
 
 		return parser.readFloat16();
 	}
@@ -277,6 +302,17 @@ public final class SWFParserHelpers {
 		return condition.value() ? parseINT16(parser, errorCode, fieldName) : null;
 	}
 
+	/**
+	 * Parses a 24 bit integer.
+	 * 
+	 * @param parser The parser that provides the input stream.
+	 * @param errorCode Error code in case parsing fails.
+	 * @param fieldName Name of the field to parse.
+	 * 
+	 * @return The parsed 24 bit integer.
+	 * 
+	 * @throws SWFParserException Thrown if parsing failed.
+	 */
 	public static INT24 parseINT24(final SWFBinaryParser parser, final int errorCode, final String fieldName) throws SWFParserException {
 		throwIf(parser, 3, errorCode, fieldName);
 		return parser.readInt24();

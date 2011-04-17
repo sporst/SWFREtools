@@ -1,7 +1,7 @@
 package tv.porst.swfretools.parser.tags;
 
-import tv.porst.splib.binaryparser.UBits;
 import tv.porst.splib.binaryparser.Flag;
+import tv.porst.splib.binaryparser.UBits;
 import tv.porst.splib.binaryparser.UINT16;
 import tv.porst.splib.binaryparser.UINT32;
 import tv.porst.swfretools.parser.structures.MorphFillStyleArray;
@@ -12,9 +12,6 @@ import tv.porst.swfretools.parser.structures.Shape;
 
 /**
  * Represents a DefineMorphShape2 tag.
- * 
- * @author sp
- *
  */
 public final class DefineMorphShape2Tag extends Tag {
 

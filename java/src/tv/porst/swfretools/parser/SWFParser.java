@@ -1,7 +1,5 @@
 package tv.porst.swfretools.parser;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 
@@ -15,8 +13,6 @@ import tv.porst.swfretools.parser.structures.SWFFile;
 import tv.porst.swfretools.parser.tags.TagParser;
 import tv.porst.swfretools.parser.tags.TagParserResult;
 
-import com.jcraft.jzlib.ZInputStream;
-
 /**
  * Class for parsing Flash SWF files.
  * 
@@ -26,90 +22,13 @@ import com.jcraft.jzlib.ZInputStream;
 public final class SWFParser {
 
 	/**
-	 * Concatenates the original uncompressed header of the input file with the decompressed data.
-	 * This step is added so that only one parser object is necessary for parsing.
-	 * 
-	 * @param fileData The file data to parse.
-	 * @param decompressedData The decompressed file data.
-	 * 
-	 * @return The header from the file data prepended in front of the decompressed data.
-	 */
-	private static byte[] concatPreprocessedData(final byte[] fileData, final byte[] decompressedData) {
-
-		assert fileData != null && fileData.length >= 8 : "Invalid SWF file data passed to function";
-		assert decompressedData != null && decompressedData.length >= 8 : "Invalid SWF file data passed to function";
-
-		final byte[] decompressedFile = new byte[8 + decompressedData.length];
-
-		System.arraycopy(fileData, 0, decompressedFile, 0, 8);
-		System.arraycopy(decompressedData, 0, decompressedFile, 8, decompressedData.length);
-
-		return decompressedFile;
-	}
-
-	/**
-	 * Decompresses compressed SWF data.
-	 * 
-	 * @param fileData File data to be parsed.
-	 * 
-	 * @return The decompressed file data.
-	 * 
-	 * @throws IOException Thrown if decompressing the data failed.
-	 */
-	private static byte[] decompress(final byte[] fileData) throws IOException {
-
-		assert fileData != null && fileData.length >= 8 : "Invalid SWF file data passed to function";
-
-		final ByteArrayInputStream inputStream = new ByteArrayInputStream(fileData, 8, fileData.length - 8);
-		final ByteArrayOutputStream output = new ByteArrayOutputStream();
-		final ZInputStream decompressor = new ZInputStream(inputStream);
-
-		final int available = inputStream.available();
-
-		if (available > 0) {
-
-			byte[] buffer = new byte[Math.min(available, 4096)];
-			int read = 0;
-
-			while ((read = decompressor.read(buffer, 0, buffer.length)) != -1) {
-				output.write(buffer, 0, read);
-				buffer = new byte[Math.min(available, 4096)];
-			}
-		}
-
-		decompressor.close();
-
-		return output.toByteArray();
-	}
-
-	/**
-	 * Decompresses compressed SWF file data.
-	 * 
-	 * @param fileData File data to be parsed.
-	 * 
-	 * @return The decompressed file data that is now ready for parsing.
-	 * 
-	 * @throws SWFParserException Thrown if decompressing the data failed.
-	 */
-	private static byte[] decompressData(final byte[] fileData) throws SWFParserException {
-
-		assert fileData != null : "Invalid SWF file data passed to function";
-
-		try {
-			return concatPreprocessedData(fileData, decompress(fileData));
-		} catch (final IOException e) {
-			throw new SWFParserException(0x00001, 0, "Invalid SWF file: Compressed data could not be decompressed");
-		}
-	}
-
-	/**
 	 * Verifies the signature of the SWF file to be parsed.
 	 * 
 	 * @param fileData File data to be parsed.
 	 * 
 	 * @return True, if the file data starts with a Flash signature. False, otherwise.
 	 */
-	private static boolean hasValidSignature(final byte[] fileData) {
+	public static boolean hasValidSignature(final byte[] fileData) {
 
 		assert fileData != null && fileData.length >= 3 : "Invalid SWF file data passed to function";
 
@@ -123,7 +42,7 @@ public final class SWFParser {
 	 * 
 	 * @return True, if the file data is compressed. False, otherwise.
 	 */
-	private static boolean isCompressed(final byte[] fileData) {
+	public static boolean isCompressed(final byte[] fileData) {
 
 		assert fileData != null && fileData.length >= 1 : "Invalid SWF file data passed to function";
 
@@ -156,11 +75,7 @@ public final class SWFParser {
 			throw new SWFParserException(0x00003, 0, "Invalid SWF file: File signature not found");
 		}
 
-		final byte[] parserInputData = isCompressed(fileData) ? decompressData(fileData) : fileData;
-
-		if (fileData != parserInputData) {
-			FileHelpers.writeFile(new File(file.getAbsolutePath() + ".decompressed"), parserInputData);
-		}
+		final byte[] parserInputData = isCompressed(fileData) ? SWFDecompressor.decompressData(fileData) : fileData;
 
 		final SWFBinaryParser parser = new SWFBinaryParser(parserInputData);
 

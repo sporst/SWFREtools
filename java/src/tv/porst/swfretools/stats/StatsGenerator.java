@@ -77,7 +77,7 @@ public final class StatsGenerator {
 		final Map<Integer, Integer> sortedMap = MapHelpers.sortByValue(stats.getTagCounts());
 
 		for (final Map.Entry<Integer, Integer> element : sortedMap.entrySet()) {
-			System.out.println(TagNames.getTagName(element.getKey()) + ": " + element.getValue());
+			System.out.println(TagNames.getPrintableTagName(element.getKey()) + ": " + element.getValue());
 		}
 	}
 

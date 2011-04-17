@@ -6,9 +6,6 @@ import tv.porst.swfretools.parser.structures.Rect;
 
 /**
  * Represents a DefineScalingGrid tag.
- * 
- * @author sp
- *
  */
 public final class DefineScalingGridTag extends Tag {
 

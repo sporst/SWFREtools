@@ -1,6 +1,5 @@
 package tv.porst.swfretools.dissector.gui.main.flashtree.nodes;
 
-import tv.porst.swfretools.dissector.gui.main.flashtree.FlashTreeNode;
 import tv.porst.swfretools.parser.structures.SoundEnvelope;
 
 public class FlashSoundEnvelopeNode extends FlashTreeNode<SoundEnvelope> {

@@ -7,9 +7,6 @@ import tv.porst.swfretools.parser.structures.UINT16List;
 
 /**
  * Represents a DefineFont tag.
- * 
- * @author sp
- *
  */
 public final class DefineFontTag extends Tag {
 

@@ -12,8 +12,6 @@ import tv.porst.swfretools.parser.structures.ShapeWithStyleParser;
 
 /**
  * Class for parsing DefineShape2 tags.
- * 
- * @author sp
  */
 public final class DefineShape2Parser {
 

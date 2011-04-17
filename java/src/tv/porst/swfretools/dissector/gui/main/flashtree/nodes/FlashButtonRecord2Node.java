@@ -1,6 +1,5 @@
 package tv.porst.swfretools.dissector.gui.main.flashtree.nodes;
 
-import tv.porst.swfretools.dissector.gui.main.flashtree.FlashTreeNode;
 import tv.porst.swfretools.parser.structures.ButtonRecord2;
 
 public class FlashButtonRecord2Node extends FlashTreeNode<ButtonRecord2> {

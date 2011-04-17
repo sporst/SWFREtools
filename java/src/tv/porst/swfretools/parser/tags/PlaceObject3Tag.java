@@ -13,9 +13,6 @@ import tv.porst.swfretools.parser.structures.RecordHeader;
 
 /**
  * Represents a PlaceObject3 tag.
- * 
- * @author sp
- *
  */
 public final class PlaceObject3Tag extends Tag {
 

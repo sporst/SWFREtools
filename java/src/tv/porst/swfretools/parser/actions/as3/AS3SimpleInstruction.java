@@ -10,7 +10,7 @@ public abstract class AS3SimpleInstruction extends AS3Instruction {
 
 	@Override
 	public int getBitLength() {
-		return getOpcode().getBitPosition();
+		return getOpcode().getBitLength();
 	}
 
 }

@@ -12,8 +12,6 @@ import tv.porst.swfretools.parser.structures.ShapeWithStyle3Parser;
 
 /**
  * Class for parsing DefineShape3 tags.
- * 
- * @author sp
  */
 public final class DefineShape3Parser {
 

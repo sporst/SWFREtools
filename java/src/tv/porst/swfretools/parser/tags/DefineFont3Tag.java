@@ -15,9 +15,6 @@ import tv.porst.swfretools.parser.structures.Shape3List;
 
 /**
  * Represents a DefineFont3 tag.
- * 
- * @author sp
- *
  */
 public final class DefineFont3Tag extends Tag {
 

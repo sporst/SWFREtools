@@ -1,17 +1,14 @@
 package tv.porst.swfretools.parser.tags;
 
 import tv.porst.splib.binaryparser.AsciiString;
-import tv.porst.splib.binaryparser.UBits;
 import tv.porst.splib.binaryparser.Flag;
+import tv.porst.splib.binaryparser.UBits;
 import tv.porst.splib.binaryparser.UINT16;
 import tv.porst.swfretools.parser.structures.ByteArray;
 import tv.porst.swfretools.parser.structures.RecordHeader;
 
 /**
  * Represents a DefineFont4 tag.
- * 
- * @author sp
- *
  */
 public final class DefineFont4Tag extends Tag {
 

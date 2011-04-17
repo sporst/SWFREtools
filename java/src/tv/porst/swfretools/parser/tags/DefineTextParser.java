@@ -21,8 +21,6 @@ import tv.porst.swfretools.parser.structures.TextRecordParser;
 
 /**
  * Class for parsing DefineText tags.
- * 
- * @author sp
  */
 public final class DefineTextParser {
 

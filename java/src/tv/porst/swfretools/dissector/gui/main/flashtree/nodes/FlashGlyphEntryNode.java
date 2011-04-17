@@ -1,6 +1,5 @@
 package tv.porst.swfretools.dissector.gui.main.flashtree.nodes;
 
-import tv.porst.swfretools.dissector.gui.main.flashtree.FlashTreeNode;
 import tv.porst.swfretools.parser.structures.GlyphEntry;
 
 public class FlashGlyphEntryNode extends FlashTreeNode<GlyphEntry> {

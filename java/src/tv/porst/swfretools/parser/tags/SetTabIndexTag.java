@@ -6,9 +6,6 @@ import tv.porst.swfretools.parser.structures.RecordHeader;
 
 /**
  * Represents a SetTabIndex tag.
- * 
- * @author sp
- *
  */
 public final class SetTabIndexTag extends Tag {
 

@@ -35,8 +35,6 @@ import tv.porst.swfretools.parser.structures.ShapeParser;
 
 /**
  * Class for parsing DefineFont2 tags.
- * 
- * @author sp
  */
 public final class DefineFont2Parser {
 

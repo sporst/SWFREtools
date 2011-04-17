@@ -9,9 +9,6 @@ import tv.porst.swfretools.parser.structures.TextRecordList;
 
 /**
  * Represents a DefineText tag.
- * 
- * @author sp
- *
  */
 public final class DefineTextTag extends Tag {
 

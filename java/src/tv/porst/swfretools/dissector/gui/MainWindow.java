@@ -12,24 +12,34 @@ import tv.porst.swfretools.dissector.gui.main.DetailPanel;
 import tv.porst.swfretools.dissector.gui.main.TreePanel;
 import tv.porst.swfretools.dissector.gui.main.actions.OpenAction;
 import tv.porst.swfretools.dissector.gui.main.flashtree.FlashTree;
-import tv.porst.swfretools.dissector.gui.main.flashtree.FlashTreeNode;
 import tv.porst.swfretools.dissector.gui.main.flashtree.FlashTreeNodeSelectionHandler;
+import tv.porst.swfretools.dissector.gui.main.flashtree.nodes.FlashTreeNode;
 import tv.porst.swfretools.dissector.gui.main.models.FileModel;
 
-public class MainWindow extends JFrame {
+/**
+ * Main window of Flash Dissector.
+ */
+public final class MainWindow extends JFrame {
 
-	private final TreeSelectionListener internalTreeSelectionListener = new InternalTreeSelectionListener();
+	/**
+	 * Tree panel that shows the structures of the loaded SWF files.
+	 */
 	private final TreePanel panel;
+
+	/**
+	 * Selection listener that updates the GUI when a new node in the
+	 * tree panel was activated.
+	 */
+	private final TreeSelectionListener internalTreeSelectionListener = new InternalTreeSelectionListener();
+
+	/**
+	 * Panel that is shown on the right-hand side of the window.
+	 */
 	private final DetailPanel detailPanel = new DetailPanel();
 
-	public static void main(final String[] args) {
-		final MainWindow window = new MainWindow();
-
-		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		window.setVisible(true);
-	}
-
-
+	/**
+	 * Creates a new main window object.
+	 */
 	public MainWindow() {
 		super("Flash Dissector");
 
@@ -50,7 +60,7 @@ public class MainWindow extends JFrame {
 
 		final JMenu menu = new JMenu("File");
 
-		menu.add(new OpenAction(this, tree, fileModel));
+		menu.add(new OpenAction(tree, fileModel));
 
 		menuBar.add(menu);
 
@@ -60,12 +70,16 @@ public class MainWindow extends JFrame {
 		setLocationRelativeTo(null);
 	}
 
+	/**
+	 * Selection listener that updates the GUI when a new node in the
+	 * tree panel was activated.
+	 */
 	private class InternalTreeSelectionListener implements TreeSelectionListener {
 
 		@Override
 		public void valueChanged(final TreeSelectionEvent e) {
 
-			final FlashTreeNode node = (FlashTreeNode) panel.getTree().getLastSelectedPathComponent();
+			final FlashTreeNode<?> node = (FlashTreeNode<?>) panel.getTree().getLastSelectedPathComponent();
 
 			FlashTreeNodeSelectionHandler.handleSelection(node, detailPanel);
 		}

@@ -17,8 +17,6 @@ import tv.porst.swfretools.parser.structures.SceneNameParser;
 
 /**
  * Class for parsing DefineSceneAndFrameLabelData tags.
- * 
- * @author sp
  */
 public final class DefineSceneAndFrameLabelDataParser {
 

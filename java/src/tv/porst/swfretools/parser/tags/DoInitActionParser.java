@@ -12,11 +12,8 @@ import tv.porst.swfretools.parser.actions.as2.ActionRecordParser;
 import tv.porst.swfretools.parser.structures.ActionList;
 import tv.porst.swfretools.parser.structures.RecordHeader;
 
-
 /**
  * Class for parsing DoInitAction tags.
- * 
- * @author sp
  */
 public final class DoInitActionParser {
 

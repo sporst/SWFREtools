@@ -16,8 +16,6 @@ import tv.porst.swfretools.parser.structures.UINT16List;
 
 /**
  * Class for parsing DefineFont tags.
- * 
- * @author sp
  */
 public final class DefineFontParser {
 

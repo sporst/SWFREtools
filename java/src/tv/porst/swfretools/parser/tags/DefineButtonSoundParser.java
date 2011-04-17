@@ -10,8 +10,6 @@ import tv.porst.swfretools.parser.structures.SoundInfoParser;
 
 /**
  * Class for parsing DefineButtonSound tags.
- * 
- * @author sp
  */
 public final class DefineButtonSoundParser {
 

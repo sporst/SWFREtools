@@ -6,9 +6,6 @@ import tv.porst.swfretools.parser.structures.RecordHeader;
 
 /**
  * Represents a DefineFontName tag.
- * 
- * @author sp
- *
  */
 public final class DefineFontNameTag extends Tag {
 

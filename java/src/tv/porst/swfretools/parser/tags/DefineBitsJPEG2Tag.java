@@ -6,9 +6,6 @@ import tv.porst.swfretools.parser.structures.RecordHeader;
 
 /**
  * Represents a DefineBitsJPEG2 tag.
- * 
- * @author sp
- *
  */
 public final class DefineBitsJPEG2Tag extends Tag {
 

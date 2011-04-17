@@ -24,8 +24,6 @@ import tv.porst.swfretools.parser.structures.RecordHeader;
 
 /**
  * Class for parsing DefineButton2 tags.
- * 
- * @author sp
  */
 public final class DefineButton2Parser {
 

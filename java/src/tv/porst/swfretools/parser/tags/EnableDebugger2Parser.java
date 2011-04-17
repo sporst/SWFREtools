@@ -10,8 +10,6 @@ import tv.porst.swfretools.parser.structures.RecordHeader;
 
 /**
  * Class for parsing EnableDebugger2 tags.
- * 
- * @author sp
  */
 public final class EnableDebugger2Parser {
 

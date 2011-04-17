@@ -6,9 +6,6 @@ import tv.porst.swfretools.parser.structures.RecordHeader;
 
 /**
  * Represents a DefineButtonCxform tag.
- * 
- * @author sp
- *
  */
 public final class DefineButtonCxformTag extends Tag {
 

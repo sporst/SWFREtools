@@ -1,6 +1,5 @@
 package tv.porst.swfretools.dissector.gui.main.flashtree.nodes;
 
-import tv.porst.swfretools.dissector.gui.main.flashtree.FlashTreeNode;
 import tv.porst.swfretools.parser.structures.MorphLineStyleArray;
 
 public class FlashMorphLineStyleArrayNode extends FlashTreeNode<MorphLineStyleArray> {

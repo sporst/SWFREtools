@@ -6,9 +6,6 @@ import tv.porst.swfretools.parser.structures.RecordHeader;
 
 /**
  * Represents a SoundStreamBlock tag.
- * 
- * @author sp
- *
  */
 public final class SoundStreamBlockTag extends Tag {
 

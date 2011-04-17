@@ -140,7 +140,7 @@ public final class ActionRecordParser {
 			case ActionCodes.ActionGotoFrame2: actions.add(ActionGotoFrame2Parser.parse(parser, actionCode, fieldName)); break;
 
 			default:
-				throw new IllegalStateException("Invalid action code");
+				throw new IllegalStateException("Invalid action code " + actionCode.value());
 			}
 		}
 

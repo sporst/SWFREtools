@@ -1,7 +1,6 @@
 package tv.porst.swfretools.dissector.gui.main.flashtree.nodes;
 
 import tv.porst.splib.binaryparser.INT16;
-import tv.porst.swfretools.dissector.gui.main.flashtree.FlashTreeNode;
 
 public class FlashINT16Node extends FlashTreeNode<INT16> {
 

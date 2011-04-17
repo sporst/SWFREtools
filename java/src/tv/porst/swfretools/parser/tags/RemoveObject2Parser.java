@@ -8,8 +8,6 @@ import tv.porst.swfretools.parser.structures.RecordHeader;
 
 /**
  * Class for parsing RemoveObject2 tags.
- * 
- * @author sp
  */
 public final class RemoveObject2Parser {
 

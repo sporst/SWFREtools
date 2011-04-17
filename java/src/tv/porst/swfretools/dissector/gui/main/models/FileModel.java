@@ -10,16 +10,40 @@ import tv.porst.swfretools.parser.SWFParser;
 import tv.porst.swfretools.parser.SWFParserException;
 import tv.porst.swfretools.parser.structures.SWFFile;
 
+/**
+ * Model that keeps track of open files.
+ */
 public final class FileModel {
 
-	private final ListenerProvider<IFileModelListener> listeners = new ListenerProvider<IFileModelListener>();
-
+	/**
+	 * Currently open files.
+	 */
 	private final List<LoadedFile> openFiles = new ArrayList<LoadedFile>();
 
+	/**
+	 * Listeners that are notified about changes in open files.
+	 */
+	private final ListenerProvider<IFileModelListener> listeners = new ListenerProvider<IFileModelListener>();
+
+	/**
+	 * Adds a new listener that is notified about changes in open files.
+	 * 
+	 * @param listener The listener object to add.
+	 */
 	public void addListener(final IFileModelListener listener) {
 		listeners.add(listener);
 	}
 
+	/**
+	 * Opens a new file.
+	 * 
+	 * @param file The file to open.
+	 * 
+	 * @return Structure that represents the newly opened file.
+	 * 
+	 * @throws IOException Thrown if the file could not be read.
+	 * @throws SWFParserException Thrown if the file could not be parsed.
+	 */
 	public LoadedFile openFile(final File file) throws IOException, SWFParserException {
 
 		final SWFFile swfFile = SWFParser.parse(file);
@@ -41,6 +65,11 @@ public final class FileModel {
 		return loadedFile;
 	}
 
+	/**
+	 * Removes a listener object that was previously listening on this model.
+	 * 
+	 * @param listener The listener object to remove.
+	 */
 	public void removeListener(final IFileModelListener listener) {
 		listeners.remove(listener);
 	}

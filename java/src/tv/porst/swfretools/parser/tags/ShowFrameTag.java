@@ -4,9 +4,6 @@ import tv.porst.swfretools.parser.structures.RecordHeader;
 
 /**
  * Represents a ShowFrame tag.
- * 
- * @author sp
- *
  */
 public final class ShowFrameTag extends Tag {
 

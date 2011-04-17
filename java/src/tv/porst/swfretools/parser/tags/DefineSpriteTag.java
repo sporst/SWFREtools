@@ -6,9 +6,6 @@ import tv.porst.swfretools.parser.structures.TagList;
 
 /**
  * Represents a DefineSprite tag.
- * 
- * @author sp
- *
  */
 public final class DefineSpriteTag extends Tag {
 

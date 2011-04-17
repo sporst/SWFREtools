@@ -5,9 +5,6 @@ import tv.porst.swfretools.parser.structures.RecordHeader;
 
 /**
  * Represents an EnableDebugger tag.
- * 
- * @author sp
- *
  */
 public final class EnableDebuggerTag extends Tag {
 

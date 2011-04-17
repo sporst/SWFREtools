@@ -404,7 +404,7 @@ public final class Minimizer {
 			// whether the modified file still crashes.
 			for (final Tag tag : parsedFile.getTags()) {
 
-				System.out.printf("Trying to remove tag %s at offset %08X\n", TagNames.getTagName(tag.getHeader().getTagCode()), tag.getBitPosition() / 8);
+				System.out.printf("Trying to remove tag %s at offset %08X\n", TagNames.getPrintableTagName(tag.getHeader().getTagCode()), tag.getBitPosition() / 8);
 
 				final int startOffset = tag.getBitPosition() / 8;
 				final int length = tag.getHeader().getHeaderLength() + tag.getHeader().getNormalizedLength();
@@ -440,7 +440,7 @@ public final class Minimizer {
 			}
 
 			for (final Tag tag : removableTags) {
-				System.out.printf("\t%08X: %s\n", tag.getBitPosition() / 8, TagNames.getTagName(tag.getHeader().getTagCode()));
+				System.out.printf("\t%08X: %s\n", tag.getBitPosition() / 8, TagNames.getPrintableTagName(tag.getHeader().getTagCode()));
 			}
 
 			final byte[] iterationData = removeTags(fileData, removableTags);

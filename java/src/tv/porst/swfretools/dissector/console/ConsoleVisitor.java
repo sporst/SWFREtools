@@ -17,7 +17,7 @@ import tv.porst.splib.binaryparser.UINT16;
 import tv.porst.splib.binaryparser.UINT32;
 import tv.porst.splib.binaryparser.UINT8;
 import tv.porst.splib.strings.StringHelpers;
-import tv.porst.swfretools.Constants;
+import tv.porst.swfretools.dissector.Constants;
 import tv.porst.swfretools.parser.actions.as2.Action;
 import tv.porst.swfretools.parser.structures.*;
 import tv.porst.swfretools.parser.tags.Tag;
@@ -597,7 +597,7 @@ public class ConsoleVisitor implements ISWFVisitor {
 
 		updateStack(parent);
 
-		output.printf(getPadding() + "[%08X:%d]: %s\n", tag.getHeader().getBitPosition(), 0, TagNames.getTagName(tag.getHeader().getTagCode()));
+		output.printf(getPadding() + "[%08X:%d]: %s\n", tag.getHeader().getBitPosition(), 0, TagNames.getPrintableTagName(tag.getHeader().getTagCode()));
 
 		stack.push(tag);
 	}

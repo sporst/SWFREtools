@@ -1,7 +1,6 @@
 package tv.porst.swfretools.dissector.gui.main.flashtree.nodes;
 
 import tv.porst.splib.binaryparser.Float64;
-import tv.porst.swfretools.dissector.gui.main.flashtree.FlashTreeNode;
 
 public class FlashFloat64Node extends FlashTreeNode<Float64> {
 

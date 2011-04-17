@@ -6,9 +6,6 @@ import tv.porst.swfretools.parser.structures.RecordHeader;
 
 /**
  * Represents a VideoFrame tag.
- * 
- * @author sp
- *
  */
 public final class VideoFrameTag extends Tag {
 

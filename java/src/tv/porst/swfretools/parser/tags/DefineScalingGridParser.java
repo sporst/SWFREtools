@@ -10,8 +10,6 @@ import tv.porst.swfretools.parser.structures.RectParser;
 
 /**
  * Class for parsing DefineScalingGrid tags.
- * 
- * @author sp
  */
 public final class DefineScalingGridParser {
 

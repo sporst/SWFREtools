@@ -8,8 +8,6 @@ import tv.porst.swfretools.parser.structures.RecordHeader;
 
 /**
  * Class for parsing DefineSprite tags.
- * 
- * @author sp
  */
 public final class DefineSpriteParser {
 

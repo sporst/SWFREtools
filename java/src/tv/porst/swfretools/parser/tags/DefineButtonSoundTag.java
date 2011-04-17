@@ -6,9 +6,6 @@ import tv.porst.swfretools.parser.structures.SoundInfo;
 
 /**
  * Represents a DefineButtonSound tag.
- * 
- * @author sp
- *
  */
 public final class DefineButtonSoundTag extends Tag {
 

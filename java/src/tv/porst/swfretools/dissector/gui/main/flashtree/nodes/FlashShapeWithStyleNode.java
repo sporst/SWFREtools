@@ -1,6 +1,5 @@
 package tv.porst.swfretools.dissector.gui.main.flashtree.nodes;
 
-import tv.porst.swfretools.dissector.gui.main.flashtree.FlashTreeNode;
 import tv.porst.swfretools.parser.structures.ShapeWithStyle;
 
 public class FlashShapeWithStyleNode extends FlashTreeNode<ShapeWithStyle> {

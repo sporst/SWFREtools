@@ -18,8 +18,6 @@ import tv.porst.swfretools.parser.structures.ShapeParser;
 
 /**
  * Class for parsing DefineMorphShape tags.
- * 
- * @author sp
  */
 public final class DefineMorphShapeParser {
 

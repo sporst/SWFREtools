@@ -5,9 +5,6 @@ import tv.porst.swfretools.parser.structures.RecordHeader;
 
 /**
  * Represents a StartSound2 tag.
- * 
- * @author sp
- *
  */
 public class ProtectTag extends Tag {
 

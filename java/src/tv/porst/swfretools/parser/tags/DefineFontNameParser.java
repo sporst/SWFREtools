@@ -10,8 +10,6 @@ import tv.porst.swfretools.parser.structures.RecordHeader;
 
 /**
  * Class for parsing DefineFontName tags.
- * 
- * @author sp
  */
 public final class DefineFontNameParser {
 

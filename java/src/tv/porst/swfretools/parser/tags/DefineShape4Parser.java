@@ -16,8 +16,6 @@ import tv.porst.swfretools.parser.structures.ShapeWithStyle4Parser;
 
 /**
  * Class for parsing DefineShape4 tags.
- * 
- * @author sp
  */
 public final class DefineShape4Parser {
 

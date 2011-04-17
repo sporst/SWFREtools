@@ -7,9 +7,6 @@ import tv.porst.swfretools.parser.structures.RecordHeader;
 
 /**
  * Represents a DefineBitsLossless tag.
- * 
- * @author sp
- *
  */
 public final class DefineBitsLosslessTag extends Tag {
 

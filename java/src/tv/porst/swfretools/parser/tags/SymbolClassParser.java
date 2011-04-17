@@ -15,8 +15,6 @@ import tv.porst.swfretools.parser.structures.SymbolParser;
 
 /**
  * Class for parsing SymbolClass tags.
- * 
- * @author sp
  */
 public final class SymbolClassParser {
 

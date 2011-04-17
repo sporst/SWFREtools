@@ -10,9 +10,6 @@ import tv.porst.swfretools.parser.structures.RecordHeader;
 
 /**
  * Represents a DefineButton2 tag.
- * 
- * @author sp
- *
  */
 public final class DefineButton2Tag extends Tag {
 

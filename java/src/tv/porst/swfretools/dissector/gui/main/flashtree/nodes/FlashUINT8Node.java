@@ -1,7 +1,6 @@
 package tv.porst.swfretools.dissector.gui.main.flashtree.nodes;
 
 import tv.porst.splib.binaryparser.UINT8;
-import tv.porst.swfretools.dissector.gui.main.flashtree.FlashTreeNode;
 
 public class FlashUINT8Node extends FlashTreeNode<UINT8> {
 

@@ -22,8 +22,6 @@ import tv.porst.swfretools.parser.structures.RecordHeader;
 
 /**
  * Class for parsing DefineFontInfo2 tags.
- * 
- * @author sp
  */
 public final class DefineFontInfo2Parser {
 

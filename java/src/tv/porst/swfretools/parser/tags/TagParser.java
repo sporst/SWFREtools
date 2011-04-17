@@ -15,9 +15,6 @@ import tv.porst.swfretools.parser.structures.TagList;
 
 /**
  * Class for parsing individual SWF tags.
- * 
- * @author sp
- *
  */
 public final class TagParser {
 

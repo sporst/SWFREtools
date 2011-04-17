@@ -17,8 +17,6 @@ import tv.porst.swfretools.parser.structures.ZoneRecordParser;
 
 /**
  * Class for parsing DefineFontAlignZones tags.
- * 
- * @author sp
  */
 public final class DefineFontAlignZonesParser {
 

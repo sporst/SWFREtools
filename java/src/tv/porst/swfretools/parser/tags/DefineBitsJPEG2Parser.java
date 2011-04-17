@@ -10,8 +10,6 @@ import tv.porst.swfretools.parser.structures.RecordHeader;
 
 /**
  * Class for parsing DefineBitsJPEG2 tags.
- * 
- * @author sp
  */
 public final class DefineBitsJPEG2Parser {
 

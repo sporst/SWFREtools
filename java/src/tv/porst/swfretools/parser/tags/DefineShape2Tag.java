@@ -7,9 +7,6 @@ import tv.porst.swfretools.parser.structures.ShapeWithStyle;
 
 /**
  * Represents a DefineShape2 tag.
- * 
- * @author sp
- *
  */
 public final class DefineShape2Tag extends Tag {
 

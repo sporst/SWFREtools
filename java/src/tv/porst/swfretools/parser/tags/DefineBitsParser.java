@@ -10,8 +10,6 @@ import tv.porst.swfretools.parser.structures.RecordHeader;
 
 /**
  * Class for parsing DefineBits tags.
- * 
- * @author sp
  */
 public final class DefineBitsParser {
 

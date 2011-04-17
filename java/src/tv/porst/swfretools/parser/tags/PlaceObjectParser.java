@@ -12,8 +12,6 @@ import tv.porst.swfretools.parser.structures.RecordHeader;
 
 /**
  * Class for parsing PlaceObject tags.
- * 
- * @author sp
  */
 public final class PlaceObjectParser {
 

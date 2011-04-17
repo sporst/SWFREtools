@@ -7,9 +7,6 @@ import tv.porst.swfretools.parser.structures.RecordHeader;
 
 /**
  * Represents a DefineBinaryData tag.
- * 
- * @author sp
- *
  */
 public final class DefineBinaryDataTag extends Tag {
 

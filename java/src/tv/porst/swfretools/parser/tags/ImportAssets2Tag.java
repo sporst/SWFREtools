@@ -8,9 +8,6 @@ import tv.porst.swfretools.parser.structures.SymbolList;
 
 /**
  * Represents an ImportAssets2 tag.
- * 
- * @author sp
- *
  */
 public final class ImportAssets2Tag extends Tag {
 

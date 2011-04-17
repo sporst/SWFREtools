@@ -2,7 +2,6 @@ package tv.porst.swfretools.dissector.gui.main.flashtree.nodes;
 
 import javax.swing.JPanel;
 
-import tv.porst.swfretools.dissector.gui.main.flashtree.FlashTreeNode;
 import tv.porst.swfretools.dissector.gui.main.panels.AS3CodePanel;
 import tv.porst.swfretools.parser.actions.as3.AS3Instruction;
 import tv.porst.swfretools.parser.actions.as3.AS3InstructionList;

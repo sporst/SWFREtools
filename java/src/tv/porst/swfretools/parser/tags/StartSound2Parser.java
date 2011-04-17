@@ -10,8 +10,6 @@ import tv.porst.swfretools.parser.structures.SoundInfoParser;
 
 /**
  * Class for parsing StartSound2 tags.
- * 
- * @author sp
  */
 public final class StartSound2Parser {
 

@@ -1,7 +1,7 @@
 package tv.porst.swfretools.parser.tags;
 
-import tv.porst.splib.binaryparser.UBits;
 import tv.porst.splib.binaryparser.Flag;
+import tv.porst.splib.binaryparser.UBits;
 import tv.porst.splib.binaryparser.UINT16;
 import tv.porst.swfretools.parser.structures.RecordHeader;
 import tv.porst.swfretools.parser.structures.Rect;
@@ -9,9 +9,6 @@ import tv.porst.swfretools.parser.structures.ShapeWithStyle4;
 
 /**
  * Represents a DefineShape4 tag.
- * 
- * @author sp
- *
  */
 public final class DefineShape4Tag extends Tag {
 

@@ -10,9 +10,6 @@ import tv.porst.swfretools.parser.structures.RecordHeader;
 
 /**
  * Represents a DefineFontInfo2 tag.
- * 
- * @author sp
- *
  */
 public final class DefineFontInfo2Tag extends Tag {
 

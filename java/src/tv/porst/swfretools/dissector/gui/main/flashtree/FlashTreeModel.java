@@ -4,16 +4,31 @@ import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
 
 import tv.porst.swfretools.dissector.gui.main.flashtree.nodes.FlashFileNode;
+import tv.porst.swfretools.dissector.gui.main.flashtree.nodes.FlashTreeRootNode;
 import tv.porst.swfretools.dissector.gui.main.models.FileModel;
 import tv.porst.swfretools.dissector.gui.main.models.IFileModelListener;
 import tv.porst.swfretools.dissector.gui.main.models.LoadedFile;
 
-public class FlashTreeModel extends DefaultTreeModel {
+/**
+ * Tree model of the Flash tree.
+ */
+public final class FlashTreeModel extends DefaultTreeModel {
 
+	/**
+	 * Model that keeps track of open files.
+	 */
 	private final FileModel fileModel;
 
+	/**
+	 * Listener that keeps track of changes in open files.
+	 */
 	private final IFileModelListener internalFileModelListener = new InternalFileModelListener();
 
+	/**
+	 * Creates a new tree model.
+	 * 
+	 * @param fileModel Model that keeps track of open files.
+	 */
 	public FlashTreeModel(final FileModel fileModel) {
 		super(new FlashTreeRootNode());
 
@@ -22,6 +37,16 @@ public class FlashTreeModel extends DefaultTreeModel {
 		fileModel.addListener(internalFileModelListener);
 	}
 
+	/**
+	 * Frees allocated resources.
+	 */
+	public void dispose() {
+		fileModel.removeListener(internalFileModelListener);
+	}
+
+	/**
+	 * Listener that keeps track of changes in open files.
+	 */
 	private class InternalFileModelListener implements IFileModelListener {
 
 		@Override

@@ -1,6 +1,5 @@
 package tv.porst.swfretools.dissector.gui.main.flashtree.nodes;
 
-import tv.porst.swfretools.dissector.gui.main.flashtree.FlashTreeNode;
 import tv.porst.swfretools.parser.structures.IMultiname;
 import tv.porst.swfretools.parser.structures.Multiname;
 import tv.porst.swfretools.parser.structures.MultinameA;

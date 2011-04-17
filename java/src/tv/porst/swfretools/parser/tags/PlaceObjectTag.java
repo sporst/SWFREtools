@@ -8,9 +8,6 @@ import tv.porst.swfretools.parser.structures.RecordHeader;
 
 /**
  * Represents a PlaceObject tag.
- * 
- * @author sp
- *
  */
 public final class PlaceObjectTag extends Tag {
 

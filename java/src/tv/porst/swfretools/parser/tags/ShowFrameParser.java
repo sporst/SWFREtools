@@ -5,8 +5,6 @@ import tv.porst.swfretools.parser.structures.RecordHeader;
 
 /**
  * Class for parsing ShowFrame tags.
- * 
- * @author sp
  */
 public final class ShowFrameParser {
 

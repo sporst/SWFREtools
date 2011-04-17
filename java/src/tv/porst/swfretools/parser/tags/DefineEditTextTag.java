@@ -11,9 +11,6 @@ import tv.porst.swfretools.parser.structures.Rect;
 
 /**
  * Represents a DefineEditText tag.
- * 
- * @author sp
- *
  */
 public final class DefineEditTextTag extends Tag {
 

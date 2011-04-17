@@ -22,8 +22,6 @@ import tv.porst.swfretools.parser.structures.RectParser;
 
 /**
  * Class for parsing DefineEditText tags.
- * 
- * @author sp
  */
 public final class DefineEditTextParser {
 

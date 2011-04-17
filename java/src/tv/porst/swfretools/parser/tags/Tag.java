@@ -5,9 +5,6 @@ import tv.porst.swfretools.parser.structures.RecordHeader;
 
 /**
  * Base class of all concrete SWF tags.
- * 
- * @author sp
- *
  */
 public abstract class Tag implements IFileElement {
 

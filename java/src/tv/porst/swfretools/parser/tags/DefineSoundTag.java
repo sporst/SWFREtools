@@ -8,9 +8,6 @@ import tv.porst.swfretools.parser.structures.RecordHeader;
 
 /**
  * Represents a DefineSound tag.
- * 
- * @author sp
- *
  */
 public final class DefineSoundTag extends Tag {
 

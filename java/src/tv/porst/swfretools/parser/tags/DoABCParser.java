@@ -12,8 +12,6 @@ import tv.porst.swfretools.parser.structures.RecordHeader;
 
 /**
  * Class for parsing DoABC tags.
- * 
- * @author sp
  */
 public final class DoABCParser {
 

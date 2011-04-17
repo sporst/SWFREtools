@@ -4,9 +4,6 @@ import tv.porst.swfretools.parser.structures.RecordHeader;
 
 /**
  * Represents an End tag.
- * 
- * @author sp
- *
  */
 public final class EndTag extends Tag {
 

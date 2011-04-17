@@ -1,6 +1,5 @@
 package tv.porst.swfretools.dissector.gui.main.flashtree.nodes;
 
-import tv.porst.swfretools.dissector.gui.main.flashtree.FlashTreeNode;
 import tv.porst.swfretools.parser.structures.FillStyleArray;
 
 public class FlashFillStyleArrayNode extends FlashTreeNode<FillStyleArray> {

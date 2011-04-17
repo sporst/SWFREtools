@@ -1,4 +1,4 @@
-package tv.porst.swfretools.dissector.gui.main.flashtree;
+package tv.porst.swfretools.dissector.gui.main.flashtree.nodes;
 
 import tv.porst.splib.binaryparser.AsciiString;
 import tv.porst.splib.binaryparser.Bits;
@@ -21,6 +21,11 @@ import tv.porst.swfretools.parser.actions.as2.Action;
 import tv.porst.swfretools.parser.structures.*;
 import tv.porst.swfretools.parser.tags.Tag;
 
+/**
+ * Base class for all tree nodes shown in the Flash tree.
+ * 
+ * @param <T> Type of the SWF structure represented by the node.
+ */
 public class FlashTreeNode<T extends IFileElement> extends IconNode {
 
 	private final String name;

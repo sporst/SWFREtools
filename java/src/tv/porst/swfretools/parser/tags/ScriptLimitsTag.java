@@ -6,9 +6,6 @@ import tv.porst.swfretools.parser.structures.RecordHeader;
 
 /**
  * Represents a ScriptLimits tag.
- * 
- * @author sp
- *
  */
 public final class ScriptLimitsTag extends Tag {
 

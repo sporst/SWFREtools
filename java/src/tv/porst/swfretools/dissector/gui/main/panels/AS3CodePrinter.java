@@ -5,7 +5,11 @@ import tv.porst.swfretools.parser.structures.AS3Code;
 import tv.porst.swfretools.parser.structures.MethodBody;
 import tv.porst.swfretools.parser.tags.DoABCTag;
 
-public class AS3CodePrinter {
+/**
+ * Contains functions that turn ActionScript 3 code into a string that can
+ * be displayed to the user.
+ */
+public final class AS3CodePrinter {
 
 	private static void add(final StringBuilder sb, final String mnemonic) {
 		sb.append(mnemonic);

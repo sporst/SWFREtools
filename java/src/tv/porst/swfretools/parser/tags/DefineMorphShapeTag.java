@@ -10,9 +10,6 @@ import tv.porst.swfretools.parser.structures.Shape;
 
 /**
  * Represents a DefineMorphShape tag.
- * 
- * @author sp
- *
  */
 public final class DefineMorphShapeTag extends Tag {
 

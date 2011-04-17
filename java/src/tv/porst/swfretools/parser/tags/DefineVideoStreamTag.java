@@ -1,16 +1,13 @@
 package tv.porst.swfretools.parser.tags;
 
-import tv.porst.splib.binaryparser.UBits;
 import tv.porst.splib.binaryparser.Flag;
+import tv.porst.splib.binaryparser.UBits;
 import tv.porst.splib.binaryparser.UINT16;
 import tv.porst.splib.binaryparser.UINT8;
 import tv.porst.swfretools.parser.structures.RecordHeader;
 
 /**
  * Represents a DefineVideoStream tag.
- * 
- * @author sp
- *
  */
 public final class DefineVideoStreamTag extends Tag {
 

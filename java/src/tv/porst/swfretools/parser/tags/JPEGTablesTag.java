@@ -5,9 +5,6 @@ import tv.porst.swfretools.parser.structures.RecordHeader;
 
 /**
  * Represents a JPEGTables tag.
- * 
- * @author sp
- *
  */
 public final class JPEGTablesTag extends Tag {
 

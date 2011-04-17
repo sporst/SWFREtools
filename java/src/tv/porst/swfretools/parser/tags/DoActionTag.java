@@ -5,19 +5,19 @@ import tv.porst.swfretools.parser.structures.RecordHeader;
 
 /**
  * Represents a DoAction tag.
- * 
- * @author sp
- *
  */
 public final class DoActionTag extends Tag {
 
+	/**
+	 * Actions that are associated with this tag.
+	 */
 	private final ActionList actions;
 
 	/**
 	 * Creates a new DoAction tag object.
 	 * 
 	 * @param header Tag header.
-	 * @param actionList
+	 * @param actions Actions that are associated with this tag.
 	 */
 	public DoActionTag(final RecordHeader header, final ActionList actions) {
 		super(header);
@@ -26,9 +26,9 @@ public final class DoActionTag extends Tag {
 	}
 
 	/**
-	 * Returns the
+	 * Returns the actions that are associated with this tag.
 	 *
-	 * @return The
+	 * @return The actions that are associated with this tag.
 	 */
 	public ActionList getActions() {
 		return actions;

@@ -8,8 +8,6 @@ import tv.porst.swfretools.parser.structures.TagList;
 
 /**
  * Represents the result of a tag parsing operation.
- * 
- * @author sp
  */
 public final class TagParserResult {
 

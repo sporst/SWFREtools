@@ -6,9 +6,6 @@ import tv.porst.swfretools.parser.structures.RecordHeader;
 
 /**
  * Represents a RemoveObject2 tag.
- * 
- * @author sp
- *
  */
 public final class RemoveObject2Tag extends Tag {
 

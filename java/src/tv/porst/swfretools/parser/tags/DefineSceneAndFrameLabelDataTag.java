@@ -7,9 +7,6 @@ import tv.porst.swfretools.parser.structures.SceneNameList;
 
 /**
  * Represents a DefineSceneAndFrameLabelData tag.
- * 
- * @author sp
- *
  */
 public final class DefineSceneAndFrameLabelDataTag extends Tag {
 

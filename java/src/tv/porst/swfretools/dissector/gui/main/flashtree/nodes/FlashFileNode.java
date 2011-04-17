@@ -3,11 +3,10 @@ package tv.porst.swfretools.dissector.gui.main.flashtree.nodes;
 import javax.swing.ImageIcon;
 
 import tv.porst.swfretools.dissector.Main;
-import tv.porst.swfretools.dissector.gui.main.flashtree.FlashTreeNode;
 import tv.porst.swfretools.dissector.gui.main.models.LoadedFile;
 import tv.porst.swfretools.parser.tags.Tag;
 
-public class FlashFileNode extends FlashTreeNode {
+public class FlashFileNode extends FlashTreeNode<FlashFileNodeWrapper> {
 
 	private final LoadedFile file;
 

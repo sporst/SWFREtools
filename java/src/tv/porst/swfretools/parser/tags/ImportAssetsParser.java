@@ -17,8 +17,6 @@ import tv.porst.swfretools.parser.structures.SymbolParser;
 
 /**
  * Class for parsing ImportAssets tags.
- * 
- * @author sp
  */
 public final class ImportAssetsParser {
 

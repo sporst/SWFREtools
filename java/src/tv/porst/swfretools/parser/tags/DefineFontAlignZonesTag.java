@@ -7,9 +7,6 @@ import tv.porst.swfretools.parser.structures.ZoneRecordList;
 
 /**
  * Represents a DefineFontAlignZones tag.
- * 
- * @author sp
- *
  */
 public final class DefineFontAlignZonesTag extends Tag {
 

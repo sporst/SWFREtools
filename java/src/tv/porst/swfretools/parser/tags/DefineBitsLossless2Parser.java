@@ -13,29 +13,8 @@ import tv.porst.swfretools.parser.structures.RecordHeader;
 
 /**
  * Class for parsing DefineBitsLossless2 tags.
- * 
- * @author sp
  */
 public final class DefineBitsLossless2Parser {
-
-
-	/**
-	 * Calculates the size of the image data without the color table.
-	 * 
-	 * @param header Tag header.
-	 * @param bitmapColorTableSize Size of the color table.
-	 * 
-	 * @return The length of the image data in bytes.
-	 */
-	private static int getImageSize(final RecordHeader header, final UINT8 bitmapColorTableSize) {
-
-		if (bitmapColorTableSize == null) {
-			return 0;
-		}
-		else {
-			return header.getNormalizedLength() - (8 + 4 * (bitmapColorTableSize.value() + 1));
-		}
-	}
 
 	/**
 	 * Parses a DefineBitsLossless2 tag.
