@@ -2,14 +2,26 @@ package tv.porst.swfretools.dissector.gui.main.flashtree.nodes;
 
 import tv.porst.swfretools.parser.structures.MorphGradientRecord;
 
-public class FlashMorphGradientRecordNode extends FlashTreeNode<MorphGradientRecord> {
+/**
+ * Node that represents a MorphGradientRecord object in the Flash tree.
+ */
+public final class FlashMorphGradientRecordNode extends FlashTreeNode<MorphGradientRecord> {
 
-	public FlashMorphGradientRecordNode(final String name, final MorphGradientRecord morphGradient) {
-		super(name, morphGradient);
+	/**
+	 * Creates a new node object
+	 * 
+	 * @param name Name of the node.
+	 * @param value Flash structure represented by the node.
+	 */
+	public FlashMorphGradientRecordNode(final String name, final MorphGradientRecord value) {
+		super(name, value);
 
 		createChildren();
 	}
 
+	/**
+	 * Creates the child nodes of the node.
+	 */
 	private void createChildren() {
 		addNode("StartRatio", getUserObject().getStartRatio());
 		addNode("StartColor", getUserObject().getStartColor());

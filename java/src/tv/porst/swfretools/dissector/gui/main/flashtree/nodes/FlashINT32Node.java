@@ -2,10 +2,19 @@ package tv.porst.swfretools.dissector.gui.main.flashtree.nodes;
 
 import tv.porst.splib.binaryparser.INT32;
 
-public class FlashINT32Node extends FlashTreeNode<INT32> {
+/**
+ * Node that represents an INT32 object in the Flash tree.
+ */
+public final class FlashINT32Node extends FlashTreeNode<INT32> {
 
-	public FlashINT32Node(final String name, final INT32 userObject) {
-		super(name, userObject);
+	/**
+	 * Creates a new node object
+	 * 
+	 * @param name Name of the node.
+	 * @param value Flash structure represented by the node.
+	 */
+	public FlashINT32Node(final String name, final INT32 value) {
+		super(name, value);
 	}
 
 	@Override

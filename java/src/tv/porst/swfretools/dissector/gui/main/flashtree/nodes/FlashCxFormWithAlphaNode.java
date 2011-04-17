@@ -2,14 +2,26 @@ package tv.porst.swfretools.dissector.gui.main.flashtree.nodes;
 
 import tv.porst.swfretools.parser.structures.CxFormWithAlpha;
 
-public class FlashCxFormWithAlphaNode extends FlashTreeNode<CxFormWithAlpha> {
+/**
+ * Node that represents a CxFormWithAlpha object in the Flash tree.
+ */
+public final class FlashCxFormWithAlphaNode extends FlashTreeNode<CxFormWithAlpha> {
 
-	public FlashCxFormWithAlphaNode(final String name, final CxFormWithAlpha cxForm) {
-		super(name, cxForm);
+	/**
+	 * Creates a new node object
+	 * 
+	 * @param name Name of the node.
+	 * @param value Flash structure represented by the node.
+	 */
+	public FlashCxFormWithAlphaNode(final String name, final CxFormWithAlpha value) {
+		super(name, value);
 
 		createChildren();
 	}
 
+	/**
+	 * Creates the child nodes of the node.
+	 */
 	private void createChildren() {
 		addNode("HasAddTerms", getUserObject().getHasAddTerms());
 		addNode("HasMultTerms", getUserObject().getHasMultTerms());

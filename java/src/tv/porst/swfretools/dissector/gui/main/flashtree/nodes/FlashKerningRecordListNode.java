@@ -3,14 +3,26 @@ package tv.porst.swfretools.dissector.gui.main.flashtree.nodes;
 import tv.porst.swfretools.parser.structures.KerningRecord;
 import tv.porst.swfretools.parser.structures.KerningRecordList;
 
-public class FlashKerningRecordListNode extends FlashTreeNode<KerningRecordList> {
+/**
+ * Node that represents a KerningRecordList object in the Flash tree.
+ */
+public final class FlashKerningRecordListNode extends FlashTreeNode<KerningRecordList> {
 
-	public FlashKerningRecordListNode(final String name, final KerningRecordList kerningRecordList) {
-		super(name, kerningRecordList);
+	/**
+	 * Creates a new node object
+	 * 
+	 * @param name Name of the node.
+	 * @param value Flash structure represented by the node.
+	 */
+	public FlashKerningRecordListNode(final String name, final KerningRecordList value) {
+		super(name, value);
 
 		createChildren();
 	}
 
+	/**
+	 * Creates the child nodes of the node.
+	 */
 	private void createChildren() {
 
 		int counter = 0;

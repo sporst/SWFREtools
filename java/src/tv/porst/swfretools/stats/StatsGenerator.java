@@ -30,7 +30,7 @@ public final class StatsGenerator {
 
 		final Map<Integer, Integer> tagCounts = new TreeMap<Integer, Integer>();
 
-		DirectoryTraverser.recurse(directory, new IDirectoryTraversalVisitor() {
+		DirectoryTraverser.traverse(directory, new IDirectoryTraversalVisitor() {
 
 			@Override
 			public void visit(final File file) {

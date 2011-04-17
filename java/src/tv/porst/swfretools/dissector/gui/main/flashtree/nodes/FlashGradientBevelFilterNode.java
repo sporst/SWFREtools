@@ -2,14 +2,26 @@ package tv.porst.swfretools.dissector.gui.main.flashtree.nodes;
 
 import tv.porst.swfretools.parser.structures.GradientBevelFilter;
 
-public class FlashGradientBevelFilterNode extends FlashTreeNode<GradientBevelFilter> {
+/**
+ * Node that represents a GradientBevelFilter object in the Flash tree.
+ */
+public final class FlashGradientBevelFilterNode extends FlashTreeNode<GradientBevelFilter> {
 
-	public FlashGradientBevelFilterNode(final String name, final GradientBevelFilter filter) {
-		super(name, filter);
+	/**
+	 * Creates a new node object
+	 * 
+	 * @param name Name of the node.
+	 * @param value Flash structure represented by the node.
+	 */
+	public FlashGradientBevelFilterNode(final String name, final GradientBevelFilter value) {
+		super(name, value);
 
 		createChildren();
 	}
 
+	/**
+	 * Creates the child nodes of the node.
+	 */
 	private void createChildren() {
 		addNode("NumColors", getUserObject().getNumColors());
 		addNode("GradientColors", getUserObject().getGradientColors());

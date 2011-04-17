@@ -3,14 +3,26 @@ package tv.porst.swfretools.dissector.gui.main.flashtree.nodes;
 import tv.porst.splib.binaryparser.UINT8;
 import tv.porst.swfretools.parser.structures.UINT8List;
 
-public class FlashUINT8ListNode extends FlashTreeNode<UINT8List> {
+/**
+ * Node that represents a UINT8List object in the Flash tree.
+ */
+public final class FlashUINT8ListNode extends FlashTreeNode<UINT8List> {
 
-	public FlashUINT8ListNode(final String name, final UINT8List integers) {
-		super(name, integers);
+	/**
+	 * Creates a new node object
+	 * 
+	 * @param name Name of the node.
+	 * @param value Flash structure represented by the node.
+	 */
+	public FlashUINT8ListNode(final String name, final UINT8List value) {
+		super(name, value);
 
 		createChildren();
 	}
 
+	/**
+	 * Creates the child nodes of the node.
+	 */
 	private void createChildren() {
 
 		int counter = 0;

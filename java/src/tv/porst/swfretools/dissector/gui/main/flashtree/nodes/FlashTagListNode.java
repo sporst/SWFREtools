@@ -3,14 +3,26 @@ package tv.porst.swfretools.dissector.gui.main.flashtree.nodes;
 import tv.porst.swfretools.parser.structures.TagList;
 import tv.porst.swfretools.parser.tags.Tag;
 
-public class FlashTagListNode extends FlashTreeNode<TagList> {
+/**
+ * Node that represents a TagList object in the Flash tree.
+ */
+public final class FlashTagListNode extends FlashTreeNode<TagList> {
 
-	public FlashTagListNode(final String name, final TagList tagList) {
-		super(name, tagList);
+	/**
+	 * Creates a new node object
+	 * 
+	 * @param name Name of the node.
+	 * @param value Flash structure represented by the node.
+	 */
+	public FlashTagListNode(final String name, final TagList value) {
+		super(name, value);
 
 		createChildren();
 	}
 
+	/**
+	 * Creates the child nodes of the node.
+	 */
 	private void createChildren() {
 
 		int counter = 0;

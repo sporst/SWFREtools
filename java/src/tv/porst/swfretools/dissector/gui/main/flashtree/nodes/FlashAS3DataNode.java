@@ -2,14 +2,26 @@ package tv.porst.swfretools.dissector.gui.main.flashtree.nodes;
 
 import tv.porst.swfretools.parser.structures.AS3Data;
 
-public class FlashAS3DataNode extends FlashTreeNode<AS3Data> {
+/**
+ * Node that represents a AS3Data object in the Flash tree.
+ */
+public final class FlashAS3DataNode extends FlashTreeNode<AS3Data> {
 
+	/**
+	 * Creates a new node object
+	 * 
+	 * @param name Name of the node.
+	 * @param value Flash structure represented by the node.
+	 */
 	public FlashAS3DataNode(final String name, final AS3Data value) {
 		super(name, value);
 
 		createChildren();
 	}
 
+	/**
+	 * Creates the child nodes of the node.
+	 */
 	private void createChildren() {
 		addNode("minor_version", getUserObject().getMinorVersion());
 		addNode("major_version", getUserObject().getMajorVersion());

@@ -70,20 +70,33 @@ import tv.porst.swfretools.parser.tags.Tag;
 import tv.porst.swfretools.parser.tags.VideoFrameTag;
 import tv.porst.swfretools.utils.TagNames;
 
-public class FlashTagNode extends FlashTreeNode<Tag> {
+/**
+ * Node that represents a Tag object in the Flash tree.
+ */
+public final class FlashTagNode extends FlashTreeNode<Tag> {
 
-	private final Tag tag;
+	/**
+	 * Panel shown when the node is selected.
+	 */
 	private JPanel panel;
 
+	/**
+	 * Creates a new node object
+	 * 
+	 * @param tag Flash structure represented by the node.
+	 */
 	public FlashTagNode(final Tag tag) {
 		super(TagNames.getPrintableTagName(tag.getHeader().getTagCode()), tag);
-
-		this.tag = tag;
 
 		createChildren();
 	}
 
+	/**
+	 * Creates the child nodes of the node.
+	 */
 	private void createChildren() {
+
+		final Tag tag = getUserObject();
 
 		addNode("Header", tag.getHeader());
 
@@ -694,6 +707,11 @@ public class FlashTagNode extends FlashTreeNode<Tag> {
 		}
 	}
 
+	/**
+	 * Returns the extra panel that belongs to the node.
+	 * 
+	 * @return The extra panel that belongs to the node.
+	 */
 	public JPanel getExtraPanel() {
 		if (panel == null) {
 			if (getUserObject() instanceof DoABCTag) {

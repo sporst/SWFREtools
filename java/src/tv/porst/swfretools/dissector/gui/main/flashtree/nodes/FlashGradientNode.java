@@ -5,14 +5,26 @@ import tv.porst.swfretools.parser.structures.Gradient;
 import tv.porst.swfretools.parser.structures.Gradient3;
 import tv.porst.swfretools.parser.structures.IGradient;
 
+/**
+ * Node that represents a Gradient object in the Flash tree.
+ */
 public class FlashGradientNode extends FlashTreeNode<IGradient> {
 
-	public FlashGradientNode(final String name, final IGradient gradient) {
-		super(name, gradient);
+	/**
+	 * Creates a new node object
+	 * 
+	 * @param name Name of the node.
+	 * @param value Flash structure represented by the node.
+	 */
+	public FlashGradientNode(final String name, final IGradient value) {
+		super(name, value);
 
 		createChildren();
 	}
 
+	/**
+	 * Creates the child nodes of the node.
+	 */
 	private void createChildren() {
 		if (getUserObject() instanceof Gradient) {
 			final Gradient cgradient = (Gradient) getUserObject();
@@ -41,6 +53,11 @@ public class FlashGradientNode extends FlashTreeNode<IGradient> {
 		}
 	}
 
+	/**
+	 * Returns the gradient name for each specific gradient type.
+	 * 
+	 * @return The gradient name.
+	 */
 	private String getGradientName() {
 
 		if (getUserObject() instanceof Gradient) {

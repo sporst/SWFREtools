@@ -3,14 +3,26 @@ package tv.porst.swfretools.dissector.gui.main.flashtree.nodes;
 import tv.porst.swfretools.parser.structures.MetaData;
 import tv.porst.swfretools.parser.structures.MetaDataList;
 
-public class FlashMetaDataListNode extends FlashTreeNode<MetaDataList> {
+/**
+ * Node that represents a MetaDataList object in the Flash tree.
+ */
+public final class FlashMetaDataListNode extends FlashTreeNode<MetaDataList> {
 
-	public FlashMetaDataListNode(final String name, final MetaDataList encodedList) {
-		super(name, encodedList);
+	/**
+	 * Creates a new node object
+	 * 
+	 * @param name Name of the node.
+	 * @param value Flash structure represented by the node.
+	 */
+	public FlashMetaDataListNode(final String name, final MetaDataList value) {
+		super(name, value);
 
 		createChildren();
 	}
 
+	/**
+	 * Creates the child nodes of the node.
+	 */
 	private void createChildren() {
 
 		int counter = 0;

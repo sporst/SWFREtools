@@ -2,14 +2,26 @@ package tv.porst.swfretools.dissector.gui.main.flashtree.nodes;
 
 import tv.porst.swfretools.parser.structures.MorphLineStyleArray2;
 
-public class FlashMorphLineStyle2ArrayNode extends FlashTreeNode<MorphLineStyleArray2> {
+/**
+ * Node that represents a MorphLineStyle2Array object in the Flash tree.
+ */
+public final class FlashMorphLineStyle2ArrayNode extends FlashTreeNode<MorphLineStyleArray2> {
 
-	public FlashMorphLineStyle2ArrayNode(final String name, final MorphLineStyleArray2 lineStyleArray) {
-		super(name, lineStyleArray);
+	/**
+	 * Creates a new node object
+	 * 
+	 * @param name Name of the node.
+	 * @param value Flash structure represented by the node.
+	 */
+	public FlashMorphLineStyle2ArrayNode(final String name, final MorphLineStyleArray2 value) {
+		super(name, value);
 
 		createChildren();
 	}
 
+	/**
+	 * Creates the child nodes of the node.
+	 */
 	private void createChildren() {
 		addNode("LineStyleCount", getUserObject().getLineStyleCount());
 		addNode("LineStyleCountExtended", getUserObject().getLineStyleCountExtended());

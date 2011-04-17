@@ -3,14 +3,26 @@ package tv.porst.swfretools.dissector.gui.main.flashtree.nodes;
 import tv.porst.swfretools.parser.structures.Shape3Record;
 import tv.porst.swfretools.parser.structures.Shape3RecordList;
 
-public class FlashShapeRecord3ListNode extends FlashTreeNode<Shape3RecordList> {
+/**
+ * Node that represents a ShapeRecord3List object in the Flash tree.
+ */
+public final class FlashShapeRecord3ListNode extends FlashTreeNode<Shape3RecordList> {
 
-	public FlashShapeRecord3ListNode(final String name, final Shape3RecordList shapeRecordList) {
-		super(name, shapeRecordList);
+	/**
+	 * Creates a new node object
+	 * 
+	 * @param name Name of the node.
+	 * @param value Flash structure represented by the node.
+	 */
+	public FlashShapeRecord3ListNode(final String name, final Shape3RecordList value) {
+		super(name, value);
 
 		createChildren();
 	}
 
+	/**
+	 * Creates the child nodes of the node.
+	 */
 	private void createChildren() {
 
 		int counter = 0;

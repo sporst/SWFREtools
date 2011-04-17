@@ -2,10 +2,19 @@ package tv.porst.swfretools.dissector.gui.main.flashtree.nodes;
 
 import tv.porst.splib.binaryparser.AsciiString;
 
-public class FlashAsciiStringNode extends FlashTreeNode<AsciiString> {
+/**
+ * Node that represents an ASCII string object in the Flash tree.
+ */
+public final class FlashAsciiStringNode extends FlashTreeNode<AsciiString> {
 
-	public FlashAsciiStringNode(final String name, final AsciiString string) {
-		super(name, string);
+	/**
+	 * Creates a new node object
+	 * 
+	 * @param name Name of the node.
+	 * @param value Flash structure represented by the node.
+	 */
+	public FlashAsciiStringNode(final String name, final AsciiString value) {
+		super(name, value);
 	}
 
 	@Override

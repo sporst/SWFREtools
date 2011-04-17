@@ -2,14 +2,26 @@ package tv.porst.swfretools.dissector.gui.main.flashtree.nodes;
 
 import tv.porst.swfretools.parser.structures.DropShadowFilter;
 
-public class FlashDropShadowFilterNode extends FlashTreeNode<DropShadowFilter> {
+/**
+ * Node that represents a DropShadowFilter object in the Flash tree.
+ */
+public final class FlashDropShadowFilterNode extends FlashTreeNode<DropShadowFilter> {
 
-	public FlashDropShadowFilterNode(final String name, final DropShadowFilter filter) {
-		super(name, filter);
+	/**
+	 * Creates a new node object
+	 * 
+	 * @param name Name of the node.
+	 * @param value Flash structure represented by the node.
+	 */
+	public FlashDropShadowFilterNode(final String name, final DropShadowFilter value) {
+		super(name, value);
 
 		createChildren();
 	}
 
+	/**
+	 * Creates the child nodes of the node.
+	 */
 	private void createChildren() {
 		addNode("DropShadowColor", getUserObject().getDropShadowColor());
 		addNode("BlurX", getUserObject().getBlurX());

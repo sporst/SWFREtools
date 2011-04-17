@@ -11,22 +11,59 @@ import tv.porst.swfretools.parser.tags.DoABCTag;
  */
 public final class AS3CodePrinter {
 
+	/**
+	 * Adds a simple one-mnemonic instruction to the output.
+	 * 
+	 * @param sb The string builder the output is appended to.
+	 * @param mnemonic The instruction mnemonic.
+	 */
 	private static void add(final StringBuilder sb, final String mnemonic) {
 		sb.append(mnemonic);
 	}
 
+	/**
+	 * Adds an instruction with one argument to the output.
+	 * 
+	 * @param sb The string builder the output is appended to.
+	 * @param mnemonic The instruction mnemonic.
+	 * @param value The instruction argument value.
+	 */
 	private static void add(final StringBuilder sb, final String mnemonic, final long value) {
 		sb.append(String.format("%s %d", mnemonic, value));
 	}
 
+	/**
+	 * Adds an instruction with two arguments to the output.
+	 * 
+	 * @param sb The string builder the output is appended to.
+	 * @param mnemonic The instruction mnemonic.
+	 * @param value1 The first instruction argument value.
+	 * @param value2 The second instruction argument value.
+	 */
 	private static void add(final StringBuilder sb, final String mnemonic, final long value1, final long value2) {
 		sb.append(String.format("%s %d, %d", mnemonic, value1, value2));
 	}
 
+	/**
+	 * Adds an instruction with four arguments to the output.
+	 * 
+	 * @param sb The string builder the output is appended to.
+	 * @param mnemonic The instruction mnemonic.
+	 * @param value1 The first instruction argument value.
+	 * @param value2 The second instruction argument value.
+	 * @param value3 The third instruction argument value.
+	 * @param value4 The fourth instruction argument value.
+	 */
 	private static void add(final StringBuilder sb, final String mnemonic, final long value1, final long value2, final long  value3, final long value4) {
 		sb.append(String.format("%s %d, %d, %d, %d", mnemonic, value1, value2, value3, value4));
 	}
 
+	/**
+	 * Adds an instruction to the output.
+	 * 
+	 * @param sb The string builder the output is appended to.
+	 * @param instruction The instruction to add to the output.
+	 */
 	private static void addInstructionText(final StringBuilder sb, final AS3Instruction instruction) {
 
 		new AS3Visitor() {
@@ -750,6 +787,13 @@ public final class AS3CodePrinter {
 		}.visit(instruction);
 	}
 
+	/**
+	 * Generates a printable string that represents the given ActionScript 3 code.
+	 * 
+	 * @param code The ActionScript 3 code to turn into a string.
+	 * 
+	 * @return The generated ActionScript 3 code string.
+	 */
 	public static String getCodeText(final AS3Code code) {
 
 		if (code.getInstructions().size() == 0) {
@@ -776,6 +820,14 @@ public final class AS3CodePrinter {
 		return sb.toString();
 	}
 
+	/**
+	 * Generates a printable string that represents all code in a given
+	 * DoABC tag.
+	 * 
+	 * @param tag The tag that contains the ActionScript 3 code.
+	 * 
+	 * @return The generated ActionScript 3 code string.
+	 */
 	public static String getCodeText(final DoABCTag tag) {
 		final StringBuilder sb = new StringBuilder();
 

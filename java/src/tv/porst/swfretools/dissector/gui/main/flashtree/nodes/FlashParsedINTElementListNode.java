@@ -3,14 +3,26 @@ package tv.porst.swfretools.dissector.gui.main.flashtree.nodes;
 import tv.porst.splib.binaryparser.IParsedINTElement;
 import tv.porst.swfretools.parser.structures.ParsedINTElementList;
 
-public class FlashParsedINTElementListNode extends FlashTreeNode<ParsedINTElementList> {
+/**
+ * Node that represents a INTElementList object in the Flash tree.
+ */
+public final class FlashParsedINTElementListNode extends FlashTreeNode<ParsedINTElementList> {
 
-	public FlashParsedINTElementListNode(final String name, final ParsedINTElementList list) {
-		super(name, list);
+	/**
+	 * Creates a new node object
+	 * 
+	 * @param name Name of the node.
+	 * @param value Flash structure represented by the node.
+	 */
+	public FlashParsedINTElementListNode(final String name, final ParsedINTElementList value) {
+		super(name, value);
 
 		createChildren();
 	}
 
+	/**
+	 * Creates the child nodes of the node.
+	 */
 	private void createChildren() {
 
 		int counter = 0;

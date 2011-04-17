@@ -2,14 +2,26 @@ package tv.porst.swfretools.dissector.gui.main.flashtree.nodes;
 
 import tv.porst.swfretools.parser.structures.OptionDetail;
 
-public class FlashOptionDetailNode extends FlashTreeNode<OptionDetail> {
+/**
+ * Node that represents a OptionDetail object in the Flash tree.
+ */
+public final class FlashOptionDetailNode extends FlashTreeNode<OptionDetail> {
 
-	public FlashOptionDetailNode(final String name, final OptionDetail optionDetail) {
-		super(name, optionDetail);
+	/**
+	 * Creates a new node object
+	 * 
+	 * @param name Name of the node.
+	 * @param value Flash structure represented by the node.
+	 */
+	public FlashOptionDetailNode(final String name, final OptionDetail value) {
+		super(name, value);
 
 		createChildren();
 	}
 
+	/**
+	 * Creates the child nodes of the node.
+	 */
 	private void createChildren() {
 		addNode("Val", getUserObject().getVal());
 		addNode("Kind", getUserObject().getKind());

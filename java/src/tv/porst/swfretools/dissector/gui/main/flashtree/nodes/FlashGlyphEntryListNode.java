@@ -3,14 +3,26 @@ package tv.porst.swfretools.dissector.gui.main.flashtree.nodes;
 import tv.porst.swfretools.parser.structures.GlyphEntry;
 import tv.porst.swfretools.parser.structures.GlyphEntryList;
 
-public class FlashGlyphEntryListNode extends FlashTreeNode<GlyphEntryList> {
+/**
+ * Node that represents a GlyphEntryList object in the Flash tree.
+ */
+public final class FlashGlyphEntryListNode extends FlashTreeNode<GlyphEntryList> {
 
-	public FlashGlyphEntryListNode(final String name, final GlyphEntryList glyphEntryList) {
-		super(name, glyphEntryList);
+	/**
+	 * Creates a new node object
+	 * 
+	 * @param name Name of the node.
+	 * @param value Flash structure represented by the node.
+	 */
+	public FlashGlyphEntryListNode(final String name, final GlyphEntryList value) {
+		super(name, value);
 
 		createChildren();
 	}
 
+	/**
+	 * Creates the child nodes of the node.
+	 */
 	private void createChildren() {
 
 		int counter = 0;
@@ -27,5 +39,4 @@ public class FlashGlyphEntryListNode extends FlashTreeNode<GlyphEntryList> {
 	public String toString() {
 		return String.format("%s : GlyphEntryList", getName());
 	}
-
 }

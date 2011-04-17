@@ -3,14 +3,26 @@ package tv.porst.swfretools.dissector.gui.main.flashtree.nodes;
 import tv.porst.swfretools.parser.structures.FrameLabel;
 import tv.porst.swfretools.parser.structures.FrameLabelList;
 
-public class FlashFrameLabelListNode extends FlashTreeNode<FrameLabelList> {
+/**
+ * Node that represents a FrameLabelList object in the Flash tree.
+ */
+public final class FlashFrameLabelListNode extends FlashTreeNode<FrameLabelList> {
 
-	public FlashFrameLabelListNode(final String name, final FrameLabelList list) {
-		super(name, list);
+	/**
+	 * Creates a new node object
+	 * 
+	 * @param name Name of the node.
+	 * @param value Flash structure represented by the node.
+	 */
+	public FlashFrameLabelListNode(final String name, final FrameLabelList value) {
+		super(name, value);
 
 		createChildren();
 	}
 
+	/**
+	 * Creates the child nodes of the node.
+	 */
 	private void createChildren() {
 
 		int counter = 0;

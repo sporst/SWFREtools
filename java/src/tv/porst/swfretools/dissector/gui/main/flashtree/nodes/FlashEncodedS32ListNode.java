@@ -3,14 +3,26 @@ package tv.porst.swfretools.dissector.gui.main.flashtree.nodes;
 import tv.porst.swfretools.parser.structures.EncodedS32;
 import tv.porst.swfretools.parser.structures.EncodedS32List;
 
-public class FlashEncodedS32ListNode extends FlashTreeNode<EncodedS32List> {
+/**
+ * Node that represents an s32List object in the Flash tree.
+ */
+public final class FlashEncodedS32ListNode extends FlashTreeNode<EncodedS32List> {
 
-	public FlashEncodedS32ListNode(final String name, final EncodedS32List encodedList) {
-		super(name, encodedList);
+	/**
+	 * Creates a new node object
+	 * 
+	 * @param name Name of the node.
+	 * @param value Flash structure represented by the node.
+	 */
+	public FlashEncodedS32ListNode(final String name, final EncodedS32List value) {
+		super(name, value);
 
 		createChildren();
 	}
 
+	/**
+	 * Creates the child nodes of the node.
+	 */
 	private void createChildren() {
 
 		int counter = 0;

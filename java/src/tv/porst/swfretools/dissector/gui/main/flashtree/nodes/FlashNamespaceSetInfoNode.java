@@ -2,14 +2,26 @@ package tv.porst.swfretools.dissector.gui.main.flashtree.nodes;
 
 import tv.porst.swfretools.parser.structures.NamespaceSetInfo;
 
-public class FlashNamespaceSetInfoNode extends FlashTreeNode<NamespaceSetInfo> {
+/**
+ * Node that represents a NamespaceSetInfo object in the Flash tree.
+ */
+public final class FlashNamespaceSetInfoNode extends FlashTreeNode<NamespaceSetInfo> {
 
-	public FlashNamespaceSetInfoNode(final String name, final NamespaceSetInfo namespaceSetInfo) {
-		super(name, namespaceSetInfo);
+	/**
+	 * Creates a new node object
+	 * 
+	 * @param name Name of the node.
+	 * @param value Flash structure represented by the node.
+	 */
+	public FlashNamespaceSetInfoNode(final String name, final NamespaceSetInfo value) {
+		super(name, value);
 
 		createChildren();
 	}
 
+	/**
+	 * Creates the child nodes of the node.
+	 */
 	private void createChildren() {
 		addNode("Count", getUserObject().getCount());
 		addNode("Namespaces", getUserObject().getNamespaces());

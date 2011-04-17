@@ -2,14 +2,26 @@ package tv.porst.swfretools.dissector.gui.main.flashtree.nodes;
 
 import tv.porst.swfretools.parser.structures.LineStyle3Array;
 
-public class FlashLineStyle3ArrayNode extends FlashTreeNode<LineStyle3Array> {
+/**
+ * Node that represents a LineStyle3Array object in the Flash tree.
+ */
+public final class FlashLineStyle3ArrayNode extends FlashTreeNode<LineStyle3Array> {
 
-	public FlashLineStyle3ArrayNode(final String name, final LineStyle3Array lineStyleArray) {
-		super(name, lineStyleArray);
+	/**
+	 * Creates a new node object
+	 * 
+	 * @param name Name of the node.
+	 * @param value Flash structure represented by the node.
+	 */
+	public FlashLineStyle3ArrayNode(final String name, final LineStyle3Array value) {
+		super(name, value);
 
 		createChildren();
 	}
 
+	/**
+	 * Creates the child nodes of the node.
+	 */
 	private void createChildren() {
 		addNode("LineStyleCount", getUserObject().getLineStyleCount());
 		addNode("LineStyleCountExtended", getUserObject().getLineStyleCountExtended());

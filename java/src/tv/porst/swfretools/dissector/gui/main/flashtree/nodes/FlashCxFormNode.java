@@ -2,14 +2,26 @@ package tv.porst.swfretools.dissector.gui.main.flashtree.nodes;
 
 import tv.porst.swfretools.parser.structures.CxForm;
 
-public class FlashCxFormNode extends FlashTreeNode<CxForm> {
+/**
+ * Node that represents a CxForm object in the Flash tree.
+ */
+public final class FlashCxFormNode extends FlashTreeNode<CxForm> {
 
-	public FlashCxFormNode(final String name, final CxForm cxForm) {
-		super(name, cxForm);
+	/**
+	 * Creates a new node object
+	 * 
+	 * @param name Name of the node.
+	 * @param value Flash structure represented by the node.
+	 */
+	public FlashCxFormNode(final String name, final CxForm value) {
+		super(name, value);
 
 		createChildren();
 	}
 
+	/**
+	 * Creates the child nodes of the node.
+	 */
 	private void createChildren() {
 		addNode("HasAddTerms", getUserObject().getHasAddTerms());
 		addNode("HasMultTerms", getUserObject().getHasMultTerms());

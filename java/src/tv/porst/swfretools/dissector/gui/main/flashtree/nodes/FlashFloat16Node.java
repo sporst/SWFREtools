@@ -2,10 +2,19 @@ package tv.porst.swfretools.dissector.gui.main.flashtree.nodes;
 
 import tv.porst.splib.binaryparser.Float16;
 
-public class FlashFloat16Node extends FlashTreeNode<Float16> {
+/**
+ * Node that represents a Float16 object in the Flash tree.
+ */
+public final class FlashFloat16Node extends FlashTreeNode<Float16> {
 
-	public FlashFloat16Node(final String name, final Float16 userObject) {
-		super(name, userObject);
+	/**
+	 * Creates a new node object
+	 * 
+	 * @param name Name of the node.
+	 * @param value Flash structure represented by the node.
+	 */
+	public FlashFloat16Node(final String name, final Float16 value) {
+		super(name, value);
 	}
 
 	@Override

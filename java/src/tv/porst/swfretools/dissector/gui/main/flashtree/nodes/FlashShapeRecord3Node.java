@@ -6,8 +6,18 @@ import tv.porst.swfretools.parser.structures.Shape3Record;
 import tv.porst.swfretools.parser.structures.StraightEdgeRecord;
 import tv.porst.swfretools.parser.structures.StyleChangeRecord3;
 
-public class FlashShapeRecord3Node extends FlashTreeNode<Shape3Record> {
+/**
+ * Node that represents a ShapeRecord3 object in the Flash tree.
+ */
+public final class FlashShapeRecord3Node extends FlashTreeNode<Shape3Record> {
 
+	/**
+	 * Returns the exact shape name for a given shape record.
+	 * 
+	 * @param shapeRecord The shape record.
+	 * 
+	 * @return The shape name of the shape record.
+	 */
 	private static String getShapeName(final Shape3Record shapeRecord) {
 
 		if (shapeRecord instanceof CurvedEdgeRecord) {
@@ -27,12 +37,21 @@ public class FlashShapeRecord3Node extends FlashTreeNode<Shape3Record> {
 		}
 	}
 
-	public FlashShapeRecord3Node(final String name, final Shape3Record shapeRecord) {
-		super(name, shapeRecord);
+	/**
+	 * Creates a new node object
+	 * 
+	 * @param name Name of the node.
+	 * @param value Flash structure represented by the node.
+	 */
+	public FlashShapeRecord3Node(final String name, final Shape3Record value) {
+		super(name, value);
 
 		createChildren();
 	}
 
+	/**
+	 * Creates the child nodes of the node.
+	 */
 	private void createChildren() {
 		final Shape3Record shapeRecord = getUserObject();
 

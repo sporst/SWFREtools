@@ -3,14 +3,26 @@ package tv.porst.swfretools.dissector.gui.main.flashtree.nodes;
 import tv.porst.swfretools.parser.structures.StringInfo;
 import tv.porst.swfretools.parser.structures.StringInfoList;
 
-public class FlashStringInfoListNode extends FlashTreeNode<StringInfoList> {
+/**
+ * Node that represents a StringInfoList object in the Flash tree.
+ */
+public final class FlashStringInfoListNode extends FlashTreeNode<StringInfoList> {
 
-	public FlashStringInfoListNode(final String name, final StringInfoList encodedList) {
-		super(name, encodedList);
+	/**
+	 * Creates a new node object
+	 * 
+	 * @param name Name of the node.
+	 * @param value Flash structure represented by the node.
+	 */
+	public FlashStringInfoListNode(final String name, final StringInfoList value) {
+		super(name, value);
 
 		createChildren();
 	}
 
+	/**
+	 * Creates the child nodes of the node.
+	 */
 	private void createChildren() {
 
 		int counter = 0;

@@ -2,10 +2,19 @@ package tv.porst.swfretools.dissector.gui.main.flashtree.nodes;
 
 import tv.porst.splib.binaryparser.Bits;
 
-public class FlashBitsNode extends FlashTreeNode<Bits> {
+/**
+ * Node that represents a Bits object in the Flash tree.
+ */
+public final class FlashBitsNode extends FlashTreeNode<Bits> {
 
-	public FlashBitsNode(final String name, final Bits bits) {
-		super(name, bits);
+	/**
+	 * Creates a new node object
+	 * 
+	 * @param name Name of the node.
+	 * @param value Flash structure represented by the node.
+	 */
+	public FlashBitsNode(final String name, final Bits value) {
+		super(name, value);
 	}
 
 	@Override

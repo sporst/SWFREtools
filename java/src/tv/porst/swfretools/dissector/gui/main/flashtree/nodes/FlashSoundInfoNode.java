@@ -2,14 +2,26 @@ package tv.porst.swfretools.dissector.gui.main.flashtree.nodes;
 
 import tv.porst.swfretools.parser.structures.SoundInfo;
 
-public class FlashSoundInfoNode extends FlashTreeNode<SoundInfo> {
+/**
+ * Node that represents a FlashSoundInfo object in the Flash tree.
+ */
+public final class FlashSoundInfoNode extends FlashTreeNode<SoundInfo> {
 
-	public FlashSoundInfoNode(final String name, final SoundInfo soundInfo) {
-		super(name, soundInfo);
+	/**
+	 * Creates a new node object
+	 * 
+	 * @param name Name of the node.
+	 * @param value Flash structure represented by the node.
+	 */
+	public FlashSoundInfoNode(final String name, final SoundInfo value) {
+		super(name, value);
 
 		createChildren();
 	}
 
+	/**
+	 * Creates the child nodes of the node.
+	 */
 	private void createChildren() {
 		addNode("Reserved", getUserObject().getReserved());
 		addNode("SyncStop", getUserObject().getSyncStop());

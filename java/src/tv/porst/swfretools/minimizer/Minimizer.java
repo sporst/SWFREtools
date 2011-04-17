@@ -7,7 +7,7 @@ import java.util.Collections;
 import java.util.List;
 
 import tv.porst.splib.arrays.ArrayHelpers;
-import tv.porst.splib.io.FileHelpers;
+import tv.porst.splib.file.FileHelpers;
 import tv.porst.swfretools.parser.SWFParser;
 import tv.porst.swfretools.parser.SWFParserException;
 import tv.porst.swfretools.parser.actions.as3.AS3InstructionList;

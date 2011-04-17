@@ -11,8 +11,16 @@ import tv.porst.splib.gui.GuiHelpers;
 import tv.porst.swfretools.parser.structures.AS3Code;
 import tv.porst.swfretools.parser.tags.DoABCTag;
 
-public class AS3CodePanel extends JPanel {
+/**
+ * Panel to display ActionScript 3 code.
+ */
+public final class AS3CodePanel extends JPanel {
 
+	/**
+	 * Creates a new panel object.
+	 * 
+	 * @param code The code to display in the panel.
+	 */
 	public AS3CodePanel(final AS3Code code) {
 		super(new BorderLayout());
 
@@ -23,6 +31,11 @@ public class AS3CodePanel extends JPanel {
 		add(new JScrollPane(area));
 	}
 
+	/**
+	 * Creates a new panel object.
+	 * 
+	 * @param tag The tag that contains the code to display.
+	 */
 	public AS3CodePanel(final DoABCTag tag) {
 		super(new BorderLayout());
 
@@ -32,5 +45,4 @@ public class AS3CodePanel extends JPanel {
 
 		add(new JScrollPane(area));
 	}
-
 }

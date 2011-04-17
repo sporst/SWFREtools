@@ -2,14 +2,26 @@ package tv.porst.swfretools.dissector.gui.main.flashtree.nodes;
 
 import tv.porst.swfretools.parser.structures.ClipActions;
 
-public class FlashClipActionsNode extends FlashTreeNode<ClipActions> {
+/**
+ * Node that represents a ClipActions object in the Flash tree.
+ */
+public final class FlashClipActionsNode extends FlashTreeNode<ClipActions> {
 
-	public FlashClipActionsNode(final String name, final ClipActions clipActions) {
-		super(name, clipActions);
+	/**
+	 * Creates a new node object
+	 * 
+	 * @param name Name of the node.
+	 * @param value Flash structure represented by the node.
+	 */
+	public FlashClipActionsNode(final String name, final ClipActions value) {
+		super(name, value);
 
 		createChildren();
 	}
 
+	/**
+	 * Creates the child nodes of the node.
+	 */
 	private void createChildren() {
 		addNode("Ratio", getUserObject().getReserved());
 		addNode("AllEventFlags", getUserObject().getAllEventFlags());

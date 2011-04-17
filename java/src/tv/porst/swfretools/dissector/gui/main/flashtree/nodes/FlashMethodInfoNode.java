@@ -2,14 +2,26 @@ package tv.porst.swfretools.dissector.gui.main.flashtree.nodes;
 
 import tv.porst.swfretools.parser.structures.MethodInfo;
 
-public class FlashMethodInfoNode extends FlashTreeNode<MethodInfo> {
+/**
+ * Node that represents a MethodInfo object in the Flash tree.
+ */
+public final class FlashMethodInfoNode extends FlashTreeNode<MethodInfo> {
 
-	public FlashMethodInfoNode(final String name, final MethodInfo methodInfo) {
-		super(name, methodInfo);
+	/**
+	 * Creates a new node object
+	 * 
+	 * @param name Name of the node.
+	 * @param value Flash structure represented by the node.
+	 */
+	public FlashMethodInfoNode(final String name, final MethodInfo value) {
+		super(name, value);
 
 		createChildren();
 	}
 
+	/**
+	 * Creates the child nodes of the node.
+	 */
 	private void createChildren() {
 		addNode("param_count", getUserObject().getParamCount());
 		addNode("return_type", getUserObject().getReturnType());

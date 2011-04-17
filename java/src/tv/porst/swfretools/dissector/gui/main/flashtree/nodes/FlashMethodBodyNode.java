@@ -2,14 +2,26 @@ package tv.porst.swfretools.dissector.gui.main.flashtree.nodes;
 
 import tv.porst.swfretools.parser.structures.MethodBody;
 
-public class FlashMethodBodyNode extends FlashTreeNode<MethodBody> {
+/**
+ * Node that represents a MethodBody object in the Flash tree.
+ */
+public final class FlashMethodBodyNode extends FlashTreeNode<MethodBody> {
 
-	public FlashMethodBodyNode(final String name, final MethodBody methodBody) {
-		super(name, methodBody);
+	/**
+	 * Creates a new node object
+	 * 
+	 * @param name Name of the node.
+	 * @param value Flash structure represented by the node.
+	 */
+	public FlashMethodBodyNode(final String name, final MethodBody value) {
+		super(name, value);
 
 		createChildren();
 	}
 
+	/**
+	 * Creates the child nodes of the node.
+	 */
 	private void createChildren() {
 		addNode("method", getUserObject().getMethod());
 		addNode("max_stack", getUserObject().getMaxStack());

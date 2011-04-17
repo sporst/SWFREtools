@@ -2,10 +2,19 @@ package tv.porst.swfretools.dissector.gui.main.flashtree.nodes;
 
 import tv.porst.swfretools.parser.structures.ByteArray;
 
-public class FlashByteArrayNode extends FlashTreeNode<ByteArray> {
+/**
+ * Node that represents a ByteArray object in the Flash tree.
+ */
+public final class FlashByteArrayNode extends FlashTreeNode<ByteArray> {
 
-	public FlashByteArrayNode(final String name, final ByteArray userObject) {
-		super(name, userObject);
+	/**
+	 * Creates a new node object
+	 * 
+	 * @param name Name of the node.
+	 * @param value Flash structure represented by the node.
+	 */
+	public FlashByteArrayNode(final String name, final ByteArray value) {
+		super(name, value);
 	}
 
 	@Override

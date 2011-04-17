@@ -3,14 +3,26 @@ package tv.porst.swfretools.dissector.gui.main.flashtree.nodes;
 import tv.porst.swfretools.parser.structures.Symbol;
 import tv.porst.swfretools.parser.structures.SymbolList;
 
-public class FlashSymbolListNode extends FlashTreeNode<SymbolList> {
+/**
+ * Node that represents a SymbolList object in the Flash tree.
+ */
+public final class FlashSymbolListNode extends FlashTreeNode<SymbolList> {
 
-	public FlashSymbolListNode(final String name, final SymbolList symbolList) {
-		super(name, symbolList);
+	/**
+	 * Creates a new node object
+	 * 
+	 * @param name Name of the node.
+	 * @param value Flash structure represented by the node.
+	 */
+	public FlashSymbolListNode(final String name, final SymbolList value) {
+		super(name, value);
 
 		createChildren();
 	}
 
+	/**
+	 * Creates the child nodes of the node.
+	 */
 	private void createChildren() {
 
 		int counter = 0;
@@ -27,5 +39,4 @@ public class FlashSymbolListNode extends FlashTreeNode<SymbolList> {
 	public String toString() {
 		return String.format("%s : SymbolList", getName());
 	}
-
 }

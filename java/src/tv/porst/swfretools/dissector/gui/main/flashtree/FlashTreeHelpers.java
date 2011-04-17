@@ -54,7 +54,7 @@ public final class FlashTreeHelpers {
 	public static LoadedFile getLoadedFile(final FlashTreeNode<?> node) {
 
 		if (node instanceof FlashFileNode) {
-			return ((FlashFileNode) node).getFile();
+			return ((FlashFileNode) node).getUserObject().getLoadedFile();
 		}
 
 		return getLoadedFile((FlashTreeNode<?>) node.getParent());

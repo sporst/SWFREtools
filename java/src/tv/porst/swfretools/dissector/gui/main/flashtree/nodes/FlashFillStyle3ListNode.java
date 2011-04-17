@@ -3,14 +3,26 @@ package tv.porst.swfretools.dissector.gui.main.flashtree.nodes;
 import tv.porst.swfretools.parser.structures.FillStyle3;
 import tv.porst.swfretools.parser.structures.FillStyle3List;
 
-public class FlashFillStyle3ListNode extends FlashTreeNode<FillStyle3List> {
+/**
+ * Node that represents a FillStyle3List object in the Flash tree.
+ */
+public final class FlashFillStyle3ListNode extends FlashTreeNode<FillStyle3List> {
 
-	public FlashFillStyle3ListNode(final String name, final FillStyle3List fillStyleList) {
-		super(name, fillStyleList);
+	/**
+	 * Creates a new node object
+	 * 
+	 * @param name Name of the node.
+	 * @param value Flash structure represented by the node.
+	 */
+	public FlashFillStyle3ListNode(final String name, final FillStyle3List value) {
+		super(name, value);
 
 		createChildren();
 	}
 
+	/**
+	 * Creates the child nodes of the node.
+	 */
 	private void createChildren() {
 
 		int counter = 0;

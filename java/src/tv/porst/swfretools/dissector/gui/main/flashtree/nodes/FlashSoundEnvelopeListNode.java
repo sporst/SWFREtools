@@ -3,14 +3,26 @@ package tv.porst.swfretools.dissector.gui.main.flashtree.nodes;
 import tv.porst.swfretools.parser.structures.SoundEnvelope;
 import tv.porst.swfretools.parser.structures.SoundEnvelopeList;
 
-public class FlashSoundEnvelopeListNode extends FlashTreeNode<SoundEnvelopeList> {
+/**
+ * Node that represents a SoundEnvelopeList object in the Flash tree.
+ */
+public final class FlashSoundEnvelopeListNode extends FlashTreeNode<SoundEnvelopeList> {
 
-	public FlashSoundEnvelopeListNode(final String name, final SoundEnvelopeList soundEnvelopeList) {
-		super(name, soundEnvelopeList);
+	/**
+	 * Creates a new node object
+	 * 
+	 * @param name Name of the node.
+	 * @param value Flash structure represented by the node.
+	 */
+	public FlashSoundEnvelopeListNode(final String name, final SoundEnvelopeList value) {
+		super(name, value);
 
 		createChildren();
 	}
 
+	/**
+	 * Creates the child nodes of the node.
+	 */
 	private void createChildren() {
 
 		int counter = 0;

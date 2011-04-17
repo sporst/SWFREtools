@@ -2,14 +2,26 @@ package tv.porst.swfretools.dissector.gui.main.flashtree.nodes;
 
 import tv.porst.swfretools.parser.structures.ShapeWithStyle;
 
-public class FlashShapeWithStyleNode extends FlashTreeNode<ShapeWithStyle> {
+/**
+ * Node that represents a ShapeWithStyle object in the Flash tree.
+ */
+public final class FlashShapeWithStyleNode extends FlashTreeNode<ShapeWithStyle> {
 
-	public FlashShapeWithStyleNode(final String name, final ShapeWithStyle shapeWithStyle) {
-		super(name, shapeWithStyle);
+	/**
+	 * Creates a new node object
+	 * 
+	 * @param name Name of the node.
+	 * @param value Flash structure represented by the node.
+	 */
+	public FlashShapeWithStyleNode(final String name, final ShapeWithStyle value) {
+		super(name, value);
 
 		createChildren();
 	}
 
+	/**
+	 * Creates the child nodes of the node.
+	 */
 	private void createChildren() {
 		addNode("FillStyles", getUserObject().getFillStyles());
 		addNode("LineStyles", getUserObject().getLineStyles());

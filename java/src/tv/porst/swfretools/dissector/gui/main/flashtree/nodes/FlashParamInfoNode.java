@@ -2,14 +2,26 @@ package tv.porst.swfretools.dissector.gui.main.flashtree.nodes;
 
 import tv.porst.swfretools.parser.structures.ParamInfo;
 
-public class FlashParamInfoNode extends FlashTreeNode<ParamInfo> {
+/**
+ * Node that represents a ParamInfo object in the Flash tree.
+ */
+public final class FlashParamInfoNode extends FlashTreeNode<ParamInfo> {
 
-	public FlashParamInfoNode(final String name, final ParamInfo paramInfo) {
-		super(name, paramInfo);
+	/**
+	 * Creates a new node object
+	 * 
+	 * @param name Name of the node.
+	 * @param value Flash structure represented by the node.
+	 */
+	public FlashParamInfoNode(final String name, final ParamInfo value) {
+		super(name, value);
 
 		createChildren();
 	}
 
+	/**
+	 * Creates the child nodes of the node.
+	 */
 	private void createChildren() {
 		addNode("param_names", getUserObject().getParamNames());
 	}

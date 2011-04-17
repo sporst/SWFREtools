@@ -2,14 +2,26 @@ package tv.porst.swfretools.dissector.gui.main.flashtree.nodes;
 
 import tv.porst.swfretools.parser.structures.MorphFillStyle;
 
-public class FlashMorphFillStyleNode extends FlashTreeNode<MorphFillStyle> {
+/**
+ * Node that represents a MorphFillStyle object in the Flash tree.
+ */
+public final class FlashMorphFillStyleNode extends FlashTreeNode<MorphFillStyle> {
 
-	public FlashMorphFillStyleNode(final String name, final MorphFillStyle fillStyle) {
-		super(name, fillStyle);
+	/**
+	 * Creates a new node object
+	 * 
+	 * @param name Name of the node.
+	 * @param value Flash structure represented by the node.
+	 */
+	public FlashMorphFillStyleNode(final String name, final MorphFillStyle value) {
+		super(name, value);
 
 		createChildren();
 	}
 
+	/**
+	 * Creates the child nodes of the node.
+	 */
 	private void createChildren() {
 		addNode("FillStyleType", getUserObject().getFillStyleType());
 		addNode("StartColor", getUserObject().getStartColor());

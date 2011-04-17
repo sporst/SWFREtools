@@ -2,10 +2,19 @@ package tv.porst.swfretools.dissector.gui.main.flashtree.nodes;
 
 import tv.porst.swfretools.parser.structures.Fixed;
 
-public class FlashFixedNode extends FlashTreeNode<Fixed> {
+/**
+ * Node that represents a FIXED object in the Flash tree.
+ */
+public final class FlashFixedNode extends FlashTreeNode<Fixed> {
 
-	public FlashFixedNode(final String name, final Fixed userObject) {
-		super(name, userObject);
+	/**
+	 * Creates a new node object
+	 * 
+	 * @param name Name of the node.
+	 * @param value Flash structure represented by the node.
+	 */
+	public FlashFixedNode(final String name, final Fixed value) {
+		super(name, value);
 	}
 
 	@Override

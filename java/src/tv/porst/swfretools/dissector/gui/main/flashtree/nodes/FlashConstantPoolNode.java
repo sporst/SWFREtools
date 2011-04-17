@@ -2,14 +2,26 @@ package tv.porst.swfretools.dissector.gui.main.flashtree.nodes;
 
 import tv.porst.swfretools.parser.structures.ConstantPool;
 
-public class FlashConstantPoolNode extends FlashTreeNode<ConstantPool> {
+/**
+ * Node that represents a ConstantPool object in the Flash tree.
+ */
+public final class FlashConstantPoolNode extends FlashTreeNode<ConstantPool> {
 
+	/**
+	 * Creates a new node object
+	 * 
+	 * @param name Name of the node.
+	 * @param value Flash structure represented by the node.
+	 */
 	public FlashConstantPoolNode(final String name, final ConstantPool value) {
 		super(name, value);
 
 		createChildren();
 	}
 
+	/**
+	 * Creates the child nodes of the node.
+	 */
 	private void createChildren() {
 		addNode("int_count", getUserObject().getIntCount());
 		addNode("integer", getUserObject().getIntegers());

@@ -2,14 +2,26 @@ package tv.porst.swfretools.dissector.gui.main.flashtree.nodes;
 
 import tv.porst.swfretools.parser.structures.ConvolutionFilter;
 
-public class FlashConvolutionFilterNode extends FlashTreeNode<ConvolutionFilter> {
+/**
+ * Node that represents a ConvolutionFilter object in the Flash tree.
+ */
+public final class FlashConvolutionFilterNode extends FlashTreeNode<ConvolutionFilter> {
 
-	public FlashConvolutionFilterNode(final String name, final ConvolutionFilter filter) {
-		super(name, filter);
+	/**
+	 * Creates a new node object
+	 * 
+	 * @param name Name of the node.
+	 * @param value Flash structure represented by the node.
+	 */
+	public FlashConvolutionFilterNode(final String name, final ConvolutionFilter value) {
+		super(name, value);
 
 		createChildren();
 	}
 
+	/**
+	 * Creates the child nodes of the node.
+	 */
 	private void createChildren() {
 		addNode("MatrixX", getUserObject().getMatrixX());
 		addNode("MatrixY", getUserObject().getMatrixY());

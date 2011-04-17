@@ -3,14 +3,26 @@ package tv.porst.swfretools.dissector.gui.main.flashtree.nodes;
 import tv.porst.swfretools.parser.structures.GradRecord3;
 import tv.porst.swfretools.parser.structures.GradRecord3List;
 
-public class FlashGradRecord3ListNode extends FlashTreeNode<GradRecord3List> {
+/**
+ * Node that represents a GradRecord3List object in the Flash tree.
+ */
+public final class FlashGradRecord3ListNode extends FlashTreeNode<GradRecord3List> {
 
-	public FlashGradRecord3ListNode(final String name, final GradRecord3List gradRecordList) {
-		super(name, gradRecordList);
+	/**
+	 * Creates a new node object
+	 * 
+	 * @param name Name of the node.
+	 * @param value Flash structure represented by the node.
+	 */
+	public FlashGradRecord3ListNode(final String name, final GradRecord3List value) {
+		super(name, value);
 
 		createChildren();
 	}
 
+	/**
+	 * Creates the child nodes of the node.
+	 */
 	private void createChildren() {
 
 		int counter = 0;

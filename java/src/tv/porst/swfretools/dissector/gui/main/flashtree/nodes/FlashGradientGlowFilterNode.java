@@ -2,14 +2,26 @@ package tv.porst.swfretools.dissector.gui.main.flashtree.nodes;
 
 import tv.porst.swfretools.parser.structures.GradientGlowFilter;
 
-public class FlashGradientGlowFilterNode extends FlashTreeNode<GradientGlowFilter> {
+/**
+ * Node that represents a GradientGlowFilter object in the Flash tree.
+ */
+public final class FlashGradientGlowFilterNode extends FlashTreeNode<GradientGlowFilter> {
 
-	public FlashGradientGlowFilterNode(final String name, final GradientGlowFilter filter) {
-		super(name, filter);
+	/**
+	 * Creates a new node object
+	 * 
+	 * @param name Name of the node.
+	 * @param value Flash structure represented by the node.
+	 */
+	public FlashGradientGlowFilterNode(final String name, final GradientGlowFilter value) {
+		super(name, value);
 
 		createChildren();
 	}
 
+	/**
+	 * Creates the child nodes of the node.
+	 */
 	private void createChildren() {
 		addNode("NumColors", getUserObject().getNumColors());
 		addNode("GradientColors", getUserObject().getGradientColors());

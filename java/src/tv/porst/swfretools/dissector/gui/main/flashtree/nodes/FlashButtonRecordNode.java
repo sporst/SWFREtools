@@ -2,14 +2,26 @@ package tv.porst.swfretools.dissector.gui.main.flashtree.nodes;
 
 import tv.porst.swfretools.parser.structures.ButtonRecord;
 
-public class FlashButtonRecordNode extends FlashTreeNode<ButtonRecord> {
+/**
+ * Node that represents a ButtonRecord object in the Flash tree.
+ */
+public final class FlashButtonRecordNode extends FlashTreeNode<ButtonRecord> {
 
-	public FlashButtonRecordNode(final String name, final ButtonRecord buttonRecord) {
-		super(name, buttonRecord);
+	/**
+	 * Creates a new node object
+	 * 
+	 * @param name Name of the node.
+	 * @param value Flash structure represented by the node.
+	 */
+	public FlashButtonRecordNode(final String name, final ButtonRecord value) {
+		super(name, value);
 
 		createChildren();
 	}
 
+	/**
+	 * Creates the child nodes of the node.
+	 */
 	private void createChildren() {
 		addNode("ButtonReserved", getUserObject().getButtonReserved());
 		addNode("ButtonHasBlendMode", getUserObject().getButtonHasBlendMode());

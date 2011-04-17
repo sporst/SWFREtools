@@ -6,14 +6,26 @@ import tv.porst.swfretools.parser.structures.TraitFunction;
 import tv.porst.swfretools.parser.structures.TraitMethod;
 import tv.porst.swfretools.parser.structures.TraitSlot;
 
-public class FlashTraitKindNode extends FlashTreeNode<ITraitKind> {
+/**
+ * Node that represents a TraitKind object in the Flash tree.
+ */
+public final class FlashTraitKindNode extends FlashTreeNode<ITraitKind> {
 
-	public FlashTraitKindNode(final String name, final ITraitKind traitKind) {
-		super(name, traitKind);
+	/**
+	 * Creates a new node object
+	 * 
+	 * @param name Name of the node.
+	 * @param value Flash structure represented by the node.
+	 */
+	public FlashTraitKindNode(final String name, final ITraitKind value) {
+		super(name, value);
 
 		createChildren();
 	}
 
+	/**
+	 * Creates the child nodes of the node.
+	 */
 	private void createChildren() {
 		if (getUserObject() instanceof TraitClass) {
 			final TraitClass cgradient = (TraitClass) getUserObject();
@@ -42,7 +54,12 @@ public class FlashTraitKindNode extends FlashTreeNode<ITraitKind> {
 		}
 	}
 
-	private String getGradientName() {
+	/**
+	 * Returns the name for each specific trait class.
+	 * 
+	 * @return The name for each specific trait class.
+	 */
+	private String getTraitName() {
 
 		if (getUserObject() instanceof TraitClass) {
 			return "Trait_Class";
@@ -63,6 +80,6 @@ public class FlashTraitKindNode extends FlashTreeNode<ITraitKind> {
 
 	@Override
 	public String toString() {
-		return String.format("%s : %s", getName(), getGradientName());
+		return String.format("%s : %s", getName(), getTraitName());
 	}
 }

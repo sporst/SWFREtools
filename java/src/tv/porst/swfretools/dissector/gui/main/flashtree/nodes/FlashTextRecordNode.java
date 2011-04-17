@@ -2,14 +2,26 @@ package tv.porst.swfretools.dissector.gui.main.flashtree.nodes;
 
 import tv.porst.swfretools.parser.structures.TextRecord;
 
-public class FlashTextRecordNode extends FlashTreeNode<TextRecord> {
+/**
+ * Node that represents a TextRecord object in the Flash tree.
+ */
+public final class FlashTextRecordNode extends FlashTreeNode<TextRecord> {
 
-	public FlashTextRecordNode(final String name, final TextRecord textRecord) {
-		super(name, textRecord);
+	/**
+	 * Creates a new node object
+	 * 
+	 * @param name Name of the node.
+	 * @param value Flash structure represented by the node.
+	 */
+	public FlashTextRecordNode(final String name, final TextRecord value) {
+		super(name, value);
 
 		createChildren();
 	}
 
+	/**
+	 * Creates the child nodes of the node.
+	 */
 	private void createChildren() {
 		addNode("TextRecordType", getUserObject().getTextRecordType());
 		addNode("StyleFlagsReserved", getUserObject().getStyleFlagsReserved());

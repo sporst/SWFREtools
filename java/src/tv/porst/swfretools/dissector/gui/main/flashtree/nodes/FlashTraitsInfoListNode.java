@@ -3,14 +3,26 @@ package tv.porst.swfretools.dissector.gui.main.flashtree.nodes;
 import tv.porst.swfretools.parser.structures.TraitsInfo;
 import tv.porst.swfretools.parser.structures.TraitsInfoList;
 
-public class FlashTraitsInfoListNode extends FlashTreeNode<TraitsInfoList> {
+/**
+ * Node that represents a TraitsInfoList object in the Flash tree.
+ */
+public final class FlashTraitsInfoListNode extends FlashTreeNode<TraitsInfoList> {
 
-	public FlashTraitsInfoListNode(final String name, final TraitsInfoList encodedList) {
-		super(name, encodedList);
+	/**
+	 * Creates a new node object
+	 * 
+	 * @param name Name of the node.
+	 * @param value Flash structure represented by the node.
+	 */
+	public FlashTraitsInfoListNode(final String name, final TraitsInfoList value) {
+		super(name, value);
 
 		createChildren();
 	}
 
+	/**
+	 * Creates the child nodes of the node.
+	 */
 	private void createChildren() {
 
 		int counter = 0;

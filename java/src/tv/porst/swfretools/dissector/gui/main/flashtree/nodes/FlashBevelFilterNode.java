@@ -2,14 +2,26 @@ package tv.porst.swfretools.dissector.gui.main.flashtree.nodes;
 
 import tv.porst.swfretools.parser.structures.BevelFilter;
 
-public class FlashBevelFilterNode extends FlashTreeNode<BevelFilter> {
+/**
+ * Node that represents a BevelFilter object in the Flash tree.
+ */
+public final class FlashBevelFilterNode extends FlashTreeNode<BevelFilter> {
 
-	public FlashBevelFilterNode(final String name, final BevelFilter filter) {
-		super(name, filter);
+	/**
+	 * Creates a new node object
+	 * 
+	 * @param name Name of the node.
+	 * @param value Flash structure represented by the node.
+	 */
+	public FlashBevelFilterNode(final String name, final BevelFilter value) {
+		super(name, value);
 
 		createChildren();
 	}
 
+	/**
+	 * Creates the child nodes of the node.
+	 */
 	private void createChildren() {
 		addNode("ShadowColor", getUserObject().getShadowColor());
 		addNode("HighlightColor", getUserObject().getHighlightColor());

@@ -2,14 +2,26 @@ package tv.porst.swfretools.dissector.gui.main.flashtree.nodes;
 
 import tv.porst.swfretools.parser.structures.ClipActionRecord;
 
-public class FlashClipActionRecordNode extends FlashTreeNode<ClipActionRecord> {
+/**
+ * Node that represents a ClipActionRecord object in the Flash tree.
+ */
+public final class FlashClipActionRecordNode extends FlashTreeNode<ClipActionRecord> {
 
-	public FlashClipActionRecordNode(final String name, final ClipActionRecord clipActionRecord) {
-		super(name, clipActionRecord);
+	/**
+	 * Creates a new node object
+	 * 
+	 * @param name Name of the node.
+	 * @param value Flash structure represented by the node.
+	 */
+	public FlashClipActionRecordNode(final String name, final ClipActionRecord value) {
+		super(name, value);
 
 		createChildren();
 	}
 
+	/**
+	 * Creates the child nodes of the node.
+	 */
 	private void createChildren() {
 		addNode("EventFlags", getUserObject().getEventFlags());
 		addNode("ActionRecordSize", getUserObject().getActionRecordSize());

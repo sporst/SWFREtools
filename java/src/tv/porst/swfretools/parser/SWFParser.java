@@ -6,7 +6,7 @@ import java.io.IOException;
 import tv.porst.splib.binaryparser.UINT16;
 import tv.porst.splib.binaryparser.UINT32;
 import tv.porst.splib.binaryparser.UINT8;
-import tv.porst.splib.io.FileHelpers;
+import tv.porst.splib.file.FileHelpers;
 import tv.porst.swfretools.parser.structures.Rect;
 import tv.porst.swfretools.parser.structures.RectParser;
 import tv.porst.swfretools.parser.structures.SWFFile;

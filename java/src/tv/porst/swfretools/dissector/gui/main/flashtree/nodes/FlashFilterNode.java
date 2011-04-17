@@ -2,14 +2,26 @@ package tv.porst.swfretools.dissector.gui.main.flashtree.nodes;
 
 import tv.porst.swfretools.parser.structures.Filter;
 
-public class FlashFilterNode extends FlashTreeNode<Filter> {
+/**
+ * Node that represents a Filter object in the Flash tree.
+ */
+public final class FlashFilterNode extends FlashTreeNode<Filter> {
 
-	public FlashFilterNode(final String name, final Filter filter) {
-		super(name, filter);
+	/**
+	 * Creates a new node object
+	 * 
+	 * @param name Name of the node.
+	 * @param value Flash structure represented by the node.
+	 */
+	public FlashFilterNode(final String name, final Filter value) {
+		super(name, value);
 
 		createChildren();
 	}
 
+	/**
+	 * Creates the child nodes of the node.
+	 */
 	private void createChildren() {
 		addNode("FilterID", getUserObject().getFilterId());
 		addNode("DropShadowFilter", getUserObject().getDropShadowFilter());

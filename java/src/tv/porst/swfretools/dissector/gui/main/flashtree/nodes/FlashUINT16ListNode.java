@@ -3,14 +3,26 @@ package tv.porst.swfretools.dissector.gui.main.flashtree.nodes;
 import tv.porst.splib.binaryparser.UINT16;
 import tv.porst.swfretools.parser.structures.UINT16List;
 
-public class FlashUINT16ListNode extends FlashTreeNode<UINT16List> {
+/**
+ * Node that represents a UINT16List object in the Flash tree.
+ */
+public final class FlashUINT16ListNode extends FlashTreeNode<UINT16List> {
 
-	public FlashUINT16ListNode(final String name, final UINT16List userObject) {
-		super(name, userObject);
+	/**
+	 * Creates a new node object
+	 * 
+	 * @param name Name of the node.
+	 * @param value Flash structure represented by the node.
+	 */
+	public FlashUINT16ListNode(final String name, final UINT16List value) {
+		super(name, value);
 
 		createChildren();
 	}
 
+	/**
+	 * Creates the child nodes of the node.
+	 */
 	private void createChildren() {
 
 		int counter = 0;

@@ -2,14 +2,26 @@ package tv.porst.swfretools.dissector.gui.main.flashtree.nodes;
 
 import tv.porst.swfretools.parser.structures.LineStyle4;
 
-public class FlashLineStyle4Node extends FlashTreeNode<LineStyle4> {
+/**
+ * Node that represents a LineStyle4 object in the Flash tree.
+ */
+public final class FlashLineStyle4Node extends FlashTreeNode<LineStyle4> {
 
-	public FlashLineStyle4Node(final String name, final LineStyle4 lineStyle) {
-		super(name, lineStyle);
+	/**
+	 * Creates a new node object
+	 * 
+	 * @param name Name of the node.
+	 * @param value Flash structure represented by the node.
+	 */
+	public FlashLineStyle4Node(final String name, final LineStyle4 value) {
+		super(name, value);
 
 		createChildren();
 	}
 
+	/**
+	 * Creates the child nodes of the node.
+	 */
 	private void createChildren() {
 		addNode("Width", getUserObject().getWidth());
 		addNode("StartCapStyle", getUserObject().getStartCapStyle());

@@ -2,14 +2,26 @@ package tv.porst.swfretools.dissector.gui.main.flashtree.nodes;
 
 import tv.porst.swfretools.parser.structures.ClipEventFlags;
 
-public class FlashClipEventFlagsNode extends FlashTreeNode<ClipEventFlags> {
+/**
+ * Node that represents a ClipEventFlags object in the Flash tree.
+ */
+public final class FlashClipEventFlagsNode extends FlashTreeNode<ClipEventFlags> {
 
-	public FlashClipEventFlagsNode(final String name, final ClipEventFlags clipEventFlags) {
-		super(name, clipEventFlags);
+	/**
+	 * Creates a new node object
+	 * 
+	 * @param name Name of the node.
+	 * @param value Flash structure represented by the node.
+	 */
+	public FlashClipEventFlagsNode(final String name, final ClipEventFlags value) {
+		super(name, value);
 
 		createChildren();
 	}
 
+	/**
+	 * Creates the child nodes of the node.
+	 */
 	private void createChildren() {
 		addNode("ClipEventKeyUp", getUserObject().getClipEventKeyUp());
 		addNode("ClipEventKeyDown", getUserObject().getClipEventKeyDown());

@@ -2,14 +2,26 @@ package tv.porst.swfretools.dissector.gui.main.flashtree.nodes;
 
 import tv.porst.swfretools.parser.structures.Matrix;
 
-public class FlashMatrixNode extends FlashTreeNode<Matrix> {
+/**
+ * Node that represents a Matrix object in the Flash tree.
+ */
+public final class FlashMatrixNode extends FlashTreeNode<Matrix> {
 
-	public FlashMatrixNode(final String name, final Matrix matrix) {
-		super(name, matrix);
+	/**
+	 * Creates a new node object
+	 * 
+	 * @param name Name of the node.
+	 * @param value Flash structure represented by the node.
+	 */
+	public FlashMatrixNode(final String name, final Matrix value) {
+		super(name, value);
 
 		createChildren();
 	}
 
+	/**
+	 * Creates the child nodes of the node.
+	 */
 	private void createChildren() {
 		addNode("HasScale", getUserObject().getHasScale());
 		addNode("NScaleBits", getUserObject().getnScaleBits());

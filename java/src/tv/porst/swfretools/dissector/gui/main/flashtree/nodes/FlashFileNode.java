@@ -6,10 +6,21 @@ import tv.porst.swfretools.dissector.Main;
 import tv.porst.swfretools.dissector.gui.main.models.LoadedFile;
 import tv.porst.swfretools.parser.tags.Tag;
 
-public class FlashFileNode extends FlashTreeNode<FlashFileNodeWrapper> {
+/**
+ * Node that represents a whole SWF file in the Flash tree.
+ */
+public final class FlashFileNode extends FlashTreeNode<FlashFileNodeWrapper> {
 
+	/**
+	 * The loaded file represented by the node.
+	 */
 	private final LoadedFile file;
 
+	/**
+	 * Creates a new node object.
+	 * 
+	 * @param file The loaded file represented by the node.
+	 */
 	public FlashFileNode(final LoadedFile file) {
 		super(null, new FlashFileNodeWrapper(file));
 
@@ -18,17 +29,14 @@ public class FlashFileNode extends FlashTreeNode<FlashFileNodeWrapper> {
 		createChildren();
 	}
 
+	/**
+	 * Creates the child nodes of the node.
+	 */
 	private void createChildren() {
 
 		for (final Tag tag : file.getSWFFile().getTags()) {
-
 			add(new FlashTagNode(tag));
-
 		}
-	}
-
-	public LoadedFile getFile() {
-		return file;
 	}
 
 	@Override

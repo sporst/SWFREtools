@@ -47,6 +47,15 @@ public final class RecordHeader implements IFileElement {
 	}
 
 	/**
+	 * Returns the optional length field.
+	 * 
+	 * @return The optional length field.
+	 */
+	public INT32 getExtraLength() {
+		return length;
+	}
+
+	/**
 	 * Returns the length of the record header structure in bytes.
 	 * 
 	 * @return The length of the record header structure in bytes.

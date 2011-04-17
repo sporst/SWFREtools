@@ -2,10 +2,19 @@ package tv.porst.swfretools.dissector.gui.main.flashtree.nodes;
 
 import tv.porst.splib.binaryparser.UBits;
 
-public class FlashUBitsNode extends FlashTreeNode<UBits> {
+/**
+ * Node that represents a UBits object in the Flash tree.
+ */
+public final class FlashUBitsNode extends FlashTreeNode<UBits> {
 
-	public FlashUBitsNode(final String name, final UBits bits) {
-		super(name, bits);
+	/**
+	 * Creates a new node object
+	 * 
+	 * @param name Name of the node.
+	 * @param value Flash structure represented by the node.
+	 */
+	public FlashUBitsNode(final String name, final UBits value) {
+		super(name, value);
 	}
 
 	@Override

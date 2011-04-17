@@ -3,14 +3,26 @@ package tv.porst.swfretools.dissector.gui.main.flashtree.nodes;
 import tv.porst.swfretools.parser.structures.SceneName;
 import tv.porst.swfretools.parser.structures.SceneNameList;
 
-public class FlashSceneNameListNode extends FlashTreeNode<SceneNameList> {
+/**
+ * Node that represents a SceneNameList object in the Flash tree.
+ */
+public final class FlashSceneNameListNode extends FlashTreeNode<SceneNameList> {
 
-	public FlashSceneNameListNode(final String name, final SceneNameList list) {
-		super(name, list);
+	/**
+	 * Creates a new node object
+	 * 
+	 * @param name Name of the node.
+	 * @param value Flash structure represented by the node.
+	 */
+	public FlashSceneNameListNode(final String name, final SceneNameList value) {
+		super(name, value);
 
 		createChildren();
 	}
 
+	/**
+	 * Creates the child nodes of the node.
+	 */
 	private void createChildren() {
 
 		int counter = 0;

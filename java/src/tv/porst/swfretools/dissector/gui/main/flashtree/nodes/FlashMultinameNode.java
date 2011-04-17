@@ -12,14 +12,26 @@ import tv.porst.swfretools.parser.structures.RTQNameA;
 import tv.porst.swfretools.parser.structures.RTQNameL;
 import tv.porst.swfretools.parser.structures.RTQNameLA;
 
-public class FlashMultinameNode extends FlashTreeNode<IMultiname> {
+/**
+ * Node that represents a Multiname object in the Flash tree.
+ */
+public final class FlashMultinameNode extends FlashTreeNode<IMultiname> {
 
-	public FlashMultinameNode(final String name, final IMultiname multiname) {
-		super(name, multiname);
+	/**
+	 * Creates a new node object
+	 * 
+	 * @param name Name of the node.
+	 * @param value Flash structure represented by the node.
+	 */
+	public FlashMultinameNode(final String name, final IMultiname value) {
+		super(name, value);
 
 		createChildren();
 	}
 
+	/**
+	 * Creates the child nodes of the node.
+	 */
 	private void createChildren() {
 		if (getUserObject() instanceof Multiname) {
 			final Multiname cname = (Multiname) getUserObject();
@@ -68,6 +80,12 @@ public class FlashMultinameNode extends FlashTreeNode<IMultiname> {
 		}
 	}
 
+	/**
+	 * Returns the correct name for the multiname represented by this
+	 * node.
+	 * 
+	 * @return The name for the multiname object.
+	 */
 	private String getGradientName() {
 
 		if (getUserObject() instanceof Multiname) {

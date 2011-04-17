@@ -10,8 +10,16 @@ import javax.swing.JTextArea;
 import tv.porst.splib.gui.GuiHelpers;
 import tv.porst.swfretools.parser.structures.ActionList;
 
-public class AS2CodePanel extends JPanel {
+/**
+ * Panel to display ActionScript 2 code.
+ */
+public final class AS2CodePanel extends JPanel {
 
+	/**
+	 * Creates a new panel object.
+	 * 
+	 * @param code The code to display in the panel.
+	 */
 	public AS2CodePanel(final ActionList code) {
 		super(new BorderLayout());
 
