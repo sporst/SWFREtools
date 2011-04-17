@@ -66,7 +66,7 @@ public final class MainWindow extends JFrame {
 
 		setJMenuBar(menuBar);
 
-		setSize(800, 600);
+		setSize(900, 600);
 		setLocationRelativeTo(null);
 	}
 

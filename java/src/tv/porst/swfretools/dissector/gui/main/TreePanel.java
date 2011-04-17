@@ -38,7 +38,7 @@ public final class TreePanel extends JPanel {
 
 		add(new JScrollPane(tree));
 
-		setPreferredSize(new Dimension(250, 200));
+		setPreferredSize(new Dimension(350, 200));
 	}
 
 	/**
