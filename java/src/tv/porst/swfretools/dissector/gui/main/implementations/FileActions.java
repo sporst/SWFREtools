@@ -5,6 +5,7 @@ import java.io.IOException;
 
 import javax.swing.JFileChooser;
 import javax.swing.SwingUtilities;
+import javax.swing.filechooser.FileFilter;
 import javax.swing.tree.TreeNode;
 import javax.swing.tree.TreePath;
 
@@ -46,6 +47,7 @@ public final class FileActions {
 	public static void openFile(final FlashTree tree, final FileModel model) {
 
 		final JFileChooser chooser = new JFileChooser();
+		chooser.setFileFilter(new SWFFileFilter());
 
 		if (model.getLastDirectory() != null) {
 			chooser.setCurrentDirectory(model.getLastDirectory());
@@ -71,6 +73,27 @@ public final class FileActions {
 			} catch (final SWFParserException e) {
 				MessageBox.showError(SwingUtilities.getWindowAncestor(tree), "Selected file could not be parsed.");
 			}
+		}
+	}
+
+	/**
+	 * File filter class to make sure only SWF files can be selected.
+	 */
+	private static class SWFFileFilter extends FileFilter {
+
+		@Override
+		public boolean accept(final File f) {
+
+			if (f.isDirectory()) {
+				return true;
+			}
+
+			return f.getAbsolutePath().toLowerCase().endsWith("swf");
+		}
+
+		@Override
+		public String getDescription() {
+			return "SWF files";
 		}
 	}
 }
