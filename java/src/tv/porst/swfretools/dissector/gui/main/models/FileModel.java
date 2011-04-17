@@ -26,12 +26,26 @@ public final class FileModel {
 	private final ListenerProvider<IFileModelListener> listeners = new ListenerProvider<IFileModelListener>();
 
 	/**
+	 * The directory in which the open dialog should start.
+	 */
+	private File lastDirectory = null;
+
+	/**
 	 * Adds a new listener that is notified about changes in open files.
 	 * 
 	 * @param listener The listener object to add.
 	 */
 	public void addListener(final IFileModelListener listener) {
 		listeners.add(listener);
+	}
+
+	/**
+	 * Returns the directory in which the open dialog should start.
+	 * 
+	 * @return The directory in which the open dialog should start.
+	 */
+	public File getLastDirectory() {
+		return lastDirectory;
 	}
 
 	/**
@@ -51,6 +65,8 @@ public final class FileModel {
 		final LoadedFile loadedFile = new LoadedFile(file, swfFile);
 
 		openFiles.add(loadedFile);
+
+		lastDirectory = file.getParentFile();
 
 		for (final IFileModelListener listener : listeners) {
 

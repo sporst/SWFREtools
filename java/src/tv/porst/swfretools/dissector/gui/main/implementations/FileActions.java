@@ -47,6 +47,10 @@ public final class FileActions {
 
 		final JFileChooser chooser = new JFileChooser();
 
+		if (model.getLastDirectory() != null) {
+			chooser.setCurrentDirectory(model.getLastDirectory());
+		}
+
 		if (JFileChooser.APPROVE_OPTION == chooser.showOpenDialog(tree)) {
 
 			final File file = chooser.getSelectedFile();
