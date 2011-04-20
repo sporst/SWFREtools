@@ -5,7 +5,10 @@ import tv.porst.splib.binaryparser.UINT8;
 import tv.porst.swfretools.parser.SWFBinaryParser;
 import tv.porst.swfretools.parser.SWFParserException;
 
-public class AS3AddiParser {
+/**
+ * Parses ActionScript 3 'add' instructions.
+ */
+public final class AS3AddiParser {
 
 	public static AS3Addi parse(final SWFBinaryParser parser, final String fieldName) throws SWFParserException {
 

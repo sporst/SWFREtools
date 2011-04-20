@@ -7,7 +7,10 @@ import tv.porst.swfretools.parser.SWFParserException;
 import tv.porst.swfretools.parser.structures.EncodedU30;
 import tv.porst.swfretools.parser.structures.EncodedU30Parser;
 
-public class AS3CallproplexParser {
+/**
+ * Parses ActionScript 3 'callproplex' instructions.
+ */
+public final class AS3CallproplexParser {
 
 	public static AS3Callproplex parse(final SWFBinaryParser parser, final String fieldName) throws SWFParserException {
 

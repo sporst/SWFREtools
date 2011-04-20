@@ -7,7 +7,10 @@ import tv.porst.swfretools.parser.SWFParserException;
 import tv.porst.swfretools.parser.structures.EncodedU30;
 import tv.porst.swfretools.parser.structures.EncodedU30Parser;
 
-public class AS3CallsuperParser {
+/**
+ * Parses ActionScript 3 'callsuper' instructions.
+ */
+public final class AS3CallsuperParser {
 
 	public static AS3Callsuper parse(final SWFBinaryParser parser, final String fieldName) throws SWFParserException {
 

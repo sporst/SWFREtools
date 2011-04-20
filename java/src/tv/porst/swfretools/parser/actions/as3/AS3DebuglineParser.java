@@ -7,7 +7,10 @@ import tv.porst.swfretools.parser.SWFParserException;
 import tv.porst.swfretools.parser.structures.EncodedU30;
 import tv.porst.swfretools.parser.structures.EncodedU30Parser;
 
-public class AS3DebuglineParser {
+/**
+ * Parses ActionScript 3 'debugline' instructions.
+ */
+public final class AS3DebuglineParser {
 
 	public static AS3Debugline parse(final SWFBinaryParser parser, final String fieldName) throws SWFParserException {
 		final UINT8 opcode = parseUINT8(parser, 0x00006, fieldName + "::opcode");

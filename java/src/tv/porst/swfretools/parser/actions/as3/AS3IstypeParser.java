@@ -7,7 +7,10 @@ import tv.porst.swfretools.parser.SWFParserException;
 import tv.porst.swfretools.parser.structures.EncodedU30;
 import tv.porst.swfretools.parser.structures.EncodedU30Parser;
 
-public class AS3IstypeParser {
+/**
+ * Parses ActionScript 3 'istype' instructions.
+ */
+public final class AS3IstypeParser {
 
 	public static AS3Istype parse(final SWFBinaryParser parser, final String fieldName) throws SWFParserException {
 		final UINT8 opcode = parseUINT8(parser, 0x00006, fieldName + "::opcode");

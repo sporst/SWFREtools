@@ -5,6 +5,9 @@ import tv.porst.splib.binaryparser.UINT8;
 import tv.porst.swfretools.parser.SWFBinaryParser;
 import tv.porst.swfretools.parser.SWFParserException;
 
+/**
+ * Parses ActionScript 3 'setlocal2' instructions.
+ */
 public class AS3Setlocal2Parser {
 
 	public static AS3Setlocal2 parse(final SWFBinaryParser parser, final String fieldName) throws SWFParserException {

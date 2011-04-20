@@ -5,7 +5,10 @@ import tv.porst.splib.binaryparser.UINT8;
 import tv.porst.swfretools.parser.SWFBinaryParser;
 import tv.porst.swfretools.parser.SWFParserException;
 
-public class AS3PushundefinedParser {
+/**
+ * Parses ActionScript 3 'pushundefined' instructions.
+ */
+public final class AS3PushundefinedParser {
 
 	public static AS3Pushundefined parse(final SWFBinaryParser parser, final String fieldName) throws SWFParserException {
 		final UINT8 opcode = parseUINT8(parser, 0x00006, fieldName + "::opcode");

@@ -7,7 +7,10 @@ import tv.porst.swfretools.parser.SWFParserException;
 import tv.porst.swfretools.parser.structures.EncodedU30;
 import tv.porst.swfretools.parser.structures.EncodedU30Parser;
 
-public class AS3AstypeParser {
+/**
+ * Parses ActionScript 3 'astype' instructions.
+ */
+public final class AS3AstypeParser {
 
 	public static AS3Astype parse(final SWFBinaryParser parser, final String fieldName) throws SWFParserException {
 

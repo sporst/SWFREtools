@@ -5,7 +5,10 @@ import tv.porst.splib.binaryparser.UINT8;
 import tv.porst.swfretools.parser.SWFBinaryParser;
 import tv.porst.swfretools.parser.SWFParserException;
 
-public class AS3BitandParser {
+/**
+ * Parses ActionScript 3 'bitand' instructions.
+ */
+public final class AS3BitandParser {
 
 	public static AS3Bitand parse(final SWFBinaryParser parser, final String fieldName) throws SWFParserException {
 

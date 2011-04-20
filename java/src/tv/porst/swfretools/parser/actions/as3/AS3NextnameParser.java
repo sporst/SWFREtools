@@ -5,7 +5,10 @@ import tv.porst.splib.binaryparser.UINT8;
 import tv.porst.swfretools.parser.SWFBinaryParser;
 import tv.porst.swfretools.parser.SWFParserException;
 
-public class AS3NextnameParser {
+/**
+ * Parses ActionScript 3 'nextname' instructions.
+ */
+public final class AS3NextnameParser {
 
 	public static AS3Nextname parse(final SWFBinaryParser parser, final String fieldName) throws SWFParserException {
 		final UINT8 opcode = parseUINT8(parser, 0x00006, fieldName + "::opcode");

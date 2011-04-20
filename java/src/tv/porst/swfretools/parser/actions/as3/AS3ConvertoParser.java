@@ -5,7 +5,10 @@ import tv.porst.splib.binaryparser.UINT8;
 import tv.porst.swfretools.parser.SWFBinaryParser;
 import tv.porst.swfretools.parser.SWFParserException;
 
-public class AS3ConvertoParser {
+/**
+ * Parses ActionScript 3 'converto' instructions.
+ */
+public final class AS3ConvertoParser {
 
 	public static AS3Converto parse(final SWFBinaryParser parser, final String fieldName) throws SWFParserException {
 

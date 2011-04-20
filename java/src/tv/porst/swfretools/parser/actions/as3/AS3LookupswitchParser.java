@@ -13,6 +13,9 @@ import tv.porst.swfretools.parser.SWFParserException;
 import tv.porst.swfretools.parser.structures.EncodedU30;
 import tv.porst.swfretools.parser.structures.EncodedU30Parser;
 
+/**
+ * Parses ActionScript 3 'lookupswitch' instructions.
+ */
 public class AS3LookupswitchParser {
 
 	public static AS3Lookupswitch parse(final SWFBinaryParser parser, final String fieldName) throws SWFParserException {

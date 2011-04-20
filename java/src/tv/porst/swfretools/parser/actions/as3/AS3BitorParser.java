@@ -5,7 +5,10 @@ import tv.porst.splib.binaryparser.UINT8;
 import tv.porst.swfretools.parser.SWFBinaryParser;
 import tv.porst.swfretools.parser.SWFParserException;
 
-public class AS3BitorParser {
+/**
+ * Parses ActionScript 3 'bitor' instructions.
+ */
+public final class AS3BitorParser {
 
 	public static AS3Bitor parse(final SWFBinaryParser parser, final String fieldName) throws SWFParserException {
 

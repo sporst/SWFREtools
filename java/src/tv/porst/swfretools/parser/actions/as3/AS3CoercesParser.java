@@ -5,7 +5,10 @@ import tv.porst.splib.binaryparser.UINT8;
 import tv.porst.swfretools.parser.SWFBinaryParser;
 import tv.porst.swfretools.parser.SWFParserException;
 
-public class AS3CoercesParser {
+/**
+ * Parses ActionScript 3 'coerces' instructions.
+ */
+public final class AS3CoercesParser {
 
 	public static AS3Coerces parse(final SWFBinaryParser parser, final String fieldName) throws SWFParserException {
 

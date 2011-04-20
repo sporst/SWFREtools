@@ -5,7 +5,10 @@ import tv.porst.splib.binaryparser.UINT8;
 import tv.porst.swfretools.parser.SWFBinaryParser;
 import tv.porst.swfretools.parser.SWFParserException;
 
-public class AS3AstypelateParser {
+/**
+ * Parses ActionScript 3 'astypelater' instructions.
+ */
+public final class AS3AstypelateParser {
 
 	public static AS3Astypelate parse(final SWFBinaryParser parser, final String fieldName) throws SWFParserException {
 

@@ -4,7 +4,10 @@ import tv.porst.splib.binaryparser.UINT8;
 import tv.porst.swfretools.parser.SWFParserHelpers;
 import tv.porst.swfretools.parser.structures.EncodedU30;
 
-public class AS3Constructprop extends AS3Instruction {
+/**
+ * Represents an ActionScript Constructprop instruction.
+ */
+public final class AS3Constructprop extends AS3Instruction {
 
 	private final EncodedU30 index;
 

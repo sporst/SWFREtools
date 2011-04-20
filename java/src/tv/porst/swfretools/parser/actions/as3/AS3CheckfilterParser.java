@@ -5,7 +5,10 @@ import tv.porst.splib.binaryparser.UINT8;
 import tv.porst.swfretools.parser.SWFBinaryParser;
 import tv.porst.swfretools.parser.SWFParserException;
 
-public class AS3CheckfilterParser {
+/**
+ * Parses ActionScript 3 'checkfilter' instructions.
+ */
+public final class AS3CheckfilterParser {
 
 	public static AS3Checkfilter parse(final SWFBinaryParser parser, final String fieldName) throws SWFParserException {
 
