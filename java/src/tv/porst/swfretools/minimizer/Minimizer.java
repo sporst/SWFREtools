@@ -518,9 +518,7 @@ public final class Minimizer {
 	 * 
 	 * @param args The command line arguments passed to the program.
 	 */
-	public static void main(String[] args) {
-
-		args = new String[] { "C:\\@@\\flashplayer_10_sa.exe", "C:\\@@\\survey-questions_2011.swf"};
+	public static void main(final String[] args) {
 
 		if (args.length != 2) {
 
