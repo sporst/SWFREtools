@@ -32,7 +32,7 @@ public final class FlashConstantPoolNode extends FlashTreeNode<ConstantPool> {
 		addNode("string_count", getUserObject().getStringCount());
 		addNode("string_info", getUserObject().getStrings());
 		addNode("namespace_count", getUserObject().getNamespaceCount());
-		addNode("namespace_info", getUserObject().getNamespaces());
+		addNode("namespace_info", getUserObject().getNamespaces(), getUserObject().getStrings());
 		addNode("ns_set_count", getUserObject().getNamespaceSetCount());
 		addNode("ns_set_info", getUserObject().getNamespaceSets());
 		addNode("multiname_count", getUserObject().getMultinameCount());

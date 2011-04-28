@@ -1340,9 +1340,9 @@ public class FlashTreeNode<T extends IFileElement> extends IconNode {
 	 * @param name The name of the child node.
 	 * @param value The Flash structure represented by the node.
 	 */
-	protected void addNode(final String name, final NamespaceInfoList value) {
+	protected void addNode(final String name, final NamespaceInfoList value, final StringInfoList constantPool) {
 		if (value != null) {
-			add(new FlashNamespaceInfoListNode(name, value));
+			add(new FlashNamespaceInfoListNode(name, value, constantPool));
 		}
 	}
 
