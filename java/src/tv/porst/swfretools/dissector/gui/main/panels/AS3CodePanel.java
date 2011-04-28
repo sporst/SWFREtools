@@ -14,7 +14,7 @@ import tv.porst.swfretools.parser.tags.DoABCTag;
 /**
  * Panel to display ActionScript 3 code.
  */
-public final class AS3CodePanel extends JPanel {
+public final class AS3CodePanel extends JPanel implements IExtraPanel {
 
 	/**
 	 * Creates a new panel object.
@@ -44,5 +44,15 @@ public final class AS3CodePanel extends JPanel {
 		area.setFont(new Font(GuiHelpers.getMonospaceFont(), 0, 12));
 
 		add(new JScrollPane(area));
+	}
+
+	@Override
+	public JPanel getPanel() {
+		return this;
+	}
+
+	@Override
+	public String getTabName() {
+		return "Code";
 	}
 }

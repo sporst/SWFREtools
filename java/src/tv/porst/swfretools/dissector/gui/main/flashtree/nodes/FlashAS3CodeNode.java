@@ -1,7 +1,5 @@
 package tv.porst.swfretools.dissector.gui.main.flashtree.nodes;
 
-import javax.swing.JPanel;
-
 import tv.porst.swfretools.dissector.gui.main.panels.AS3CodePanel;
 import tv.porst.swfretools.parser.structures.AS3Code;
 
@@ -13,7 +11,7 @@ public final class FlashAS3CodeNode extends FlashTreeNode<AS3Code> {
 	/**
 	 * Panel to be shown when the node is selected.
 	 */
-	private JPanel panel;
+	private AS3CodePanel panel;
 
 	/**
 	 * Creates a new node object
@@ -30,7 +28,8 @@ public final class FlashAS3CodeNode extends FlashTreeNode<AS3Code> {
 	 * 
 	 * @return The panel to be shown.
 	 */
-	public JPanel getExtraPanel() {
+	@Override
+	public AS3CodePanel getExtraPanel() {
 
 		if (panel == null) {
 			panel = new AS3CodePanel(getUserObject());

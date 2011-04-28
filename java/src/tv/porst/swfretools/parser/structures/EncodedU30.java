@@ -16,14 +16,14 @@ public final class EncodedU30 implements IFileElement {
 	/**
 	 * The decoded integer value.
 	 */
-	private final long value;
+	private final int value;
 
 	/**
 	 * Creates a new encoded integer value.
 	 * 
 	 * @param value The decoded integer value.
 	 */
-	public EncodedU30(final int bitPosition, final int bitLength, final long value) {
+	public EncodedU30(final int bitPosition, final int bitLength, final int value) {
 
 		this.bitPosition = bitPosition;
 		this.bitLength = bitLength;
@@ -45,7 +45,7 @@ public final class EncodedU30 implements IFileElement {
 	 * 
 	 * @return The decoded integer value.
 	 */
-	public long value() {
+	public int value() {
 		return value;
 	}
 }

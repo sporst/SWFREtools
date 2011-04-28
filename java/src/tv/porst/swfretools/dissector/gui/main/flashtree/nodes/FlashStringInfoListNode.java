@@ -1,5 +1,6 @@
 package tv.porst.swfretools.dissector.gui.main.flashtree.nodes;
 
+import tv.porst.swfretools.dissector.gui.main.panels.StringInfoListPanel;
 import tv.porst.swfretools.parser.structures.StringInfo;
 import tv.porst.swfretools.parser.structures.StringInfoList;
 
@@ -7,6 +8,8 @@ import tv.porst.swfretools.parser.structures.StringInfoList;
  * Node that represents a StringInfoList object in the Flash tree.
  */
 public final class FlashStringInfoListNode extends FlashTreeNode<StringInfoList> {
+
+	private StringInfoListPanel panel;
 
 	/**
 	 * Creates a new node object
@@ -33,6 +36,21 @@ public final class FlashStringInfoListNode extends FlashTreeNode<StringInfoList>
 
 			counter++;
 		}
+	}
+
+	/**
+	 * Returns the panel to be shown when the node is selected.
+	 * 
+	 * @return The panel to be shown.
+	 */
+	@Override
+	public StringInfoListPanel getExtraPanel() {
+
+		if (panel == null) {
+			panel = new StringInfoListPanel(getUserObject());
+		}
+
+		return panel;
 	}
 
 	@Override

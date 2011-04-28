@@ -16,6 +16,7 @@ import tv.porst.splib.binaryparser.UINT16;
 import tv.porst.splib.binaryparser.UINT32;
 import tv.porst.splib.binaryparser.UINT8;
 import tv.porst.splib.gui.tree.IconNode;
+import tv.porst.swfretools.dissector.gui.main.panels.IExtraPanel;
 import tv.porst.swfretools.parser.actions.as2.Action;
 import tv.porst.swfretools.parser.structures.*;
 import tv.porst.swfretools.parser.tags.Tag;
@@ -2005,6 +2006,10 @@ public class FlashTreeNode<T extends IFileElement> extends IconNode {
 		}
 	}
 
+	public IExtraPanel getExtraPanel() {
+		return null;
+	}
+
 	/**
 	 * Returns the name of the node.
 	 * 
@@ -2019,5 +2024,4 @@ public class FlashTreeNode<T extends IFileElement> extends IconNode {
 	public T getUserObject() {
 		return (T) super.getUserObject();
 	}
-
 }
