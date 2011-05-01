@@ -1,9 +1,13 @@
 package tv.porst.swfretools.dissector.gui.main.panels;
 
+import java.util.List;
+
 import tv.porst.swfretools.parser.actions.as3.*;
 import tv.porst.swfretools.parser.structures.AS3Code;
-import tv.porst.swfretools.parser.structures.MethodBody;
-import tv.porst.swfretools.parser.tags.DoABCTag;
+import tv.porst.swfretools.utils.ActionScript3Helpers;
+import tv.porst.swfretools.utils.as3.ResolvedClass;
+import tv.porst.swfretools.utils.as3.ResolvedCode;
+import tv.porst.swfretools.utils.as3.ResolvedMethod;
 
 /**
  * Contains functions that turn ActionScript 3 code into a string that can
@@ -58,13 +62,43 @@ public final class AS3CodePrinter {
 		sb.append(String.format("%s %d, %d, %d, %d", mnemonic, value1, value2, value3, value4));
 	}
 
+	private static void addClassFooter(final StringBuilder sb) {
+		sb.append("}\n\n");
+	}
+
+	private static void addClassHeader(final ResolvedClass resolvedClass, final StringBuilder sb) {
+		sb.append("class ");
+
+		// Add the class name.
+		final String className = ActionScript3Helpers.flattenNamespaceName(resolvedClass.getName());
+		sb.append(className);
+
+		// Add the opening class parentheses.
+		sb.append("\n{\n");
+	}
+
+	private static void addDouble(final StringBuilder sb, final String mnemonic, final int multiName, final ResolvedCode code) {
+
+		final Double dbl = code.resolveDouble(multiName - 1);
+
+		sb.append(mnemonic);
+		sb.append(" ");
+
+		if (dbl == null) {
+			sb.append(String.format("??? [0x%08X]", multiName));
+		}
+		else {
+			sb.append(String.format("%f [0x%08X]", dbl, multiName));
+		}
+	}
+
 	/**
 	 * Adds an instruction to the output.
 	 * 
 	 * @param sb The string builder the output is appended to.
 	 * @param instruction The instruction to add to the output.
 	 */
-	private static void addInstructionText(final StringBuilder sb, final AS3Instruction instruction) {
+	private static void addInstructionText(final StringBuilder sb, final AS3Instruction instruction, final ResolvedCode code) {
 
 		new AS3Visitor() {
 
@@ -80,7 +114,7 @@ public final class AS3CodePrinter {
 
 			@Override
 			protected void visit(final AS3Astype instruction) {
-				add(sb, "add", instruction.getIndex().value());
+				addMultiname(sb, "add", instruction.getIndex().value(), code);
 			}
 
 			@Override
@@ -115,37 +149,39 @@ public final class AS3CodePrinter {
 
 			@Override
 			protected void visit(final AS3Callmethod instruction) {
+				// TODO
 				add(sb, "callmethod", instruction.getIndex().value(), instruction.getArgCount().value());
 			}
 
 			@Override
 			protected void visit(final AS3Callproperty instruction) {
-				add(sb, "callproperty", instruction.getIndex().value(), instruction.getArgCount().value());
+				addMultinameInteger(sb, "callproperty", instruction.getIndex().value(), instruction.getArgCount().value(), code);
 			}
 
 			@Override
 			protected void visit(final AS3Callproplex instruction) {
-				add(sb, "callproplex", instruction.getIndex().value(), instruction.getArgCount().value());
+				addMultinameInteger(sb, "callproplex", instruction.getIndex().value(), instruction.getArgCount().value(), code);
 			}
 
 			@Override
 			protected void visit(final AS3Callpropvoid instruction) {
-				add(sb, "callpropvoid", instruction.getIndex().value(), instruction.getArgCount().value());
+				addMultinameInteger(sb, "callpropvoid", instruction.getIndex().value(), instruction.getArgCount().value(), code);
 			}
 
 			@Override
 			protected void visit(final AS3Callstatic instruction) {
+				// TODO
 				add(sb, "callstatic", instruction.getIndex().value(), instruction.getArgCount().value());
 			}
 
 			@Override
 			protected void visit(final AS3Callsuper instruction) {
-				add(sb, "callsuper", instruction.getIndex().value(), instruction.getArgCount().value());
+				addMultinameInteger(sb, "callsuper", instruction.getIndex().value(), instruction.getArgCount().value(), code);
 			}
 
 			@Override
 			protected void visit(final AS3Callsupervoid instruction) {
-				add(sb, "callsupervoid", instruction.getIndex().value(), instruction.getArgCount().value());
+				addMultinameInteger(sb, "callsupervoid", instruction.getIndex().value(), instruction.getArgCount().value(), code);
 			}
 
 			@Override
@@ -155,7 +191,7 @@ public final class AS3CodePrinter {
 
 			@Override
 			protected void visit(final AS3Coerce instruction) {
-				add(sb, "coerce", instruction.getIndex().value());
+				addMultiname(sb, "coerce", instruction.getIndex().value(), code);
 			}
 
 			@Override
@@ -175,7 +211,7 @@ public final class AS3CodePrinter {
 
 			@Override
 			protected void visit(final AS3Constructprop instruction) {
-				add(sb, "constructprop", instruction.getIndex().value(), instruction.getArgCount().value());
+				addMultinameInteger(sb, "constructprop", instruction.getIndex().value(), instruction.getArgCount().value(), code);
 			}
 
 			@Override
@@ -215,12 +251,13 @@ public final class AS3CodePrinter {
 
 			@Override
 			protected void visit(final AS3Debug instruction) {
+				// TODO
 				add(sb, "debug", instruction.getDebugType().value(), instruction.getIndex().value(), instruction.getReg().value(), instruction.getExtra().value());
 			}
 
 			@Override
 			protected void visit(final AS3Debugfile instruction) {
-				add(sb, "debugfile", instruction.getIndex().value());
+				addString(sb, "debugfile", instruction.getIndex().value(), code);
 			}
 
 			@Override
@@ -250,7 +287,7 @@ public final class AS3CodePrinter {
 
 			@Override
 			protected void visit(final AS3Deleteproperty instruction) {
-				add(sb, "deletproperty", instruction.getIndex().value());
+				addMultiname(sb, "deletproperty", instruction.getIndex().value(), code);
 			}
 
 			@Override
@@ -265,7 +302,7 @@ public final class AS3CodePrinter {
 
 			@Override
 			protected void visit(final AS3Dxns instruction) {
-				add(sb, "dxns", instruction.getIndex().value());
+				addString(sb, "dxns", instruction.getIndex().value(), code);
 			}
 
 			@Override
@@ -290,17 +327,17 @@ public final class AS3CodePrinter {
 
 			@Override
 			protected void visit(final AS3Findproperty instruction) {
-				add(sb, "findproperty", instruction.getIndex().value());
+				addMultiname(sb, "findproperty", instruction.getIndex().value(), code);
 			}
 
 			@Override
 			protected void visit(final AS3Findpropstrict instruction) {
-				add(sb, "findpropstrict", instruction.getIndex().value());
+				addMultiname(sb, "findpropstrict", instruction.getIndex().value(), code);
 			}
 
 			@Override
 			protected void visit(final AS3Getdescendants instruction) {
-				add(sb, "getdescendants", instruction.getIndex().value());
+				addMultiname(sb, "getdescendants", instruction.getIndex().value(), code);
 			}
 
 			@Override
@@ -315,7 +352,7 @@ public final class AS3CodePrinter {
 
 			@Override
 			protected void visit(final AS3Getlex instruction) {
-				add(sb, "getlex", instruction.getIndex().value());
+				addMultiname(sb, "getlex", instruction.getIndex().value(), code);
 			}
 
 			@Override
@@ -345,7 +382,7 @@ public final class AS3CodePrinter {
 
 			@Override
 			protected void visit(final AS3Getproperty instruction) {
-				add(sb, "getproperty", instruction.getIndex().value());
+				addMultiname(sb, "getproperty", instruction.getIndex().value() ,code);
 			}
 
 			@Override
@@ -360,7 +397,7 @@ public final class AS3CodePrinter {
 
 			@Override
 			protected void visit(final AS3Getsuper instruction) {
-				add(sb, "getsuper", instruction.getIndex().value());
+				addMultiname(sb, "getsuper", instruction.getIndex().value(), code);
 			}
 
 			@Override
@@ -465,8 +502,7 @@ public final class AS3CodePrinter {
 
 			@Override
 			protected void visit(final AS3Initproperty instruction) {
-				add(sb, "initproperty", instruction.getIndex().value());
-
+				addMultiname(sb, "initproperty", instruction.getIndex().value(), code);
 			}
 
 			@Override
@@ -486,7 +522,7 @@ public final class AS3CodePrinter {
 
 			@Override
 			protected void visit(final AS3Istype instruction) {
-				add(sb, "istype", instruction.getIndex().value());
+				addMultiname(sb, "istype", instruction.getIndex().value(), code);
 			}
 
 			@Override
@@ -522,7 +558,6 @@ public final class AS3CodePrinter {
 			@Override
 			protected void visit(final AS3Lookupswitch instruction) {
 				// TODO Auto-generated method stub
-
 			}
 
 			@Override
@@ -582,7 +617,7 @@ public final class AS3CodePrinter {
 
 			@Override
 			protected void visit(final AS3Newobject instruction) {
-				add(sb, "newcatch", instruction.getIndex().value());
+				add(sb, "newobject", instruction.getIndex().value());
 			}
 
 			@Override
@@ -622,7 +657,7 @@ public final class AS3CodePrinter {
 
 			@Override
 			protected void visit(final AS3Pushdouble instruction) {
-				add(sb, "pushdouble", instruction.getIndex().value());
+				addDouble(sb, "pushdouble", instruction.getIndex().value(), code);
 			}
 
 			@Override
@@ -632,11 +667,12 @@ public final class AS3CodePrinter {
 
 			@Override
 			protected void visit(final AS3Pushint instruction) {
-				add(sb, "pushint", instruction.getIndex().value());
+				addInteger(sb, "pushint", instruction.getIndex().value(), code);
 			}
 
 			@Override
 			protected void visit(final AS3Pushnamespace instruction) {
+				// TODO
 				add(sb, "pushnamespace", instruction.getIndex().value());
 			}
 
@@ -662,7 +698,7 @@ public final class AS3CodePrinter {
 
 			@Override
 			protected void visit(final AS3Pushstring instruction) {
-				add(sb, "pushstring", instruction.getIndex().value());
+				addString(sb, "pushstring", instruction.getIndex().value(), code);
 			}
 
 			@Override
@@ -672,7 +708,7 @@ public final class AS3CodePrinter {
 
 			@Override
 			protected void visit(final AS3Pushuint instruction) {
-				add(sb, "pushuint", instruction.getIndex().value());
+				addUInteger(sb, "pushuint", instruction.getIndex().value(), code);
 			}
 
 			@Override
@@ -732,7 +768,7 @@ public final class AS3CodePrinter {
 
 			@Override
 			protected void visit(final AS3Setproperty instruction) {
-				add(sb, "setproperty", instruction.getIndex().value());
+				addMultiname(sb, "setproperty", instruction.getIndex().value(), code);
 			}
 
 			@Override
@@ -742,7 +778,7 @@ public final class AS3CodePrinter {
 
 			@Override
 			protected void visit(final AS3Setsuper instruction) {
-				add(sb, "setsuper", instruction.getIndex().value());
+				addMultiname(sb, "setsuper", instruction.getIndex().value(), code);
 			}
 
 			@Override
@@ -787,14 +823,142 @@ public final class AS3CodePrinter {
 		}.visit(instruction);
 	}
 
+	private static void addInteger(final StringBuilder sb, final String mnemonic, final int multiName, final ResolvedCode code) {
+
+		final Long integer = code.resolveInteger(multiName - 1);
+
+		sb.append(mnemonic);
+		sb.append(" ");
+
+		if (integer == null) {
+			sb.append(String.format("??? [0x%08X]", multiName));
+		}
+		else {
+			sb.append(String.format("%d [0x%08X]", integer, multiName));
+		}
+	}
+
+	private static boolean addMethod(final ResolvedCode code, final ResolvedMethod resolvedMethod, final String className, final StringBuilder sb) {
+		sb.append("\t");
+		final String flattenedReturnType = ActionScript3Helpers.flattenNamespaceName(resolvedMethod.getReturnType());
+		sb.append(flattenedReturnType);
+
+		if (!flattenedReturnType.isEmpty()) {
+			// This path is taken for all methods but constructors.
+			sb.append(" ");
+		}
+
+		final String functionName = ActionScript3Helpers.flattenNamespaceName(resolvedMethod.getName());
+
+		if (functionName.startsWith(className)) {
+			// To make code more readable, strip fully qualified type
+			// information.
+			sb.append(functionName.substring(className.length() + 1));
+		}
+		else {
+			sb.append(functionName);
+		}
+
+		sb.append("(");
+
+		// Print the method arguments.
+		for (final String[] argument : resolvedMethod.getArguments()) {
+
+			if (argument != resolvedMethod.getArguments().get(0)) {
+				sb.append(", ");
+			}
+
+			sb.append(ActionScript3Helpers.flattenNamespaceName(argument));
+		}
+
+		sb.append(")");
+
+		// Print the code.
+		final AS3Code methodCode = resolvedMethod.getCode();
+
+		if (methodCode == null) {
+			sb.append(";\n");
+			return false;
+		}
+		else {
+			sb.append("\n");
+			sb.append("\t{");
+			sb.append("\n");
+			sb.append(getCodeText(code, methodCode, "\t\t"));
+			sb.append("\t}\n");
+			return true;
+		}
+	}
+
+	private static void addMultiname(final StringBuilder sb, final String mnemonic, final int multiName, final ResolvedCode code) {
+
+		final String[] multinameString = code.resolveMultiname(multiName);
+
+		sb.append(mnemonic);
+		sb.append(" ");
+
+		if (multinameString == null) {
+			sb.append(String.format("??? [0x%08X]", multiName));
+		}
+		else {
+			sb.append(String.format("%s [0x%08X]", ActionScript3Helpers.flattenNamespaceName(multinameString), multiName));
+		}
+	}
+
+	private static void addMultinameInteger(final StringBuilder sb, final String mnemonic, final int multiName, final int value, final ResolvedCode code) {
+
+		final String[] multinameString = code.resolveMultiname(multiName);
+
+		sb.append(mnemonic);
+		sb.append(" ");
+
+		if (multinameString == null) {
+			sb.append(String.format("??? [0x%08X], %d", multiName, value));
+		}
+		else {
+			sb.append(String.format("%s [0x%08X], %d", ActionScript3Helpers.flattenNamespaceName(multinameString), multiName, value));
+		}
+	}
+
+	private static void addString(final StringBuilder sb, final String mnemonic, final int multiName, final ResolvedCode code) {
+
+		final String string = code.resolveString(multiName - 1);
+
+		sb.append(mnemonic);
+		sb.append(" ");
+
+		if (string == null) {
+			sb.append(String.format("??? [0x%08X]", multiName));
+		}
+		else {
+			sb.append(String.format("\"%s\" [0x%08X]", string, multiName));
+		}
+	}
+
+	private static void addUInteger(final StringBuilder sb, final String mnemonic, final int multiName, final ResolvedCode code) {
+
+		final Long integer = code.resolveUInteger(multiName - 1);
+
+		sb.append(mnemonic);
+		sb.append(" ");
+
+		if (integer == null) {
+			sb.append(String.format("??? [0x%08X]", multiName));
+		}
+		else {
+			sb.append(String.format("%d [0x%08X]", integer, multiName));
+		}
+	}
+
 	/**
 	 * Generates a printable string that represents the given ActionScript 3 code.
 	 * 
 	 * @param code The ActionScript 3 code to turn into a string.
+	 * @param multinameList
 	 * 
 	 * @return The generated ActionScript 3 code string.
 	 */
-	public static String getCodeText(final AS3Code code) {
+	private static String getCodeText(final ResolvedCode resolvedCode, final AS3Code code, final String prefix) {
 
 		if (code.getInstructions().size() == 0) {
 			return "";
@@ -810,9 +974,10 @@ public final class AS3CodePrinter {
 
 			final int absoluteOffset = instruction.getBitPosition() / 8;
 			final int relativeOffset = absoluteOffset - firstOffset  / 8;
+			sb.append(prefix);
 			sb.append(String.format("%08X %08X  ", absoluteOffset, relativeOffset));
 
-			addInstructionText(sb, instruction);
+			addInstructionText(sb, instruction, resolvedCode);
 
 			sb.append('\n');
 		}
@@ -820,20 +985,65 @@ public final class AS3CodePrinter {
 		return sb.toString();
 	}
 
+	public static String getCodeText(final ResolvedClass resolvedClass, final ResolvedMethod resolvedMethod) {
+		final StringBuilder sb = new StringBuilder();
+
+		final String className = ActionScript3Helpers.flattenNamespaceName(resolvedClass.getName());
+
+		addClassHeader(resolvedClass, sb);
+		//		addMethod(resolvedMethod, className, sb);
+		addClassFooter(sb);
+
+		return sb.toString();
+	}
+
 	/**
 	 * Generates a printable string that represents all code in a given
-	 * DoABC tag.
+	 * resolved ActionScript 3 code snippet.
 	 * 
-	 * @param tag The tag that contains the ActionScript 3 code.
+	 * @param code The resolved code to display.
 	 * 
 	 * @return The generated ActionScript 3 code string.
 	 */
-	public static String getCodeText(final DoABCTag tag) {
+	public static String getCodeText(final ResolvedCode code) {
 		final StringBuilder sb = new StringBuilder();
 
-		for (final MethodBody body : tag.getAbcData().getMethodBodies()) {
-			sb.append(getCodeText(body.getCode()));
-			sb.append("---------------------------------------------------------------\n");
+		for (final ResolvedClass resolvedClass : code.getClasses()) {
+
+			// Start out with the class definition.
+			addClassHeader(resolvedClass, sb);
+
+			boolean hadCode = false;
+
+			// Start preparing all the methods for printing. Add the instance
+			// constructor and the class constructor for printing.
+			final ResolvedMethod staticConstructor = resolvedClass.getStaticConstructor();
+			final ResolvedMethod constructor = resolvedClass.getConstructor();
+
+			final List<ResolvedMethod> resolvedMethods = resolvedClass.getMethods();
+
+			resolvedMethods.add(0, constructor);
+
+			if (staticConstructor.getCode() != null) {
+				// Only add the static constructor if it actually has code.
+				resolvedMethods.add(0, staticConstructor);
+			}
+
+			final String className = ActionScript3Helpers.flattenNamespaceName(resolvedClass.getName());
+
+			// Print the individual methods now.
+			for (final ResolvedMethod resolvedMethod : resolvedMethods) {
+
+				if (resolvedMethod != resolvedMethods.get(0)) {
+					if (hadCode || resolvedMethod.getCode() != null) {
+						sb.append("\n");
+					}
+				}
+
+				hadCode = addMethod(code, resolvedMethod, className, sb);
+			}
+
+			addClassFooter(sb);
 		}
 
 		return sb.toString();

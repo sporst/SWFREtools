@@ -1111,10 +1111,11 @@ public class FlashTreeNode<T extends IFileElement> extends IconNode {
 	 * 
 	 * @param name The name of the child node.
 	 * @param value The Flash structure represented by the node.
+	 * @param abcData
 	 */
-	protected void addNode(final String name, final MethodBody value) {
+	protected void addNode(final String name, final MethodBody value, final AS3Data abcData) {
 		if (value != null) {
-			add(new FlashMethodBodyNode(name, value));
+			add(new FlashMethodBodyNode(name, value, abcData));
 		}
 	}
 
@@ -1124,9 +1125,9 @@ public class FlashTreeNode<T extends IFileElement> extends IconNode {
 	 * @param name The name of the child node.
 	 * @param value The Flash structure represented by the node.
 	 */
-	protected void addNode(final String name, final MethodBodyList value) {
+	protected void addNode(final String name, final MethodBodyList value, final AS3Data abcData) {
 		if (value != null) {
-			add(new FlashMethodBodyListNode(name, value));
+			add(new FlashMethodBodyListNode(name, value, abcData));
 		}
 	}
 
@@ -1315,10 +1316,12 @@ public class FlashTreeNode<T extends IFileElement> extends IconNode {
 	 * 
 	 * @param name The name of the child node.
 	 * @param value The Flash structure represented by the node.
+	 * @param stringList
+	 * @param namespaceList
 	 */
-	protected void addNode(final String name, final MultinameInfoList value) {
+	protected void addNode(final String name, final MultinameInfoList value, final StringInfoList stringList, final NamespaceInfoList namespaceList) {
 		if (value != null) {
-			add(new FlashMultinameInfoListNode(name, value));
+			add(new FlashMultinameInfoListNode(name, value, stringList, namespaceList));
 		}
 	}
 

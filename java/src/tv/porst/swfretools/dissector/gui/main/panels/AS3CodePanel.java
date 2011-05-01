@@ -8,8 +8,9 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 
 import tv.porst.splib.gui.GuiHelpers;
-import tv.porst.swfretools.parser.structures.AS3Code;
-import tv.porst.swfretools.parser.tags.DoABCTag;
+import tv.porst.swfretools.utils.as3.ResolvedClass;
+import tv.porst.swfretools.utils.as3.ResolvedCode;
+import tv.porst.swfretools.utils.as3.ResolvedMethod;
 
 /**
  * Panel to display ActionScript 3 code.
@@ -21,10 +22,10 @@ public final class AS3CodePanel extends JPanel implements IExtraPanel {
 	 * 
 	 * @param code The code to display in the panel.
 	 */
-	public AS3CodePanel(final AS3Code code) {
+	public AS3CodePanel(final ResolvedClass resolvedClass, final ResolvedMethod resolvedMethod) {
 		super(new BorderLayout());
 
-		final JTextArea area = new JTextArea(AS3CodePrinter.getCodeText(code));
+		final JTextArea area = new JTextArea(AS3CodePrinter.getCodeText(resolvedClass, resolvedMethod));
 		area.setEditable(false);
 		area.setFont(new Font(GuiHelpers.getMonospaceFont(), 0, 12));
 
@@ -36,10 +37,10 @@ public final class AS3CodePanel extends JPanel implements IExtraPanel {
 	 * 
 	 * @param tag The tag that contains the code to display.
 	 */
-	public AS3CodePanel(final DoABCTag tag) {
+	public AS3CodePanel(final ResolvedCode code) {
 		super(new BorderLayout());
 
-		final JTextArea area = new JTextArea(AS3CodePrinter.getCodeText(tag));
+		final JTextArea area = new JTextArea(AS3CodePrinter.getCodeText(code));
 		area.setEditable(false);
 		area.setFont(new Font(GuiHelpers.getMonospaceFont(), 0, 12));
 

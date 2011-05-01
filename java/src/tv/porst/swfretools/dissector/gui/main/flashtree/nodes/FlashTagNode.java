@@ -68,6 +68,8 @@ import tv.porst.swfretools.parser.tags.SymbolClassTag;
 import tv.porst.swfretools.parser.tags.Tag;
 import tv.porst.swfretools.parser.tags.VideoFrameTag;
 import tv.porst.swfretools.utils.TagNames;
+import tv.porst.swfretools.utils.as3.ActionScript3Resolver;
+import tv.porst.swfretools.utils.as3.ResolvedCode;
 
 /**
  * Node that represents a Tag object in the Flash tree.
@@ -714,7 +716,8 @@ public final class FlashTagNode extends FlashTreeNode<Tag> {
 	public IExtraPanel getExtraPanel() {
 		if (panel == null) {
 			if (getUserObject() instanceof DoABCTag) {
-				panel = new AS3CodePanel((DoABCTag) getUserObject());
+				final ResolvedCode code = ActionScript3Resolver.resolve(((DoABCTag) getUserObject()).getAbcData());
+				panel = new AS3CodePanel(code);
 			}
 			else if (getUserObject() instanceof DoActionTag) {
 				panel = new AS2CodePanel(((DoActionTag) getUserObject()).getActions());
