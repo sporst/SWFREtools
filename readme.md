@@ -83,12 +83,12 @@ too for your work.
 The SWFRETools depend on a number of a number of external libraries you also
 need if you want to compile the tools yourself. The Java tools require
 
-JHexView: https://github.com/sporst/JHexView
-splib: https://github.com/sporst/splib
+* JHexView: https://github.com/sporst/JHexView
+* splib: https://github.com/sporst/splib
 
 while the Python tools require
 
-Buggery: https://github.com/grugq/Buggery
+* Buggery: https://github.com/grugq/Buggery
 
 Contributors
 ------------
