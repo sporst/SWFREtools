@@ -1,6 +1,7 @@
 package tv.porst.swfretools.dissector.gui;
 
 import java.awt.BorderLayout;
+import java.io.File;
 
 import javax.swing.JFrame;
 import javax.swing.JMenu;
@@ -8,12 +9,14 @@ import javax.swing.JMenuBar;
 import javax.swing.event.TreeSelectionEvent;
 import javax.swing.event.TreeSelectionListener;
 
+import net.iharder.dnd.FileDrop;
 import tv.porst.swfretools.dissector.gui.main.DetailPanel;
 import tv.porst.swfretools.dissector.gui.main.TreePanel;
 import tv.porst.swfretools.dissector.gui.main.actions.OpenAction;
 import tv.porst.swfretools.dissector.gui.main.flashtree.FlashTree;
 import tv.porst.swfretools.dissector.gui.main.flashtree.FlashTreeNodeSelectionHandler;
 import tv.porst.swfretools.dissector.gui.main.flashtree.nodes.FlashTreeNode;
+import tv.porst.swfretools.dissector.gui.main.implementations.FileActions;
 import tv.porst.swfretools.dissector.gui.main.models.FileModel;
 
 /**
@@ -55,6 +58,16 @@ public final class MainWindow extends JFrame {
 		tree.addTreeSelectionListener(internalTreeSelectionListener);
 
 		add(panel, BorderLayout.WEST);
+
+		// Add Drag & Drop capabilities to the panel to make it easier to open files.
+		new FileDrop(panel, new FileDrop.Listener() {
+			@Override
+			public void filesDropped(final File[] files) {
+				for (final File file : files) {
+					FileActions.openFile(tree, fileModel, file);
+				}
+			}
+		});
 
 		final JMenuBar menuBar = new JMenuBar();
 

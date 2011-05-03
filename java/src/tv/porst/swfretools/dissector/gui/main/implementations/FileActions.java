@@ -54,25 +54,34 @@ public final class FileActions {
 		}
 
 		if (JFileChooser.APPROVE_OPTION == chooser.showOpenDialog(tree)) {
+			openFile(tree, model, chooser.getSelectedFile());
+		}
+	}
 
-			final File file = chooser.getSelectedFile();
+	/**
+	 * Opens the given file.
+	 * 
+	 * @param tree The tree that shows the opened SWF file.
+	 * @param model The file model that keeps track of open files.
+	 * @param file The file to open.
+	 */
+	public static void openFile(final FlashTree tree, final FileModel model, final File file) {
 
-			try {
-				final LoadedFile loadedFile = model.openFile(file);
+		try {
+			final LoadedFile loadedFile = model.openFile(file);
 
-				// After loading the file, the new node in the tree should
-				// be selected. This is not done in the event handler because
-				// in the future there will be other ways to load files and
-				// those should not display the node selection behavior.
+			// After loading the file, the new node in the tree should
+			// be selected. This is not done in the event handler because
+			// in the future there will be other ways to load files and
+			// those should not display the node selection behavior.
 
-				final FlashTreeNode<?> node = FlashTreeHelpers.findNode((FlashTreeNode<?>) tree.getModel().getRoot(), loadedFile);
+			final FlashTreeNode<?> node = FlashTreeHelpers.findNode((FlashTreeNode<?>) tree.getModel().getRoot(), loadedFile);
 
-				selectNode(tree, node);
-			} catch (final IOException e) {
-				MessageBox.showError(SwingUtilities.getWindowAncestor(tree), "Selected file could not be read.");
-			} catch (final SWFParserException e) {
-				MessageBox.showError(SwingUtilities.getWindowAncestor(tree), "Selected file could not be parsed.");
-			}
+			selectNode(tree, node);
+		} catch (final IOException e) {
+			MessageBox.showError(SwingUtilities.getWindowAncestor(tree), "Selected file could not be read.");
+		} catch (final SWFParserException e) {
+			MessageBox.showError(SwingUtilities.getWindowAncestor(tree), "Selected file could not be parsed.");
 		}
 	}
 

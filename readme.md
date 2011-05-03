@@ -68,3 +68,11 @@ Contributors
 ------------
 
 [Sebastian Porst](http://github.com/sporst) (sp@porst.tv)
+
+External Software
+-----------------
+
+The SWFRETools use the following external components and libraries.
+
+The [Java FileDrop](http://www.iharder.net/current/java/filedrop/) component (Public Domain) to allow users to open Flash
+files via Drag & Drop.
