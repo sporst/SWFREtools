@@ -64,6 +64,32 @@ files.
 For more information about using StatsGenerator, please check out the readme
 file in the StatsGenerator directory.
 
+Installation
+------------
+
+The installation process of the SWFRETools is simple. Assuming you have Java
+installed, all you need is to download the latest binary package of SWFRETools
+from
+
+https://github.com/sporst/SWFREtools/downloads
+
+Once extracted, you can use use the tools.
+
+If you want to modify the source code of the any of the tools, I recommend you
+grab the source code from GitHub using your favourite Git client. The
+SWFRETools are developed using Eclipse so it makes sense if you used Eclipse
+too for your work.
+
+The SWFRETools depend on a number of a number of external libraries you also
+need if you want to compile the tools yourself. The Java tools require
+
+JHexView: https://github.com/sporst/JHexView
+splib: https://github.com/sporst/splib
+
+while the Python tools require
+
+Buggery: https://github.com/grugq/Buggery
+
 Contributors
 ------------
 
