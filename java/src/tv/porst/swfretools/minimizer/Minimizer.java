@@ -114,6 +114,18 @@ public final class Minimizer {
 	}
 
 	/**
+	 * Determines the output directory used by the Minimizer to write the final
+	 * result to.
+	 * 
+	 * @param inputFile The input file to be minimized.
+	 * 
+	 * @return The output directory.
+	 */
+	private static File getOutputDirectory(final File inputFile) {
+		return inputFile.getParentFile() == null ? new File(".") : inputFile.getParentFile();
+	}
+
+	/**
 	 * Determines whether an ActionScript 3 code fragment is noppable or not. A
 	 * code fragment is noppable if it has at least two instructions (one plus the
 	 * return instruction) and has not been nopped yet.
@@ -216,7 +228,7 @@ public final class Minimizer {
 		assert lastIteration >= 0 : "Last iteration must not be negative";
 
 		File inputFile = new File(flashFile);
-		final File parentDirectory = inputFile.getParentFile();
+		final File parentDirectory = getOutputDirectory(inputFile);
 		final String filename = FileHelpers.extractFilename(inputFile.getAbsolutePath());
 
 		if (lastIteration != 0) {
@@ -377,7 +389,7 @@ public final class Minimizer {
 		assert waitPeriod >= 0 : "Wait period must not be negative";
 
 		File inputFile = new File(flashFile);
-		final File parentDirectory = inputFile.getParentFile();
+		final File parentDirectory = getOutputDirectory(inputFile);
 		final String filename = FileHelpers.extractFilename(inputFile.getAbsolutePath());
 
 		boolean hasChanged = true;
@@ -557,7 +569,7 @@ public final class Minimizer {
 			final int lastIteration = removeTags(flashPlayer, flashFile, waitPeriod);
 			removeAS3Code(flashPlayer, flashFile, waitPeriod, lastIteration);
 
-			// TODO: Remove AS3 code
+			// TODO: Remove AS2 code
 
 			System.out.println("Minimization complete");
 		} catch (final MinimizerException e) {
