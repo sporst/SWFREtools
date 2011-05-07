@@ -1,0 +1,15 @@
+Version 1.1 (June 7th 2011):
+
+- Feature: Much improved display of ActionScript 3 code
+- Feature: Improved the Minimizer to give more status information
+- Feature: Added a way to dump decompressed Flash files to disk from the GUI
+- Feature: Opening SWF files via drag&drop is now possible in Flash Dissector
+- Feature: Added source setup and installation information to the readme file
+- Feature: Added the changes.txt file
+- Bugfix: Fixed a bug in the Minimizer that led to nullpointer exceptions when
+          the output results directory could not be determined
+- Bugfix: Fixed a bug when parsing negative signed 3-byte integer values
+
+Version 1.0 (April 21st 2011):
+
+- Initial release
