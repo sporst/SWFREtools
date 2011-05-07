@@ -4,6 +4,7 @@ import java.util.List;
 
 import tv.porst.swfretools.parser.actions.as3.*;
 import tv.porst.swfretools.parser.structures.AS3Code;
+import tv.porst.swfretools.parser.structures.MethodInfo;
 import tv.porst.swfretools.utils.ActionScript3Helpers;
 import tv.porst.swfretools.utils.as3.ResolvedClass;
 import tv.porst.swfretools.utils.as3.ResolvedCode;
@@ -92,13 +93,18 @@ public final class AS3CodePrinter {
 		}
 	}
 
+	private static void addIf(final StringBuilder sb, final String mnemonic, final long value) {
+		sb.append(String.format("%s %08X", mnemonic, value));
+	}
+
 	/**
 	 * Adds an instruction to the output.
 	 * 
 	 * @param sb The string builder the output is appended to.
 	 * @param instruction The instruction to add to the output.
+	 * @param firstOffset
 	 */
-	private static void addInstructionText(final StringBuilder sb, final AS3Instruction instruction, final ResolvedCode code) {
+	private static void addInstructionText(final StringBuilder sb, final AS3Instruction instruction, final ResolvedCode code, final int firstOffset) {
 
 		new AS3Visitor() {
 
@@ -149,8 +155,13 @@ public final class AS3CodePrinter {
 
 			@Override
 			protected void visit(final AS3Callmethod instruction) {
-				// TODO
-				add(sb, "callmethod", instruction.getIndex().value(), instruction.getArgCount().value());
+				final String methodName = getMethodName(instruction.getIndex().value(), code);
+
+				if (methodName == null) {
+					sb.append(String.format("callmethod ???, %d", instruction.getArgCount().value()));
+				} else {
+					sb.append(String.format("callmethod %s, %d", instruction.getArgCount().value()));
+				}
 			}
 
 			@Override
@@ -170,8 +181,13 @@ public final class AS3CodePrinter {
 
 			@Override
 			protected void visit(final AS3Callstatic instruction) {
-				// TODO
-				add(sb, "callstatic", instruction.getIndex().value(), instruction.getArgCount().value());
+				final String methodName = getMethodName(instruction.getIndex().value(), code);
+
+				if (methodName == null) {
+					sb.append(String.format("callstatic ???, %d", instruction.getArgCount().value()));
+				} else {
+					sb.append(String.format("callstatic %s, %d", instruction.getArgCount().value()));
+				}
 			}
 
 			@Override
@@ -251,8 +267,16 @@ public final class AS3CodePrinter {
 
 			@Override
 			protected void visit(final AS3Debug instruction) {
-				// TODO
-				add(sb, "debug", instruction.getDebugType().value(), instruction.getIndex().value(), instruction.getReg().value(), instruction.getExtra().value());
+
+				final int index = instruction.getIndex().value();
+
+				if (index < code.getData().getConstantPool().getStrings().size()) {
+					final String constant = code.getData().getConstantPool().getStrings().get(index).getName().value();
+					sb.append(String.format("debug %d, %s, %d, %d", instruction.getDebugType().value(), constant, instruction.getReg().value(), instruction.getExtra().value()));
+				}
+				else {
+					sb.append(String.format("debug %d, ???, %d, %d", instruction.getDebugType().value(), instruction.getReg().value(), instruction.getExtra().value()));
+				}
 			}
 
 			@Override
@@ -417,72 +441,72 @@ public final class AS3CodePrinter {
 
 			@Override
 			protected void visit(final AS3Ifeq instruction) {
-				add(sb, "ifeq", instruction.getOffset().value());
+				addIf(sb, "ifeq", instruction.getBitPosition() / 8 + instruction.getBitLength() / 8 + instruction.getOffset().value() - firstOffset);
 			}
 
 			@Override
 			protected void visit(final AS3Iffalse instruction) {
-				add(sb, "iffalse", instruction.getOffset().value());
+				addIf(sb, "iffalse", instruction.getBitPosition() / 8 + instruction.getBitLength() / 8 + instruction.getOffset().value() - firstOffset);
 			}
 
 			@Override
 			protected void visit(final AS3Ifge instruction) {
-				add(sb, "ifge", instruction.getOffset().value());
+				addIf(sb, "ifge", instruction.getBitPosition() / 8 + instruction.getBitLength() / 8 + instruction.getOffset().value() - firstOffset);
 			}
 
 			@Override
 			protected void visit(final AS3Ifgt instruction) {
-				add(sb, "ifgt", instruction.getOffset().value());
+				addIf(sb, "ifgt", instruction.getBitPosition() / 8 + instruction.getBitLength() / 8 + instruction.getOffset().value() - firstOffset);
 			}
 
 			@Override
 			protected void visit(final AS3Ifle instruction) {
-				add(sb, "ifle", instruction.getOffset().value());
+				addIf(sb, "ifle", instruction.getBitPosition() / 8 + instruction.getBitLength() / 8 + instruction.getOffset().value() - firstOffset);
 			}
 
 			@Override
 			protected void visit(final AS3Iflt instruction) {
-				add(sb, "iflt", instruction.getOffset().value());
+				addIf(sb, "iflt", instruction.getBitPosition() / 8 + instruction.getBitLength() / 8 + instruction.getOffset().value() - firstOffset);
 			}
 
 			@Override
 			protected void visit(final AS3Ifne instruction) {
-				add(sb, "ifne", instruction.getOffset().value());
+				addIf(sb, "ifne", instruction.getBitPosition() / 8 + instruction.getBitLength() / 8 + instruction.getOffset().value() - firstOffset);
 			}
 
 			@Override
 			protected void visit(final AS3Ifnge instruction) {
-				add(sb, "ifnge", instruction.getOffset().value());
+				addIf(sb, "ifnge", instruction.getBitPosition() / 8 + instruction.getBitLength() / 8 + instruction.getOffset().value() - firstOffset);
 			}
 
 			@Override
 			protected void visit(final AS3Ifngt instruction) {
-				add(sb, "ifngt", instruction.getOffset().value());
+				addIf(sb, "ifngt", instruction.getBitPosition() / 8 + instruction.getBitLength() / 8 + instruction.getOffset().value() - firstOffset);
 			}
 
 			@Override
 			protected void visit(final AS3Ifnle instruction) {
-				add(sb, "ifnle", instruction.getOffset().value());
+				addIf(sb, "ifnle", instruction.getBitPosition() / 8 + instruction.getBitLength() / 8 + instruction.getOffset().value() - firstOffset);
 			}
 
 			@Override
 			protected void visit(final AS3Ifnlt instruction) {
-				add(sb, "ifnlt", instruction.getOffset().value());
+				addIf(sb, "ifnlt", instruction.getBitPosition() / 8 + instruction.getBitLength() / 8 + instruction.getOffset().value() - firstOffset);
 			}
 
 			@Override
 			protected void visit(final AS3Ifstricteq instruction) {
-				add(sb, "ifstricteq", instruction.getOffset().value());
+				addIf(sb, "ifstricteq", instruction.getBitPosition() / 8 + instruction.getBitLength() / 8 + instruction.getOffset().value() - firstOffset);
 			}
 
 			@Override
 			protected void visit(final AS3Ifstrictne instruction) {
-				add(sb, "ifstrictne", instruction.getOffset().value());
+				addIf(sb, "ifstrictne", instruction.getBitPosition() / 8 + instruction.getBitLength() / 8 + instruction.getOffset().value() - firstOffset);
 			}
 
 			@Override
 			protected void visit(final AS3Iftrue instruction) {
-				add(sb, "iftrue", instruction.getOffset().value());
+				addIf(sb, "iftrue", instruction.getBitPosition() / 8 + instruction.getBitLength() / 8 + instruction.getOffset().value() - firstOffset);
 			}
 
 			@Override
@@ -672,8 +696,7 @@ public final class AS3CodePrinter {
 
 			@Override
 			protected void visit(final AS3Pushnamespace instruction) {
-				// TODO
-				add(sb, "pushnamespace", instruction.getIndex().value());
+				addNamespace(sb, "pushnamespace", instruction.getIndex().value(), code);
 			}
 
 			@Override
@@ -920,6 +943,21 @@ public final class AS3CodePrinter {
 		}
 	}
 
+	private static void addNamespace(final StringBuilder sb, final String mnemonic, final int namespace, final ResolvedCode code) {
+
+		final String namespaceString = code.resolveNamespace(namespace);
+
+		sb.append(mnemonic);
+		sb.append(" ");
+
+		if (namespaceString == null) {
+			sb.append(String.format("??? [0x%08X]", namespace));
+		}
+		else {
+			sb.append(String.format("\"%s\" [0x%08X]", namespaceString, namespace));
+		}
+	}
+
 	private static void addString(final StringBuilder sb, final String mnemonic, final int multiName, final ResolvedCode code) {
 
 		final String string = code.resolveString(multiName - 1);
@@ -977,12 +1015,29 @@ public final class AS3CodePrinter {
 			sb.append(prefix);
 			sb.append(String.format("%08X %08X  ", absoluteOffset, relativeOffset));
 
-			addInstructionText(sb, instruction, resolvedCode);
+			addInstructionText(sb, instruction, resolvedCode, firstOffset / 8);
 
 			sb.append('\n');
 		}
 
 		return sb.toString();
+	}
+
+	private static String getMethodName(final int methodIndex, final ResolvedCode code) {
+		if (methodIndex >= code.getData().getMethodInfos().size()) {
+			return null;
+		}
+
+		final MethodInfo method = code.getData().getMethodInfos().get(methodIndex);
+
+		final int nameIndex = method.getName().value();
+
+		if (nameIndex >= code.getData().getConstantPool().getStrings().size()) {
+			return null;
+		}
+		else {
+			return code.getData().getConstantPool().getStrings().get(nameIndex).getName().value();
+		}
 	}
 
 	public static String getCodeText(final ResolvedClass resolvedClass, final ResolvedMethod resolvedMethod) {

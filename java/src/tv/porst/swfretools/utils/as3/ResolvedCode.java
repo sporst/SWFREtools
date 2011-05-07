@@ -146,6 +146,29 @@ public final class ResolvedCode {
 	}
 
 	/**
+	 * Returns a string value from the namespace constants table.
+	 * 
+	 * @param index Index into the table.
+	 * 
+	 * @return The indexed namespace value.
+	 */
+	public String resolveNamespace(final int index) {
+
+		if (index < 0) {
+			throw new IllegalArgumentException("Index value must not be negative");
+		}
+
+		if (index >= data.getConstantPool().getNamespaces().size()) {
+			return null;
+		}
+		else {
+			final int nameIndex = data.getConstantPool().getNamespaces().get(index).getName().value();
+
+			return nameIndex == 0 ? "" : resolveString(nameIndex);
+		}
+	}
+
+	/**
 	 * Returns a string value from the string constants table.
 	 * 
 	 * @param index Index into the table.
