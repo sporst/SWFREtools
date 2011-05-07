@@ -15,6 +15,7 @@ import tv.porst.swfretools.parser.actions.as3.AS3Nop;
 import tv.porst.swfretools.parser.structures.AS3Code;
 import tv.porst.swfretools.parser.structures.MethodBody;
 import tv.porst.swfretools.parser.structures.SWFFile;
+import tv.porst.swfretools.parser.structures.TagList;
 import tv.porst.swfretools.parser.tags.DoABCTag;
 import tv.porst.swfretools.parser.tags.Tag;
 import tv.porst.swfretools.utils.TagNames;
@@ -254,16 +255,20 @@ public final class Minimizer {
 			// crashing.
 			final List<AS3Code> removableCode = new ArrayList<AS3Code>();
 
+			int codeSectionCounter = 1;
+			final List<AS3Code> codeSections = findAS3Code(parsedFile);
+
 			// Inner loop: Remove one function at a time and then check
 			// whether the modified file still crashes.
-			for (final AS3Code code : findAS3Code(parsedFile)) {
+			for (final AS3Code code : codeSections) {
 
 				if (!isNoppable(code)) {
 					// This code fragment can not be nopped, so just ignore it.
+					codeSectionCounter++;
 					continue;
 				}
 
-				System.out.printf("Trying to remove code at offset %08X\n", code.getBitPosition() / 8);
+				System.out.printf("Trying to remove method body (%d of %d) at offset %08X ... ", codeSectionCounter, codeSections.size(), code.getBitPosition() / 8);
 
 				final byte[] modifiedData = nopCode(fileData, code);
 
@@ -281,7 +286,13 @@ public final class Minimizer {
 
 				if (executionResult == ExecutionResult.Crashed) {
 					removableCode.add(code);
+					System.out.println("REMOVE");
 				}
+				else {
+					System.out.println("KEEP");
+				}
+
+				codeSectionCounter++;
 			}
 
 			if (removableCode.isEmpty()) {
@@ -400,11 +411,15 @@ public final class Minimizer {
 			// crashing.
 			final List<Tag> removableTags = new ArrayList<Tag>();
 
+			final TagList tags = parsedFile.getTags();
+
+			int tagCounter = 1;
+
 			// Inner loop: Remove one tag at a time and then check
 			// whether the modified file still crashes.
-			for (final Tag tag : parsedFile.getTags()) {
+			for (final Tag tag : tags) {
 
-				System.out.printf("Trying to remove tag %s at offset %08X\n", TagNames.getPrintableTagName(tag.getHeader().getTagCode()), tag.getBitPosition() / 8);
+				System.out.printf("Trying to remove tag %s (%d of %d) at offset %08X ... ", TagNames.getPrintableTagName(tag.getHeader().getTagCode()), tagCounter, tags.size(), tag.getBitPosition() / 8);
 
 				final int startOffset = tag.getBitPosition() / 8;
 				final int length = tag.getHeader().getHeaderLength() + tag.getHeader().getNormalizedLength();
@@ -425,7 +440,13 @@ public final class Minimizer {
 
 				if (executionResult == ExecutionResult.Crashed) {
 					removableTags.add(tag);
+					System.out.println("REMOVE");
 				}
+				else {
+					System.out.println("KEEP");
+				}
+
+				tagCounter++;
 			}
 
 			if (removableTags.isEmpty()) {
