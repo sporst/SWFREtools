@@ -1,19 +1,25 @@
 package tv.porst.swfretools.dissector.gui;
 
 import java.awt.BorderLayout;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.io.File;
 
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
+import javax.swing.JTree;
 import javax.swing.event.TreeSelectionEvent;
 import javax.swing.event.TreeSelectionListener;
+import javax.swing.tree.TreePath;
 
 import net.iharder.dnd.FileDrop;
 import tv.porst.swfretools.dissector.gui.main.DetailPanel;
 import tv.porst.swfretools.dissector.gui.main.TreePanel;
 import tv.porst.swfretools.dissector.gui.main.actions.OpenAction;
 import tv.porst.swfretools.dissector.gui.main.flashtree.FlashTree;
+import tv.porst.swfretools.dissector.gui.main.flashtree.FlashTreeNodeClickHandler;
 import tv.porst.swfretools.dissector.gui.main.flashtree.FlashTreeNodeSelectionHandler;
 import tv.porst.swfretools.dissector.gui.main.flashtree.nodes.FlashTreeNode;
 import tv.porst.swfretools.dissector.gui.main.implementations.FileActions;
@@ -36,6 +42,11 @@ public final class MainWindow extends JFrame {
 	private final TreeSelectionListener internalTreeSelectionListener = new InternalTreeSelectionListener();
 
 	/**
+	 * Mouse listener that handles clicks on nodes.
+	 */
+	private final MouseListener internalTreeClickListener = new InternalTreeClickListener();
+
+	/**
 	 * Panel that is shown on the right-hand side of the window.
 	 */
 	private final DetailPanel detailPanel = new DetailPanel();
@@ -56,6 +67,7 @@ public final class MainWindow extends JFrame {
 
 		final FlashTree tree = panel.getTree();
 		tree.addTreeSelectionListener(internalTreeSelectionListener);
+		tree.addMouseListener(internalTreeClickListener);
 
 		add(panel, BorderLayout.WEST);
 
@@ -81,6 +93,49 @@ public final class MainWindow extends JFrame {
 
 		setSize(900, 600);
 		setLocationRelativeTo(null);
+	}
+
+	/**
+	 * Handles clicks on tree nodes.
+	 */
+	private final class InternalTreeClickListener extends MouseAdapter {
+
+		/**
+		 * Handles right-clicks on tree nodes.
+		 * 
+		 * @param e Mouse event created by the right-click.
+		 */
+		private void handleRightClick(final MouseEvent e) {
+
+			final int x = e.getX();
+			final int y = e.getY();
+
+			final JTree tree = (JTree)e.getSource();
+			final TreePath path = tree.getPathForLocation(x, y);
+
+			if (path == null) {
+				return;
+			}
+
+			tree.setSelectionPath(path);
+
+			final FlashTreeNode<?> node = (FlashTreeNode<?>)path.getLastPathComponent();
+
+			FlashTreeNodeClickHandler.handleRightClick(tree, node, x, y);
+		}
+
+		@Override
+		public void mousePressed(final MouseEvent e) {
+			if (e.isPopupTrigger()) {
+				handleRightClick(e);
+			}
+		}
+		@Override
+		public void mouseReleased(final MouseEvent e) {
+			if (e.isPopupTrigger()) {
+				handleRightClick(e);
+			}
+		}
 	}
 
 	/**

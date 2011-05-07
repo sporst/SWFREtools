@@ -88,7 +88,7 @@ public final class FileActions {
 	/**
 	 * File filter class to make sure only SWF files can be selected.
 	 */
-	private static class SWFFileFilter extends FileFilter {
+	public static class SWFFileFilter extends FileFilter {
 
 		@Override
 		public boolean accept(final File f) {
