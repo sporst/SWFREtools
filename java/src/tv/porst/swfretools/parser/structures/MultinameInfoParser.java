@@ -19,6 +19,7 @@ public class MultinameInfoParser {
 		case 0x0E: return MultinameAParser.parse(parser, fieldName);
 		case 0x1B: return MultinameLParser.parse(parser, fieldName);
 		case 0x1C: return MultinameLAParser.parse(parser, fieldName);
+		case 0x1D: return GenericVectorParser.parse(parser, fieldName);
 		default: throw new IllegalStateException("Invalid multiname type");
 		}
 	}

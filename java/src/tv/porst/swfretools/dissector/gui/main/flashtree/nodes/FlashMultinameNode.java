@@ -1,6 +1,7 @@
 package tv.porst.swfretools.dissector.gui.main.flashtree.nodes;
 
 import tv.porst.swfretools.dissector.gui.main.panels.IExtraPanel;
+import tv.porst.swfretools.parser.structures.GenericVector;
 import tv.porst.swfretools.parser.structures.IMultiname;
 import tv.porst.swfretools.parser.structures.Multiname;
 import tv.porst.swfretools.parser.structures.MultinameA;
@@ -77,6 +78,12 @@ public final class FlashMultinameNode extends FlashTreeNode<IMultiname> {
 		}
 		else if (getUserObject() instanceof RTQNameLA) {
 			// Nothing to do
+		}
+		else if (getUserObject() instanceof GenericVector) {
+			final GenericVector cname = (GenericVector) getUserObject();
+			addNode("type_definition", cname.getTypeDefinition());
+			addNode("param_count", cname.getParamCount());
+			addNode("params", cname.getParams());
 		}
 		else {
 			throw new IllegalStateException("Error: Unknown multiname");
