@@ -11,6 +11,8 @@ Version 1.2 (June 5th 2011):
 	  been fixed.
 - Bugfix: The constant list defined by an ActionScript 2 ConstantPool
           instruction is now better formatted for improved readability.
+- Bugfix: ActionScript 2 Push instructions were not previously not shown in the
+          GUI.
 
 Version 1.1 (May 7th 2011):
 

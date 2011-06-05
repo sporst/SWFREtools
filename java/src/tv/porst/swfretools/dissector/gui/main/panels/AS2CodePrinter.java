@@ -1,100 +1,7 @@
 package tv.porst.swfretools.dissector.gui.main.panels;
 
 import tv.porst.splib.binaryparser.AsciiString;
-import tv.porst.swfretools.parser.actions.as2.AS2Visitor;
-import tv.porst.swfretools.parser.actions.as2.Action;
-import tv.porst.swfretools.parser.actions.as2.ActionAdd;
-import tv.porst.swfretools.parser.actions.as2.ActionAdd2;
-import tv.porst.swfretools.parser.actions.as2.ActionAnd;
-import tv.porst.swfretools.parser.actions.as2.ActionAsciiToChar;
-import tv.porst.swfretools.parser.actions.as2.ActionBitAnd;
-import tv.porst.swfretools.parser.actions.as2.ActionBitLShift;
-import tv.porst.swfretools.parser.actions.as2.ActionBitOr;
-import tv.porst.swfretools.parser.actions.as2.ActionBitRShift;
-import tv.porst.swfretools.parser.actions.as2.ActionBitURShift;
-import tv.porst.swfretools.parser.actions.as2.ActionBitXor;
-import tv.porst.swfretools.parser.actions.as2.ActionCall;
-import tv.porst.swfretools.parser.actions.as2.ActionCallFunction;
-import tv.porst.swfretools.parser.actions.as2.ActionCallMethod;
-import tv.porst.swfretools.parser.actions.as2.ActionCastOp;
-import tv.porst.swfretools.parser.actions.as2.ActionCharToAscii;
-import tv.porst.swfretools.parser.actions.as2.ActionCloneSprite;
-import tv.porst.swfretools.parser.actions.as2.ActionConstantPool;
-import tv.porst.swfretools.parser.actions.as2.ActionDecrement;
-import tv.porst.swfretools.parser.actions.as2.ActionDefineFunction;
-import tv.porst.swfretools.parser.actions.as2.ActionDefineFunction2;
-import tv.porst.swfretools.parser.actions.as2.ActionDefineLocal;
-import tv.porst.swfretools.parser.actions.as2.ActionDefineLocal2;
-import tv.porst.swfretools.parser.actions.as2.ActionDelete;
-import tv.porst.swfretools.parser.actions.as2.ActionDelete2;
-import tv.porst.swfretools.parser.actions.as2.ActionDivide;
-import tv.porst.swfretools.parser.actions.as2.ActionEndDrag;
-import tv.porst.swfretools.parser.actions.as2.ActionEnumerate;
-import tv.porst.swfretools.parser.actions.as2.ActionEnumerate2;
-import tv.porst.swfretools.parser.actions.as2.ActionEquals;
-import tv.porst.swfretools.parser.actions.as2.ActionEquals2;
-import tv.porst.swfretools.parser.actions.as2.ActionExtends;
-import tv.porst.swfretools.parser.actions.as2.ActionGetMember;
-import tv.porst.swfretools.parser.actions.as2.ActionGetProperty;
-import tv.porst.swfretools.parser.actions.as2.ActionGetTime;
-import tv.porst.swfretools.parser.actions.as2.ActionGetURL;
-import tv.porst.swfretools.parser.actions.as2.ActionGetURL2;
-import tv.porst.swfretools.parser.actions.as2.ActionGetVariable;
-import tv.porst.swfretools.parser.actions.as2.ActionGotoFrame;
-import tv.porst.swfretools.parser.actions.as2.ActionGotoFrame2;
-import tv.porst.swfretools.parser.actions.as2.ActionGotoLabel;
-import tv.porst.swfretools.parser.actions.as2.ActionGreater;
-import tv.porst.swfretools.parser.actions.as2.ActionIf;
-import tv.porst.swfretools.parser.actions.as2.ActionImplementsOp;
-import tv.porst.swfretools.parser.actions.as2.ActionIncrement;
-import tv.porst.swfretools.parser.actions.as2.ActionInitArray;
-import tv.porst.swfretools.parser.actions.as2.ActionInitObject;
-import tv.porst.swfretools.parser.actions.as2.ActionInstanceOf;
-import tv.porst.swfretools.parser.actions.as2.ActionJump;
-import tv.porst.swfretools.parser.actions.as2.ActionLess;
-import tv.porst.swfretools.parser.actions.as2.ActionLess2;
-import tv.porst.swfretools.parser.actions.as2.ActionMBAsciiToChar;
-import tv.porst.swfretools.parser.actions.as2.ActionMBCharToAscii;
-import tv.porst.swfretools.parser.actions.as2.ActionMBStringExtract;
-import tv.porst.swfretools.parser.actions.as2.ActionMBStringLength;
-import tv.porst.swfretools.parser.actions.as2.ActionModulo;
-import tv.porst.swfretools.parser.actions.as2.ActionMultiply;
-import tv.porst.swfretools.parser.actions.as2.ActionNewMethod;
-import tv.porst.swfretools.parser.actions.as2.ActionNewObject;
-import tv.porst.swfretools.parser.actions.as2.ActionNextFrame;
-import tv.porst.swfretools.parser.actions.as2.ActionNot;
-import tv.porst.swfretools.parser.actions.as2.ActionOr;
-import tv.porst.swfretools.parser.actions.as2.ActionSetMember;
-import tv.porst.swfretools.parser.actions.as2.ActionSetProperty;
-import tv.porst.swfretools.parser.actions.as2.ActionSetTarget;
-import tv.porst.swfretools.parser.actions.as2.ActionSetTarget2;
-import tv.porst.swfretools.parser.actions.as2.ActionSetVariable;
-import tv.porst.swfretools.parser.actions.as2.ActionStackSwap;
-import tv.porst.swfretools.parser.actions.as2.ActionStartDrag;
-import tv.porst.swfretools.parser.actions.as2.ActionStop;
-import tv.porst.swfretools.parser.actions.as2.ActionStopSounds;
-import tv.porst.swfretools.parser.actions.as2.ActionStoreRegister;
-import tv.porst.swfretools.parser.actions.as2.ActionStrictEquals;
-import tv.porst.swfretools.parser.actions.as2.ActionStringAdd;
-import tv.porst.swfretools.parser.actions.as2.ActionStringEquals;
-import tv.porst.swfretools.parser.actions.as2.ActionStringExtract;
-import tv.porst.swfretools.parser.actions.as2.ActionStringGreater;
-import tv.porst.swfretools.parser.actions.as2.ActionStringLength;
-import tv.porst.swfretools.parser.actions.as2.ActionStringLess;
-import tv.porst.swfretools.parser.actions.as2.ActionSubtract;
-import tv.porst.swfretools.parser.actions.as2.ActionTargetPath;
-import tv.porst.swfretools.parser.actions.as2.ActionThrow;
-import tv.porst.swfretools.parser.actions.as2.ActionToInteger;
-import tv.porst.swfretools.parser.actions.as2.ActionToNumbers;
-import tv.porst.swfretools.parser.actions.as2.ActionToString;
-import tv.porst.swfretools.parser.actions.as2.ActionToggleQuality;
-import tv.porst.swfretools.parser.actions.as2.ActionTrace;
-import tv.porst.swfretools.parser.actions.as2.ActionTry;
-import tv.porst.swfretools.parser.actions.as2.ActionTypeOf;
-import tv.porst.swfretools.parser.actions.as2.ActionUnknown;
-import tv.porst.swfretools.parser.actions.as2.ActionWaitForFrame;
-import tv.porst.swfretools.parser.actions.as2.ActionWaitForFrame2;
-import tv.porst.swfretools.parser.actions.as2.ActionWith;
+import tv.porst.swfretools.parser.actions.as2.*;
 import tv.porst.swfretools.parser.structures.ActionList;
 import tv.porst.swfretools.parser.structures.StringList;
 
@@ -484,6 +391,55 @@ public final class AS2CodePrinter {
 			@Override
 			protected void visit(final ActionOr instruction) {
 				add(sb, "Or");
+			}
+
+			@Override
+			protected void visit(final ActionPush instruction) {
+				add(sb, "Push");
+
+				final PushedValueList strings = instruction.getPushedValueList();
+
+				if (strings.size() != 0) {
+					sb.append('\n');
+				}
+
+				for (int i = 0; i < strings.size(); i++) {
+					final PushedValue<?> string = strings.get(i);
+
+					if (string instanceof PushedBoolean) {
+						sb.append(String.format("                      %03d: %b\n", i, ((PushedBoolean)string).getValue().value()));
+					}
+					else if (string instanceof PushedConstant16) {
+						sb.append(String.format("                      %03d: %d\n", i, ((PushedConstant16)string).getValue().value()));
+					}
+					else if (string instanceof PushedConstant8) {
+						sb.append(String.format("                      %03d: %d\n", i, ((PushedConstant8)string).getValue().value()));
+					}
+					else if (string instanceof PushedDouble) {
+						sb.append(String.format("                      %03d: %f\n", i, ((PushedDouble)string).getValue().value()));
+					}
+					else if (string instanceof PushedFloat) {
+						sb.append(String.format("                      %03d: %f\n", i, ((PushedFloat)string).getValue().value()));
+					}
+					else if (string instanceof PushedInteger) {
+						sb.append(String.format("                      %03d: %d\n", i, ((PushedInteger)string).getValue().value()));
+					}
+					else if (string instanceof PushedNull) {
+						sb.append(String.format("                      %03d: null\n", i));
+					}
+					else if (string instanceof PushedRegisterNumber) {
+						sb.append(String.format("                      %03d: %d\n", i, ((PushedRegisterNumber)string).getValue().value()));
+					}
+					else if (string instanceof PushedString) {
+						sb.append(String.format("                      %03d: %s\n", i, ((PushedString)string).getValue().value()));
+					}
+					else if (string instanceof PushedUndefined) {
+						sb.append(String.format("                      %03d: undefined\n", i));
+					}
+					else if (string instanceof PushedUnknown) {
+						sb.append(String.format("                      %03d: unknown\n", i));
+					}
+				}
 			}
 
 			@Override
