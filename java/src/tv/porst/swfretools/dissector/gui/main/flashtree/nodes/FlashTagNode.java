@@ -490,6 +490,7 @@ public final class FlashTagNode extends FlashTreeNode<Tag> {
 			final DoInitActionTag ctag = (DoInitActionTag) tag;
 
 			addNode("SpriteID", ctag.getSpriteId());
+			addNode("Actions", ctag.getActions());
 		}
 		else if (tag instanceof EnableDebugger2Tag) {
 			final EnableDebugger2Tag ctag = (EnableDebugger2Tag) tag;
