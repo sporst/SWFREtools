@@ -243,9 +243,13 @@ public final class AS2CodePrinter {
 
 				final StringList strings = instruction.getConstantPool();
 
+				if (strings.size() != 0) {
+					sb.append('\n');
+				}
+
 				for (int i = 0; i < strings.size(); i++) {
 					final AsciiString string = strings.get(i);
-					sb.append(String.format("%03d: %s", i, string.value()));
+					sb.append(String.format("                      %03d: %s\n", i, string.value()));
 				}
 			}
 
