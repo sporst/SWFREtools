@@ -157,7 +157,11 @@ public final class AS2CodePrinter {
 
 				for (int i = 0; i < strings.size(); i++) {
 					final AsciiString string = strings.get(i);
-					sb.append(String.format("                      %03d: %s\n", i, string.value()));
+					sb.append(String.format("                      %03d: %s", i, string.value()));
+
+					if (i != strings.size() - 1) {
+						sb.append('\n');
+					}
 				}
 			}
 
@@ -422,37 +426,41 @@ public final class AS2CodePrinter {
 					final PushedValue<?> string = strings.get(i);
 
 					if (string instanceof PushedBoolean) {
-						sb.append(String.format("                      %03d: %b\n", i, ((PushedBoolean)string).getValue().value()));
+						sb.append(String.format("                      %03d: %b", i, ((PushedBoolean)string).getValue().value()));
 					}
 					else if (string instanceof PushedConstant16) {
-						sb.append(String.format("                      %03d: %d\n", i, ((PushedConstant16)string).getValue().value()));
+						sb.append(String.format("                      %03d: %d", i, ((PushedConstant16)string).getValue().value()));
 					}
 					else if (string instanceof PushedConstant8) {
-						sb.append(String.format("                      %03d: %d\n", i, ((PushedConstant8)string).getValue().value()));
+						sb.append(String.format("                      %03d: %d", i, ((PushedConstant8)string).getValue().value()));
 					}
 					else if (string instanceof PushedDouble) {
-						sb.append(String.format("                      %03d: %f\n", i, ((PushedDouble)string).getValue().value()));
+						sb.append(String.format("                      %03d: %f", i, ((PushedDouble)string).getValue().value()));
 					}
 					else if (string instanceof PushedFloat) {
-						sb.append(String.format("                      %03d: %f\n", i, ((PushedFloat)string).getValue().value()));
+						sb.append(String.format("                      %03d: %f", i, ((PushedFloat)string).getValue().value()));
 					}
 					else if (string instanceof PushedInteger) {
-						sb.append(String.format("                      %03d: %d\n", i, ((PushedInteger)string).getValue().value()));
+						sb.append(String.format("                      %03d: %d", i, ((PushedInteger)string).getValue().value()));
 					}
 					else if (string instanceof PushedNull) {
-						sb.append(String.format("                      %03d: null\n", i));
+						sb.append(String.format("                      %03d: null", i));
 					}
 					else if (string instanceof PushedRegisterNumber) {
-						sb.append(String.format("                      %03d: %d\n", i, ((PushedRegisterNumber)string).getValue().value()));
+						sb.append(String.format("                      %03d: %d", i, ((PushedRegisterNumber)string).getValue().value()));
 					}
 					else if (string instanceof PushedString) {
-						sb.append(String.format("                      %03d: %s\n", i, ((PushedString)string).getValue().value()));
+						sb.append(String.format("                      %03d: %s", i, ((PushedString)string).getValue().value()));
 					}
 					else if (string instanceof PushedUndefined) {
-						sb.append(String.format("                      %03d: undefined\n", i));
+						sb.append(String.format("                      %03d: undefined", i));
 					}
 					else if (string instanceof PushedUnknown) {
-						sb.append(String.format("                      %03d: unknown\n", i));
+						sb.append(String.format("                      %03d: unknown", i));
+					}
+
+					if (i != strings.size() - 1) {
+						sb.append('\n');
 					}
 				}
 			}
