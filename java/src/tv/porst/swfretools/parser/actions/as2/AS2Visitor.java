@@ -124,6 +124,8 @@ public abstract class AS2Visitor {
 
 	protected abstract void visit(final ActionOr instruction);
 
+	protected abstract void visit(final ActionPlay instruction);
+
 	protected abstract void visit(final ActionPop instruction);
 
 	protected abstract void visit(final ActionPush instruction);
@@ -375,6 +377,9 @@ public abstract class AS2Visitor {
 		}
 		else if (instruction instanceof ActionOr) {
 			visit((ActionOr) instruction);
+		}
+		else if (instruction instanceof ActionPlay) {
+			visit((ActionPlay) instruction);
 		}
 		else if (instruction instanceof ActionPop) {
 			visit((ActionPop) instruction);
