@@ -30,7 +30,7 @@ public class ActionPushParser {
 		case 7: return new PushedInteger(type, parseUINT32(parser, 0x00006, fieldName + "::Integer"));
 		case 8: return new PushedConstant8(type, parseUINT8(parser, 0x00006, fieldName + "::Constant8"));
 		case 9: return new PushedConstant16(type, parseUINT16(parser, 0x00006, fieldName + "::Constant16"));
-		default: throw new IllegalStateException("Unknown pushed type");
+		default: return new PushedUnknown(type);
 		}
 
 	}
@@ -43,7 +43,12 @@ public class ActionPushParser {
 		final List<PushedValue<?>> pushedValues = new ArrayList<PushedValue<?>>();
 
 		while (parser.getBytePosition() < end) {
-			pushedValues.add(parsePushedValue(parser, fieldName));
+			try {
+				pushedValues.add(parsePushedValue(parser, fieldName));
+			}
+			catch (final IllegalArgumentException e) {
+				break;
+			}
 		}
 
 		return new ActionPush(actionCode, length, new PushedValueList(pushedValues));

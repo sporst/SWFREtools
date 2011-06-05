@@ -210,17 +210,22 @@ public final class TagParser {
 		{
 			final int before = parser.getBytePosition();
 
-			final Tag parsedTag = parseTag(parser, version, errors);
+			try {
+				final Tag parsedTag = parseTag(parser, version, errors);
 
-			if (parsedTag != null) {
-				tags.add(parsedTag);
+				if (parsedTag != null) {
+					tags.add(parsedTag);
 
-				if (parser.getBytePosition() != before + parsedTag.getHeader().getNormalizedLength() + (parsedTag.getHeader().getHeaderLength()))
-				{
-					System.out.println(String.format("No: Wanted %X but was %X", before + parsedTag.getHeader().getNormalizedLength() + (parsedTag.getHeader().getHeaderLength()), parser.getBytePosition()));
+					if (parser.getBytePosition() != before + parsedTag.getHeader().getNormalizedLength() + (parsedTag.getHeader().getHeaderLength()))
+					{
+						System.out.println(String.format("No: Wanted %X but was %X", before + parsedTag.getHeader().getNormalizedLength() + (parsedTag.getHeader().getHeaderLength()), parser.getBytePosition()));
 
-					parser.setPosition(before + parsedTag.getHeader().getNormalizedLength() + (parsedTag.getHeader().getHeaderLength()), 0);
+						parser.setPosition(before + parsedTag.getHeader().getNormalizedLength() + (parsedTag.getHeader().getHeaderLength()), 0);
+					}
 				}
+			}
+			catch (final IllegalArgumentException e) {
+				break;
 			}
 		}
 

@@ -82,6 +82,8 @@ public final class FileActions {
 			MessageBox.showError(SwingUtilities.getWindowAncestor(tree), "Selected file could not be read.");
 		} catch (final SWFParserException e) {
 			MessageBox.showError(SwingUtilities.getWindowAncestor(tree), "Selected file could not be parsed.");
+		} catch (final Exception e) {
+			MessageBox.showError(SwingUtilities.getWindowAncestor(tree), "Selected file could not be parsed. Please help improve Flash Dissector by sending this file to the Flash Dissector support.");
 		}
 	}
 
