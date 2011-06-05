@@ -394,6 +394,11 @@ public final class AS2CodePrinter {
 			}
 
 			@Override
+			protected void visit(final ActionPop instruction) {
+				add(sb, "Pop");
+			}
+
+			@Override
 			protected void visit(final ActionPush instruction) {
 				add(sb, "Push");
 
