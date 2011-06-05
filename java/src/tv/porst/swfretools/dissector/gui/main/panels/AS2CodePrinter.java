@@ -404,6 +404,11 @@ public final class AS2CodePrinter {
 			}
 
 			@Override
+			protected void visit(final ActionPreviousFrame instruction) {
+				add(sb, "PreviousFrame");
+			}
+
+			@Override
 			protected void visit(final ActionPush instruction) {
 				add(sb, "Push");
 
