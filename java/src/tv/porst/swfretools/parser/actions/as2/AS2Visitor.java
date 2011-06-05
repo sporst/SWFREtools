@@ -136,6 +136,8 @@ public abstract class AS2Visitor {
 
 	protected abstract void visit(final ActionRandomNumber instruction);
 
+	protected abstract void visit(final ActionRemoveSprite instruction);
+
 	protected abstract void visit(final ActionSetMember instruction);
 
 	protected abstract void visit(final ActionSetProperty instruction);
@@ -396,6 +398,9 @@ public abstract class AS2Visitor {
 		}
 		else if (instruction instanceof ActionRandomNumber) {
 			visit((ActionRandomNumber) instruction);
+		}
+		else if (instruction instanceof ActionRemoveSprite) {
+			visit((ActionRemoveSprite) instruction);
 		}
 		else if (instruction instanceof ActionPushDuplicate) {
 			visit((ActionPushDuplicate) instruction);

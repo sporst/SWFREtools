@@ -21,6 +21,8 @@ Version 1.2 (June 5th 2011):
           shown in the GUI.
 - Bugfix: ActionScript 2 RandomNumber instructions were not previously not
           shown in the GUI.
+- Bugfix: ActionScript 2 RemoveSprite instructions were not previously not
+          shown in the GUI.
 
 Version 1.1 (May 7th 2011):
 
