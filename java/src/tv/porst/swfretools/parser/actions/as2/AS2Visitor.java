@@ -178,6 +178,8 @@ public abstract class AS2Visitor {
 
 	protected abstract void visit(final ActionTypeOf instruction);
 
+	protected abstract void visit(final ActionUnknown instruction);
+
 	protected abstract void visit(final ActionWaitForFrame instruction);
 
 	protected abstract void visit(final ActionWaitForFrame2 instruction);
@@ -457,6 +459,9 @@ public abstract class AS2Visitor {
 		}
 		else if (instruction instanceof ActionWith) {
 			visit((ActionWith) instruction);
+		}
+		else if (instruction instanceof ActionUnknown) {
+			visit((ActionUnknown) instruction);
 		}
 	}
 }

@@ -1,6 +1,8 @@
 Version 1.2 (June 5th 2011):
 - Feature: Made parsing of files more robust. This became necessary after the
            recent spike in obfuscated ActionScript code malware.
+- Feature: Unknown ActionScript 2 instructions are now shown in the GUI with
+           their action code.
 - Bugfix: In previous versions, the ActionScript 2 actions belonging to a
           DoAction tag were not shown in the Flash Dissector tree. This has
 	  been fixed.

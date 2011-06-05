@@ -91,6 +91,7 @@ import tv.porst.swfretools.parser.actions.as2.ActionToggleQuality;
 import tv.porst.swfretools.parser.actions.as2.ActionTrace;
 import tv.porst.swfretools.parser.actions.as2.ActionTry;
 import tv.porst.swfretools.parser.actions.as2.ActionTypeOf;
+import tv.porst.swfretools.parser.actions.as2.ActionUnknown;
 import tv.porst.swfretools.parser.actions.as2.ActionWaitForFrame;
 import tv.porst.swfretools.parser.actions.as2.ActionWaitForFrame2;
 import tv.porst.swfretools.parser.actions.as2.ActionWith;
@@ -618,6 +619,11 @@ public final class AS2CodePrinter {
 			@Override
 			protected void visit(final ActionTypeOf instruction) {
 				add(sb, "TypeOf");
+			}
+
+			@Override
+			protected void visit(final ActionUnknown instruction) {
+				add(sb, String.format("Unknown %02X", instruction.getActionCode().value()));
 			}
 
 			@Override
