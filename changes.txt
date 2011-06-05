@@ -1,4 +1,11 @@
-Version 1.1 (June 7th 2011):
+Version 1.2 (June 5th 2011):
+- Feature: Made parsing of files more robust. This became necessary after the
+           recent spike in obfuscated ActionScript code malware.
+- Bugfix: In previous versions, the ActionScript 2 actions belonging to a
+          DoAction tag were not shown in the Flash Dissector tree. This has
+	  been fixed.
+
+Version 1.1 (May 7th 2011):
 
 - Feature: Much improved display of ActionScript 3 code
 - Feature: Improved the Minimizer to give more status information

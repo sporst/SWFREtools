@@ -482,6 +482,9 @@ public final class FlashTagNode extends FlashTreeNode<Tag> {
 			addNode("CodecID", ctag.getCodecId());
 		}
 		else if (tag instanceof DoActionTag) {
+			final DoActionTag ctag = (DoActionTag) tag;
+
+			addNode("Actions", ctag.getActions());
 		}
 		else if (tag instanceof DoInitActionTag) {
 			final DoInitActionTag ctag = (DoInitActionTag) tag;
