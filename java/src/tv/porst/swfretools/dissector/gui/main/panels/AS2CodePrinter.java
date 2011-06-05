@@ -473,6 +473,11 @@ public final class AS2CodePrinter {
 			}
 
 			@Override
+			protected void visit(final ActionReturn instruction) {
+				add(sb, "Return");
+			}
+
+			@Override
 			protected void visit(final ActionSetMember instruction) {
 				add(sb, "SetMember");
 			}
