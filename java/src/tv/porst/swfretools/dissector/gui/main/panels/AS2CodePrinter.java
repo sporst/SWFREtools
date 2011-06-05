@@ -443,6 +443,11 @@ public final class AS2CodePrinter {
 			}
 
 			@Override
+			protected void visit(final ActionPushDuplicate instruction) {
+				add(sb, "PushDuplicate");
+			}
+
+			@Override
 			protected void visit(final ActionSetMember instruction) {
 				add(sb, "SetMember");
 			}

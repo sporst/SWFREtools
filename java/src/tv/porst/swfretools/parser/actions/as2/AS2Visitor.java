@@ -126,6 +126,8 @@ public abstract class AS2Visitor {
 
 	protected abstract void visit(final ActionPush instruction);
 
+	protected abstract void visit(final ActionPushDuplicate instruction);
+
 	protected abstract void visit(final ActionSetMember instruction);
 
 	protected abstract void visit(final ActionSetProperty instruction);
@@ -375,6 +377,9 @@ public abstract class AS2Visitor {
 		else if (instruction instanceof ActionPush) {
 			visit((ActionPush) instruction);
 		}
+		else if (instruction instanceof ActionPushDuplicate) {
+			visit((ActionPushDuplicate) instruction);
+		}
 		else if (instruction instanceof ActionSetMember) {
 			visit((ActionSetMember) instruction);
 		}
@@ -467,9 +472,6 @@ public abstract class AS2Visitor {
 		}
 		else if (instruction instanceof ActionUnknown) {
 			visit((ActionUnknown) instruction);
-		}
-		else {
-			System.out.println("oh");
 		}
 	}
 }

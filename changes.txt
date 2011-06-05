@@ -13,6 +13,8 @@ Version 1.2 (June 5th 2011):
           instruction is now better formatted for improved readability.
 - Bugfix: ActionScript 2 Push instructions were not previously not shown in the
           GUI.
+- Bugfix: ActionScript 2 PushDuplicate instructions were not previously not
+          shown in the GUI.
 
 Version 1.1 (May 7th 2011):
 
