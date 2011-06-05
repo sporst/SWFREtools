@@ -463,6 +463,11 @@ public final class AS2CodePrinter {
 			}
 
 			@Override
+			protected void visit(final ActionRandomNumber instruction) {
+				add(sb, "RandomNumber");
+			}
+
+			@Override
 			protected void visit(final ActionSetMember instruction) {
 				add(sb, "SetMember");
 			}
