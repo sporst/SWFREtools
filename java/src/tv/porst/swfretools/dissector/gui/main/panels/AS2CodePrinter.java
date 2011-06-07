@@ -334,7 +334,7 @@ public final class AS2CodePrinter {
 
 			@Override
 			protected void visit(final ActionJump instruction) {
-				add(sb, "Jump", instruction.getBranchOffset().value());
+				addHex(sb, "Jump", (instruction.getBitPosition() - firstOffset) / 8 + instruction.getBitLength() / 8 + instruction.getBranchOffset().value());
 			}
 
 			@Override
