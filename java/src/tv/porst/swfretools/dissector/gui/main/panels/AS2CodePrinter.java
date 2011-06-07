@@ -162,7 +162,7 @@ public final class AS2CodePrinter {
 
 				for (int i = 0; i < strings.size(); i++) {
 					final AsciiString string = strings.get(i);
-					sb.append(String.format("                      %03d: %s", i, string.value()));
+					sb.append(String.format("                      %03d: \"%s\"", i, string.value()));
 
 					if (i != strings.size() - 1) {
 						sb.append('\n');
