@@ -455,7 +455,7 @@ public final class AS2CodePrinter {
 						sb.append(String.format("                      %03d: r%d", i, ((PushedRegisterNumber)string).getValue().value()));
 					}
 					else if (string instanceof PushedString) {
-						sb.append(String.format("                      %03d: %s", i, ((PushedString)string).getValue().value()));
+						sb.append(String.format("                      %03d: \"%s\"", i, ((PushedString)string).getValue().value()));
 					}
 					else if (string instanceof PushedUndefined) {
 						sb.append(String.format("                      %03d: undefined", i));
