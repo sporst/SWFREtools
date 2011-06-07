@@ -3,6 +3,9 @@ Version 1.2 (June 5th 2011):
            recent spike in obfuscated ActionScript code malware.
 - Feature: Unknown ActionScript 2 instructions are now shown in the GUI with
            their action code.
+- Feature: In ActionScript 2 code, the jump target shown in the GUI is now the
+           adjusted address instead of the raw relative address. This makes it
+	   easier for the user to find out where a jump is going.
 - Bugfix: In previous versions, the ActionScript 2 actions belonging to a
           DoAction tag were not shown in the Flash Dissector tree. This has
 	  been fixed.

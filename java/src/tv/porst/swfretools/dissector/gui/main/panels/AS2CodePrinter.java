@@ -55,13 +55,18 @@ public final class AS2CodePrinter {
 		sb.append(String.format("%s %s", mnemonic, value1, value2));
 	}
 
+	private static void addHex(final StringBuilder sb, final String mnemonic, final long value) {
+		sb.append(String.format("%s %X", mnemonic, value));
+	}
+
 	/**
 	 * Adds an instruction to the output.
 	 * 
 	 * @param sb The string builder the output is appended to.
 	 * @param instruction The instruction to add to the output.
+	 * @param firstOffset The offset of the first instruction in the script.
 	 */
-	private static void addInstructionText(final StringBuilder sb, final Action instruction) {
+	private static void addInstructionText(final StringBuilder sb, final Action instruction, final int firstOffset) {
 
 		new AS2Visitor() {
 
@@ -299,7 +304,7 @@ public final class AS2CodePrinter {
 
 			@Override
 			protected void visit(final ActionIf instruction) {
-				add(sb, "If", instruction.getBranchOffset().value());
+				addHex(sb, "If", (instruction.getBitPosition() - firstOffset) / 8 + instruction.getBitLength() / 8 + instruction.getBranchOffset().value());
 			}
 
 			@Override
@@ -672,7 +677,7 @@ public final class AS2CodePrinter {
 			final int relativeOffset = absoluteOffset - firstOffset  / 8;
 			sb.append(String.format("%08X %08X  ", absoluteOffset, relativeOffset));
 
-			addInstructionText(sb, instruction);
+			addInstructionText(sb, instruction, firstOffset);
 
 			sb.append('\n');
 		}
