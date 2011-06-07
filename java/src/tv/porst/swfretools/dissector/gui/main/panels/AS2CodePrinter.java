@@ -452,7 +452,7 @@ public final class AS2CodePrinter {
 						sb.append(String.format("                      %03d: null", i));
 					}
 					else if (string instanceof PushedRegisterNumber) {
-						sb.append(String.format("                      %03d: %d", i, ((PushedRegisterNumber)string).getValue().value()));
+						sb.append(String.format("                      %03d: r%d", i, ((PushedRegisterNumber)string).getValue().value()));
 					}
 					else if (string instanceof PushedString) {
 						sb.append(String.format("                      %03d: %s", i, ((PushedString)string).getValue().value()));

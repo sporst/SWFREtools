@@ -1,4 +1,5 @@
 Version 1.2 (June 5th 2011):
+
 - Feature: Made parsing of files more robust. This became necessary after the
            recent spike in obfuscated ActionScript code malware.
 - Feature: Unknown ActionScript 2 instructions are now shown in the GUI with
@@ -13,6 +14,8 @@ Version 1.2 (June 5th 2011):
 	   where a jump is going.
 - Feature: Strings defined in ActionScript 2 ConstantPool actions are now
            surrounded by quotes to make them more readable.
+- Feature: When ActionScript 2 code is shown in the GUI, registers pushed
+           by ActionPush are now easily distinguished from pushed integers.
 - Bugfix: In previous versions, the ActionScript 2 actions belonging to a
           DoAction tag were not shown in the Flash Dissector tree. This has
 	  been fixed.
