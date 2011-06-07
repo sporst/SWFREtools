@@ -434,10 +434,10 @@ public final class AS2CodePrinter {
 						sb.append(String.format("                      %03d: %b", i, ((PushedBoolean)string).getValue().value()));
 					}
 					else if (string instanceof PushedConstant16) {
-						sb.append(String.format("                      %03d: %d", i, ((PushedConstant16)string).getValue().value()));
+						sb.append(String.format("                      %03d: constant : %d", i, ((PushedConstant16)string).getValue().value()));
 					}
 					else if (string instanceof PushedConstant8) {
-						sb.append(String.format("                      %03d: %d", i, ((PushedConstant8)string).getValue().value()));
+						sb.append(String.format("                      %03d: constant : %d", i, ((PushedConstant8)string).getValue().value()));
 					}
 					else if (string instanceof PushedDouble) {
 						sb.append(String.format("                      %03d: %f", i, ((PushedDouble)string).getValue().value()));

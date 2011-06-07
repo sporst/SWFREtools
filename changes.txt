@@ -16,6 +16,8 @@ Version 1.2 (June 5th 2011):
            surrounded by quotes to make them more readable.
 - Feature: When ActionScript 2 code is shown in the GUI, registers pushed
            by ActionPush are now easily distinguished from pushed integers.
+- Feature: When ActionScript 2 code is shown in the GUI, constants pushed
+           by ActionPush are now easily distinguished from pushed integers.
 - Bugfix: In previous versions, the ActionScript 2 actions belonging to a
           DoAction tag were not shown in the Flash Dissector tree. This has
 	  been fixed.
