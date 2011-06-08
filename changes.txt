@@ -35,13 +35,13 @@ Version 1.2 (June 5th 2011):
 - Bugfix: ActionScript 2 Pop instructions were previously not shown in the GUI.
 - Bugfix: ActionScript 2 Play instructions were previously not shown in the GUI.
 - Bugfix: ActionScript 2 PreviousFrame instructions were previously not shown
-          shown in the GUI.
+          in the GUI.
 - Bugfix: ActionScript 2 RandomNumber instructions were previously not shown
-          shown in the GUI.
+          in the GUI.
 - Bugfix: ActionScript 2 RemoveSprite instructions were previously not shown
-          shown in the GUI.
+          in the GUI.
 - Bugfix: ActionScript 2 Return instructions were previously not shown
-          shown in the GUI.
+          in the GUI.
 
 Version 1.1 (May 7th 2011):
 
