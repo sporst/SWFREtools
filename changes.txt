@@ -28,19 +28,19 @@ Version 1.2 (June 5th 2011):
 	  been fixed.
 - Bugfix: The constant list defined by an ActionScript 2 ConstantPool
           instruction is now better formatted for improved readability.
-- Bugfix: ActionScript 2 Push instructions were not previously not shown in the
+- Bugfix: ActionScript 2 Push instructions were previously not shown in the
           GUI.
-- Bugfix: ActionScript 2 PushDuplicate instructions were not previously not
+- Bugfix: ActionScript 2 PushDuplicate instructions were previously not
           shown in the GUI.
-- Bugfix: ActionScript 2 Pop instructions were not previously not in the GUI.
-- Bugfix: ActionScript 2 Play instructions were not previously not in the GUI.
-- Bugfix: ActionScript 2 PreviousFrame instructions were not previously not
+- Bugfix: ActionScript 2 Pop instructions were previously not shown in the GUI.
+- Bugfix: ActionScript 2 Play instructions were previously not shown in the GUI.
+- Bugfix: ActionScript 2 PreviousFrame instructions were previously not shown
           shown in the GUI.
-- Bugfix: ActionScript 2 RandomNumber instructions were not previously not
+- Bugfix: ActionScript 2 RandomNumber instructions were previously not shown
           shown in the GUI.
-- Bugfix: ActionScript 2 RemoveSprite instructions were not previously not
+- Bugfix: ActionScript 2 RemoveSprite instructions were previously not shown
           shown in the GUI.
-- Bugfix: ActionScript 2 Return instructions were not previously not
+- Bugfix: ActionScript 2 Return instructions were previously not shown
           shown in the GUI.
 
 Version 1.1 (May 7th 2011):
