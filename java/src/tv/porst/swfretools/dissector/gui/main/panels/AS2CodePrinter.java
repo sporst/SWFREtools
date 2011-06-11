@@ -182,7 +182,7 @@ public final class AS2CodePrinter {
 				add(sb, instruction.getFunctionName().value());
 				sb.append('\n');
 				sb.append("{\n");
-				sb.append(getCodeText(instruction.getCode()));
+				sb.append(getCodeText(instruction.getCode(), "    "));
 				sb.append("\n}");
 			}
 
@@ -193,7 +193,7 @@ public final class AS2CodePrinter {
 				add(sb, instruction.getFunctionName().value());
 				sb.append('\n');
 				sb.append("{\n");
-				sb.append(getCodeText(instruction.getActionList()));
+				sb.append(getCodeText(instruction.getActionList(), "    "));
 				sb.append("\n}");
 			}
 
@@ -656,11 +656,11 @@ public final class AS2CodePrinter {
 	 * action list.
 	 * 
 	 * @param code The list that contains the ActionScript 2 code.
+	 * @param padding Padding string that is prepended before every line.
 	 * 
 	 * @return The generated ActionScript 2 code string.
 	 */
-	public static String getCodeText(final ActionList code) {
-
+	private static String getCodeText(final ActionList code, final String padding) {
 		if (code.size() == 0) {
 			return "";
 		}
@@ -675,7 +675,7 @@ public final class AS2CodePrinter {
 
 			final int absoluteOffset = instruction.getBitPosition() / 8;
 			final int relativeOffset = absoluteOffset - firstOffset  / 8;
-			sb.append(String.format("%08X %08X  ", absoluteOffset, relativeOffset));
+			sb.append(String.format("%s%08X %08X  ", padding, absoluteOffset, relativeOffset));
 
 			addInstructionText(sb, instruction, firstOffset);
 
@@ -683,5 +683,17 @@ public final class AS2CodePrinter {
 		}
 
 		return sb.toString();
+	}
+
+	/**
+	 * Generates a printable string that represents all code in a given
+	 * action list.
+	 * 
+	 * @param code The list that contains the ActionScript 2 code.
+	 * 
+	 * @return The generated ActionScript 2 code string.
+	 */
+	public static String getCodeText(final ActionList code) {
+		return getCodeText(code, "");
 	}
 }
