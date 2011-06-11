@@ -18,7 +18,8 @@ public final class NamespaceInfoListPanel extends JPanel implements IExtraPanel 
 	/**
 	 * Creates a new panel object.
 	 * 
-	 * @param namespaceInfoList The namespaces to display in the GUI.
+	 * @param namespaceInfoList The namespaces to display in the GUI.\
+	 * @param constantPool Constant pool used to look up namespace names.
 	 */
 	public NamespaceInfoListPanel(final NamespaceInfoList namespaceInfoList, final StringInfoList constantPool) {
 		super(new BorderLayout());
@@ -55,25 +56,35 @@ public final class NamespaceInfoListPanel extends JPanel implements IExtraPanel 
 		 */
 		private final NamespaceInfoList namespaceInfoList;
 
+		/**
+		 * Constant pool used to look up namespace names.
+		 */
 		private final StringInfoList constantPool;
 
 		/**
 		 * Creates a new table model object.
 		 * 
 		 * @param namespaceInfoList Provides the strings to display in the table.
-		 * @param constantPool
+		 * @param constantPool Constant pool used to look up namespace names.
 		 */
 		private NamespaceInfoListModel(final NamespaceInfoList namespaceInfoList, final StringInfoList constantPool) {
 			this.namespaceInfoList = namespaceInfoList;
 			this.constantPool = constantPool;
 		}
 
-		private String lookupString(final int value) {
-			if (value >= constantPool.size() + 1) {
+		/**
+		 * Tries to resolve the string representation of a namespace.
+		 * 
+		 * @param stringIndex Index of the namespace string.
+		 * 
+		 * @return The resolved string representation or the string "???".
+		 */
+		private String lookupString(final int stringIndex) {
+			if (stringIndex >= constantPool.size() + 1) {
 				return "???";
 			}
 			else {
-				return constantPool.get(value + 1).getName().value();
+				return constantPool.get(stringIndex + 1).getName().value();
 			}
 		}
 

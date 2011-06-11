@@ -11,15 +11,22 @@ import tv.porst.swfretools.parser.structures.StringInfoList;
  */
 public final class FlashNamespaceInfoListNode extends FlashTreeNode<NamespaceInfoList> {
 
-	private IExtraPanel panel;
-
+	/**
+	 * String info list associated with the namespace info list.
+	 */
 	private final StringInfoList constantPool;
+
+	/**
+	 * Panel shown when the node is selected.
+	 */
+	private IExtraPanel panel;
 
 	/**
 	 * Creates a new node object
 	 * 
 	 * @param name Name of the node.
 	 * @param value Flash structure represented by the node.
+	 * @param constantPool String info list associated with the namespace info list.
 	 */
 	public FlashNamespaceInfoListNode(final String name, final NamespaceInfoList value, final StringInfoList constantPool) {
 		super(name, value);

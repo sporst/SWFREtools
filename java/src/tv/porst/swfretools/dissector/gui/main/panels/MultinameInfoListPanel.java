@@ -23,6 +23,8 @@ public final class MultinameInfoListPanel extends JPanel implements IExtraPanel 
 	 * Creates a new panel object.
 	 * 
 	 * @param multinameInfoList The multinames to display in the GUI.
+	 * @param constantPool Constant pool used to look up names.
+	 * @param namespaceList Provides namespace information.
 	 */
 	public MultinameInfoListPanel(final MultinameInfoList multinameInfoList, final StringInfoList constantPool, final NamespaceInfoList namespaceList) {
 		super(new BorderLayout());
@@ -59,16 +61,22 @@ public final class MultinameInfoListPanel extends JPanel implements IExtraPanel 
 		 */
 		private final MultinameInfoList multinameInfoList;
 
+		/**
+		 * Constant pool used to look up names.
+		 */
 		private final StringInfoList constantPool;
 
+		/**
+		 * Provides namespace information.
+		 */
 		private final NamespaceInfoList namespaceList;
 
 		/**
 		 * Creates a new table model object.
 		 * 
 		 * @param multinameInfoList Provides the multinames to display in the table.
-		 * @param constantPool
-		 * @param namespaceList
+		 * @param constantPool Constant pool used to look up names.
+		 * @param namespaceList Provides namespace information.
 		 */
 		private MultinameInfoListModel(final MultinameInfoList multinameInfoList, final StringInfoList constantPool, final NamespaceInfoList namespaceList) {
 			this.multinameInfoList = multinameInfoList;
@@ -76,6 +84,13 @@ public final class MultinameInfoListPanel extends JPanel implements IExtraPanel 
 			this.namespaceList = namespaceList;
 		}
 
+		/**
+		 * Tries to resolve the string representation of a multiname object.
+		 * 
+		 * @param multinameInfo The multiname object.
+		 * 
+		 * @return The name representation of the multiname object or "???".
+		 */
 		private String lookupString(final MultinameInfo multinameInfo) {
 			try {
 				final String[] namespaceParts = ActionScript3Helpers.resolveMultiname(multinameInfo, constantPool, namespaceList);

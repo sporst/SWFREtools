@@ -12,15 +12,28 @@ import tv.porst.swfretools.parser.structures.StringInfoList;
  */
 public final class FlashMultinameInfoListNode extends FlashTreeNode<MultinameInfoList> {
 
-	private IExtraPanel panel;
+	/**
+	 * Constant pool associated with the multiname list.
+	 */
 	private final StringInfoList constantPool;
+
+	/**
+	 * Namespace list associated with the multiname list.
+	 */
 	private final NamespaceInfoList namespaceList;
+
+	/**
+	 * Panel that is shown when the node is selected.
+	 */
+	private IExtraPanel panel;
 
 	/**
 	 * Creates a new node object
 	 * 
 	 * @param name Name of the node.
 	 * @param value Flash structure represented by the node.
+	 * @param constantPool Constant pool associated with the multiname list.
+	 * @param namespaceList Namespace list associated with the multiname list.
 	 */
 	public FlashMultinameInfoListNode(final String name, final MultinameInfoList value, final StringInfoList constantPool, final NamespaceInfoList namespaceList) {
 		super(name, value);

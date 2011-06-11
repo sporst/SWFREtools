@@ -1,7 +1,5 @@
 package tv.porst.swfretools.dissector.gui.main.flashtree.nodes;
 
-import tv.porst.swfretools.dissector.gui.main.panels.AS3CodePanel;
-import tv.porst.swfretools.parser.structures.AS3Data;
 import tv.porst.swfretools.parser.structures.MethodBody;
 
 /**
@@ -10,22 +8,13 @@ import tv.porst.swfretools.parser.structures.MethodBody;
 public final class FlashMethodBodyNode extends FlashTreeNode<MethodBody> {
 
 	/**
-	 * Panel to be shown when the node is selected.
-	 */
-	private AS3CodePanel panel;
-
-	private final AS3Data abcData;
-
-	/**
 	 * Creates a new node object
 	 * 
 	 * @param name Name of the node.
 	 * @param value Flash structure represented by the node.
 	 */
-	public FlashMethodBodyNode(final String name, final MethodBody value, final AS3Data abcData) {
+	public FlashMethodBodyNode(final String name, final MethodBody value) {
 		super(name, value);
-
-		this.abcData = abcData;
 
 		createChildren();
 	}
@@ -45,21 +34,6 @@ public final class FlashMethodBodyNode extends FlashTreeNode<MethodBody> {
 		addNode("exceptions", getUserObject().getExceptions());
 		addNode("trait_count", getUserObject().getTraitCount());
 		addNode("traits", getUserObject().getTraits());
-	}
-
-	/**
-	 * Returns the panel to be shown when the node is selected.
-	 * 
-	 * @return The panel to be shown.
-	 */
-	@Override
-	public AS3CodePanel getExtraPanel() {
-
-		if (panel == null) {
-			//			panel = new AS3CodePanel(getUserObject(), abcData);
-		}
-
-		return panel;
 	}
 
 	@Override

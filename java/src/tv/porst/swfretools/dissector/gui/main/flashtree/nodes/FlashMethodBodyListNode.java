@@ -1,6 +1,5 @@
 package tv.porst.swfretools.dissector.gui.main.flashtree.nodes;
 
-import tv.porst.swfretools.parser.structures.AS3Data;
 import tv.porst.swfretools.parser.structures.MethodBody;
 import tv.porst.swfretools.parser.structures.MethodBodyList;
 
@@ -9,18 +8,14 @@ import tv.porst.swfretools.parser.structures.MethodBodyList;
  */
 public final class FlashMethodBodyListNode extends FlashTreeNode<MethodBodyList> {
 
-	private final AS3Data abcData;
-
 	/**
 	 * Creates a new node object
 	 * 
 	 * @param name Name of the node.
 	 * @param value Flash structure represented by the node.
 	 */
-	public FlashMethodBodyListNode(final String name, final MethodBodyList value, final AS3Data abcData) {
+	public FlashMethodBodyListNode(final String name, final MethodBodyList value) {
 		super(name, value);
-
-		this.abcData = abcData;
 
 		createChildren();
 	}
@@ -34,7 +29,7 @@ public final class FlashMethodBodyListNode extends FlashTreeNode<MethodBodyList>
 
 		for (final MethodBody element: getUserObject()) {
 
-			addNode(String.format("%s[%d]", getName(), counter), element, abcData);
+			addNode(String.format("%s[%d]", getName(), counter), element);
 
 			counter++;
 		}

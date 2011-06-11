@@ -9,6 +9,9 @@ import tv.porst.swfretools.parser.structures.StringInfoList;
  */
 public final class FlashStringInfoListNode extends FlashTreeNode<StringInfoList> {
 
+	/**
+	 * Panel that is shown when the node is selected.
+	 */
 	private StringInfoListPanel panel;
 
 	/**

@@ -55,6 +55,13 @@ public final class FlashTreeImplementations {
 		}
 	}
 
+	/**
+	 * Dumps the binary representation of a SWF file element to disk.
+	 * 
+	 * @param parent Parent window used for dialogs.
+	 * @param loadedFile The SWF file the element belongs to.
+	 * @param element The element that is dumped to disk.
+	 */
 	public static void dumpElement(final Window parent, final LoadedFile loadedFile, final IFileElement element) {
 
 		if (parent == null) {

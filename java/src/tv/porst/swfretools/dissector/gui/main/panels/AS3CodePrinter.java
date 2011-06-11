@@ -50,23 +50,20 @@ public final class AS3CodePrinter {
 	}
 
 	/**
-	 * Adds an instruction with four arguments to the output.
+	 * Adds the class footer to the output.
 	 * 
 	 * @param sb The string builder the output is appended to.
-	 * @param mnemonic The instruction mnemonic.
-	 * @param value1 The first instruction argument value.
-	 * @param value2 The second instruction argument value.
-	 * @param value3 The third instruction argument value.
-	 * @param value4 The fourth instruction argument value.
 	 */
-	private static void add(final StringBuilder sb, final String mnemonic, final long value1, final long value2, final long  value3, final long value4) {
-		sb.append(String.format("%s %d, %d, %d, %d", mnemonic, value1, value2, value3, value4));
-	}
-
 	private static void addClassFooter(final StringBuilder sb) {
 		sb.append("}\n\n");
 	}
 
+	/**
+	 * Adds the class header to the output.
+	 * 
+	 * @param resolvedClass Provides the class information.
+	 * @param sb The string builder the output is appended to.
+	 */
 	private static void addClassHeader(final ResolvedClass resolvedClass, final StringBuilder sb) {
 		sb.append("class ");
 
@@ -78,21 +75,36 @@ public final class AS3CodePrinter {
 		sb.append("\n{\n");
 	}
 
-	private static void addDouble(final StringBuilder sb, final String mnemonic, final int multiName, final ResolvedCode code) {
+	/**
+	 * Resolves and adds a double value to the output.
+	 * 
+	 * @param sb The string builder the output is appended to.
+	 * @param mnemonic The mnemonic of the instruction.
+	 * @param doubleIndex The double index.
+	 * @param code The code the instruction belongs to.
+	 */
+	private static void addDouble(final StringBuilder sb, final String mnemonic, final int doubleIndex, final ResolvedCode code) {
 
-		final Double dbl = code.resolveDouble(multiName - 1);
+		final Double dbl = code.resolveDouble(doubleIndex - 1);
 
 		sb.append(mnemonic);
 		sb.append(" ");
 
 		if (dbl == null) {
-			sb.append(String.format("??? [0x%08X]", multiName));
+			sb.append(String.format("??? [0x%08X]", doubleIndex));
 		}
 		else {
-			sb.append(String.format("%f [0x%08X]", dbl, multiName));
+			sb.append(String.format("%f [0x%08X]", dbl, doubleIndex));
 		}
 	}
 
+	/**
+	 * Adds an if instruction to the output.
+	 * 
+	 * @param sb The string builder the output is appended to.
+	 * @param mnemonic The mnemonic of the if instruction.
+	 * @param value The branch offset value.
+	 */
 	private static void addIf(final StringBuilder sb, final String mnemonic, final long value) {
 		sb.append(String.format("%s %08X", mnemonic, value));
 	}
@@ -102,7 +114,8 @@ public final class AS3CodePrinter {
 	 * 
 	 * @param sb The string builder the output is appended to.
 	 * @param instruction The instruction to add to the output.
-	 * @param firstOffset
+	 * @param code The code the instruction belongs to.
+	 * @param firstOffset The offset of the first instruction in the code.
 	 */
 	private static void addInstructionText(final StringBuilder sb, final AS3Instruction instruction, final ResolvedCode code, final int firstOffset) {
 
@@ -846,21 +859,39 @@ public final class AS3CodePrinter {
 		}.visit(instruction);
 	}
 
-	private static void addInteger(final StringBuilder sb, final String mnemonic, final int multiName, final ResolvedCode code) {
+	/**
+	 * Resolves and adds an integer value to the output.
+	 * 
+	 * @param sb The string builder the output is appended to.
+	 * @param mnemonic The mnemonic of the instruction.
+	 * @param integerIndex The integer index.
+	 * @param code The code the instruction belongs to.
+	 */
+	private static void addInteger(final StringBuilder sb, final String mnemonic, final int integerIndex, final ResolvedCode code) {
 
-		final Long integer = code.resolveInteger(multiName - 1);
+		final Long integer = code.resolveInteger(integerIndex - 1);
 
 		sb.append(mnemonic);
 		sb.append(" ");
 
 		if (integer == null) {
-			sb.append(String.format("??? [0x%08X]", multiName));
+			sb.append(String.format("??? [0x%08X]", integerIndex));
 		}
 		else {
-			sb.append(String.format("%d [0x%08X]", integer, multiName));
+			sb.append(String.format("%d [0x%08X]", integer, integerIndex));
 		}
 	}
 
+	/**
+	 * Adds a method to the output.
+	 * 
+	 * @param code The code the method belongs to.
+	 * @param resolvedMethod The method to add to the output.
+	 * @param className The name of the enclosing class the method belongs to.
+	 * @param sb The string builder the output is appended to.
+	 * 
+	 * @return True, if the method has code. False, if the method is just a declaration.
+	 */
 	private static boolean addMethod(final ResolvedCode code, final ResolvedMethod resolvedMethod, final String className, final StringBuilder sb) {
 		sb.append("\t");
 		final String flattenedReturnType = ActionScript3Helpers.flattenNamespaceName(resolvedMethod.getReturnType());
@@ -913,6 +944,14 @@ public final class AS3CodePrinter {
 		}
 	}
 
+	/**
+	 * Resolves and adds an multiname instruction to the output.
+	 * 
+	 * @param sb The string builder the output is appended to.
+	 * @param mnemonic The mnemonic of the instruction.
+	 * @param multiName The multiname index.
+	 * @param code The code the instruction belongs to.
+	 */
 	private static void addMultiname(final StringBuilder sb, final String mnemonic, final int multiName, final ResolvedCode code) {
 
 		final String[] multinameString = code.resolveMultiname(multiName);
@@ -928,6 +967,15 @@ public final class AS3CodePrinter {
 		}
 	}
 
+	/**
+	 * Resolves and adds a multiname + integer instruction to the output.
+	 * 
+	 * @param sb The string builder the output is appended to.
+	 * @param mnemonic The mnemonic of the instruction.
+	 * @param multiName The multiname index.
+	 * @param value The integer value to add.
+	 * @param code The code the instruction belongs to.
+	 */
 	private static void addMultinameInteger(final StringBuilder sb, final String mnemonic, final int multiName, final int value, final ResolvedCode code) {
 
 		final String[] multinameString = code.resolveMultiname(multiName);
@@ -943,6 +991,14 @@ public final class AS3CodePrinter {
 		}
 	}
 
+	/**
+	 * Resolves and adds a namespace instruction to the output.
+	 * 
+	 * @param sb The string builder the output is appended to.
+	 * @param mnemonic The mnemonic of the instruction.
+	 * @param namespace The namespace index.
+	 * @param code The code the instruction belongs to.
+	 */
 	private static void addNamespace(final StringBuilder sb, final String mnemonic, final int namespace, final ResolvedCode code) {
 
 		final String namespaceString = code.resolveNamespace(namespace);
@@ -958,41 +1014,58 @@ public final class AS3CodePrinter {
 		}
 	}
 
-	private static void addString(final StringBuilder sb, final String mnemonic, final int multiName, final ResolvedCode code) {
+	/**
+	 * Resolves and adds a string value instruction to the output.
+	 * 
+	 * @param sb The string builder the output is appended to.
+	 * @param mnemonic The mnemonic of the instruction.
+	 * @param stringIndex The string index.
+	 * @param code The code the instruction belongs to.
+	 */
+	private static void addString(final StringBuilder sb, final String mnemonic, final int stringIndex, final ResolvedCode code) {
 
-		final String string = code.resolveString(multiName - 1);
+		final String string = code.resolveString(stringIndex - 1);
 
 		sb.append(mnemonic);
 		sb.append(" ");
 
 		if (string == null) {
-			sb.append(String.format("??? [0x%08X]", multiName));
+			sb.append(String.format("??? [0x%08X]", stringIndex));
 		}
 		else {
-			sb.append(String.format("\"%s\" [0x%08X]", string, multiName));
+			sb.append(String.format("\"%s\" [0x%08X]", string, stringIndex));
 		}
 	}
 
-	private static void addUInteger(final StringBuilder sb, final String mnemonic, final int multiName, final ResolvedCode code) {
+	/**
+	 * Resolves and adds an unsigned integer value instruction to the output.
+	 * 
+	 * @param sb The string builder the output is appended to.
+	 * @param mnemonic The mnemonic of the instruction.
+	 * @param uintIndex The unsigned integer index.
+	 * @param code The code the instruction belongs to.
+	 */
+	private static void addUInteger(final StringBuilder sb, final String mnemonic, final int uintIndex, final ResolvedCode code) {
 
-		final Long integer = code.resolveUInteger(multiName - 1);
+		final Long integer = code.resolveUInteger(uintIndex - 1);
 
 		sb.append(mnemonic);
 		sb.append(" ");
 
 		if (integer == null) {
-			sb.append(String.format("??? [0x%08X]", multiName));
+			sb.append(String.format("??? [0x%08X]", uintIndex));
 		}
 		else {
-			sb.append(String.format("%d [0x%08X]", integer, multiName));
+			sb.append(String.format("%d [0x%08X]", integer, uintIndex));
 		}
 	}
 
 	/**
 	 * Generates a printable string that represents the given ActionScript 3 code.
 	 * 
-	 * @param code The ActionScript 3 code to turn into a string.
-	 * @param multinameList
+	 * @param resolvedCode The ActionScript 3 code to turn into a string.
+	 * @param code The raw ActionScript 3 code.
+	 * @param prefix The prefix to write before every printed line.
 	 * 
 	 * @return The generated ActionScript 3 code string.
 	 */
@@ -1023,6 +1096,14 @@ public final class AS3CodePrinter {
 		return sb.toString();
 	}
 
+	/**
+	 * Determines the method name of a method.
+	 * 
+	 * @param methodIndex The index of the method whose name is returned.
+	 * @param code The resolved code the method belongs to.
+	 * 
+	 * @return The method name or null if the method name could not be resolved.
+	 */
 	private static String getMethodName(final int methodIndex, final ResolvedCode code) {
 		if (methodIndex >= code.getData().getMethodInfos().size()) {
 			return null;
@@ -1038,18 +1119,6 @@ public final class AS3CodePrinter {
 		else {
 			return code.getData().getConstantPool().getStrings().get(nameIndex).getName().value();
 		}
-	}
-
-	public static String getCodeText(final ResolvedClass resolvedClass, final ResolvedMethod resolvedMethod) {
-		final StringBuilder sb = new StringBuilder();
-
-		final String className = ActionScript3Helpers.flattenNamespaceName(resolvedClass.getName());
-
-		addClassHeader(resolvedClass, sb);
-		//		addMethod(resolvedMethod, className, sb);
-		addClassFooter(sb);
-
-		return sb.toString();
 	}
 
 	/**

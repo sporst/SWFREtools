@@ -10,7 +10,7 @@ import tv.porst.swfretools.dissector.gui.main.flashtree.implementations.FlashTre
 import tv.porst.swfretools.dissector.gui.main.models.LoadedFile;
 
 /**
- * Action that is used to dump SWF elements to a file.
+ * Action that is used to dump SWF elements to disk.
  */
 public final class DumpElementAction extends AbstractAction {
 
@@ -20,12 +20,12 @@ public final class DumpElementAction extends AbstractAction {
 	private final Window parent;
 
 	/**
-	 * The loaded file whose decompressed data is dumped to disk.
+	 * The loaded file the element belongs to.
 	 */
 	private final LoadedFile loadedFile;
 
 	/**
-	 * The element to dump to a file.
+	 * The element to dump to disk.
 	 */
 	private final IFileElement element;
 
@@ -33,7 +33,7 @@ public final class DumpElementAction extends AbstractAction {
 	 * Creates a new action object.
 	 * 
 	 * @param parent Parent window used for dialogs.
-	 * @param loadedFile The loaded file whose decompressed data is dumped to disk.
+	 * @param loadedFile The loaded file the element belongs to.
 	 * @param element The element to dump to a file.
 	 */
 	public DumpElementAction(final Window parent, final LoadedFile loadedFile, final IFileElement element) {

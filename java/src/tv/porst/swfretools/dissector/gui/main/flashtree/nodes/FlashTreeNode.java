@@ -1111,11 +1111,10 @@ public class FlashTreeNode<T extends IFileElement> extends IconNode {
 	 * 
 	 * @param name The name of the child node.
 	 * @param value The Flash structure represented by the node.
-	 * @param abcData
 	 */
-	protected void addNode(final String name, final MethodBody value, final AS3Data abcData) {
+	protected void addNode(final String name, final MethodBody value) {
 		if (value != null) {
-			add(new FlashMethodBodyNode(name, value, abcData));
+			add(new FlashMethodBodyNode(name, value));
 		}
 	}
 
@@ -1125,9 +1124,9 @@ public class FlashTreeNode<T extends IFileElement> extends IconNode {
 	 * @param name The name of the child node.
 	 * @param value The Flash structure represented by the node.
 	 */
-	protected void addNode(final String name, final MethodBodyList value, final AS3Data abcData) {
+	protected void addNode(final String name, final MethodBodyList value) {
 		if (value != null) {
-			add(new FlashMethodBodyListNode(name, value, abcData));
+			add(new FlashMethodBodyListNode(name, value));
 		}
 	}
 
@@ -1342,6 +1341,7 @@ public class FlashTreeNode<T extends IFileElement> extends IconNode {
 	 * 
 	 * @param name The name of the child node.
 	 * @param value The Flash structure represented by the node.
+	 * @param constantPool String info list associated with the namespace info list.
 	 */
 	protected void addNode(final String name, final NamespaceInfoList value, final StringInfoList constantPool) {
 		if (value != null) {
@@ -2009,6 +2009,11 @@ public class FlashTreeNode<T extends IFileElement> extends IconNode {
 		}
 	}
 
+	/**
+	 * Returns the panel that is shown when the node is selected.
+	 * 
+	 * @return The panel to show or null.
+	 */
 	public IExtraPanel getExtraPanel() {
 		return null;
 	}

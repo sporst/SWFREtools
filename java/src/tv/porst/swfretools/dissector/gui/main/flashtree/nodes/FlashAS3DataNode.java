@@ -36,7 +36,7 @@ public final class FlashAS3DataNode extends FlashTreeNode<AS3Data> {
 		addNode("script_count", getUserObject().getScriptCount());
 		addNode("scripts", getUserObject().getScripts());
 		addNode("method_body_count", getUserObject().getMethodBodyCount());
-		addNode("method_bodies", getUserObject().getMethodBodies(), getUserObject());
+		addNode("method_bodies", getUserObject().getMethodBodies());
 	}
 
 	@Override

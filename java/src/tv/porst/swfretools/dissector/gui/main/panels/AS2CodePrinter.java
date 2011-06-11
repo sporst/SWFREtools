@@ -55,6 +55,13 @@ public final class AS2CodePrinter {
 		sb.append(String.format("%s %s", mnemonic, value1, value2));
 	}
 
+	/**
+	 * Adds an instruction with one hexadecimal argument to the output.
+	 * 
+	 * @param sb The string builder the output is appended to.
+	 * @param mnemonic The instruction mnemonic.
+	 * @param value The instruction argument value.
+	 */
 	private static void addHex(final StringBuilder sb, final String mnemonic, final long value) {
 		sb.append(String.format("%s %X", mnemonic, value));
 	}

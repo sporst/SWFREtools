@@ -9,7 +9,7 @@ import tv.porst.swfretools.dissector.gui.main.flashtree.implementations.FlashTre
 import tv.porst.swfretools.dissector.gui.main.models.LoadedFile;
 
 /**
- * Action that is used to dump decompressed SWF files to a file.
+ * Action that is used to dump decompressed SWF files to disk.
  */
 public final class DumpDecompressedAction extends AbstractAction {
 

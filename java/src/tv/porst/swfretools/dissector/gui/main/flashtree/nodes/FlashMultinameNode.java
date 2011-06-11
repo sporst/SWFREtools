@@ -1,6 +1,5 @@
 package tv.porst.swfretools.dissector.gui.main.flashtree.nodes;
 
-import tv.porst.swfretools.dissector.gui.main.panels.IExtraPanel;
 import tv.porst.swfretools.parser.structures.GenericVector;
 import tv.porst.swfretools.parser.structures.IMultiname;
 import tv.porst.swfretools.parser.structures.Multiname;
@@ -18,8 +17,6 @@ import tv.porst.swfretools.parser.structures.RTQNameLA;
  * Node that represents a Multiname object in the Flash tree.
  */
 public final class FlashMultinameNode extends FlashTreeNode<IMultiname> {
-
-	private IExtraPanel panel;
 
 	/**
 	 * Creates a new node object
