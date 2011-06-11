@@ -6,8 +6,11 @@ import java.io.IOException;
 
 import javax.swing.JFileChooser;
 
+import tv.porst.splib.arrays.ArrayHelpers;
+import tv.porst.splib.binaryparser.IFileElement;
 import tv.porst.splib.file.FileHelpers;
 import tv.porst.swfretools.dissector.gui.main.MessageBox;
+import tv.porst.swfretools.dissector.gui.main.implementations.FileActions.BinFileFilter;
 import tv.porst.swfretools.dissector.gui.main.implementations.FileActions.SWFFileFilter;
 import tv.porst.swfretools.dissector.gui.main.models.LoadedFile;
 
@@ -48,6 +51,41 @@ public final class FlashTreeImplementations {
 				FileHelpers.writeFile(outputFile, loadedFile.getSWFFile().getDecompressedData());
 			} catch (final IOException e) {
 				MessageBox.showError(parent, "File could not be saved");
+			}
+		}
+	}
+
+	public static void dumpElement(final Window parent, final LoadedFile loadedFile, final IFileElement element) {
+
+		if (parent == null) {
+			throw new IllegalArgumentException("Parent argument must not be null.");
+		}
+
+		if (element == null) {
+			throw new IllegalArgumentException("Element argument must not be null.");
+		}
+
+		final JFileChooser fc = new JFileChooser();
+		fc.setFileFilter(new BinFileFilter());
+
+		final File parentFile = loadedFile.getFile().getParentFile();
+
+		if (parent != null) {
+			fc.setCurrentDirectory(parentFile);
+		}
+
+		if (JFileChooser.APPROVE_OPTION == fc.showSaveDialog(parent)) {
+			final File outputFile = fc.getSelectedFile();
+
+			try {
+
+				final byte[] data = loadedFile.getSWFFile().getDecompressedData();
+
+				final byte[] elementData = ArrayHelpers.getSubArray(data, element.getBitPosition() / 8, element.getBitLength() / 8);
+
+				FileHelpers.writeFile(outputFile, elementData);
+			} catch (final IOException e) {
+				MessageBox.showError(parent, "Element could not be saved");
 			}
 		}
 	}

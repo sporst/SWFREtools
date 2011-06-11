@@ -88,6 +88,27 @@ public final class FileActions {
 	}
 
 	/**
+	 * File filter class to make sure only BIN files can be selected.
+	 */
+	public static class BinFileFilter extends FileFilter {
+
+		@Override
+		public boolean accept(final File f) {
+
+			if (f.isDirectory()) {
+				return true;
+			}
+
+			return f.getAbsolutePath().toLowerCase().endsWith("bin");
+		}
+
+		@Override
+		public String getDescription() {
+			return "Binary files";
+		}
+	}
+
+	/**
 	 * File filter class to make sure only SWF files can be selected.
 	 */
 	public static class SWFFileFilter extends FileFilter {
