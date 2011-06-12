@@ -12,104 +12,7 @@ import tv.porst.splib.binaryparser.UINT16;
 import tv.porst.splib.binaryparser.UINT32;
 import tv.porst.splib.binaryparser.UINT8;
 import tv.porst.swfretools.parser.actions.as2.Action;
-import tv.porst.swfretools.parser.structures.ActionList;
-import tv.porst.swfretools.parser.structures.BevelFilter;
-import tv.porst.swfretools.parser.structures.BlurFilter;
-import tv.porst.swfretools.parser.structures.ButtonCondAction;
-import tv.porst.swfretools.parser.structures.ButtonCondActionList;
-import tv.porst.swfretools.parser.structures.ButtonRecord2;
-import tv.porst.swfretools.parser.structures.ButtonRecord2List;
-import tv.porst.swfretools.parser.structures.ByteArray;
-import tv.porst.swfretools.parser.structures.ClipActionRecord;
-import tv.porst.swfretools.parser.structures.ClipActionRecordList;
-import tv.porst.swfretools.parser.structures.ClipActions;
-import tv.porst.swfretools.parser.structures.ClipEventFlags;
-import tv.porst.swfretools.parser.structures.ColorMatrixFilter;
-import tv.porst.swfretools.parser.structures.ConvolutionFilter;
-import tv.porst.swfretools.parser.structures.CurvedEdgeRecord;
-import tv.porst.swfretools.parser.structures.CxFormWithAlpha;
-import tv.porst.swfretools.parser.structures.DropShadowFilter;
-import tv.porst.swfretools.parser.structures.EndShapeRecord;
-import tv.porst.swfretools.parser.structures.FillStyle;
-import tv.porst.swfretools.parser.structures.FillStyle3;
-import tv.porst.swfretools.parser.structures.FillStyle3Array;
-import tv.porst.swfretools.parser.structures.FillStyle3List;
-import tv.porst.swfretools.parser.structures.FillStyleArray;
-import tv.porst.swfretools.parser.structures.FillStyleList;
-import tv.porst.swfretools.parser.structures.Filter;
-import tv.porst.swfretools.parser.structures.FilterList;
-import tv.porst.swfretools.parser.structures.Fixed;
-import tv.porst.swfretools.parser.structures.Fixed8;
-import tv.porst.swfretools.parser.structures.FocalGradient;
-import tv.porst.swfretools.parser.structures.GlowFilter;
-import tv.porst.swfretools.parser.structures.GlyphEntry;
-import tv.porst.swfretools.parser.structures.GlyphEntryList;
-import tv.porst.swfretools.parser.structures.GradRecord;
-import tv.porst.swfretools.parser.structures.GradRecord3;
-import tv.porst.swfretools.parser.structures.GradRecord3List;
-import tv.porst.swfretools.parser.structures.GradRecordList;
-import tv.porst.swfretools.parser.structures.Gradient;
-import tv.porst.swfretools.parser.structures.Gradient3;
-import tv.porst.swfretools.parser.structures.GradientBevelFilter;
-import tv.porst.swfretools.parser.structures.GradientGlowFilter;
-import tv.porst.swfretools.parser.structures.INT16List;
-import tv.porst.swfretools.parser.structures.KerningRecord;
-import tv.porst.swfretools.parser.structures.KerningRecordList;
-import tv.porst.swfretools.parser.structures.LineStyle;
-import tv.porst.swfretools.parser.structures.LineStyle3;
-import tv.porst.swfretools.parser.structures.LineStyle3Array;
-import tv.porst.swfretools.parser.structures.LineStyle3List;
-import tv.porst.swfretools.parser.structures.LineStyle4;
-import tv.porst.swfretools.parser.structures.LineStyle4Array;
-import tv.porst.swfretools.parser.structures.LineStyle4List;
-import tv.porst.swfretools.parser.structures.LineStyleArray;
-import tv.porst.swfretools.parser.structures.LineStyleList;
-import tv.porst.swfretools.parser.structures.Matrix;
-import tv.porst.swfretools.parser.structures.MorphFillStyle;
-import tv.porst.swfretools.parser.structures.MorphFillStyleArray;
-import tv.porst.swfretools.parser.structures.MorphFillStyleList;
-import tv.porst.swfretools.parser.structures.MorphGradient;
-import tv.porst.swfretools.parser.structures.MorphGradientRecord;
-import tv.porst.swfretools.parser.structures.MorphGradientRecordList;
-import tv.porst.swfretools.parser.structures.MorphLineStyle;
-import tv.porst.swfretools.parser.structures.MorphLineStyleArray;
-import tv.porst.swfretools.parser.structures.MorphLineStyleList;
-import tv.porst.swfretools.parser.structures.ParsedINTElementList;
-import tv.porst.swfretools.parser.structures.RGB;
-import tv.porst.swfretools.parser.structures.RGBA;
-import tv.porst.swfretools.parser.structures.Rect;
-import tv.porst.swfretools.parser.structures.RectList;
-import tv.porst.swfretools.parser.structures.SWFFile;
-import tv.porst.swfretools.parser.structures.Shape;
-import tv.porst.swfretools.parser.structures.Shape3;
-import tv.porst.swfretools.parser.structures.Shape3List;
-import tv.porst.swfretools.parser.structures.Shape3Record;
-import tv.porst.swfretools.parser.structures.Shape3RecordList;
-import tv.porst.swfretools.parser.structures.ShapeList;
-import tv.porst.swfretools.parser.structures.ShapeRecord;
-import tv.porst.swfretools.parser.structures.ShapeRecordList;
-import tv.porst.swfretools.parser.structures.ShapeWithStyle;
-import tv.porst.swfretools.parser.structures.ShapeWithStyle3;
-import tv.porst.swfretools.parser.structures.ShapeWithStyle4;
-import tv.porst.swfretools.parser.structures.SingleFilterList;
-import tv.porst.swfretools.parser.structures.SoundEnvelope;
-import tv.porst.swfretools.parser.structures.SoundEnvelopeList;
-import tv.porst.swfretools.parser.structures.SoundInfo;
-import tv.porst.swfretools.parser.structures.StraightEdgeRecord;
-import tv.porst.swfretools.parser.structures.StyleChangeRecord;
-import tv.porst.swfretools.parser.structures.StyleChangeRecord3;
-import tv.porst.swfretools.parser.structures.StyleChangeRecord4;
-import tv.porst.swfretools.parser.structures.SymbolList;
-import tv.porst.swfretools.parser.structures.TagList;
-import tv.porst.swfretools.parser.structures.TextRecord;
-import tv.porst.swfretools.parser.structures.TextRecord2;
-import tv.porst.swfretools.parser.structures.TextRecord2List;
-import tv.porst.swfretools.parser.structures.TextRecordList;
-import tv.porst.swfretools.parser.structures.UINT16List;
-import tv.porst.swfretools.parser.structures.ZoneData;
-import tv.porst.swfretools.parser.structures.ZoneDataList;
-import tv.porst.swfretools.parser.structures.ZoneRecord;
-import tv.porst.swfretools.parser.structures.ZoneRecordList;
+import tv.porst.swfretools.parser.structures.*;
 import tv.porst.swfretools.parser.tags.Tag;
 
 /**
@@ -135,6 +38,15 @@ public interface ISWFVisitor {
 	 * @param value The value.
 	 */
 	void visit(Object parent, String name, ActionList value);
+
+	/**
+	 * Invoked when a AS3Data value is encountered.
+	 * 
+	 * @param parent The parent element of the value.
+	 * @param name The name of the value.
+	 * @param value The value.
+	 */
+	void visit(Object parent, String name, AS3Data value);
 
 	/**
 	 * Invoked when an AsciiString value is encountered.
@@ -191,6 +103,15 @@ public interface ISWFVisitor {
 	void visit(Object parent, String name, ButtonCondActionList value);
 
 	/**
+	 * Invoked when a ButtonRecord value is encountered.
+	 * 
+	 * @param parent The parent element of the value.
+	 * @param name The name of the value.
+	 * @param value The value.
+	 */
+	void visit(Object parent, String name, ButtonRecord value);
+
+	/**
 	 * Invoked when a ButtonRecord2 value is encountered.
 	 * 
 	 * @param parent The parent element of the value.
@@ -207,6 +128,15 @@ public interface ISWFVisitor {
 	 * @param value The value.
 	 */
 	void visit(Object parent, String name, ButtonRecord2List value);
+
+	/**
+	 * Invoked when a ButtonRecordList value is encountered.
+	 * 
+	 * @param parent The parent element of the value.
+	 * @param name The name of the value.
+	 * @param value The value.
+	 */
+	void visit(Object parent, String name, ButtonRecordList value);
 
 	/**
 	 * Invoked when a ByteArray value is encountered.
@@ -281,6 +211,15 @@ public interface ISWFVisitor {
 	void visit(Object parent, String name, CurvedEdgeRecord value);
 
 	/**
+	 * Invoked when a CxForm value is encountered.
+	 * 
+	 * @param parent The parent element of the value.
+	 * @param name The name of the value.
+	 * @param value The value.
+	 */
+	void visit(Object parent, String name, CxForm value);
+
+	/**
 	 * Invoked when a CxFormWithAlpha value is encountered.
 	 * 
 	 * @param parent The parent element of the value.
@@ -297,6 +236,15 @@ public interface ISWFVisitor {
 	 * @param value The value.
 	 */
 	void visit(Object parent, String name, DropShadowFilter value);
+
+	/**
+	 * Invoked when an EncodedU32 value is encountered.
+	 * 
+	 * @param parent The parent element of the value.
+	 * @param name The name of the value.
+	 * @param value The value.
+	 */
+	void visit(Object parent, String name, EncodedU32 value);
 
 	/**
 	 * Invoked when an EndShapeRecord value is encountered.
@@ -425,6 +373,15 @@ public interface ISWFVisitor {
 	void visit(Object parent, String name, Float32 value);
 
 	/**
+	 * Invoked when a Float32List value is encountered.
+	 * 
+	 * @param parent The parent element of the value.
+	 * @param name The name of the value.
+	 * @param value The value.
+	 */
+	void visit(Object parent, String name, Float32List value);
+
+	/**
 	 * Invoked when a FocalGradient value is encountered.
 	 * 
 	 * @param parent The parent element of the value.
@@ -432,6 +389,24 @@ public interface ISWFVisitor {
 	 * @param value The value.
 	 */
 	void visit(Object parent, String name, FocalGradient value);
+
+	/**
+	 * Invoked when an FrameLabel value is encountered.
+	 * 
+	 * @param parent The parent element of the value.
+	 * @param name The name of the value.
+	 * @param value The value.
+	 */
+	void visit(Object parent, String name, FrameLabel value);
+
+	/**
+	 * Invoked when a FrameLabelList value is encountered.
+	 * 
+	 * @param parent The parent element of the value.
+	 * @param name The name of the value.
+	 * @param value The value.
+	 */
+	void visit(Object parent, String name, FrameLabelList value);
 
 	/**
 	 * Invoked when a GlowFilter value is encountered.
@@ -731,6 +706,24 @@ public interface ISWFVisitor {
 	void visit(Object parent, String name, MorphLineStyle value);
 
 	/**
+	 * Invoked when a MorphLineStyle2 value is encountered.
+	 * 
+	 * @param parent The parent element of the value.
+	 * @param name The name of the value.
+	 * @param value The value.
+	 */
+	void visit(Object parent, String name, MorphLineStyle2 value);
+
+	/**
+	 * Invoked when a MorphLineStyle2List value is encountered.
+	 * 
+	 * @param parent The parent element of the value.
+	 * @param name The name of the value.
+	 * @param value The value.
+	 */
+	void visit(Object parent, String name, MorphLineStyle2List value);
+
+	/**
 	 * Invoked when a MorphLineStyleArray value is encountered.
 	 * 
 	 * @param parent The parent element of the value.
@@ -738,6 +731,15 @@ public interface ISWFVisitor {
 	 * @param value The value.
 	 */
 	void visit(Object parent, String name, MorphLineStyleArray value);
+
+	/**
+	 * Invoked when a MorphLineStyleArray2 value is encountered.
+	 * 
+	 * @param parent The parent element of the value.
+	 * @param name The name of the value.
+	 * @param value The value.
+	 */
+	void visit(Object parent, String name, MorphLineStyleArray2 value);
 
 	/**
 	 * Invoked when a MorphLineStyleList value is encountered.
@@ -756,6 +758,15 @@ public interface ISWFVisitor {
 	 * @param value The value.
 	 */
 	void visit(Object parent, String name, ParsedINTElementList value);
+
+	/**
+	 * Invoked when a RecordHeader value is encountered.
+	 * 
+	 * @param parent The parent element of the value.
+	 * @param name The name of the value.
+	 * @param value The value.
+	 */
+	void visit(Object parent, String name, RecordHeader value);
 
 	/**
 	 * Invoked when a Rect value is encountered.
@@ -792,6 +803,33 @@ public interface ISWFVisitor {
 	 * @param value The value.
 	 */
 	void visit(Object parent, String name, RGBA value);
+
+	/**
+	 * Invoked when a RGBAList value is encountered.
+	 * 
+	 * @param parent The parent element of the value.
+	 * @param name The name of the value.
+	 * @param value The value.
+	 */
+	void visit(Object parent, String name, RGBAList value);
+
+	/**
+	 * Invoked when an SceneName value is encountered.
+	 * 
+	 * @param parent The parent element of the value.
+	 * @param name The name of the value.
+	 * @param value The value.
+	 */
+	void visit(Object parent, String name, SceneName value);
+
+	/**
+	 * Invoked when a SceneNameList value is encountered.
+	 * 
+	 * @param parent The parent element of the value.
+	 * @param name The name of the value.
+	 * @param value The value.
+	 */
+	void visit(Object parent, String name, SceneNameList value);
 
 	/**
 	 * Invoked when a Shape value is encountered.
@@ -965,6 +1003,15 @@ public interface ISWFVisitor {
 	void visit(Object parent, String name, StyleChangeRecord4 value);
 
 	/**
+	 * Invoked when a Symbol value is encountered.
+	 * 
+	 * @param parent The parent element of the value.
+	 * @param name The name of the value.
+	 * @param value The value.
+	 */
+	void visit(Object parent, String name, Symbol value);
+
+	/**
 	 * Invoked when a SymbolList value is encountered.
 	 * 
 	 * @param parent The parent element of the value.
@@ -1062,6 +1109,15 @@ public interface ISWFVisitor {
 	 * @param value The value.
 	 */
 	void visit(Object parent, String name, UINT8 value);
+
+	/**
+	 * Invoked when a UINT8List value is encountered.
+	 * 
+	 * @param parent The parent element of the value.
+	 * @param name The name of the value.
+	 * @param value The value.
+	 */
+	void visit(Object parent, String name, UINT8List value);
 
 	/**
 	 * Invoked when a ZoneData value is encountered.

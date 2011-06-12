@@ -1,5 +1,7 @@
 Version 1.3 (The uncertain future):
 
+- Feature: It is now possible to dump the content of a SWF file to stdout by
+           doing 'dissector.jar -dump <input file>'.
 - Feature: Function bodies defined by the ActionScript 2 functions
            DefineFunction and DefineFunction2 are now aligned better in the
 	   GUI to improve readability of the code.

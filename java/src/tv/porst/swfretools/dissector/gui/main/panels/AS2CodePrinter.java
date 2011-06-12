@@ -663,11 +663,23 @@ public final class AS2CodePrinter {
 	 * action list.
 	 * 
 	 * @param code The list that contains the ActionScript 2 code.
+	 * 
+	 * @return The generated ActionScript 2 code string.
+	 */
+	public static String getCodeText(final ActionList code) {
+		return getCodeText(code, "");
+	}
+
+	/**
+	 * Generates a printable string that represents all code in a given
+	 * action list.
+	 * 
+	 * @param code The list that contains the ActionScript 2 code.
 	 * @param padding Padding string that is prepended before every line.
 	 * 
 	 * @return The generated ActionScript 2 code string.
 	 */
-	private static String getCodeText(final ActionList code, final String padding) {
+	public static String getCodeText(final ActionList code, final String padding) {
 		if (code.size() == 0) {
 			return "";
 		}
@@ -690,17 +702,5 @@ public final class AS2CodePrinter {
 		}
 
 		return sb.toString();
-	}
-
-	/**
-	 * Generates a printable string that represents all code in a given
-	 * action list.
-	 * 
-	 * @param code The list that contains the ActionScript 2 code.
-	 * 
-	 * @return The generated ActionScript 2 code string.
-	 */
-	public static String getCodeText(final ActionList code) {
-		return getCodeText(code, "");
 	}
 }
