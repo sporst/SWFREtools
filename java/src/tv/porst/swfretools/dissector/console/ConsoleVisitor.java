@@ -86,8 +86,22 @@ public class ConsoleVisitor implements ISWFVisitor {
 	}
 
 	@Override
+	public void visit(final Object parent, final String name, final AsciiString value) {
+		if (value != null) {
+			output.printf(getPadding() + "[%08X:%d]: %s : %s\n", value.getBitPosition(), 0, name, value.value());
+		}
+	}
+
+	@Override
 	public void visit(final Object parent, final String name, final BevelFilter value) {
 		handleStructure(parent, name, value);
+	}
+
+	@Override
+	public void visit(final Object parent, final String name, final Bits value) {
+		if (value != null) {
+			output.printf(getPadding() + "[%08X:%d]: %s : %d\n", value.getBitPosition(), value.getBitPosition(), name, value.value());
+		}
 	}
 
 	@Override
@@ -113,6 +127,13 @@ public class ConsoleVisitor implements ISWFVisitor {
 	@Override
 	public void visit(final Object parent, final String name, final ButtonRecord2List value) {
 		handleList(parent, name, value);
+	}
+
+	@Override
+	public void visit(final Object parent, final String name, final ByteArray value) {
+		if (value != null) {
+			output.printf(getPadding() + "[%08X:%d]: %s : %s\n", value.getBitPosition(), 0, name, "ARRAY");
+		}
 	}
 
 	@Override
@@ -206,6 +227,39 @@ public class ConsoleVisitor implements ISWFVisitor {
 	}
 
 	@Override
+	public void visit(final Object parent, final String name, final Fixed value) {
+		if (value != null) {
+			output.printf(getPadding() + "[%08X:%d]: %s : %d\n", value.getBitPosition(), 0, name, value.value());
+		}
+	}
+
+	@Override
+	public void visit(final Object parent, final String name, final Fixed8 value) {
+		output.printf(getPadding() + "[%08X:%d]: %s : %b\n", value.getBitPosition(), 0, name, value.value());
+	}
+
+	@Override
+	public void visit(final Object parent, final String name, final Flag value) {
+		if (value != null) {
+			output.printf(getPadding() + "[%08X:%d]: %s : %b\n", value.getBitPosition(), value.getBitPosition(), name, value.value());
+		}
+	}
+
+	@Override
+	public void visit(final Object parent, final String name, final Float16 value) {
+		if (value != null) {
+			output.printf(getPadding() + "[%08X:%d]: %s : %f\n", value.getBitPosition(), 0, name, value.value());
+		}
+	}
+
+	@Override
+	public void visit(final Object parent, final String name, final Float32 value) {
+		if (value != null) {
+			output.printf(getPadding() + "[%08X:%d]: %s : %f\n", value.getBitPosition(), 0, name, value.value());
+		}
+	}
+
+	@Override
 	public void visit(final Object parent, final String name, final FocalGradient value) {
 		handleStructure(parent, name, value);
 	}
@@ -266,6 +320,13 @@ public class ConsoleVisitor implements ISWFVisitor {
 	}
 
 	@Override
+	public void visit(final Object parent, final String name, final INT16 value) {
+		if (value != null) {
+			output.printf(getPadding() + "[%08X:%d]: %s : %d\n", value.getBitPosition(), 0, name, value.value());
+		}
+	}
+
+	@Override
 	public void visit(final Object parent, final String name, final INT16List value) {
 		if (value.size() != 0) {
 
@@ -274,6 +335,13 @@ public class ConsoleVisitor implements ISWFVisitor {
 			output.printf(getPadding() + "[%08X:%d]: %s (%d elements)\n", value.getBitPosition(), 0, name, value.size());
 
 			stack.push(value);
+		}
+	}
+
+	@Override
+	public void visit(final Object parent, final String name, final INT32 value) {
+		if (value != null) {
+			output.printf(getPadding() + "[%08X:%d]: %s : %d\n", value.getBitPosition(), 0, name, value.value());
 		}
 	}
 
@@ -561,6 +629,20 @@ public class ConsoleVisitor implements ISWFVisitor {
 	}
 
 	@Override
+	public void visit(final Object parent, final String name, final UBits value) {
+		if (value != null) {
+			output.printf(getPadding() + "[%08X:%d]: %s : %d\n", value.getBitPosition(), value.getBitPosition(), name, value.value());
+		}
+	}
+
+	@Override
+	public void visit(final Object parent, final String name, final UINT16 value) {
+		if (value != null) {
+			output.printf(getPadding() + "[%08X:%d]: %s : %d\n", value.getBitPosition(), 0, name, value.value());
+		}
+	}
+
+	@Override
 	public void visit(final Object parent, final String name, final UINT16List value) {
 		if (value.size() != 0) {
 
@@ -569,6 +651,20 @@ public class ConsoleVisitor implements ISWFVisitor {
 			output.printf(getPadding() + "[%08X:%d]: %s (%d elements)\n", value.getBitPosition(), 0, name, value.size());
 
 			stack.push(value);
+		}
+	}
+
+	@Override
+	public void visit(final Object parent, final String name, final UINT32 value) {
+		if (value != null) {
+			output.printf(getPadding() + "[%08X:%d]: %s : %d\n", value.getBitPosition(), 0, name, value.value());
+		}
+	}
+
+	@Override
+	public void visit(final Object parent, final String name, final UINT8 value) {
+		if (value != null) {
+			output.printf(getPadding() + "[%08X:%d]: %s : %d\n", value.getBitPosition(), 0, name, value.value());
 		}
 	}
 
@@ -600,102 +696,6 @@ public class ConsoleVisitor implements ISWFVisitor {
 		output.printf(getPadding() + "[%08X:%d]: %s\n", tag.getHeader().getBitPosition(), 0, TagNames.getPrintableTagName(tag.getHeader().getTagCode()));
 
 		stack.push(tag);
-	}
-
-	@Override
-	public void visit(final String name, final AsciiString value) {
-		if (value != null) {
-			output.printf(getPadding() + "[%08X:%d]: %s : %s\n", value.getBitPosition(), 0, name, value.value());
-		}
-	}
-
-	@Override
-	public void visit(final String name, final Bits value) {
-		if (value != null) {
-			output.printf(getPadding() + "[%08X:%d]: %s : %d\n", value.getBitPosition(), value.getBitPosition(), name, value.value());
-		}
-	}
-
-	@Override
-	public void visit(final String name, final ByteArray value) {
-		if (value != null) {
-			output.printf(getPadding() + "[%08X:%d]: %s : %s\n", value.getBitPosition(), 0, name, "ARRAY");
-		}
-	}
-
-	@Override
-	public void visit(final String name, final Fixed value) {
-		if (value != null) {
-			output.printf(getPadding() + "[%08X:%d]: %s : %d\n", value.getBitPosition(), 0, name, value.value());
-		}
-	}
-
-	@Override
-	public void visit(final String name, final Fixed8 value) {
-		output.printf(getPadding() + "[%08X:%d]: %s : %b\n", value.getBitPosition(), 0, name, value.value());
-	}
-
-	@Override
-	public void visit(final String name, final Flag value) {
-		if (value != null) {
-			output.printf(getPadding() + "[%08X:%d]: %s : %b\n", value.getBitPosition(), value.getBitPosition(), name, value.value());
-		}
-	}
-
-	@Override
-	public void visit(final String name, final Float16 value) {
-		if (value != null) {
-			output.printf(getPadding() + "[%08X:%d]: %s : %f\n", value.getBitPosition(), 0, name, value.value());
-		}
-	}
-
-	@Override
-	public void visit(final String name, final Float32 value) {
-		if (value != null) {
-			output.printf(getPadding() + "[%08X:%d]: %s : %f\n", value.getBitPosition(), 0, name, value.value());
-		}
-	}
-
-	@Override
-	public void visit(final String name, final INT16 value) {
-		if (value != null) {
-			output.printf(getPadding() + "[%08X:%d]: %s : %d\n", value.getBitPosition(), 0, name, value.value());
-		}
-	}
-
-	@Override
-	public void visit(final String name, final INT32 value) {
-		if (value != null) {
-			output.printf(getPadding() + "[%08X:%d]: %s : %d\n", value.getBitPosition(), 0, name, value.value());
-		}
-	}
-
-	@Override
-	public void visit(final String name, final UBits value) {
-		if (value != null) {
-			output.printf(getPadding() + "[%08X:%d]: %s : %d\n", value.getBitPosition(), value.getBitPosition(), name, value.value());
-		}
-	}
-
-	@Override
-	public void visit(final String name, final UINT16 value) {
-		if (value != null) {
-			output.printf(getPadding() + "[%08X:%d]: %s : %d\n", value.getBitPosition(), 0, name, value.value());
-		}
-	}
-
-	@Override
-	public void visit(final String name, final UINT32 value) {
-		if (value != null) {
-			output.printf(getPadding() + "[%08X:%d]: %s : %d\n", value.getBitPosition(), 0, name, value.value());
-		}
-	}
-
-	@Override
-	public void visit(final String name, final UINT8 value) {
-		if (value != null) {
-			output.printf(getPadding() + "[%08X:%d]: %s : %d\n", value.getBitPosition(), 0, name, value.value());
-		}
 	}
 
 	@Override

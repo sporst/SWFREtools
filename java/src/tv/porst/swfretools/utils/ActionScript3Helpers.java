@@ -1,57 +1,90 @@
 package tv.porst.swfretools.utils;
 
+import tv.porst.splib.strings.StringHelpers;
 import tv.porst.swfretools.parser.structures.MultinameInfo;
 import tv.porst.swfretools.parser.structures.NamespaceInfo;
 import tv.porst.swfretools.parser.structures.NamespaceInfoList;
 import tv.porst.swfretools.parser.structures.QName;
 import tv.porst.swfretools.parser.structures.StringInfoList;
 
-public class ActionScript3Helpers {
+/**
+ * Contains helper functions for working with ActionScript 3 code.
+ */
+public final class ActionScript3Helpers {
 
-	private static NamespaceInfo resolveNamespace(final int ns, final NamespaceInfoList namespaceList) throws ResolverException {
+	/**
+	 * Looks up a namespace in a namespace list.
+	 * 
+	 * @param namespaceIndex Index of the namespace.
+	 * @param namespaceList Provides all available namespaces.
+	 * 
+	 * @return The resolved namespace or null if the namespaceIndex was 0.
+	 * 
+	 * @throws ResolverException Thrown if the namespace could not be resolved.
+	 */
+	private static NamespaceInfo resolveNamespace(final int namespaceIndex, final NamespaceInfoList namespaceList) throws ResolverException {
 
-		if (ns == 0) {
+		if (namespaceIndex == 0) {
 			return null;
 		}
-		else if (ns > namespaceList.size()) {
+		else if (namespaceIndex > namespaceList.size()) {
 			throw new ResolverException("Invalid namespace index");
 		}
 		else {
-			return namespaceList.get(ns - 1);
+			return namespaceList.get(namespaceIndex - 1);
 		}
 	}
 
-	private static String resolveString(final int namespaceNameIndex, final StringInfoList constantPool) throws ResolverException {
+	/**
+	 * Looks up a string in a string info list
+	 * 
+	 * @param stringIndex The index of the string to look up.
+	 * @param constantPool Provides the strings.
+	 * 
+	 * @return The looked up string or null if the string index was 0.
+	 * 
+	 * @throws ResolverException Thrown if the string could not be looked up.
+	 */
+	private static String resolveString(final int stringIndex, final StringInfoList constantPool) throws ResolverException {
 
-		if (namespaceNameIndex == 0) {
+		if (stringIndex == 0) {
 			return null;
 		}
-		else if (namespaceNameIndex > constantPool.size()) {
+		else if (stringIndex > constantPool.size()) {
 			throw new ResolverException("Invalid string index");
 		}
 		else {
-			return constantPool.get(namespaceNameIndex - 1).getName().value();
+			return constantPool.get(stringIndex - 1).getName().value();
 		}
 	}
 
+	/**
+	 * Flattens a multi-part namespace string into a single string.
+	 * 
+	 * @param namespaceParts The parts of the namespace.
+	 * 
+	 * @return The flattened namespace string.
+	 */
 	public static String flattenNamespaceName(final String[] namespaceParts) {
-		final StringBuilder builder = new StringBuilder();
 
-		for (final String namespaceName : namespaceParts) {
-			if (namespaceName == namespaceParts[0] && (namespaceName == null || namespaceName.equals(""))) {
-				continue;
-			}
-
-			if (builder.length() != 0) {
-				builder.append(":");
-			}
-
-			builder.append(namespaceName);
+		if (namespaceParts == null) {
+			throw new IllegalArgumentException("Namespace parts argument must not be null.");
 		}
 
-		return builder.toString();
+		return StringHelpers.join(namespaceParts, ":");
 	}
 
+	/**
+	 * Returns the individual components of a multiname namespace in string form.
+	 * 
+	 * @param multinameInfo The multiname namespace to resolve.
+	 * @param constantPool Provides the constant strings for the resolved namespace.
+	 * @param namespaceList Provides the available namespace.
+	 * 
+	 * @return The individual components of the resolved multiname namespace.
+	 * 
+	 * @throws ResolverException Thrown if the namespace could not be resolved.
+	 */
 	public static String[] resolveMultiname(final MultinameInfo multinameInfo, final StringInfoList constantPool, final NamespaceInfoList namespaceList) throws ResolverException {
 
 		if (multinameInfo == null) {
