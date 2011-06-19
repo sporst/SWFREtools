@@ -4,6 +4,8 @@ Version 1.3 (The uncertain future):
            doing 'dissector.jar -dump <input file>'.
 - Feature: It is now possible to decompress SWF files by doing
            'dissector.jar -decompress <input file> -o <output file>'.
+- Feature: It is now possible to open files in SWF Dissector from the command
+           line doing 'dissector.jar <file1> <file2> ... <filen>'.
 - Feature: Function bodies defined by the ActionScript 2 functions
            DefineFunction and DefineFunction2 are now aligned better in the
 	   GUI to improve readability of the code.

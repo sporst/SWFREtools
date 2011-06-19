@@ -5,6 +5,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.io.File;
+import java.util.List;
 
 import javax.swing.JFrame;
 import javax.swing.JMenu;
@@ -53,8 +54,10 @@ public final class MainWindow extends JFrame {
 
 	/**
 	 * Creates a new main window object.
+	 * 
+	 * @param filesToOpen List of SWF files to open initially.
 	 */
-	public MainWindow() {
+	public MainWindow(final List<String> filesToOpen) {
 		super("Flash Dissector");
 
 		setLayout(new BorderLayout());
@@ -93,6 +96,10 @@ public final class MainWindow extends JFrame {
 
 		setSize(900, 600);
 		setLocationRelativeTo(null);
+
+		for (final String fileName : filesToOpen) {
+			FileActions.openFile(tree, fileModel, new File(fileName));
+		}
 	}
 
 	/**
