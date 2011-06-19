@@ -77,6 +77,8 @@ public final class SWFParser {
 
 		final byte[] parserInputData = isCompressed(fileData) ? SWFDecompressor.decompressData(fileData) : fileData;
 
+		final boolean wasCompressed = parserInputData != fileData;
+
 		final SWFBinaryParser parser = new SWFBinaryParser(parserInputData);
 
 		final UINT8 signature1 = parser.readUInt8();
@@ -94,6 +96,6 @@ public final class SWFParser {
 
 		final TagParserResult tags = TagParser.parse(parser, version.value());
 
-		return new SWFFile(parserInputData, signature1, signature2, signature3, version, fileLength, frameSize, frameRate, frameCount, tags.getTags());
+		return new SWFFile(parserInputData, wasCompressed, signature1, signature2, signature3, version, fileLength, frameSize, frameRate, frameCount, tags.getTags());
 	}
 }

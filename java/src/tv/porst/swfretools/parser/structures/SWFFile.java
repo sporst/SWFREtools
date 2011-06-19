@@ -18,6 +18,11 @@ public final class SWFFile {
 	private final byte[] decompressedData;
 
 	/**
+	 * Flag that says whether the file was compressed originally.
+	 */
+	private final boolean wasCompressed;
+
+	/**
 	 * First signature byte.
 	 */
 	private final UINT8 signature1;
@@ -66,6 +71,7 @@ public final class SWFFile {
 	 * Creates a new SWF file object.
 	 * 
 	 * @param decompressedData Decompressed SWF data.
+	 * @param wasCompressed Flag that says whether the file was compressed originally.
 	 * @param signature1 First signature byte.
 	 * @param signature2 Second signature byte.
 	 * @param signature3 Third signature byte.
@@ -76,11 +82,12 @@ public final class SWFFile {
 	 * @param frameCount Total number of frames in file.
 	 * @param tags List of tags in file.
 	 */
-	public SWFFile(final byte[] decompressedData, final UINT8 signature1, final UINT8 signature2, final UINT8 signature3,
+	public SWFFile(final byte[] decompressedData, final boolean wasCompressed, final UINT8 signature1, final UINT8 signature2, final UINT8 signature3,
 			final UINT8 version, final UINT32 fileLength, final Rect frameSize, final UINT16 frameRate,
 			final UINT16 frameCount, final TagList tags) {
 
 		this.decompressedData = decompressedData;
+		this.wasCompressed = wasCompressed;
 		this.signature1 = signature1;
 		this.signature2 = signature2;
 		this.signature3 = signature3;
@@ -181,5 +188,14 @@ public final class SWFFile {
 	 */
 	public UINT8 getVersion() {
 		return version;
+	}
+
+	/**
+	 * Returns the flag that says whether the file was compressed originally.
+	 *
+	 * @return True, if the file was compressed. False if it was not.
+	 */
+	public boolean getWasCompressed() {
+		return wasCompressed;
 	}
 }
