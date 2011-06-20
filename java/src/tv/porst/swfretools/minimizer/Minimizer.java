@@ -252,15 +252,7 @@ public final class Minimizer {
 				throw new MinimizerException("SWF input file could not be parsed");
 			}
 
-			// To remove code, we are also loading the raw byte data of the
-			// input file.
-			byte[] fileData;
-
-			try {
-				fileData = FileHelpers.readFile(inputFile);
-			} catch (final IOException e) {
-				throw new MinimizerException("SWF input file could not be read");
-			}
+			final byte[] fileData = parsedFile.getDecompressedData();
 
 			// For each run of the minimizer loop, this list stores
 			// the functions that can be removed with the input file
