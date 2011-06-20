@@ -106,6 +106,11 @@ public final class ActionScript3Helpers {
 			final int nameIndex = qname.getName().value();
 
 			final NamespaceInfo namespace = resolveNamespace(ns, namespaceList);
+
+			if (namespace == null) {
+				return new String[0];
+			}
+
 			final int namespaceNameIndex = namespace.getName().value();
 			final String namespaceName = resolveString(namespaceNameIndex, constantPool);
 

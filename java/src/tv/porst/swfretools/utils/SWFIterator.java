@@ -57,6 +57,7 @@ import tv.porst.swfretools.parser.tags.JPEGTablesTag;
 import tv.porst.swfretools.parser.tags.MetadataTag;
 import tv.porst.swfretools.parser.tags.PlaceObject2Tag;
 import tv.porst.swfretools.parser.tags.PlaceObject3Tag;
+import tv.porst.swfretools.parser.tags.PlaceObjectTag;
 import tv.porst.swfretools.parser.tags.ProtectTag;
 import tv.porst.swfretools.parser.tags.RemoveObject2Tag;
 import tv.porst.swfretools.parser.tags.RemoveObjectTag;
@@ -2603,6 +2604,26 @@ public final class SWFIterator {
 	}
 
 	/**
+	 * Visits a PlaceObjectTag object.
+	 * 
+	 * @param tag The visited object.
+	 * @param visitor The visitor that is invoked for all elements of the visited object.
+	 */
+	public static void visit(final PlaceObjectTag tag, final ISWFVisitor visitor) {
+
+		if (tag == null) {
+			return;
+		}
+
+		visitor.visit(tag, "CharacterID", tag.getCharacterId());
+		visitor.visit(tag, "Depth", tag.getDepth());
+		visitor.visit(tag, "Matrix", tag.getMatrix());
+		visit(tag.getMatrix(), visitor);
+		visitor.visit(tag, "ColorTransform", tag.getColorTransform());
+		visit(tag.getColorTransform(), visitor);
+	}
+
+	/**
 	 * Visits a ProtectTag object.
 	 * 
 	 * @param tag The visited object.
@@ -3605,6 +3626,9 @@ public final class SWFIterator {
 		}
 		else if (tag instanceof MetadataTag) {
 			visit((MetadataTag) tag, visitor);
+		}
+		else if (tag instanceof PlaceObjectTag) {
+			visit((PlaceObjectTag) tag, visitor);
 		}
 		else if (tag instanceof PlaceObject2Tag) {
 			visit((PlaceObject2Tag) tag, visitor);

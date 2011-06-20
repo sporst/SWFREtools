@@ -22,7 +22,7 @@ public class TraitsInfoParser {
 		case 6: return TraitSlotParser.parse(parser, fieldName);
 		}
 
-		throw new IllegalStateException("Unknown trait kinds");
+		throw new IllegalStateException("Unknown traits kind: " + (kind.value() & 0xF));
 	}
 
 	public static TraitsInfo parse(final SWFBinaryParser parser, final String fieldName) throws SWFParserException {
