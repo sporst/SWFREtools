@@ -67,6 +67,25 @@ public final class SWFParser {
 
 		final byte[] fileData = FileHelpers.readFile(file);
 
+		return parse(fileData);
+	}
+
+	/**
+	 * Parses a SWF file.
+	 * 
+	 * @param bytes Bytes of file to parse.
+	 * 
+	 * @return The parsed SWF file.
+	 * 
+	 * @throws IOException Thrown if the given file could not be read.
+	 * @throws SWFParserException Thrown if the given file could not be parsed.
+	 */
+	public static SWFFile parse(final byte[] fileData) throws IOException, SWFParserException {
+
+		if (fileData == null) {
+			throw new IllegalArgumentException("Argument file data must not be null");
+		}
+
 		if (fileData.length < 8) {
 			throw new SWFParserException(0x00002, 0, "Invalid SWF file: File too small");
 		}
