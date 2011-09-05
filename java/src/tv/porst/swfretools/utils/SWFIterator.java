@@ -59,6 +59,7 @@ import tv.porst.swfretools.parser.tags.PlaceObject2Tag;
 import tv.porst.swfretools.parser.tags.PlaceObject3Tag;
 import tv.porst.swfretools.parser.tags.PlaceObjectTag;
 import tv.porst.swfretools.parser.tags.ProtectTag;
+import tv.porst.swfretools.parser.tags.RawABCTag;
 import tv.porst.swfretools.parser.tags.RemoveObject2Tag;
 import tv.porst.swfretools.parser.tags.RemoveObjectTag;
 import tv.porst.swfretools.parser.tags.ScriptLimitsTag;
@@ -2639,6 +2640,21 @@ public final class SWFIterator {
 	}
 
 	/**
+	 * Visits a RawABC object.
+	 * 
+	 * @param tag The visited object.
+	 * @param visitor The visitor that is invoked for all elements of the visited object.
+	 */
+	public static void visit(final RawABCTag tag, final ISWFVisitor visitor) {
+
+		if (tag == null) {
+			return;
+		}
+
+		visitor.visit(tag, "ABCData", tag.getAbcData());
+	}
+
+	/**
 	 * Visits a RecordHeader object.
 	 * 
 	 * @param header The visited object.
@@ -3587,6 +3603,9 @@ public final class SWFIterator {
 		}
 		else if (tag instanceof DefineVideoStreamTag) {
 			visit((DefineVideoStreamTag) tag, visitor);
+		}
+		else if (tag instanceof RawABCTag) {
+			visit((RawABCTag) tag, visitor);
 		}
 		else if (tag instanceof DoABCTag) {
 			visit((DoABCTag) tag, visitor);

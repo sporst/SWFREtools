@@ -53,6 +53,7 @@ import tv.porst.swfretools.parser.tags.MetadataTag;
 import tv.porst.swfretools.parser.tags.PlaceObject2Tag;
 import tv.porst.swfretools.parser.tags.PlaceObject3Tag;
 import tv.porst.swfretools.parser.tags.PlaceObjectTag;
+import tv.porst.swfretools.parser.tags.RawABCTag;
 import tv.porst.swfretools.parser.tags.RemoveObject2Tag;
 import tv.porst.swfretools.parser.tags.RemoveObjectTag;
 import tv.porst.swfretools.parser.tags.ScriptLimitsTag;
@@ -703,6 +704,11 @@ public final class FlashTagNode extends FlashTreeNode<Tag> {
 			addNode("FrameNum", ctag.getFrameNum());
 			addNode("VideoData", ctag.getVideoData());
 		}
+		else if (tag instanceof RawABCTag) {
+			final RawABCTag ctag = (RawABCTag) tag;
+
+			addNode("ABCData", ctag.getAbcData());
+		}
 		else if (tag instanceof DoABCTag) {
 			final DoABCTag ctag = (DoABCTag) tag;
 
@@ -721,6 +727,10 @@ public final class FlashTagNode extends FlashTreeNode<Tag> {
 		if (panel == null) {
 			if (getUserObject() instanceof DoABCTag) {
 				final ResolvedCode code = ActionScript3Resolver.resolve(((DoABCTag) getUserObject()).getAbcData());
+				panel = new AS3CodePanel(code);
+			}
+			else if (getUserObject() instanceof RawABCTag) {
+				final ResolvedCode code = ActionScript3Resolver.resolve(((RawABCTag) getUserObject()).getAbcData());
 				panel = new AS3CodePanel(code);
 			}
 			else if (getUserObject() instanceof DoActionTag) {

@@ -95,6 +95,7 @@ public final class TagNames {
 		case TagCodes.DefineBitsJPEG4: return "DefineBitsJPEG4";
 		case TagCodes.DefineFont4: return "DefineFont4";
 		case TagCodes.DoABC: return "DoABC";
+		case TagCodes.RawABC: return "RawABC";
 		default: return null;
 		}
 	}

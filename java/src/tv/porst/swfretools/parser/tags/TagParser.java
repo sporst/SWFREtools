@@ -163,6 +163,7 @@ public final class TagParser {
 			case TagCodes.VideoFrame: return VideoFrameParser.parse(header, parser);
 			case TagCodes.DefineBinaryData: return DefineBinaryDataParser.parse(header, parser);
 			case TagCodes.DoABC: return DoABCParser.parse(header, parser);
+			case TagCodes.RawABC: return RawABCParser.parse(header, parser);
 			case TagCodes.DefineFontName: return DefineFontNameParser.parse(header, parser);
 			}
 

@@ -251,6 +251,11 @@ public final class TagCodes {
 	public static final int ImportAssets2 = 71;
 
 	/**
+	 * Tag identifier for the RawABC tag.
+	 */
+	public static final int RawABC = 72;
+
+	/**
 	 * Tag identifier for the DefineFontAlignZones tag.
 	 */
 	public static final int DefineFontAlignZones = 73;
