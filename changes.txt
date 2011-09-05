@@ -1,3 +1,13 @@
+Version 1.4 (September 5th 2011):
+
+- Feature: SWF parser is now able to parse the RawABC tag
+- Feature: Flash Dissector is now able to display code from RawABC tags
+- Feature: Minimizer is now able to minimizer the RawABC tag
+- Feature: Added a way to parse byte arrays as SWF files to make it easier
+           to use the library from external projects.
+- Bugfix: Fixed a bug that led to spontaneous exits of the parser and
+          Flash Dissector.
+
 Version 1.3 (June 19th 2011):
 
 - Feature: It is now possible to dump the content of a SWF file to stdout by
