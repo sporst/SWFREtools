@@ -17,6 +17,7 @@ import tv.porst.swfretools.parser.structures.MethodBody;
 import tv.porst.swfretools.parser.structures.SWFFile;
 import tv.porst.swfretools.parser.structures.TagList;
 import tv.porst.swfretools.parser.tags.DoABCTag;
+import tv.porst.swfretools.parser.tags.RawABCTag;
 import tv.porst.swfretools.parser.tags.Tag;
 import tv.porst.swfretools.utils.TagNames;
 
@@ -84,6 +85,13 @@ public final class Minimizer {
 
 			if (tag instanceof DoABCTag) {
 				final DoABCTag dtag = (DoABCTag) tag;
+
+				for (final MethodBody methodBody : dtag.getAbcData().getMethodBodies()) {
+					codeFragments.add(methodBody.getCode());
+				}
+			}
+			else if (tag instanceof RawABCTag) {
+				final RawABCTag dtag = (RawABCTag) tag;
 
 				for (final MethodBody methodBody : dtag.getAbcData().getMethodBodies()) {
 					codeFragments.add(methodBody.getCode());
