@@ -26,7 +26,7 @@ public final class TagParser {
 	 * @param header Header of the tag that could not be parsed.
 	 */
 	private static void jumpToNextTag(final BinaryParser parser, final RecordHeader header) {
-		final int nextTagPosition = header.getBitPosition() / 8 + header.getHeaderLength() + header.getLength();
+		final int nextTagPosition = header.getBitPosition() / 8 + header.getHeaderLength() + header.getNormalizedLength();
 
 		parser.setPosition(nextTagPosition, 0);
 	}
